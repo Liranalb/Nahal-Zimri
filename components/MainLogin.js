@@ -1,12 +1,12 @@
 import React, { Component } from "react" //import react library
-import { Image, ImageBackground, StyleSheet ,TextInput, Button } from "react-native"
+import { Image, ImageBackground, StyleSheet ,TextInput, Button, TouchableOpacity } from "react-native"
 import { View } from "native-base"
 
 
 
 
 
-class LoginForm extends Component {
+class MainLogin extends Component {
     constructor(){
         super();
         this.state = {
@@ -25,48 +25,28 @@ class LoginForm extends Component {
                  <View style={styles.logoView}>
                  <Image source={require('../assets/img/logo.png')}
                  style={styles.logo}/>
+                 
                  </View>
                
+                 <View style = { styles.buttonStyle }>
+                        <TouchableOpacity  
+                            text = "המשך עם גוגל"
+                                      
+                        >
 
-
-                    
-                    
-                <View style={styles.inputView }>
-                    <TextInput
-                            style = { styles.TextInputStyle}
-                            textAlign = "center"
-                            placeholder = {"מייל"}
-                            placeholderTextColor = "#FF8C37"
-                            height = {45}
-                            autoCorrect = {false}
-                            onChangeText = { email => this.setState({ email })}
-                            value = {this.state.email}
-                        />
+                        </TouchableOpacity >   
                 </View>
 
-                <View style={styles.inputView}>
-                    <TextInput
-                            style = { styles.TextInputStyle}
-                            textAlign = "center"
-                            placeholder = {"סיסמה"}
-                            placeholderTextColor = "#FF8C37"
-                            secureTextEntry = {true}
-                            height = {45}
-                            autoCorrect = {false}
-                            onChangeText = { password => this.setState({ password })}
-                            value = {this.state.password}
-                        />
-                </View>
                     
                 <View style = { styles.buttonStyle }>
-                        <Button 
-                            title = "התחבר"
+                        <TouchableOpacity  
+                            title = "הרשם עם מייל"
                             color = "#FF8C37"           
                         >
-                        </Button>   
+                        </TouchableOpacity >   
                 </View>
                     
-            </View>
+                </View>
                
 
         )
@@ -75,7 +55,7 @@ class LoginForm extends Component {
     
 }
 
-export default LoginForm;
+export default MainLogin;
 
 const styles = {
      inputView: {
@@ -99,10 +79,11 @@ const styles = {
       buttonStyle: {
         backgroundColor: "#FF8C37",
         borderColor: "#FF8C37",
-        borderRadius: 25,
+        borderRadius: 10,
         borderWidth: 2,
         fontSize: 20,
-        width: "60%",
+        width: "80%",
+        height: "10%",
         alignSelf: "center",
         marginTop: 20,
         overflow: 'hidden'
