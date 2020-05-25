@@ -5,7 +5,6 @@ import { View } from "native-base"
 
 
 
-
 class MainLogin extends Component {
     constructor(){
         super();
