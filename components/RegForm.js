@@ -6,7 +6,7 @@ import { View } from "native-base"
 
 
 
-class LoginForm extends Component {
+class RegForm extends Component {
     constructor(){
         super();
         this.state = {
@@ -27,7 +27,19 @@ class LoginForm extends Component {
                  style={styles.logo}/>
                  </View>
                
-
+                <View style={styles.inputView}> 
+                
+                    <TextInput
+                            style = { styles.TextInputStyle }
+                            textAlign = "center"
+                            placeholder = {"שם מלא"}
+                            placeholderTextColor = "#FF8C37"
+                            height = {45}
+                            autoCorrect = {false}
+                            onChangeText = { username => this.setState({ username})}
+                            value = {this.state.username}
+                        />
+                </View>
 
                     
                     
@@ -60,7 +72,8 @@ class LoginForm extends Component {
                     
                 <View style = { styles.buttonStyle }>
                         <Button 
-                            title = "התחבר"
+                            title = "הרשמה"
+                            
                             color = "#FF8C37"           
                         >
                         </Button>   
@@ -68,14 +81,18 @@ class LoginForm extends Component {
                     
             </View>
                
-
+                
+                
+               
+               
+                
         )
         
     }
     
 }
 
-export default LoginForm;
+export default RegForm;
 
 const styles = {
      inputView: {
@@ -116,18 +133,16 @@ const styles = {
     },
 
     logo:{
-
+        
         width: 180,
-        height: 230
+        height: 240
 
     },
 
     logoView:{
         paddingTop: 30,
-        paddingBottom: 355,
         height: 300,
         alignItems: 'center'
-        
     }
 
     /*
