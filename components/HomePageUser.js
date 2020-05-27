@@ -138,7 +138,7 @@ const styles = {
         backgroundColor: "#F0B27A",
         borderColor: "#F0B27A",
         overflow: 'hidden',
-        borderRadius: 25,
+        borderRadius: 26,
         borderWidth: 2,
         fontSize: 20,
         width: "90%",
