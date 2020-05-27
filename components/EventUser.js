@@ -179,7 +179,7 @@ const styles = {
     },
     textDetailStyle: {
         fontWeight: "normal",
-        fontSize: 16,
+        fontSize: 17,
         alignSelf: "center"
     }
 }
