@@ -191,7 +191,7 @@ const styles = {
     },
     CheckBoxStyle: {
         backgroundColor: "#F6D365",
-        borderWidth: 1,
+        borderWidth: 2,
         borderColor: "#FFAF50",
         width: "30%",
         flex: 1,
