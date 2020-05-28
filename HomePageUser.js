@@ -32,7 +32,7 @@ class HomePageUser extends Component {
                                 style={{ width: "100%", height: "100%" }}
                             />
                             <View style={styles.textStyle}>
-                                <Text>מסלולי טיול</Text>
+                                <Text>מסלולים</Text>
                             </View>
                         </View>
                     </TouchableWithoutFeedback>
@@ -43,7 +43,7 @@ class HomePageUser extends Component {
                                 style={{ width: "100%", height: "100%" }}
                             />
                             <View style={styles.textStyle}>
-                                <Text>מסלולי פריחה</Text>
+                                <Text>מידע</Text>
                             </View>
                         </View> 
                     </TouchableWithoutFeedback>
