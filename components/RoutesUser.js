@@ -22,23 +22,6 @@ class RoutesUser extends Component {
             <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
                 <View>
                     <HeaderComp />
-                    <View style={{ flexDirection: 'row' }}>
-                        <View style={styles.CheckBoxStyle}>
-                            <CheckBox
-                                center
-                                title='מסלולי טיול'
-                                checked={this.state.checked}
-                            />
-                        </View>
-                        <View style={styles.CheckBoxStyle}>
-                            <CheckBox
-                                center
-                                title='מסלולי פריחה'
-                                checked={this.state.checked}
-                            />
-                        </View>
-                    </View>
-
                 </View>
                 <ScrollView>
                     <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
@@ -48,10 +31,6 @@ class RoutesUser extends Component {
                                     source={require('../assets/img/map.png')}
                                     style={{ width: "100%", height: "100%" }}
                                 />
-                            </View>
-                            <View style={styles.textStyle}>
-                                <Text style={styles.textTitleStyle}>מסלול</Text>
-                                <Text style={styles.textTitleStyle}>פריחה\טיול</Text>
                             </View>
                             <View style={styles.textStyle}>
                                 <Text style={styles.textTitleStyle}>שם המסלול</Text>
@@ -64,6 +43,14 @@ class RoutesUser extends Component {
                             <View style={styles.textStyle}>
                                 <Text style={styles.textTitleStyle}>ק"מ</Text>
                                 <Text style={styles.textDetailStyle}>2.5</Text>
+                            </View>
+                            <View style={styles.textStyle}>
+                                <Text style={styles.textTitleStyle}>משך זמן הליכה</Text>
+                                <Text style={styles.textDetailStyle}>40 דקות</Text>
+                            </View>
+                            <View style={styles.textStyle}>
+                                <Text style={styles.textTitleStyle}>סוג המסלול</Text>
+                                <Text style={styles.textDetailStyle}>מעגלי</Text>
                             </View>
                             <View style={styles.textStyle}>
                                 <Text style={styles.textTitleStyle}> פרטים</Text>
@@ -80,10 +67,6 @@ class RoutesUser extends Component {
                                 />
                             </View>
                             <View style={styles.textStyle}>
-                                <Text style={styles.textTitleStyle}>מסלול</Text>
-                                <Text style={styles.textTitleStyle}>פריחה\טיול</Text>
-                            </View>
-                            <View style={styles.textStyle}>
                                 <Text style={styles.textTitleStyle}>שם המסלול</Text>
                                 <Text style={styles.textDetailStyle}>שביל לאורך הפריחה</Text>
                             </View>
@@ -94,6 +77,14 @@ class RoutesUser extends Component {
                             <View style={styles.textStyle}>
                                 <Text style={styles.textTitleStyle}>ק"מ</Text>
                                 <Text style={styles.textDetailStyle}>4</Text>
+                            </View>
+                            <View style={styles.textStyle}>
+                                <Text style={styles.textTitleStyle}>משך זמן הליכה</Text>
+                                <Text style={styles.textDetailStyle}>70 דקות</Text>
+                            </View>
+                            <View style={styles.textStyle}>
+                                <Text style={styles.textTitleStyle}>סוג המסלול</Text>
+                                <Text style={styles.textDetailStyle}>הלוך חזור</Text>
                             </View>
                             <View style={styles.textStyle}>
                                 <Text style={styles.textTitleStyle}>פרטים</Text>
@@ -110,10 +101,6 @@ class RoutesUser extends Component {
                                 />
                             </View>
                             <View style={styles.textStyle}>
-                                <Text style={styles.textTitleStyle}>מסלול</Text>
-                                <Text style={styles.textTitleStyle}>פריחה\טיול</Text>
-                            </View>
-                            <View style={styles.textStyle}>
                                 <Text style={styles.textTitleStyle}>שם המסלול</Text>
                                 <Text style={styles.textDetailStyle}>ביקור בבית הצבאים</Text>
                             </View>
@@ -126,9 +113,18 @@ class RoutesUser extends Component {
                                 <Text style={styles.textDetailStyle}>2</Text>
                             </View>
                             <View style={styles.textStyle}>
-                                <Text style={styles.textTitleStyle}> פרטים</Text>
+                                <Text style={styles.textTitleStyle}>משך זמן הליכה</Text>
+                                <Text style={styles.textDetailStyle}>35 דקות</Text>
+                            </View>
+                            <View style={styles.textStyle}>
+                                <Text style={styles.textTitleStyle}>סוג המסלול</Text>
+                                <Text style={styles.textDetailStyle}>קו</Text>
+                            </View>
+                            <View style={styles.textStyle}>
+                                <Text style={styles.textTitleStyle}>פרטים</Text>
                                 <Text style={styles.textDetailStyle}>טיול מהנה</Text>
                             </View>
+
                         </View>
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
@@ -138,10 +134,6 @@ class RoutesUser extends Component {
                                     source={require('../assets/img/map.png')}
                                     style={{ width: "100%", height: "100%" }}
                                 />
-                            </View>
-                            <View style={styles.textStyle}>
-                                <Text style={styles.textTitleStyle}>מסלול</Text>
-                                <Text style={styles.textTitleStyle}>פריחה\טיול</Text>
                             </View>
                             <View style={styles.textStyle}>
                                 <Text style={styles.textTitleStyle}>שם המסלול</Text>
@@ -154,6 +146,14 @@ class RoutesUser extends Component {
                             <View style={styles.textStyle}>
                                 <Text style={styles.textTitleStyle}>ק"מ</Text>
                                 <Text style={styles.textDetailStyle}>3.5</Text>
+                            </View>
+                            <View style={styles.textStyle}>
+                                <Text style={styles.textTitleStyle}>משך זמן הליכה</Text>
+                                <Text style={styles.textDetailStyle}>60 דקות</Text>
+                            </View>
+                            <View style={styles.textStyle}>
+                                <Text style={styles.textTitleStyle}>סוג המסלול</Text>
+                                <Text style={styles.textDetailStyle}>הלוך-חזור</Text>
                             </View>
                             <View style={styles.textStyle}>
                                 <Text style={styles.textTitleStyle}> פרטים</Text>
