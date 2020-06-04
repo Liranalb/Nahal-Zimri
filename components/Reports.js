@@ -64,7 +64,7 @@ class Reports extends Component {
                                 horizontal={true}
                                 showsHorizontalScrollIndicator={false}
                             >
-                                <ReportBox imageUri={require('../assets/img/purple.jpg')}
+                                <ReportBox imageUri={require('../assets/img/flower.jpg')}
                                     name="purple flower"
                                     date="23.01.2020"
                                     catagory="פריחה"
@@ -73,11 +73,11 @@ class Reports extends Component {
                                     name="Shafan"
                                     date="23.01.2020"
                                 />
-                                <ReportBox imageUri={require('../assets/img/Sunflower.jpg')}
+                                <ReportBox imageUri={require('../assets/img/im3.jpeg')}
                                     name="Sunflower"
                                     date="23.01.2020"
                                 />
-                                <ReportBox imageUri={require('../assets/img/purple.jpg')}
+                                <ReportBox imageUri={require('../assets/img/flower.jpg')}
                                     name="purple flower"
                                     date="23.01.2020"
                                 />
@@ -85,7 +85,7 @@ class Reports extends Component {
                                     name="Shafan"
                                     date="23.01.2020"
                                 />
-                                <ReportBox imageUri={require('../assets/img/Sunflower.jpg')}
+                                <ReportBox imageUri={require('../assets/img/im3.jpeg')}
                                     name="Sunflower"
                                     date="23.01.2020"
                                 />
