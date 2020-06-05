@@ -1,7 +1,6 @@
 import React, { Component } from "react" //import react library
-import { Image, ImageBackground, StyleSheet ,TextInput, Button, TouchableOpacity } from "react-native"
+import { Text, Image, ImageBackground, StyleSheet ,TextInput, Button, TouchableOpacity } from "react-native"
 import { View } from "native-base"
-
 
 
 
@@ -28,27 +27,33 @@ class MainLogin extends Component {
                  
                  </View>
                
+
                  <View style = { styles.buttonStyle }>
                         <TouchableOpacity  
-                            text = "המשך עם גוגל"
+                        
                                       
                         >
-
+                            <Text style = { styles.text }>המשך עם גוגל</Text>
                         </TouchableOpacity >   
                 </View>
 
                     
                 <View style = { styles.buttonStyle }>
                         <TouchableOpacity  
-                            title = "הרשם עם מייל"
+                           
                             color = "#FF8C37"           
                         >
+                            <Text style = { styles.text }>הרשמה באמצעות מייל</Text>
+                           
                         </TouchableOpacity >   
                 </View>
-                    
+                <View style={ styles.line }/>
+
+                 <View style={{justifyContent: 'center', alignItems: "center", paddingTop: 20}}><Text style={ styles.login }>נרשמת בעבר? הכנס...</Text></View>   
+                
                 </View>
                
-
+                
         )
         
     }
@@ -58,25 +63,29 @@ class MainLogin extends Component {
 export default MainLogin;
 
 const styles = {
-     inputView: {
-        paddingTop: 20,
-        paddingBottom: 20,
-        
-        
-    
+
+    login: {
+        justifyContent: 'center',
+        color: 'gray',
+        fontSize: 20
+    },
+
+     line: {
+        borderBottomColor: 'gray',
+        borderBottomWidth: 0.5,
+        paddingTop: 20
      },
      
-     TextInputStyle: {
-         borderColor: "#FF8C37",
-         borderRadius: 25,
-         borderWidth: 2,
-         fontSize: 20,
-         width: "80%",
-         alignSelf: "center",
-         
-          
+     text: {
+        fontSize: 20,
+        color: '#FCDBC3'
+        
       },
+
       buttonStyle: {
+        justifyContent: 'center',
+        alignItems: "center",
+        alignSelf: "center",
         backgroundColor: "#FF8C37",
         borderColor: "#FF8C37",
         borderRadius: 10,
@@ -88,9 +97,10 @@ const styles = {
         marginTop: 20,
         overflow: 'hidden'
         
-        
+
     },
 
+    
     background:{
         backgroundColor: '#FCDBC3',
         flex: 1
@@ -98,28 +108,18 @@ const styles = {
 
     logo:{
 
-        width: 180,
-        height: 230
+        width: 200,
+        height: 250
 
     },
 
     logoView:{
         paddingTop: 30,
-        paddingBottom: 355,
+        paddingBottom: 350,
         height: 300,
         alignItems: 'center'
         
     }
-
-    /*
-    loginBackgorund: {
-        flex: 1,
-        resizeMode: "cover",
-        justifyContent: "center"
-    }
-    */
-
-    
 
 
 }
