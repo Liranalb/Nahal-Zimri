@@ -11,9 +11,9 @@ import Reports from "./components/Reports"
 import {name as appName} from './app.json';
 import ReportForm from './components/ReportForm';
 import HomePageAdmin from './components/HomePageAdmin';
+import AdminButton from './components/AdminButton';
 
-
-AppRegistry.registerComponent(appName, () => HomePageAdmin);
+AppRegistry.registerComponent(appName, () => AdminButton);
 
 
 
