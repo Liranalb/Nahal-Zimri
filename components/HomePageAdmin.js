@@ -1,32 +1,31 @@
 import 'react-native-gesture-handler';
 import React, { Component } from "react"
-import { Button, Header, ListItem } from "react-native-elements"
+import { Header, ListItem } from "react-native-elements"
 /*import { createStackNavigator } from 'react-navigation-stack';*/
-import { Image, View, TouchableWithoutFeedback, TextInput, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, unstable_enableLogBox } from "react-native"
+import { Image, View, TouchableWithoutFeedback, TextInput, Text, Button, ScrollView, TouchableOpacity, Alert, unstable_enableLogBox } from "react-native"
 import { Footer, Container } from "native-base"
 import LogoHeaderComponent from "./explore/LogoHeaderComponent";
 import Icon from 'react-native-vector-icons/Entypo';
 
-/*<Image source={require('../assets/img/Logo.png')}/>*/
-/*https://reactnative.dev/docs/images*/
-/*https://reactnative.dev/docs/image*/
-/*https://stackoverflow.com/questions/34180629/react-native-fit-image-in-containing-view-not-the-whole-screen-size*/
-/*leftComponent={{ icon: require('../assets/img/menu-24px.svg')}}*/
-/* <Image source={'../assets/img/menu-24px.svg'}/>8*/
-/*title=''
-                        color='no-color'
-                        backgroundColor='#F0B27A'*/
-/*centerComponent={{ text: 'נחל זמרי', style: { color: 'black', fontSize: 22, backgroundColor: '#FAE5D3'}}}*/
-/*centerComponent={<LogoHeaderComponent imageUri={require('../assets/img/Logo.png')}/>}*/
-class HomePageAdmin extends Component {
-    render() {
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Reports from './Reports'
+import InformationAdminPage from './InformationAdminPage'
+import PathCatagories from './PathCatagories'
+
+
+
+
+
+function HomeAdminScreen( {navigation} ) {
+
         return (
             <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
                 <View>
                     <Header style={{ width: "100%", height: "100%" }}
                         backgroundColor='#FAE5D3'
                         leftComponent={<Icon name="user" size={30} color='black' />}
-                        centerComponent={<LogoHeaderComponent imageUri={require('../assets/img/Logo.png')} />}
+                        centerComponent={<LogoHeaderComponent imageUri={require('../assets/img/logo.png')} />}
                         rightComponent={{ icon: 'menu', color: 'black' }}
                     />
                 </View>
@@ -54,7 +53,7 @@ class HomePageAdmin extends Component {
                             </View>
                         </View>
                     </TouchableWithoutFeedback>
-                    <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('PathCatagories')}>
                         <View style={styles.routesStyleRight}>
                             <Image
                                 source={require('../assets/img/flower.jpg')}
@@ -77,7 +76,7 @@ class HomePageAdmin extends Component {
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
+                <TouchableWithoutFeedback onPress={ () => navigation.navigate('Reports')}>
                     <View style={styles.observationsStyle}>
                         <Image
                             source={require('../assets/img/obs.jpeg')}
@@ -90,10 +89,42 @@ class HomePageAdmin extends Component {
                 </TouchableWithoutFeedback>
             </View>
         )
-    }
+    
 }
 
-export default HomePageAdmin;
+  function ReportsScreen() {
+    return (
+      <Reports/>
+    );
+  }
+  function InformationAdminScreen() {
+    return (
+      <InformationAdminPage/>
+    );
+  }
+  function InformationPathAdmin() {
+    return (
+      <PathCatagories/>
+    );
+  }
+  
+  const Stack = createStackNavigator();
+
+function HomePageAdmin() {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="HomeAdmin"  >
+          <Stack.Screen name="HomeAdmin" component={HomeAdminScreen} />
+          <Stack.Screen name="Reports" component={ReportsScreen} />
+          <Stack.Screen name="InformationAdmin" component={InformationAdminScreen} />
+          <Stack.Screen name="PathCatagories" component={InformationPathAdmin} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
+
+
+export default  HomePageAdmin;
 
 const styles = {
     textStyle: {

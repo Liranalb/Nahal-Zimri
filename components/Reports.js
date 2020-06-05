@@ -6,6 +6,7 @@ import ReportBox from "./explore/ReportBox"
 import LogoHeaderComponent from "./explore/LogoHeaderComponent"
 import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from "./HeaderComp"
+
 //import ImagePicker from 'react-native-image-picker';
 
 
@@ -148,7 +149,7 @@ class Reports extends Component {
 
 }
 
-export default Reports;
+export default  Reports;
 
 const styles = {
     buttonStyle: {

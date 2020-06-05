@@ -6,33 +6,33 @@ import ReportBox from "./explore/ReportBox"
 import LogoHeaderComponent from "./explore/LogoHeaderComponent"
 import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from "./HeaderComp"
-import Accordion from "react-native-accordion"
+
 //import ImagePicker from 'react-native-image-picker';
-// let Accordion = require('react-native-accordion');
+
 
 
 class ReportForm extends Component {
 
+    
 
     //   backgroundColor="#FAE5D3"
     render() {
         return (
             <View style={{ backgroundColor: '#FAE5D3' }}>
-                <View>
-                    
-                </View>
-                <View>
-                    
-                </View>
-                <View>
-                    
-                </View>
-                <Accordion
-                    header={header}
-                    content={content}
-                    easing="easeOutCubic"
-                />
-                
+                <ScrollView>
+
+
+                    <View style={styles.blockStyle}>
+
+                    </View>
+                    <View style={styles.blockStyle}>
+
+                    </View>
+                    <View style={styles.blockStyle}>
+
+                    </View>
+                </ScrollView>
+
             </View>
         )
     }
@@ -44,6 +44,12 @@ class ReportForm extends Component {
 export default ReportForm;
 
 const styles = {
-
+    blockStyle: {
+        width: "100%",
+        height: "28%",
+        borderWidth: 2,
+        borderColor: "white",
+        backgroundColor: 'green'
+    }
 
 }
