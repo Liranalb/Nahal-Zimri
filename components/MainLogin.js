@@ -67,12 +67,13 @@ function MainLogin() { //for navigation. not in use yet
         <NavigationContainer>
             <logStack.Navigator initialRouteName="MainLog">
                 <logStack.Screen options={{headerShown: false}} name="MainLog" component={MainLoginScreen} />
-                <logStack.Screen  name="LoginForm" 
-                options= {{headerStyle: styles.header}, {title: ""}}
+                <logStack.Screen  name="LoginForm" options={{headerShown: false}} 
+                //options={{title: "", headerStyle:{backgroundColor:"#FAE5D3"}}}
                 component={LoginFormScreen} />
 
-                <logStack.Screen name="RegForm"
-                options= {{headerStyle: styles.header}}
+                <logStack.Screen name="RegForm" options={{headerShown: false}} 
+                //options={{title: "", headerStyle:{backgroundColor:"#FAE5D3"}}}
+                //options={{title: "", headerStyle:{backgroundColor:"#FAE5D3"}}}
                 component={RegFormScreen} />
                 
             </logStack.Navigator>
