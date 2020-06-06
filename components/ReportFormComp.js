@@ -1,54 +1,65 @@
-// import React, { Component } from "react"
-// import { TextInput, Alert, ScrollView, Text, TouchableOpacity } from "react-native"
-// import { View } from "native-base"
-// import PropTypes from 'prop-types';
-// import { Header, ListItem, CheckBox, Button } from "react-native-elements"
-// import Icon from 'react-native-vector-icons/Entypo';
+import React, { Component } from "react";
+import {
+    View,
+    Text,
+    StyleSheet,
+    Image,
+  
+} from "react-native";
+import {  CheckBox, Button } from "react-native-elements"
+import Icon from 'react-native-vector-icons/FontAwesome';
+class ReportFormComp extends Component {
+    state= {
+        checked: false
+    }
+    render() {
+        return (
+            <View style={styles.container}>
+                <View style={{ flex: 1 ,backgroundColor: 'blue'}}>
+                    <Image source={this.props.imageUri}
+                        style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                    />
+                </View>
+                <View style={{ flex: 2, paddingRight: 10 , flexDirection:'row'}}>
+                    <View style = {{flex: 1}}>
+                    <CheckBox
+                        checkedIcon={<Icon name="check" size={40} color="#48D347" />}
+                        uncheckedIcon={<Icon name="plus" size={40} color="#505050" />}
+                        checked={this.state.checked}
+                        onPress={() => this.setState({checked: !this.state.checked})}
+                    
+                    />
+                    </View>
 
+                    <View style = {{flex: 1}}>
+                        <Text style= {styles.textStyle}>קטגוריה:     {this.props.catagory}</Text>
+                    </View>
+                    
+                    
+                </View>
+                
+                
+            </View>
+        );
+    }
+}
+export default ReportFormComp;
 
-// //import ImagePicker from 'react-native-image-picker';
+const styles = StyleSheet.create({
+    container: {
+        height: 110,
+        width:"100%", 
+        borderWidth: 0.8, 
+        borderColor: '#dddddd',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    textStyle: {
 
-// const ReportFormComp = (props) => {
-//     const { children, hide, style } = props;
-//     if (hide) {
-//       return null;
-//     }
-//     return (
-//       <View {...this.props} style={styles.bodyStyle}>
-//         { children }
-//       </View>
-//     );
-//   };
-
-
-//   ReportFormComp.propTypes = {
-//     children: PropTypes.oneOfType([
-//       PropTypes.string,
-//       PropTypes.element,
-//       PropTypes.number,
-//       PropTypes.arrayOf(PropTypes.oneOfType([
-//         PropTypes.string,
-//         PropTypes.number,
-//         PropTypes.element,
-//       ])),
-//     ]).isRequired,
-//     hide: PropTypes.bool,
-//   };
-
-
-// export default ReportFormComp;
-
-// const styles = {
-//     bodyStyle: {
-//         borderColor: "#004577",
-//         borderRadius: 25,
-//         borderWidth: 4,
-//         fontSize: 20,
-//         width: "80%",
-//         height: "25%",
-//         backgroundColor:"blue"
-
-//     }
-
-// }
+        fontSize: 24 , 
+        marginTop: 17
+        
+    }
+});
 

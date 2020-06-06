@@ -12,8 +12,11 @@ import {name as appName} from './app.json';
 import ReportForm from './components/ReportForm';
 import HomePageAdmin from './components/HomePageAdmin';
 import AdminButton from './components/AdminButton';
+import InfoBox from './components/explore/InfoBox';
+import InformationAdminPage from './components/InformationAdminPage';
+import ReportFormComp from './components/ReportFormComp';
 
-AppRegistry.registerComponent(appName, () => AdminButton);
+AppRegistry.registerComponent(appName, () => ReportForm);
 
 
 

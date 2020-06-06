@@ -7,8 +7,7 @@ import {
     TextInput,
     Text,
     TouchableOpacity,
-    ImageBackground,
-    ImageBackgroundBase
+    ImageBackground
 } from "react-native"
 
 
