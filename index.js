@@ -11,7 +11,7 @@ import RegForm from './components/RegForm';
 import MainLogin from './components/MainLogin';
 
 
-AppRegistry.registerComponent(appName, () => LoginForm);
+AppRegistry.registerComponent(appName, () => MainLogin);
 
 
 
