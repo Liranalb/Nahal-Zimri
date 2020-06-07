@@ -6,96 +6,150 @@ import {
     View,
     TextInput,
     Text,
-    TouchableOpacity,
+    TouchableWithoutFeedback,
     ImageBackground,
     ImageBackgroundBase
 } from "react-native"
+import InformationAdminPage from "./InformationAdminPage"
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+let typeName = {
+    type: "none"
+};
+
+function InfoCatagoriesScreen({ navigation }) {
+
+    return (
+        <View style={{ width: "100%", height: "100%" }}>
+            <ImageBackground source={require('../assets/img/homePageAdmin_background.jpg')}
+                style={{ flex: 1, resizeMode: 'cover' }}>
 
 
-
-
-class InfoCatagories extends Component {
-    render() {
-        return (
-            <View style={{ width: "100%", height: "100%"}}>
-                <ImageBackground source = {require('../assets/img/homeScreen.jpg') }
-                                style= {{flex:1, resizeMode: 'cover'}}>
-                    
-                
                 <View style={styles.rowStyle1}>
-                    <View style={styles.infoStyle}>
-                        <Image
-                            source={require('../assets/img/mammal.jpg')}
-                            style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                        />
-                        <View style={styles.textStyle}>
-                            <Text>יונקים</Text>
-                        </View>
-                    </View>
+                    <TouchableWithoutFeedback
 
-                    <View style={styles.infoStyle}>
-                        <Image
-                            source={require('../assets/img/bird.jpg')}
-                            style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                        />
-                        <View style={styles.textStyle}>
-                            <Text>ציפורים</Text>
+                        onPress={() => {
+                            typeName.type = "mammals";
+                            navigation.navigate('InfoAdminScreen')
+                        }
+                        }
+                    >
+                        <View style={styles.infoStyle}>
+                            <Image
+                                source={require('../assets/img/mammal.jpg')}
+                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                            />
+                            <View style={styles.textStyle}>
+                                <Text>יונקים</Text>
+                            </View>
                         </View>
-                    </View>
+                    </TouchableWithoutFeedback>
+
+                    <TouchableWithoutFeedback onPress={() => {
+                        typeName.type = "birds";
+                        navigation.navigate('InfoAdminScreen')
+                    }
+                    }>
+                        <View style={styles.infoStyle}>
+                            <Image
+                                source={require('../assets/img/bird.jpg')}
+                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                            />
+                            <View style={styles.textStyle}>
+                                <Text>ציפורים</Text>
+                            </View>
+                        </View>
+                    </TouchableWithoutFeedback>
+
+
+                </View>
+
+
+                <View style={styles.rowStyle2}>
+                    <TouchableWithoutFeedback onPress={() => {
+                        typeName.type = "blossom";
+                        navigation.navigate('InfoAdminScreen')
+                    }
+                    } >
+                        <View style={styles.infoStyle} >
+                            <Image
+                                source={require('../assets/img/blossom.jpg')}
+                                style={{ width: "100%", height: "100%" }}
+                            />
+                            <View style={styles.textStyle}>
+                                <Text>פריחה</Text>
+                            </View>
+                        </View>
+                    </TouchableWithoutFeedback>
+
+                    <TouchableWithoutFeedback onPress={() => {
+                        typeName.type = "Pisga";
+                        navigation.navigate('InfoAdminScreen')
+                    }
+                    }>
+                        <View style={styles.infoStyle}>
+                            <Image
+                                source={require('../assets/img/Pisga.jpg')}
+                                //   style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                style={{ width: "100%", height: "100%" }}
+                            />
+                            <View style={styles.textStyle}>
+                                <Text>פסגת זאב</Text>
+                            </View>
+                        </View>
+                    </TouchableWithoutFeedback>
 
 
                 </View>
                 <View style={styles.rowStyle2}>
-                    <View style={styles.infoStyle} >
-                        <Image
-                            source={require('../assets/img/blossom.jpg')}
-                            style={{ width: "100%", height: "100%" }}
-                        />
-                        <View style={styles.textStyle}>
-                            <Text>פריחה</Text>
+
+                    <TouchableWithoutFeedback onPress={() => {
+                        typeName.type = "Arch";
+                        navigation.navigate('InfoAdminScreen')
+                    }
+                    }>
+                        <View style={styles.infoStyle2}>
+                            <Image
+                                source={require('../assets/img/arch.jpg')}
+                                //   style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                style={{ width: "100%", height: "100%" }}
+                            />
+                            <View style={styles.textStyle}>
+                                <Text>ארכיאולוגיה</Text>
+                            </View>
                         </View>
-                    </View>
-
-                    <View style={styles.infoStyle}>
-                        <Image
-                            source={require('../assets/img/Pisga.jpg')}
-                            //   style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                            style={{ width: "100%", height: "100%" }}
-                        />
-                        <View style={styles.textStyle}>
-                            <Text>פסגת זאב</Text>
-                        </View>
-                    </View>
-
-
-                </View>
-                <View style={styles.rowStyle2}>
-
-                    <View style={styles.infoStyle2}>
-                        <Image
-                            source={require('../assets/img/arch.jpg')}
-                            //   style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                            style={{ width: "100%", height: "100%" }}
-                        />
-                        <View style={styles.textStyle}>
-                            <Text>ארכיאולוגיה</Text>
-                        </View>
-                    </View>
+                    </TouchableWithoutFeedback>
 
 
                 </View>
 
+            </ImageBackground>
+        </View>
+    )
 
-
-
-
-
-
-                </ImageBackground>
-            </View>
-        )
-    }
 }
+
+function InfoAdmin() {
+    return (
+        <InformationAdminPage dataType={typeName.type} />
+    );
+}
+
+const InfoStack = createStackNavigator();
+
+function InfoCatagories() {
+    return (
+        <NavigationContainer>
+            <InfoStack.Navigator initialRouteName="InfoCatScreen"  >
+                <InfoStack.Screen options={{ headerShown: false }} name="InfoCatScreen" component={InfoCatagoriesScreen} />
+                <InfoStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoAdmin} />
+            </InfoStack.Navigator>
+        </NavigationContainer>
+    );
+}
+
 
 export default InfoCatagories;
 

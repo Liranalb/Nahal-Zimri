@@ -15,8 +15,10 @@ import AdminButton from './components/AdminButton';
 import InfoBox from './components/explore/InfoBox';
 import InformationAdminPage from './components/InformationAdminPage';
 import ReportFormComp from './components/ReportFormComp';
+import InfoCatagories from './components/InfoCatagories';
+import InfoComp from './components/InfoComp';
 
-AppRegistry.registerComponent(appName, () => ReportForm);
+AppRegistry.registerComponent(appName, () => InformationAdminPage);
 
 
 

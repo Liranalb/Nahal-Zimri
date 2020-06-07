@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { TextInput, Alert, ScrollView, Text, TouchableOpacity } from "react-native"
+import { TextInput, Alert, ScrollView, Text, TouchableWithoutFeedback } from "react-native"
 import { View } from "native-base"
 import { Header, ListItem, CheckBox, Button } from "react-native-elements"
 import ReportBox from "./explore/ReportBox"
@@ -8,28 +8,39 @@ import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from "./HeaderComp"
 import InfoBox from './explore/InfoBox'
 import EditInfoBox from './explore/EditInfoBox'
+
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import InfoComp from "./InfoComp"
+
+
 //import ImagePicker from 'react-native-image-picker';
 
 
 
 class InformationAdminPage extends Component {
+    
 
     constructor() {
         super();
         this.state = {
+        
             headline: "",
             body: "",
             loading: false
         }
+      
     }
-    //   backgroundColor="#FAE5D3"
+    
+    
     render() {
+        const { navigation } =this.props;
         return (
             <View>
                 <HeaderComp />
-
+                {/* <Text>  {this.props.dataType}</Text> */}
                 <View style={styles.containerStyle}>
-
+                  
                     <View style={{ height: "100%", width: "100%", backgroundColor: '#E9DFD1' }}>
 
                         <View style={{ height: "50%", width: "100%" }}>
@@ -37,10 +48,12 @@ class InformationAdminPage extends Component {
                                 horizontal={false}
                                 showsHorizontalScrollIndicator={false}
                             >
+                                <TouchableWithoutFeedback onPress={ () => navigation.navigate('infoAdminComp')}>
                                 <EditInfoBox imageUri={require('../assets/img/purple.jpg')}
                                     headline="הדרדר הכחול"
                                     body="דַּרְדַּר כָּחֹל הוא צמח חד-שנתי ממשפחת המורכבים. לפרחי הסוג דַּרְדַּר שפע צבעים, המשותף לאבקנים ולעלי הכותרת מצבעים בהירים כמו: לבן, צהוב, כתום, קרם עד לצבעים כהים יותר כמו: ורוד, לילך, כחול, סגול ואפילו אדום. "
                                 />
+                                </TouchableWithoutFeedback>
 
                                 <EditInfoBox imageUri={require('../assets/img/blossom.jpg')}
                                     headline=" flower"
@@ -89,21 +102,21 @@ class InformationAdminPage extends Component {
                         <View style={styles.editBoxStyle}>
                             <View style={{ flex: 1 }}>
                                 <View style={{ marginLeft: 12, marginTop: 20 }}>
-                                    <TouchableOpacity
+                                    <TouchableWithoutFeedback
                                         onPress={() => this.onCamera()}
                                     >
                                         <View style={{marginLeft:12 }}>
                                             <Icon name="camera" size={30} color="white" />
                                             </View>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity
+                                    </TouchableWithoutFeedback>
+                                    <TouchableWithoutFeedback
                                         onPress={() => this.onImages()}
                                     >
                                         <View style={{ marginTop: 20,marginLeft:12 }}>
                                             <Icon name="images" size={30} color="white" />
                                             </View>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity
+                                    </TouchableWithoutFeedback>
+                                    <TouchableWithoutFeedback
                                         onPress={() => this.onImages()}
                                     >
                                         <View style={styles.buttonStyle}>
@@ -111,7 +124,7 @@ class InformationAdminPage extends Component {
                                                style= {{alignSelf: 'center',marginTop: 20,fontSize:18}}
                                                 >הוסף</Text>
                                         </View>
-                                    </TouchableOpacity>
+                                    </TouchableWithoutFeedback>
                                 </View>
                             </View>
                             <View style={{ flex: 5 }}>
@@ -130,32 +143,12 @@ class InformationAdminPage extends Component {
 
                             </View>
 
-
-
-
-
-
-
                         </View>
 
                     </View>
 
 
                 </View>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             </View>
         )
@@ -165,7 +158,37 @@ class InformationAdminPage extends Component {
 
 }
 
-export default InformationAdminPage;
+ export default InformationAdminPage;
+
+
+// export default function (props) {
+//     const navigation = useNavigation();
+
+//     return <InformationAdminPage navigation= {navigation}/>;
+// }
+
+// const InfoCompStack = createStackNavigator();
+
+// function InfoAdminComponent() { alert("bab");
+//     return (
+       
+//         // <InformationAdminPage dataType={typeName.type} />
+//         <InfoComp />
+//     );
+// }
+
+
+
+// function InfoCatagories() {
+//     return (
+//         <NavigationContainer>
+//             <InfoCompStack.Navigator  initialRouteName="infoAdminScreen">
+//                 <InfoCompStack.Screen options={{ headerShown: false }} name="infoAdminComp" component={InfoAdminComponent} />
+//                 <InfoCompStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InformationAdminPage} />
+//             </InfoCompStack.Navigator>
+//         </NavigationContainer>
+//     );
+// }
 
 const styles = {
     containerStyle: {

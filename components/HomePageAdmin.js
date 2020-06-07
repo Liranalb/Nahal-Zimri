@@ -53,7 +53,9 @@ function HomeAdminScreen( {navigation} ) {
                             </View>
                         </View>
                     </TouchableWithoutFeedback>
-                    <TouchableWithoutFeedback onPress={() => navigation.navigate('PathCatagories')}>
+                    <TouchableWithoutFeedback 
+                        onPress={() => navigation.navigate('PathCatagories')}>
+                            
                         <View style={styles.routesStyleRight}>
                             <Image
                                 source={require('../assets/img/flower.jpg')}
@@ -97,11 +99,7 @@ function HomeAdminScreen( {navigation} ) {
       <Reports/>
     );
   }
-  function InformationAdminScreen() {
-    return (
-      <InformationAdminPage/>
-    );
-  }
+
   function InformationPathAdmin() {
     return (
       <PathCatagories/>
@@ -114,9 +112,10 @@ function HomePageAdmin() {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="HomeAdmin"  >
-          <Stack.Screen name="HomeAdmin" component={HomeAdminScreen} />
-          <Stack.Screen name="Reports" component={ReportsScreen} />
-          <Stack.Screen name="InformationAdmin" component={InformationAdminScreen} />
+          <Stack.Screen options={{headerShown: false}} name="HomeAdmin" component={HomeAdminScreen} />
+          <Stack.Screen options={{headerShown: false}} name="Reports" component={ReportsScreen} />
+          <Stack.Screen options={{headerShown: false}} name="Articles" component={ReportsScreen} />
+ 
           <Stack.Screen name="PathCatagories" component={InformationPathAdmin} />
         </Stack.Navigator>
       </NavigationContainer>

@@ -13,7 +13,7 @@ import {
     ScrollView
 } from "react-native"
 import Icon from 'react-native-vector-icons/Entypo'
-import Carousel, { Pagination } from 'react-native-snap-carousel'
+import Carousel from 'react-native-snap-carousel'
 
 
 
