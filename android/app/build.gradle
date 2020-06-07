@@ -186,12 +186,13 @@ android {
         }
     }
 }
+apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
-
+    addUnimodulesDependencies() // 5.6 added by Rotem
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
