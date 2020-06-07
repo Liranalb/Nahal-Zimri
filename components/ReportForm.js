@@ -24,7 +24,7 @@ class ReportForm extends Component {
         return (
             <View style={{ height: "100%", width: "100%" }}>
                 <ImageBackground source={require('../assets/img/homePageAdmin_background.jpg')}
-                    style={{ flex: 1, resizeMode: 'cover' }}/>
+                    style={{ flex: 1, resizeMode: 'cover' }}>
                 <View style={{ backgroundColor: '#FAE5D3', height: "100%", width: "90%", alignSelf: 'center' }}>
 
 
@@ -135,6 +135,7 @@ class ReportForm extends Component {
 
 
                 </View>
+                </ImageBackground>
             </View>
         )
     }
@@ -161,7 +162,7 @@ const styles = {
         color: 'white',
         fontSize: 30,
         alignSelf: 'center',
-        marginTop: "6%"
+        marginTop: "4%"
     },
 
     checkBoxStyle: {

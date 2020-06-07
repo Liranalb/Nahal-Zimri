@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { Button, Header, ListItem } from "react-native-elements"
-/*import { createStackNavigator } from 'react-navigation-stack';*/
 import {
     Image,
     View,
@@ -22,7 +21,7 @@ let typeName = {
 };
 
 
-export function InfoCatagoriesScreen({ navigation: {navigate}}) {
+export function InfoCatagoriesScreen({ navigation }) {
     return (
         <View style={{ width: "100%", height: "100%" }}>
             <ImageBackground source={require('../assets/img/homePageAdmin_background.jpg')}
@@ -146,7 +145,7 @@ function InfoAdmin() {
 
 const InfoStack = createStackNavigator();
 
-function InfoCatagories() { 
+function InfoCatagoriesAdmin() { 
     return(
         <InfoStack.Navigator initialRouteName="InfoCatScreen">
             <InfoStack.Screen options={{ headerShown: false }} name="InfoCatScreen" component={InfoCatagoriesScreen} />
@@ -156,7 +155,7 @@ function InfoCatagories() {
         );
 }
 
-export default InfoCatagories;
+export default InfoCatagoriesAdmin;
 
 
 const styles = {

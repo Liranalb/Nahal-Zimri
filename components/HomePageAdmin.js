@@ -9,13 +9,13 @@ import Icon from 'react-native-vector-icons/Entypo';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Reports from './Reports'
+import ReportsAdmin from './ReportsAdmin'
 import InformationAdminPage from './InformationAdminPage'
 import PathCatagories from './PathCatagories'
 import EventAdmin from './EventAdmin'
 
 //  import {Test} from './InfoCatagories';
-import InfoCatagories from "./InfoCatagories"
+import InfoCatagoriesAdmin from "./InfoCatagoriesAdmin"
 // import {Test} from './InfoCatagories';
 
 
@@ -45,7 +45,7 @@ function HomeAdminScreen( {navigation} ) {
                 </TouchableWithoutFeedback>
 
                 <View style={styles.routesStyle}>
-                    <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('PathCat')}>
                         <View style={styles.routesStyleLeft}>
                             <Image
                                 source={require('../assets/img/travel.jpg')}
@@ -82,7 +82,7 @@ function HomeAdminScreen( {navigation} ) {
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback onPress={ () => navigation.navigate('Reports')}>
+                <TouchableWithoutFeedback onPress={ () => navigation.navigate('ReportAdmin')}>
                     <View style={styles.observationsStyle}>
                         <Image
                             source={require('../assets/img/obs.jpeg')}
@@ -100,17 +100,17 @@ function HomeAdminScreen( {navigation} ) {
 
   function ReportsScreen() {
     return (
-      <Reports/>
+      <ReportsAdmin/>
     );
   }
 
 
 
-  function EventsAdminScreen() { 
-    return (
-      <EventAdmin/>
-    );
-  }
+//   function EventsAdminScreen() { 
+//     return (
+//       <EventAdmin/>
+//     );
+//   }
   
 
   const Stack = createStackNavigator();
@@ -121,10 +121,11 @@ function HomePageAdmin() {
         <Stack.Navigator initialRouteName="HomeAdmin"  >
 
           <Stack.Screen options={{headerShown: false}} name="HomeAdmin" component={HomeAdminScreen} />
-          <Stack.Screen options={{headerShown: false}} name="Reports" component={ReportsScreen} />
+          <Stack.Screen options={{headerShown: false}} name="ReportAdmin" component={ReportsAdmin} />
           <Stack.Screen options={{headerShown: false}} name="Articles" component={ReportsScreen} />
           <Stack.Screen options={{headerShown: false}} name="EventsAdmin" component={EventAdmin} />
-          <Stack.Screen options={{headerShown: false}} name="InfoCat" component={InfoCatagories} />
+          <Stack.Screen options={{headerShown: false}} name="InfoCat" component={InfoCatagoriesAdmin} />
+          <Stack.Screen options={{headerShown: false}} name="PathCat" component={PathCatagories} />
         </Stack.Navigator>
       </NavigationContainer>
     );

@@ -37,8 +37,8 @@ const styles = {
         justifyContent: 'center'
     },
     containerStyle: {
-         height: 280, 
-         width: 150, 
+         height: 300, 
+         width: 170, 
          marginLeft: 10, 
          borderWidth: 0.8, 
          borderColor: '#dddddd',

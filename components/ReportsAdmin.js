@@ -6,23 +6,14 @@ import EditReports from "./explore/EditReports"
 import LogoHeaderComponent from "./explore/LogoHeaderComponent"
 import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from "./HeaderComp"
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import ReportForm from './ReportForm'
 //import ImagePicker from 'react-native-image-picker';
 
 
 
-class Reports extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            text: "",
-            username: "",
-            catagory: "",
-            loading: false
-        }
-    }
-
-    render() {
+function ReportsAdminScreen ( { navigation }) {
         return (
             <View>
 
@@ -36,21 +27,21 @@ class Reports extends Component {
 
                             center
                             title='פריחה'
-                            checked={this.state.checked}
+                            
                         />
                     </View>
                     <View style={styles.CheckBoxStyle}>
                         <CheckBox
                             center
                             title='בע"ח'
-                            checked={this.state.checked}
+                            
                         />
                     </View>
                     <View style={styles.CheckBoxStyle}>
                         <CheckBox
                             center
                             title='אחר'
-                            checked={this.state.checked}
+                            
                         />
                     </View>
 
@@ -131,8 +122,8 @@ class Reports extends Component {
                 <View style={styles.buttonStyle}>
                     <Button
                         color="#505050"
-                        title="Send Report"
-                    //   onPress= {() => this.onButtonPress()}
+                        title="הזן דוח"
+                       onPress= {() => navigation.navigate('ReportFormScreen')}
                     >
                     </Button>
                 </View>
@@ -147,9 +138,20 @@ class Reports extends Component {
 
 
 
-}
+    const ReportAdminStack = createStackNavigator();
 
-export default Reports;
+    function ReportsAdmin() { 
+        return(
+            <ReportAdminStack.Navigator initialRouteName="RepAdminScreen">
+                <ReportAdminStack.Screen options={{ headerShown: false }} name="RepAdminScreen" component={ReportsAdminScreen} />
+                 <ReportAdminStack.Screen options={{ headerShown: false }} name="ReportFormScreen" component={ReportForm} />
+                 {/* <ReportAdminStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoAdmin} /> */}
+    
+            </ReportAdminStack.Navigator>
+            );
+    }
+
+export default ReportsAdmin;
 
 const styles = {
     buttonStyle: {

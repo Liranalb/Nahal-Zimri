@@ -18,18 +18,18 @@ import InfoComp from "./InfoComp"
 
 
 
-class InformationAdminPage extends Component {
+
     
 
     
     //onPress={ () => navigation.navigate('infoAdminComp')}>
-    
-    render() {
-        const { navigation } =this.props;
+function InformationAdminScreen ({ route, navigation }) {
+
+    // const  itemId = route.params;
+ 
         return (
             <View>
                 <HeaderComp />
-                {/* <Text>  {this.props.dataType}</Text> */}
                 <View style={styles.containerStyle}>
                   
                     <View style={{ height: "100%", width: "100%", backgroundColor: '#E9DFD1' }}>
@@ -39,12 +39,14 @@ class InformationAdminPage extends Component {
                                 horizontal={false}
                                 showsHorizontalScrollIndicator={false}
                             >
-                                <TouchableWithoutFeedback> 
+                                <TouchableWithoutFeedback onPress={ () => navigation.navigate('infoAdminComp')}> 
+                          
+                                </TouchableWithoutFeedback>
                                 <EditInfoBox imageUri={require('../assets/img/purple.jpg')}
                                     headline="הדרדר הכחול"
                                     body="דַּרְדַּר כָּחֹל הוא צמח חד-שנתי ממשפחת המורכבים. לפרחי הסוג דַּרְדַּר שפע צבעים, המשותף לאבקנים ולעלי הכותרת מצבעים בהירים כמו: לבן, צהוב, כתום, קרם עד לצבעים כהים יותר כמו: ורוד, לילך, כחול, סגול ואפילו אדום. "
                                 />
-                                </TouchableWithoutFeedback>
+                                
 
                                 <EditInfoBox imageUri={require('../assets/img/blossom.jpg')}
                                     headline=" flower"
@@ -147,34 +149,27 @@ class InformationAdminPage extends Component {
 
 
 
-}
 
- // export default InformationAdminPage;
+
+export default InformationAdminPage;
 const InfoCompStack = createStackNavigator();
 
-function assistFunc (navigation) {
-    navigation = useNavigation();
-    return <InformationAdminPage navigation= {navigation}/>;
-}
 
-function InfoAdminComponent () { alert("dss");
+function InfoAdminComp () { 
     return <InfoComp/>;
 }
 
-export default function (props) {
-    const navigation = useNavigation();
+ function InformationAdminPage(){
 
     return (
         
             <InfoCompStack.Navigator  initialRouteName="infoAdminScreen">
-                
-                <InfoCompStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={assistFunc} />
-                <InfoCompStack.Screen options={{ headerShown: false }} name="infoAdminComp" component={InfoAdminComponent} />
+                <InfoCompStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InformationAdminScreen} />
+                <InfoCompStack.Screen options={{ headerShown: false }} name="infoAdminComp" component={InfoComp} />
             </InfoCompStack.Navigator>
         
     );
-
-    
+ 
 }
 
 
