@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component,useState, useEffect } from "react"
 import { TextInput, Alert, ScrollView, Text, TouchableWithoutFeedback,ImageBackground } from "react-native"
 import { View, Thumbnail, List, ListItem } from "native-base"
 import { CheckBox } from "react-native-elements"
@@ -10,17 +10,17 @@ import { Asset, Constants, FileSystem, Permissions } from 'react-native-unimodul
 import { Collapse, CollapseHeader, CollapseBody } from "accordion-collapse-react-native";
 import ReportFormComp from "./ReportFormComp"
 //import ImagePicker from 'react-native-image-picker';
-
+import { Camera } from 'expo-camera';
 
 
 
 
 class ReportForm extends Component {
 
-
-
     //   backgroundColor="#FAE5D3"
     render() {
+        
+
         return (
             <View style={{ height: "100%", width: "100%" }}>
                 <ImageBackground source={require('../assets/img/homePageAdmin_background.jpg')}

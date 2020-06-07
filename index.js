@@ -19,7 +19,7 @@ import ReportForm from './components/ReportForm'
 
 
 
-AppRegistry.registerComponent(appName, () => HomePageAdmin);
+AppRegistry.registerComponent(appName, () => LoginForm);
 
 
 
