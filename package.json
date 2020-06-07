@@ -20,15 +20,13 @@
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-elements": "2.0.0",
-<<<<<<< HEAD
-=======
+    
     "react-native-gesture-handler": "^1.6.1",
     "react-native-reanimated": "^1.9.0",
     "react-native-safe-area-context": "^3.0.2",
     "react-native-screens": "^2.8.0",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-unimodules": "^0.9.1",
->>>>>>> Rotem
     "react-navigation": "^4.3.9"
   },
   "devDependencies": {
