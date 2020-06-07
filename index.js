@@ -17,7 +17,9 @@ import HomePageAdmin from './components/HomePageAdmin';
 
 
 
-AppRegistry.registerComponent(appName, () => HomePageAdmin);
+
+AppRegistry.registerComponent(appName, () => MainLogin);
+
 
 
 

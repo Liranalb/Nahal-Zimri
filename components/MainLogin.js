@@ -1,68 +1,96 @@
+import 'react-native-gesture-handler';
 import React, { Component } from "react" //import react library
-import { Text, Image, ImageBackground, StyleSheet ,TextInput, Button, TouchableOpacity } from "react-native"
+import { Text, Image, ImageBackground, StyleSheet, TextInput, Button, TouchableOpacity } from "react-native"
 import { View } from "native-base"
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
+import LoginForm from "./LoginForm";
+import RegForm from "./RegForm";
 
 
 
 
-class MainLogin extends Component {
-    constructor(){
-        super();
-        this.state = {
-            email: "",
-            password: "",
-            username: ""
-        }
-    }
-
-
-    render() {
-        return(
+    function MainLoginScreen( {navigation}) {
+        return (
             
+                <View style={styles.background}>
+                    <View style={styles.logoView}>
+                        <Image source={require('../assets/img/logo.png')}
+                            style={styles.logo} />
 
-            <View style={styles.background}>
-                 <View style={styles.logoView}>
-                 <Image source={require('../assets/img/logo.png')}
-                 style={styles.logo}/>
-                 
-                 </View>
-               
+                    </View>
 
-                 <View style = { styles.buttonStyle }>
-                        <TouchableOpacity  
-                        
-                                      
-                        >
-                            <Text style = { styles.text }>המשך עם גוגל</Text>
-                        </TouchableOpacity >   
-                </View>
 
+                    <View style={styles.buttonStyle}>
+                        <TouchableOpacity >
+                            <Text style={styles.text}>המשך עם גוגל</Text>
+                        </TouchableOpacity >
+                    </View>
+
+
+                    <View style={styles.buttonStyle}>
+                        <TouchableOpacity color="#FF8C37" onPress={ () => navigation.navigate('RegForm')}>
+                            <Text style={styles.text}>הרשמה באמצעות מייל</Text>
+
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.line} />
                     
-                <View style = { styles.buttonStyle }>
-                        <TouchableOpacity  
-                           
-                            color = "#FF8C37"           
-                        >
-                            <Text style = { styles.text }>הרשמה באמצעות מייל</Text>
-                           
-                        </TouchableOpacity >   
+                    <TouchableOpacity onPress={ () => navigation.navigate('LoginForm')}>
+                        <View style={{ justifyContent: 'center', alignItems: "center", paddingTop: 20 }}><Text style={styles.login}>נרשמת בעבר? הכנס...</Text></View>
+                    </TouchableOpacity>
                 </View>
-                <View style={ styles.line }/>
 
-                 <View style={{justifyContent: 'center', alignItems: "center", paddingTop: 20}}><Text style={ styles.login }>נרשמת בעבר? הכנס...</Text></View>   
-                
-                </View>
-               
-                
+            
         )
-        
+
     }
-    
+
+
+
+function LoginFormScreen() {
+    return (
+      <LoginForm/>
+    );
+  }
+
+  function RegFormScreen() {
+    return (
+      <RegForm/>
+    );
+  }
+
+const logStack = createStackNavigator();
+
+function MainLogin() { //for navigation. not in use yet
+    return (
+        <NavigationContainer>
+            <logStack.Navigator initialRouteName="MainLog">
+                <logStack.Screen options={{headerShown: false}} name="MainLog" component={MainLoginScreen} />
+                <logStack.Screen  name="LoginForm" options={{headerShown: false}} 
+                //options={{title: "", headerStyle:{backgroundColor:"#FAE5D3"}}}
+                component={LoginFormScreen} />
+
+                <logStack.Screen name="RegForm" options={{headerShown: false}} 
+                //options={{title: "", headerStyle:{backgroundColor:"#FAE5D3"}}}
+                //options={{title: "", headerStyle:{backgroundColor:"#FAE5D3"}}}
+                component={RegFormScreen} />
+                
+            </logStack.Navigator>
+        </NavigationContainer>
+    );
 }
+
+
 
 export default MainLogin;
 
 const styles = {
+
+    header: {
+        backgroundColor: '#FCDBC3'
+        
+    },
 
     login: {
         justifyContent: 'center',
@@ -70,19 +98,19 @@ const styles = {
         fontSize: 20
     },
 
-     line: {
+    line: {
         borderBottomColor: 'gray',
         borderBottomWidth: 0.5,
         paddingTop: 20
-     },
-     
-     text: {
+    },
+
+    text: {
         fontSize: 20,
         color: '#FCDBC3'
-        
-      },
 
-      buttonStyle: {
+    },
+
+    buttonStyle: {
         justifyContent: 'center',
         alignItems: "center",
         alignSelf: "center",
@@ -96,29 +124,29 @@ const styles = {
         alignSelf: "center",
         marginTop: 20,
         overflow: 'hidden'
-        
+
 
     },
 
-    
-    background:{
+
+    background: {
         backgroundColor: '#FCDBC3',
         flex: 1
     },
 
-    logo:{
+    logo: {
 
         width: 200,
         height: 250
 
     },
 
-    logoView:{
+    logoView: {
         paddingTop: 30,
         paddingBottom: 350,
         height: 300,
         alignItems: 'center'
-        
+
     }
 
 
