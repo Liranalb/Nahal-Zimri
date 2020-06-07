@@ -11,7 +11,7 @@ import {
     ImageBackgroundBase
 } from "react-native"
 import InformationAdminPage from "./InformationAdminPage"
-
+import HomeAdminPage from'./HomePageAdmin'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -21,8 +21,8 @@ let typeName = {
     type: "none"
 };
 
-function InfoCatagoriesScreen({ navigation }) {
 
+export function InfoCatagoriesScreen({ navigation }) {
     return (
         <View style={{ width: "100%", height: "100%" }}>
             <ImageBackground source={require('../assets/img/homePageAdmin_background.jpg')}
@@ -133,35 +133,26 @@ function InfoCatagoriesScreen({ navigation }) {
 
 }
 
-function InfoAdmin() {
+function InfoAdmin() { 
     return (
         <InformationAdminPage dataType={typeName.type} />
     );
 }
 
-const InfoTab = createBottomTabNavigator ();
+const InfoStack = createStackNavigator();
 
-function InfoCatagories() {
-    return
-        <InfoTab.Navigator>
-             <InfoTab.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoAdmin} />
+function InfoCatagories() { 
+    return(
+        <InfoStack.Navigator initialRouteName="InfoCatScreen">
+            <InfoStack.Screen options={{ headerShown: false }} name="InfoCatScreen" component={InfoCatagoriesScreen} />
+             <InfoStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoAdmin} />
 
-        </InfoTab.Navigator>
+        </InfoStack.Navigator>
+        );
 }
 
-// function InfoCatagories() {
-//     return (
-//         // <NavigationContainer>
-//             <InfoStack.Navigator>
-//                 {/* <InfoStack.Screen options={{ headerShown: false }} name="InfoCatScreen" component={InfoCatagoriesScreen} /> */}
-//                 <InfoStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoAdmin} />
-//             </InfoStack.Navigator>
-//         {/* </NavigationContainer> */}
-//     );
-// }
-
-// initialRouteName="InfoCatScreen"  
 export default InfoCatagories;
+
 
 const styles = {
     rowStyle1: {

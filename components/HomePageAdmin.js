@@ -13,8 +13,10 @@ import Reports from './Reports'
 import InformationAdminPage from './InformationAdminPage'
 import PathCatagories from './PathCatagories'
 import EventAdmin from './EventAdmin'
-import InfoCatagories from './InfoCatagories'
 
+//  import {Test} from './InfoCatagories';
+import InfoCatagories from "./InfoCatagories"
+// import {Test} from './InfoCatagories';
 
 
 
@@ -56,7 +58,7 @@ function HomeAdminScreen( {navigation} ) {
                     </TouchableWithoutFeedback>
 
                     <TouchableWithoutFeedback 
-                        onPress={() => navigation.navigate('InfoCatagories')}>
+                        onPress={() => navigation.navigate('InfoCat')}>
 
                         <View style={styles.routesStyleRight}>
                             <Image
@@ -102,13 +104,7 @@ function HomeAdminScreen( {navigation} ) {
     );
   }
 
-  
 
-  function InformationCatagoriesAdmin() {
-    return (
-      <InfoCatagories/>
-    );
-  }
 
   function EventsAdminScreen() { 
     return (
@@ -116,6 +112,7 @@ function HomeAdminScreen( {navigation} ) {
     );
   }
   
+
   const Stack = createStackNavigator();
 
 function HomePageAdmin() {
@@ -126,8 +123,8 @@ function HomePageAdmin() {
           <Stack.Screen options={{headerShown: false}} name="HomeAdmin" component={HomeAdminScreen} />
           <Stack.Screen options={{headerShown: false}} name="Reports" component={ReportsScreen} />
           <Stack.Screen options={{headerShown: false}} name="Articles" component={ReportsScreen} />
-          <Stack.Screen options={{headerShown: false}} name="EventsAdmin" component={EventsAdminScreen} />
-          <Stack.Screen name="InfoCatagories" component={InformationCatagoriesAdmin} />
+          <Stack.Screen options={{headerShown: false}} name="EventsAdmin" component={EventAdmin} />
+          <Stack.Screen options={{headerShown: false}} name="InfoCat" component={InfoCatagories} />
         </Stack.Navigator>
       </NavigationContainer>
     );

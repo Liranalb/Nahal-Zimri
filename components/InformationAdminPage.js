@@ -21,17 +21,8 @@ import InfoComp from "./InfoComp"
 class InformationAdminPage extends Component {
     
 
-    constructor() {
-        super();
-        this.state = {
-        
-            headline: "",
-            body: "",
-            loading: false
-        }
-      
-    }
     
+    //onPress={ () => navigation.navigate('infoAdminComp')}>
     
     render() {
         const { navigation } =this.props;
@@ -48,7 +39,7 @@ class InformationAdminPage extends Component {
                                 horizontal={false}
                                 showsHorizontalScrollIndicator={false}
                             >
-                                <TouchableWithoutFeedback onPress={ () => navigation.navigate('infoAdminComp')}>
+                                <TouchableWithoutFeedback> 
                                 <EditInfoBox imageUri={require('../assets/img/purple.jpg')}
                                     headline="הדרדר הכחול"
                                     body="דַּרְדַּר כָּחֹל הוא צמח חד-שנתי ממשפחת המורכבים. לפרחי הסוג דַּרְדַּר שפע צבעים, המשותף לאבקנים ולעלי הכותרת מצבעים בהירים כמו: לבן, צהוב, כתום, קרם עד לצבעים כהים יותר כמו: ורוד, לילך, כחול, סגול ואפילו אדום. "
@@ -158,37 +149,35 @@ class InformationAdminPage extends Component {
 
 }
 
- export default InformationAdminPage;
+ // export default InformationAdminPage;
+const InfoCompStack = createStackNavigator();
+
+function assistFunc (navigation) {
+    navigation = useNavigation();
+    return <InformationAdminPage navigation= {navigation}/>;
+}
+
+function InfoAdminComponent () { alert("dss");
+    return <InfoComp/>;
+}
+
+export default function (props) {
+    const navigation = useNavigation();
+
+    return (
+        
+            <InfoCompStack.Navigator  initialRouteName="infoAdminScreen">
+                
+                <InfoCompStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={assistFunc} />
+                <InfoCompStack.Screen options={{ headerShown: false }} name="infoAdminComp" component={InfoAdminComponent} />
+            </InfoCompStack.Navigator>
+        
+    );
+
+    
+}
 
 
-// export default function (props) {
-//     const navigation = useNavigation();
-
-//     return <InformationAdminPage navigation= {navigation}/>;
-// }
-
-// const InfoCompStack = createStackNavigator();
-
-// function InfoAdminComponent() { alert("bab");
-//     return (
-       
-//         // <InformationAdminPage dataType={typeName.type} />
-//         <InfoComp />
-//     );
-// }
-
-
-
-// function InfoCatagories() {
-//     return (
-//         <NavigationContainer>
-//             <InfoCompStack.Navigator  initialRouteName="infoAdminScreen">
-//                 <InfoCompStack.Screen options={{ headerShown: false }} name="infoAdminComp" component={InfoAdminComponent} />
-//                 <InfoCompStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InformationAdminPage} />
-//             </InfoCompStack.Navigator>
-//         </NavigationContainer>
-//     );
-// }
 
 const styles = {
     containerStyle: {
@@ -233,7 +222,7 @@ const styles = {
     },
     buttonStyle: {
         width: "100%",
-        height: "60%",
+        height: "45%",
         backgroundColor: '#FFF4E3',
         borderRadius:20,
         marginTop:10,
