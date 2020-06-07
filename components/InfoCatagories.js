@@ -14,6 +14,8 @@ import InformationAdminPage from "./InformationAdminPage"
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 
 let typeName = {
     type: "none"
@@ -137,20 +139,28 @@ function InfoAdmin() {
     );
 }
 
-const InfoStack = createStackNavigator();
+const InfoTab = createBottomTabNavigator ();
 
 function InfoCatagories() {
-    return (
-        <NavigationContainer>
-            <InfoStack.Navigator initialRouteName="InfoCatScreen"  >
-                <InfoStack.Screen options={{ headerShown: false }} name="InfoCatScreen" component={InfoCatagoriesScreen} />
-                <InfoStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoAdmin} />
-            </InfoStack.Navigator>
-        </NavigationContainer>
-    );
+    return
+        <InfoTab.Navigator>
+             <InfoTab.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoAdmin} />
+
+        </InfoTab.Navigator>
 }
 
+// function InfoCatagories() {
+//     return (
+//         // <NavigationContainer>
+//             <InfoStack.Navigator>
+//                 {/* <InfoStack.Screen options={{ headerShown: false }} name="InfoCatScreen" component={InfoCatagoriesScreen} /> */}
+//                 <InfoStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoAdmin} />
+//             </InfoStack.Navigator>
+//         {/* </NavigationContainer> */}
+//     );
+// }
 
+// initialRouteName="InfoCatScreen"  
 export default InfoCatagories;
 
 const styles = {

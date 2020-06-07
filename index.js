@@ -14,11 +14,12 @@ import RegForm from './components/RegForm';
 import MainLogin from './components/MainLogin';
 import Reports from "./components/Reports";
 import HomePageAdmin from './components/HomePageAdmin';
+import EventAdmin from './components/EventAdmin';
 
 
 
 
-AppRegistry.registerComponent(appName, () => MainLogin);
+AppRegistry.registerComponent(appName, () => HomePageAdmin);
 
 
 

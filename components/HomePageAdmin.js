@@ -12,7 +12,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Reports from './Reports'
 import InformationAdminPage from './InformationAdminPage'
 import PathCatagories from './PathCatagories'
-
+import EventAdmin from './EventAdmin'
+import InfoCatagories from './InfoCatagories'
 
 
 
@@ -55,7 +56,7 @@ function HomeAdminScreen( {navigation} ) {
                     </TouchableWithoutFeedback>
 
                     <TouchableWithoutFeedback 
-                        onPress={() => navigation.navigate('PathCatagories')}>
+                        onPress={() => navigation.navigate('InfoCatagories')}>
 
                         <View style={styles.routesStyleRight}>
                             <Image
@@ -68,7 +69,7 @@ function HomeAdminScreen( {navigation} ) {
                         </View>
                     </TouchableWithoutFeedback>
                 </View>
-                <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
+                <TouchableWithoutFeedback onPress={ () => navigation.navigate('EventsAdmin')}>
                     <View style={styles.infoStyle}>
                         <Image
                             source={require('../assets/img/fox.jpg')}
@@ -101,15 +102,17 @@ function HomeAdminScreen( {navigation} ) {
     );
   }
 
-  function InformationAdminScreen() {
+  
+
+  function InformationCatagoriesAdmin() {
     return (
-      <InformationAdminPage/>
+      <InfoCatagories/>
     );
   }
 
-  function InformationPathAdmin() {
+  function EventsAdminScreen() { 
     return (
-      <PathCatagories/>
+      <EventAdmin/>
     );
   }
   
@@ -123,8 +126,8 @@ function HomePageAdmin() {
           <Stack.Screen options={{headerShown: false}} name="HomeAdmin" component={HomeAdminScreen} />
           <Stack.Screen options={{headerShown: false}} name="Reports" component={ReportsScreen} />
           <Stack.Screen options={{headerShown: false}} name="Articles" component={ReportsScreen} />
- 
-          <Stack.Screen name="PathCatagories" component={InformationPathAdmin} />
+          <Stack.Screen options={{headerShown: false}} name="EventsAdmin" component={EventsAdminScreen} />
+          <Stack.Screen name="InfoCatagories" component={InformationCatagoriesAdmin} />
         </Stack.Navigator>
       </NavigationContainer>
     );
