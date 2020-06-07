@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import {
     View,
     Text,
-    StyleSheet,
     Image
 } from "react-native";
 
 class ReportBox extends Component {
     render() {
         return (
-            <View style={{ height: 280, width: 150, marginLeft: 10, borderWidth: 0.8, borderColor: '#dddddd' }}>
+            <View style={styles.containerStyle}>
                 <View style={{ flex: 6 }}>
                     <Image  source={{uri: this.props.source}}
                         style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
@@ -31,10 +30,18 @@ class ReportBox extends Component {
 }
 export default ReportBox;
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    containerStyle: {
+         height: 280, 
+         width: 150, 
+         marginLeft: 10, 
+         borderWidth: 0.8, 
+         borderColor: '#dddddd',
+         backgroundColor: '#F4D5A7'
     }
-});
+}

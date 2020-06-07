@@ -17,6 +17,30 @@ class LoginForm extends Component {
         }
     }
 
+    onLoginSuccess() {
+        Alert.alert(
+            "החיבור הושלם",
+            "התחחברת בהצלחה",
+            [{ text: "אישור"}],
+            { cancelable: false}
+        )
+        this.setState({
+            email: "",
+            password: "",
+            loading: false
+        })
+    }
+
+    onLoginFail() {
+        this.setState({ loading: false})
+        Alert.alert(
+            "שגיאה",
+            "מייל או סיסמא אינם נכונים",
+            [{ text: "אישור"}],
+            { cancelable: false}
+        )
+    }
+
 
     render() {
         return(

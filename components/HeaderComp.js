@@ -23,7 +23,7 @@ class HeaderComp extends Component {
                         <Icon name="user" size={30} color="black" />
                     </TouchableOpacity>}
 
-                    centerComponent={<LogoHeaderComponent imageUri={require('../assets/img/Logo.png')} />}
+                    centerComponent={<LogoHeaderComponent imageUri={require('../assets/img/logo.png')} />}
                     //centerComponent={<LogoHeaderComponent />}
                     
                     rightComponent={<TouchableOpacity
