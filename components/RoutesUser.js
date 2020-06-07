@@ -5,6 +5,7 @@ import { Image, View, TextInput, Text, StyleSheet, ScrollView, TouchableWithoutF
 import { Footer, Container, Right } from "native-base"
 import HeaderComp from "./HeaderComp";
 import ReportBox from "./ReportBox"
+import UnitRoutes from "./UnitRoutes";
 
 class RoutesUser extends Component {
     constructor() {
@@ -24,6 +25,17 @@ class RoutesUser extends Component {
                     <HeaderComp />
                 </View>
                 <ScrollView>
+                <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
+                        <UnitRoutes
+                        imageUri={require('../assets/img/map.png')}
+                        nameOfRoutes="גל-קראוס שביל ימין"
+                        diff="בינוני"
+                        km="2.5"
+                        time="40 דקות"
+                        kind="מעגלי"
+                        detail="כל הציבור מוזמן"
+                        />
+                    </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
                         <View style={styles.routeStyle}>
                             <View style={styles.imageStyle}>

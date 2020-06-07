@@ -10,10 +10,14 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "firebase": "^7.15.0",
     "native-base": "2.13.12",
     "react": "16.11.0",
     "react-native": "0.62.2",
-    "react-native-elements": "2.0.0"
+    "react-native-elements": "2.0.0",
+    "react-native-indicator": "^1.2.0",
+    "react-native-lahk-marquee-label-vertical": "^1.1.1",
+    "react-native-marquee": "^0.3.2"
   },
   "devDependencies": {
     "@babel/core": "7.9.6",
