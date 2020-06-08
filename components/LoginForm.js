@@ -48,7 +48,7 @@ class LoginForm extends Component {
 
             <View style={styles.background}>
                  <View style={styles.logoView}>
-                 <Image source={require('../assets/img/Logo.png')}
+                 <Image source={require('../assets/img/logo.png')}
                  style={styles.logo}/>
                  </View>
                

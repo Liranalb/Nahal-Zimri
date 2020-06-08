@@ -5,7 +5,7 @@ import { Image, View, TextInput, Text, StyleSheet, ScrollView, TouchableWithoutF
 import { Footer, Container, Right } from "native-base"
 import HeaderComp from "./HeaderComp";
 import UnitInfoUser from "./UnitInfoUser";
-import ReportBox from "./ReportBox"
+
 
 class InfoUser extends Component {
     constructor() {

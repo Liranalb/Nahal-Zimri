@@ -4,9 +4,6 @@ import { Header, CheckBox, ListItem } from "react-native-elements"
 import { Image, View, TextInput, Text, StyleSheet, ScrollView, TouchableWithoutFeedback, Button, Alert, unstable_enableLogBox } from "react-native"
 import { Footer, Container, Right } from "native-base"
 import HeaderComp from "./HeaderComp";
-import UnitInfoUser from "./UnitInfoUser";
-import ReportBox from "./ReportBox"
-import AdminButton from "./AdminButton"
 import AdminUnitInfoUser from "./AdminUnitInfoUser"
 
 

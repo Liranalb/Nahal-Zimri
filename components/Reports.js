@@ -6,15 +6,20 @@ import ReportBox from "./explore/ReportBox"
 import LogoHeaderComponent from "./explore/LogoHeaderComponent"
 import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from "./HeaderComp"
+import firebase from "../config/Firebase"
 
 //import ImagePicker from 'react-native-image-picker';
 
-
+const db=firebase.firestore();
 
 class Reports extends Component {
 
     constructor() {
-        super();
+        db.collection('Reports').get().then((snapshot)=>{
+           
+         })
+
+        super(); 
         this.state = {
             text: "",
             username: "",
@@ -22,6 +27,8 @@ class Reports extends Component {
             loading: false
         }
     }
+    
+
              //   backgroundColor="#FAE5D3"
     render() {
         return (

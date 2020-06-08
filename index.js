@@ -13,8 +13,6 @@ import RoutesUser from "./components/RoutesUser"
 import UnitRoutes from "./components/UnitRoutes"
 import AdminInfoUser from "./components/AdminInfoUser"
 import AdminUnitInfoUser from"./components/AdminUnitInfoUser"
-
-
 import {name as appName} from './app.json';
 import RegForm from './components/RegForm';
 import MainLogin from './components/MainLogin';
@@ -26,7 +24,7 @@ import HomePageAdmin from './components/HomePageAdmin';
 
 
 
-AppRegistry.registerComponent(appName, () =>LoginForm);
+AppRegistry.registerComponent(appName, () =>Reports);
 
 
 
