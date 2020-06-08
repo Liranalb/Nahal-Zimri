@@ -10,7 +10,7 @@ class ReportBox extends Component {
         return (
             <View style={styles.containerStyle}>
                 <View style={{ flex: 6 }}>
-                    <Image source={this.props.imageUri}
+                    <Image  source={{uri: this.props.source}}
                         style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
                     />
                 </View>
@@ -37,8 +37,8 @@ const styles = {
         justifyContent: 'center'
     },
     containerStyle: {
-         height: 300, 
-         width: 170, 
+         height: 280, 
+         width: 150, 
          marginLeft: 10, 
          borderWidth: 0.8, 
          borderColor: '#dddddd',

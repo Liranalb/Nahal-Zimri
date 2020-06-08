@@ -1,7 +1,7 @@
 import React, { Component } from "react" //import react library
 import { Image, ImageBackground, StyleSheet ,TextInput, Button } from "react-native"
 import { View } from "native-base"
-
+import firebase from "../config/Firebase"
 
 
 
@@ -9,6 +9,7 @@ import { View } from "native-base"
 class LoginForm extends Component {
     constructor(){
         super();
+        this.usersRef=firebase.firestore().collection('Users');
         this.state = {
             email: "",
             password: "",

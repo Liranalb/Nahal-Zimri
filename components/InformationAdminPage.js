@@ -16,18 +16,15 @@ import InfoComp from "./InfoComp"
 
 //import ImagePicker from 'react-native-image-picker';
 
-
-
-
-    
-
-    
  
-export function InformationAdminScreen ({ navigation }) {
+ function InformationAdminScreen ({ navigation }) {
  
+
+
         return (
             <View>
                 <HeaderComp />
+                {/* <Text>  {this.props.dataType}</Text> */}
                 <View style={styles.containerStyle}>
                   
                     <View style={{ height: "100%", width: "100%", backgroundColor: '#E9DFD1' }}>
@@ -41,13 +38,18 @@ export function InformationAdminScreen ({ navigation }) {
                                     onPress= { () => navigation.navigate('infoAdminComp')}
                                     > */}
                                 <View>
+
                                 <EditInfoBox imageUri={require('../assets/img/purple.jpg')}
                                     headline="הדרדר הכחול"
                                     body="דַּרְדַּר כָּחֹל הוא צמח חד-שנתי ממשפחת המורכבים. לפרחי הסוג דַּרְדַּר שפע צבעים, המשותף לאבקנים ולעלי הכותרת מצבעים בהירים כמו: לבן, צהוב, כתום, קרם עד לצבעים כהים יותר כמו: ורוד, לילך, כחול, סגול ואפילו אדום. "
                                     onPress= { () => navigation.navigate('infoAdminComp')}
                                 />
+
                                </View>
                                {/* </TouchableWithoutFeedback> */}
+
+
+
 
                                 <EditInfoBox imageUri={require('../assets/img/blossom.jpg')}
                                     headline=" flower"
@@ -147,10 +149,6 @@ export function InformationAdminScreen ({ navigation }) {
             </View>
         )
     }
-
-
-
-
 
 
 const InfoCompStack = createStackNavigator();

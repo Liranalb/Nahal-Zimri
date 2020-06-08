@@ -4,11 +4,12 @@ import { Header, CheckBox, ListItem } from "react-native-elements"
 import { Image, View, TextInput, Text, StyleSheet, ScrollView, TouchableWithoutFeedback, Button, Alert, unstable_enableLogBox } from "react-native"
 import { Footer, Container, Right } from "native-base"
 import HeaderComp from "./HeaderComp";
-import UnitInfoUser from "./UnitInfoUser";
-import ReportBox from "./explore/ReportBox"
+import AdminUnitInfoUser from "./AdminUnitInfoUser"
 
 
-class InfoUser extends Component {
+
+
+class AdminInfoUser extends Component {
     constructor() {
         super();
         this.state = {
@@ -58,7 +59,7 @@ class InfoUser extends Component {
 
                 <ScrollView>
                     <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
-                        <UnitInfoUser catagory="כתבות"
+                        <AdminUnitInfoUser catagory="כתבות"
                             title="החיים בלילה בנחל"
                             detail="תיאור מעניין על בעלי החיים
                             והתנהגותם באתר בשעות הלילה."
@@ -66,7 +67,7 @@ class InfoUser extends Component {
                             date="2.2.20" />
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
-                        <UnitInfoUser catagory="עדכונים"
+                        <AdminUnitInfoUser catagory="עדכונים"
                             title="פעילות בתי הספר"
                             detail="בתי הספר של פסגת זאב השתתפו השבוע
                             בפעילות ניקיון הנחל. יישר כוח!"
@@ -74,28 +75,53 @@ class InfoUser extends Component {
                             date="3.1.20" />
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
-                        <UnitInfoUser catagory="חידות"
+                        <AdminUnitInfoUser catagory="חידות"
                             title="חידת הציפור"
                             detail="ילדים יקרים, לפניכם חידה מעניינת מצאו מה חסר לציפור בתמונה"
                             imageUri={require('../assets/img/im4.jpeg')}
                             date="31.12.20" />
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
-                        <UnitInfoUser catagory="כתבות"
+                        <AdminUnitInfoUser catagory="כתבות"
                             title="חנוכת הנחל"
                             detail="הטקס הרשמי התקיים ב12.12.19 בהשתתפות ראש העיר וסגניו"
                             imageUri={require('../assets/img/im2.jpeg')}
                             date="13.12.20" />
                     </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
+                        <Text style={{ fontWeight: "bold" }} > טען יותר...</Text>
+                    </TouchableWithoutFeedback>
+                    <Text>הוספת תוכן</Text>
+                    <View>
+                        <Text>סוג מידע:</Text>
+                        <TextInput style={styles.textInput}> </TextInput>
+                        <Text>כותרת:</Text>
+                        <TextInput style={styles.textInput}> </TextInput>
+                        <Text>תוכן המידע:</Text>
+                        <TextInput style={styles.textInput}> </TextInput>
+                    </View>
+                    <Button
+                        onPress={() => alert('Pressed!')}
+                        title="עדכן"
+                        
+                        
+                    />
                 </ScrollView>
+
+
             </View>
         )
     }
 }
 
-export default InfoUser;
+export default AdminInfoUser;
 
 const styles = {
+    textInput: {
+        backgroundColor: 'white',
+        borderRadius: 5,
+        height: 15,
+    },
     CheckBoxStyle: {
         backgroundColor: "#F6D365",
         borderWidth: 2,

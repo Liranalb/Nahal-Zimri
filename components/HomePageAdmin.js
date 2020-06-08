@@ -13,6 +13,15 @@ import EventAdmin from './EventAdmin'
 import InfoCatagoriesAdmin from "./InfoCatagoriesAdmin"
 import HeaderComp from './HeaderComp'
 
+import Reports from './Reports'
+import InformationAdminPage from './InformationAdminPage'
+
+import EventAdmin from './EventAdmin'
+import InfoAdmin from './InfoAdmin'
+
+//  import {Test} from './InfoCatagories';
+import InfoCatagories from './InfoCatagories'
+// import {Test} from './InfoCatagories';
 
 
 
@@ -23,7 +32,8 @@ function HomeAdminScreen( {navigation} ) {
                 
                 <HeaderComp />
                 
-                <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('InfAd')}>
+
                     <View style={styles.infoStyle}>
                         <Image
                             source={require('../assets/img/article.jpg')}
@@ -36,7 +46,7 @@ function HomeAdminScreen( {navigation} ) {
                 </TouchableWithoutFeedback>
 
                 <View style={styles.routesStyle}>
-                    <TouchableWithoutFeedback onPress={() => navigation.navigate('PathCat')}>
+                    <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
                         <View style={styles.routesStyleLeft}>
                             <Image
                                 source={require('../assets/img/travel.jpg')}
@@ -73,7 +83,7 @@ function HomeAdminScreen( {navigation} ) {
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback onPress={ () => navigation.navigate('ReportAdmin')}>
+                <TouchableWithoutFeedback onPress={ () => navigation.navigate('Reports')}>
                     <View style={styles.observationsStyle}>
                         <Image
                             source={require('../assets/img/obs.jpeg')}
@@ -91,17 +101,21 @@ function HomeAdminScreen( {navigation} ) {
 
   function ReportsScreen() {
     return (
-      <ReportsAdmin/>
+      <Reports/>
     );
   }
 
+  function InfoAdminScreen() {
+    return (
+      <InfoAdmin/>
+    );
+  }
 
-
-//   function EventsAdminScreen() { 
-//     return (
-//       <EventAdmin/>
-//     );
-//   }
+  function EventsAdminScreen() { 
+    return (
+      <EventAdmin/>
+    );
+  }
   
 
   const Stack = createStackNavigator();
@@ -112,11 +126,12 @@ function HomePageAdmin() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="HomeAdmin"  >
           <Stack.Screen options={{headerShown: false}} name="HomeAdmin" component={HomeAdminScreen} />
-          <Stack.Screen options={{headerShown: false}} name="ReportAdmin" component={ReportsAdmin} />
+          <Stack.Screen  name="InfAd" options={{headerShown: false}} component={InfoAdminScreen} />
+
+          <Stack.Screen options={{headerShown: false}} name="Reports" component={ReportsScreen} />
           <Stack.Screen options={{headerShown: false}} name="Articles" component={ReportsScreen} />
           <Stack.Screen options={{headerShown: false}} name="EventsAdmin" component={EventAdmin} />
-          <Stack.Screen options={{headerShown: false}} name="InfoCat" component={InfoCatagoriesAdmin} />
-          <Stack.Screen options={{headerShown: false}} name="PathCat" component={PathCatagories} />
+          <Stack.Screen options={{headerShown: false}} name="InfoCat" component={InfoCatagories} />
         </Stack.Navigator>
       </NavigationContainer>
     );
