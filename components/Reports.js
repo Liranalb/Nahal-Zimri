@@ -7,14 +7,22 @@ import LogoHeaderComponent from "./explore/LogoHeaderComponent"
 import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from "./HeaderComp"
 import { useNavigation } from '@react-navigation/native';
+import firebase from "../config/Firebase"
 //import ImagePicker from 'react-native-image-picker';
 
-
+const db=firebase.firestore();
 
 class Reports extends Component {
 
     constructor() {
+        db.collection('Reports').get().then((snapshot)=>{
+            alert(snapshot.docs);
+         })
+       
         super();
+        
+
+        
         this.state = {
             text: "",
             username: "",

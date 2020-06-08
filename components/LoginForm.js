@@ -1,7 +1,7 @@
 import React, { Component } from "react" //import react library
 import { Image, ImageBackground, StyleSheet ,TextInput, Button } from "react-native"
 import { View } from "native-base"
-
+import firebase from "../config/Firebase"
 
 
 

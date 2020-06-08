@@ -16,10 +16,11 @@ import ReportsAdmin from "./components/ReportsAdmin";
 import HomePageAdmin from './components/HomePageAdmin';
 import EventAdmin from './components/EventAdmin';
 import ReportForm from './components/ReportForm'
+import Reports from './components/Reports'
 
 
 
-AppRegistry.registerComponent(appName, () => LoginForm);
+AppRegistry.registerComponent(appName, () => Reports);
 
 
 
