@@ -24,13 +24,6 @@ import Reports from './components/Reports'
 
 
 
-<<<<<<< HEAD
 AppRegistry.registerComponent(appName, () => Reports);
-=======
->>>>>>> bb3ed748dd46bb73a4d0b66ecc0ce43e8b6d6541
-
-
-AppRegistry.registerComponent(appName, () =>Reports);
-
 
 
