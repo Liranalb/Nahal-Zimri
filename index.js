@@ -16,9 +16,10 @@ import AdminUnitInfoUser from"./components/AdminUnitInfoUser"
 import {name as appName} from './app.json';
 import RegForm from './components/RegForm';
 import MainLogin from './components/MainLogin';
-import Reports from "./components/Reports";
+import ReportsAdmin from "./components/ReportsAdmin";
 import HomePageAdmin from './components/HomePageAdmin';
-
+import EventAdmin from './components/EventAdmin';
+import ReportForm from './components/ReportForm'
 
 
 

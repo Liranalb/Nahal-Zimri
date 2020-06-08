@@ -5,6 +5,7 @@ import { Image, View, TextInput, Text, StyleSheet, ScrollView, TouchableWithoutF
 import { Footer, Container, Right } from "native-base"
 import HeaderComp from "./HeaderComp";
 import UnitRoutes from "./UnitRoutes";
+import ReportBox from "./explore/ReportBox"
 
 class RoutesUser extends Component {
     constructor() {

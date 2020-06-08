@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { Button, Header, ListItem } from "react-native-elements"
-/*import { createStackNavigator } from 'react-navigation-stack';*/
 import {
     Image,
     View,
@@ -10,11 +9,12 @@ import {
     ImageBackground,
     ImageBackgroundBase
 } from "react-native"
-import InformationAdminPage from "./InformationAdminPage"
+
 import HomeAdminPage from'./HomePageAdmin'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import InformationAdminPage from "./InformationAdminPage"
 
 let typeName = {
     type: "none"
@@ -33,7 +33,9 @@ export function InfoCatagoriesScreen({ navigation }) {
 
                         onPress={() => {
                             typeName.type = "mammals";
-                            navigation.navigate('InfoAdminScreen')
+                            navigate('InfoAdminScreen', {
+                                otherParam: 'anything you want here',
+                              } )
                         }
                         }
                     >
@@ -50,7 +52,10 @@ export function InfoCatagoriesScreen({ navigation }) {
 
                     <TouchableWithoutFeedback onPress={() => {
                         typeName.type = "birds";
-                        navigation.navigate('InfoAdminScreen')
+                        navigation.navigate('InfoAdminScreen', {
+                            itemId: 86,
+                            otherParam: 'anything you want here',
+                          })
                     }
                     }>
                         <View style={styles.infoStyle}>
@@ -140,7 +145,7 @@ function InfoAdmin() {
 
 const InfoStack = createStackNavigator();
 
-function InfoCatagories() { 
+function InfoCatagoriesAdmin() { 
     return(
         <InfoStack.Navigator initialRouteName="InfoCatScreen">
             <InfoStack.Screen options={{ headerShown: false }} name="InfoCatScreen" component={InfoCatagoriesScreen} />
@@ -150,7 +155,7 @@ function InfoCatagories() {
         );
 }
 
-export default InfoCatagories;
+export default InfoCatagoriesAdmin;
 
 
 const styles = {

@@ -12,8 +12,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Reports from './Reports'
 import InformationAdminPage from './InformationAdminPage'
 import PathCatagories from './PathCatagories'
+import EventAdmin from './EventAdmin'
+import InfoAdmin from './InfoAdmin'
 
-
+//  import {Test} from './InfoCatagories';
+import InfoCatagories from './InfoCatagories'
+// import {Test} from './InfoCatagories';
 
 
 
@@ -29,7 +33,7 @@ function HomeAdminScreen( {navigation} ) {
                         rightComponent={{ icon: 'menu', color: 'black' }}
                     />
                 </View>
-                <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('InfAd')}>
                     <View style={styles.infoStyle}>
                         <Image
                             source={require('../assets/img/article.jpg')}
@@ -55,7 +59,7 @@ function HomeAdminScreen( {navigation} ) {
                     </TouchableWithoutFeedback>
 
                     <TouchableWithoutFeedback 
-                        onPress={() => navigation.navigate('PathCatagories')}>
+                        onPress={() => navigation.navigate('InfoCat')}>
 
                         <View style={styles.routesStyleRight}>
                             <Image
@@ -68,7 +72,7 @@ function HomeAdminScreen( {navigation} ) {
                         </View>
                     </TouchableWithoutFeedback>
                 </View>
-                <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
+                <TouchableWithoutFeedback onPress={ () => navigation.navigate('EventsAdmin')}>
                     <View style={styles.infoStyle}>
                         <Image
                             source={require('../assets/img/fox.jpg')}
@@ -101,18 +105,19 @@ function HomeAdminScreen( {navigation} ) {
     );
   }
 
-  function InformationAdminScreen() {
+  function InfoAdminScreen() {
     return (
-      <InformationAdminPage/>
+      <InfoAdmin/>
     );
   }
 
-  function InformationPathAdmin() {
+  function EventsAdminScreen() { 
     return (
-      <PathCatagories/>
+      <EventAdmin/>
     );
   }
   
+
   const Stack = createStackNavigator();
 
 function HomePageAdmin() {
@@ -121,10 +126,13 @@ function HomePageAdmin() {
         <Stack.Navigator initialRouteName="HomeAdmin"  >
 
           <Stack.Screen options={{headerShown: false}} name="HomeAdmin" component={HomeAdminScreen} />
+          <Stack.Screen  name="InfAd" options={{headerShown: false}}
+                component={InfoAdminScreen} />
+
           <Stack.Screen options={{headerShown: false}} name="Reports" component={ReportsScreen} />
           <Stack.Screen options={{headerShown: false}} name="Articles" component={ReportsScreen} />
- 
-          <Stack.Screen name="PathCatagories" component={InformationPathAdmin} />
+          <Stack.Screen options={{headerShown: false}} name="EventsAdmin" component={EventAdmin} />
+          <Stack.Screen options={{headerShown: false}} name="InfoCat" component={InfoCatagories} />
         </Stack.Navigator>
       </NavigationContainer>
     );
