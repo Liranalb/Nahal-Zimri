@@ -6,7 +6,7 @@ import ReportBox from "./explore/ReportBox"
 import LogoHeaderComponent from "./explore/LogoHeaderComponent"
 import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from "./HeaderComp"
-import { useNavigation } from '@react-navigation/native';
+
 //import ImagePicker from 'react-native-image-picker';
 
 
@@ -24,7 +24,6 @@ class Reports extends Component {
     }
              //   backgroundColor="#FAE5D3"
     render() {
-        
         return (
             <View style = {{backgroundColor: '#FAE5D3'}}>
                 <HeaderComp />

@@ -9,13 +9,14 @@ import Icon from 'react-native-vector-icons/Entypo';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import ReportsAdmin from './ReportsAdmin'
+import Reports from './Reports'
 import InformationAdminPage from './InformationAdminPage'
 import PathCatagories from './PathCatagories'
 import EventAdmin from './EventAdmin'
+import InfoAdmin from './InfoAdmin'
 
 //  import {Test} from './InfoCatagories';
-import InfoCatagoriesAdmin from "./InfoCatagoriesAdmin"
+import InfoCatagories from './InfoCatagories'
 // import {Test} from './InfoCatagories';
 
 
@@ -32,7 +33,7 @@ function HomeAdminScreen( {navigation} ) {
                         rightComponent={{ icon: 'menu', color: 'black' }}
                     />
                 </View>
-                <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('InfAd')}>
                     <View style={styles.infoStyle}>
                         <Image
                             source={require('../assets/img/article.jpg')}
@@ -45,7 +46,7 @@ function HomeAdminScreen( {navigation} ) {
                 </TouchableWithoutFeedback>
 
                 <View style={styles.routesStyle}>
-                    <TouchableWithoutFeedback onPress={() => navigation.navigate('PathCat')}>
+                    <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
                         <View style={styles.routesStyleLeft}>
                             <Image
                                 source={require('../assets/img/travel.jpg')}
@@ -82,7 +83,7 @@ function HomeAdminScreen( {navigation} ) {
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback onPress={ () => navigation.navigate('ReportAdmin')}>
+                <TouchableWithoutFeedback onPress={ () => navigation.navigate('Reports')}>
                     <View style={styles.observationsStyle}>
                         <Image
                             source={require('../assets/img/obs.jpeg')}
@@ -100,17 +101,21 @@ function HomeAdminScreen( {navigation} ) {
 
   function ReportsScreen() {
     return (
-      <ReportsAdmin/>
+      <Reports/>
     );
   }
 
+  function InfoAdminScreen() {
+    return (
+      <InfoAdmin/>
+    );
+  }
 
-
-//   function EventsAdminScreen() { 
-//     return (
-//       <EventAdmin/>
-//     );
-//   }
+  function EventsAdminScreen() { 
+    return (
+      <EventAdmin/>
+    );
+  }
   
 
   const Stack = createStackNavigator();
@@ -121,11 +126,13 @@ function HomePageAdmin() {
         <Stack.Navigator initialRouteName="HomeAdmin"  >
 
           <Stack.Screen options={{headerShown: false}} name="HomeAdmin" component={HomeAdminScreen} />
-          <Stack.Screen options={{headerShown: false}} name="ReportAdmin" component={ReportsAdmin} />
+          <Stack.Screen  name="InfAd" options={{headerShown: false}}
+                component={InfoAdminScreen} />
+
+          <Stack.Screen options={{headerShown: false}} name="Reports" component={ReportsScreen} />
           <Stack.Screen options={{headerShown: false}} name="Articles" component={ReportsScreen} />
           <Stack.Screen options={{headerShown: false}} name="EventsAdmin" component={EventAdmin} />
-          <Stack.Screen options={{headerShown: false}} name="InfoCat" component={InfoCatagoriesAdmin} />
-          <Stack.Screen options={{headerShown: false}} name="PathCat" component={PathCatagories} />
+          <Stack.Screen options={{headerShown: false}} name="InfoCat" component={InfoCatagories} />
         </Stack.Navigator>
       </NavigationContainer>
     );
