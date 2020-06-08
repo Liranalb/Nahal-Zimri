@@ -9,6 +9,7 @@ import firebase from "../config/Firebase"
 class LoginForm extends Component {
     constructor(){
         super();
+        this.usersRef=firebase.firestore().collection('Users');
         this.state = {
             email: "",
             password: "",

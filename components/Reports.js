@@ -6,16 +6,24 @@ import ReportBox from "./explore/ReportBox"
 import LogoHeaderComponent from "./explore/LogoHeaderComponent"
 import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from "./HeaderComp"
+<<<<<<< HEAD
 import { useNavigation } from '@react-navigation/native';
 import firebase from "../config/Firebase"
 //import ImagePicker from 'react-native-image-picker';
 
+=======
+import firebase from "../config/Firebase"
+
+//import ImagePicker from 'react-native-image-picker';
+
+>>>>>>> bb3ed748dd46bb73a4d0b66ecc0ce43e8b6d6541
 const db=firebase.firestore();
 
 class Reports extends Component {
 
     constructor() {
         db.collection('Reports').get().then((snapshot)=>{
+<<<<<<< HEAD
             alert(snapshot.docs);
          })
        
@@ -23,6 +31,12 @@ class Reports extends Component {
         
 
         
+=======
+           
+         })
+
+        super(); 
+>>>>>>> bb3ed748dd46bb73a4d0b66ecc0ce43e8b6d6541
         this.state = {
             text: "",
             username: "",
@@ -30,9 +44,10 @@ class Reports extends Component {
             loading: false
         }
     }
+    
+
              //   backgroundColor="#FAE5D3"
     render() {
-        
         return (
             <View style = {{backgroundColor: '#FAE5D3'}}>
                 <HeaderComp />

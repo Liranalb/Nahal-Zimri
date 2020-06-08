@@ -17,7 +17,7 @@ class EditReports extends Component {
     render() {
         return (
 
-            <View style={{ height: 300, width: 170, marginLeft: 10, borderWidth: 0.8, borderColor: '#dddddd' }}>
+            <View style={{ height: 260, width: 150, marginLeft: 10, borderWidth: 0.8, borderColor: '#dddddd' }}>
                 <View style={{ flex: 6 }}>
                     <Image source={this.props.imageUri}
                         style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}

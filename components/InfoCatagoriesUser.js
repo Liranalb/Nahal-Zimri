@@ -10,10 +10,11 @@ import {
     ImageBackground,
     ImageBackgroundBase
 } from "react-native"
-import InformationAdminPage from "./InformationAdminPage"
+import InformationPage from "./InformationPage"
 import HomeAdminPage from'./HomePageAdmin'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
 
 
 let typeName = {
@@ -134,7 +135,7 @@ export function InfoCatagoriesScreen({ navigation }) {
 
 function InfoAdmin() { 
     return (
-        <InformationAdminPage dataType={typeName.type} />
+        <InformationPage dataType={typeName.type} />
     );
 }
 
