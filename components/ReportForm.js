@@ -10,7 +10,7 @@ import { Asset, Constants, FileSystem, Permissions } from 'react-native-unimodul
 import { Collapse, CollapseHeader, CollapseBody } from "accordion-collapse-react-native";
 import ReportFormComp from "./ReportFormComp"
 //import ImagePicker from 'react-native-image-picker';
-import { Camera } from 'expo-camera';
+
 
 
 

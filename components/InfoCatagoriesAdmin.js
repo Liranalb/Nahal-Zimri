@@ -10,10 +10,8 @@ import {
     ImageBackgroundBase
 } from "react-native"
 
-import HomeAdminPage from'./HomePageAdmin'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import InformationAdminPage from "./InformationAdminPage"
 
 let typeName = {
@@ -33,9 +31,7 @@ export function InfoCatagoriesScreen({ navigation }) {
 
                         onPress={() => {
                             typeName.type = "mammals";
-                            navigate('InfoAdminScreen', {
-                                otherParam: 'anything you want here',
-                              } )
+                            navigation.navigate('InfoAdminScreen' );
                         }
                         }
                     >
@@ -52,10 +48,7 @@ export function InfoCatagoriesScreen({ navigation }) {
 
                     <TouchableWithoutFeedback onPress={() => {
                         typeName.type = "birds";
-                        navigation.navigate('InfoAdminScreen', {
-                            itemId: 86,
-                            otherParam: 'anything you want here',
-                          })
+                        navigation.navigate('InfoAdminScreen');
                     }
                     }>
                         <View style={styles.infoStyle}>
@@ -76,7 +69,7 @@ export function InfoCatagoriesScreen({ navigation }) {
                 <View style={styles.rowStyle2}>
                     <TouchableWithoutFeedback onPress={() => {
                         typeName.type = "blossom";
-                        navigation.navigate('InfoAdminScreen')
+                        navigation.navigate('InfoAdminScreen');
                     }
                     } >
                         <View style={styles.infoStyle} >
@@ -92,7 +85,7 @@ export function InfoCatagoriesScreen({ navigation }) {
 
                     <TouchableWithoutFeedback onPress={() => {
                         typeName.type = "Pisga";
-                        navigation.navigate('InfoAdminScreen')
+                        navigation.navigate('InfoAdminScreen');
                     }
                     }>
                         <View style={styles.infoStyle}>
@@ -113,7 +106,7 @@ export function InfoCatagoriesScreen({ navigation }) {
 
                     <TouchableWithoutFeedback onPress={() => {
                         typeName.type = "Arch";
-                        navigation.navigate('InfoAdminScreen')
+                        navigation.navigate('InfoAdminScreen');
                     }
                     }>
                         <View style={styles.infoStyle2}>
@@ -137,11 +130,7 @@ export function InfoCatagoriesScreen({ navigation }) {
 
 }
 
-function InfoAdmin() { 
-    return (
-        <InformationAdminPage dataType={typeName.type} />
-    );
-}
+
 
 const InfoStack = createStackNavigator();
 
@@ -149,7 +138,7 @@ function InfoCatagoriesAdmin() {
     return(
         <InfoStack.Navigator initialRouteName="InfoCatScreen">
             <InfoStack.Screen options={{ headerShown: false }} name="InfoCatScreen" component={InfoCatagoriesScreen} />
-             <InfoStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoAdmin} />
+             <InfoStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InformationAdminPage} />
 
         </InfoStack.Navigator>
         );
