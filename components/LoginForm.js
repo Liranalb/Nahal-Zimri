@@ -1,7 +1,8 @@
 import React, { Component } from "react" //import react library
 import { Image, ImageBackground, StyleSheet ,TextInput, Button } from "react-native"
 import { View } from "native-base"
-
+import firebase from "../config/Firebase"
+import { DotIndicator } from "indicators";
 
 
 
@@ -12,7 +13,8 @@ class LoginForm extends Component {
         this.state = {
             email: "",
             password: "",
-            username: ""
+            username: "",
+            loading: false
         }
     }
 
@@ -40,6 +42,22 @@ class LoginForm extends Component {
         )
     }
 
+
+    renderButton(){
+        if(this.state.loading){
+            return <DotIndicator color ="FF8C37"/>
+        }
+        
+        return(
+        <View style = { styles.buttonStyle }>
+        <Button 
+            title = "התחבר"
+            color = "#FF8C37"           
+        >
+        </Button>   
+        </View>
+        )
+    }  
 
     render() {
         return(
@@ -81,14 +99,14 @@ class LoginForm extends Component {
                             value = {this.state.password}
                         />
                 </View>
-                    
-                <View style = { styles.buttonStyle }>
+                <View>{ this.renderButton()}</View>   
+                {/* <View style = { styles.buttonStyle }>
                         <Button 
                             title = "התחבר"
                             color = "#FF8C37"           
                         >
                         </Button>   
-                </View>
+                </View> */}
                     
             </View>
                
