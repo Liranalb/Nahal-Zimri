@@ -16,11 +16,16 @@ import InfoComp from "./InfoComp"
 
 //import ImagePicker from 'react-native-image-picker';
 
- 
- function InformationAdminScreen ({ navigation }) {
- 
 
 
+class InformationAdminPage extends Component {
+    
+
+    
+    //onPress={ () => navigation.navigate('infoAdminComp')}>
+    
+    render() {
+        const { navigation } =this.props;
         return (
             <View>
                 <HeaderComp />
@@ -34,22 +39,12 @@ import InfoComp from "./InfoComp"
                                 horizontal={false}
                                 showsHorizontalScrollIndicator={false}
                             >
-                                {/* <TouchableWithoutFeedback
-                                    onPress= { () => navigation.navigate('infoAdminComp')}
-                                    > */}
-                                <View>
-
+                                <TouchableWithoutFeedback> 
                                 <EditInfoBox imageUri={require('../assets/img/purple.jpg')}
                                     headline="הדרדר הכחול"
                                     body="דַּרְדַּר כָּחֹל הוא צמח חד-שנתי ממשפחת המורכבים. לפרחי הסוג דַּרְדַּר שפע צבעים, המשותף לאבקנים ולעלי הכותרת מצבעים בהירים כמו: לבן, צהוב, כתום, קרם עד לצבעים כהים יותר כמו: ורוד, לילך, כחול, סגול ואפילו אדום. "
-                                    onPress= { () => navigation.navigate('infoAdminComp')}
                                 />
-
-                               </View>
-                               {/* </TouchableWithoutFeedback> */}
-
-
-
+                                </TouchableWithoutFeedback>
 
                                 <EditInfoBox imageUri={require('../assets/img/blossom.jpg')}
                                     headline=" flower"
@@ -151,26 +146,37 @@ import InfoComp from "./InfoComp"
     }
 
 
+
+}
+
+ // export default InformationAdminPage;
 const InfoCompStack = createStackNavigator();
 
+function assistFunc (navigation) {
+    navigation = useNavigation();
+    return <InformationAdminPage navigation= {navigation}/>;
+}
 
-function InfoAdminComp () { 
+function InfoAdminComponent () { alert("dss");
     return <InfoComp/>;
 }
 
- function InformationAdminPage(){
+export default function (props) {
+    const navigation = useNavigation();
 
     return (
         
             <InfoCompStack.Navigator  initialRouteName="infoAdminScreen">
-                <InfoCompStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InformationAdminScreen} />
-                <InfoCompStack.Screen options={{ headerShown: false }} name="infoAdminComp" component={InfoAdminComp} />
+                
+                <InfoCompStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={assistFunc} />
+                <InfoCompStack.Screen options={{ headerShown: false }} name="infoAdminComp" component={InfoAdminComponent} />
             </InfoCompStack.Navigator>
         
     );
- 
+
+    
 }
-export default InformationAdminPage;
+
 
 
 const styles = {

@@ -1,22 +1,23 @@
 import React, { Component } from "react"
 import { TextInput, Alert, ScrollView, Text, TouchableOpacity } from "react-native"
 import { View } from "native-base"
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import { Header, ListItem, CheckBox, Button } from "react-native-elements"
 import ReportBox from "./explore/ReportBox"
 import EditReports from "./explore/EditReports"
 import LogoHeaderComponent from "./explore/LogoHeaderComponent"
 import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from "./HeaderComp"
-import firebase from "../config/Firebase"
+//import firebase from "../config/Firebase"
 import ImagePicker from 'react-native-image-crop-picker';
-
-
+import ReportForm from "./ReportForm";
 
 // const db=firebase.firestore();
 
-class Reports extends Component {
+function ReportsScreen ({ navigation }) {
 
-    constructor() {
+    /*constructor() {
         // db.collection('Reports').get().then((snapshot)=>{
 
         //  })
@@ -28,11 +29,10 @@ class Reports extends Component {
             catagory: "",
             loading: false
         }
-    }
+    }*/
 
 
     //   backgroundColor="#FAE5D3" ,  width: "100%", height: "10%"  , width: "100%", height: "50%",
-    render() {
         return (
             <View style={{ width:"100%",height:"100%", backgroundColor: '#FAE5D3' }}>
                 <HeaderComp />
@@ -43,7 +43,7 @@ class Reports extends Component {
 
                                 center
                                 title='פריחה'
-                                checked={this.state.checked}
+                                //checked={this.state.checked}
                                 containerStyle={{ backgroundColor: '#F4D5A7' }}
 
                             />
@@ -52,7 +52,7 @@ class Reports extends Component {
                             <CheckBox
                                 center
                                 title='בע"ח'
-                                checked={this.state.checked}
+                                //checked={this.state.checked}
                                 containerStyle={{ backgroundColor: '#F4D5A7' }}
                             />
                         </View>
@@ -60,7 +60,7 @@ class Reports extends Component {
                             <CheckBox
                                 center
                                 title='אחר'
-                                checked={this.state.checked}
+                                //checked={this.state.checked}
                                 containerStyle={{ backgroundColor: '#F4D5A7' }}
                             />
                         </View>
@@ -133,7 +133,7 @@ class Reports extends Component {
 
                     <View style={{flex:3}}>
                         <TouchableOpacity
-                            onPress={() => alert("pressed")}
+                            onPress={() => navigation.navigate('repFo')}
                         >
                             <View style={styles.buttonStyle}>
                                 <Text style={styles.textStyleHeaders}>שלח דיווח</Text>
@@ -154,7 +154,27 @@ class Reports extends Component {
 
 
 
-}
+    function ReportFormScreen() {
+        return (
+            <ReportForm/>
+        );
+    }
+    
+    const logStack = createStackNavigator();
+    
+    function Reports() { 
+        return (
+            <NavigationContainer>
+                <logStack.Navigator initialRouteName="rep">
+                    <logStack.Screen options={{ headerShown: false }} name="rep" component={ReportsScreen} />
+    
+                    <logStack.Screen name="repFo" options={{ headerShown: false }}
+                        component={ReportFormScreen} />
+    
+                </logStack.Navigator>
+            </NavigationContainer>
+        );
+    }
 
 export default Reports;
 

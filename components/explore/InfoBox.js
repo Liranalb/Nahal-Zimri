@@ -16,9 +16,9 @@ class InfoBox extends Component {
 
     render() {
         return (
-            // <TouchableOpacity
-            //     onPress={() => openInfo()}
-            // >
+            <TouchableOpacity
+                onPress={() => openInfo()}
+            >
 
 
                 <View style={styles.containerStyle}>
@@ -44,7 +44,7 @@ class InfoBox extends Component {
 
 
                 </View>
-            
+            </TouchableOpacity>
         );
     }
 }
