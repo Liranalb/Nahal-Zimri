@@ -4,7 +4,6 @@ import { Header, CheckBox, ListItem } from "react-native-elements"
 import { Image, View, TextInput, Text, StyleSheet, ScrollView, TouchableWithoutFeedback, Button, Alert, unstable_enableLogBox } from "react-native"
 import { Footer, Container, Right } from "native-base"
 import HeaderComp from "./HeaderComp";
-import UnitRoutes from "./UnitRoutes";
 import ReportBox from "./explore/ReportBox"
 
 class RoutesUser extends Component {
@@ -25,17 +24,6 @@ class RoutesUser extends Component {
                     <HeaderComp />
                 </View>
                 <ScrollView>
-                <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
-                        <UnitRoutes
-                        imageUri={require('../assets/img/map.png')}
-                        nameOfRoutes="גל-קראוס שביל ימין"
-                        diff="בינוני"
-                        km="2.5"
-                        time="40 דקות"
-                        kind="מעגלי"
-                        detail="כל הציבור מוזמן"
-                        />
-                    </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
                         <View style={styles.routeStyle}>
                             <View style={styles.imageStyle}>

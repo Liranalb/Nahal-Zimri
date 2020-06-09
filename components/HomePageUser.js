@@ -10,9 +10,6 @@ import RoutesUser from "./RoutesUser";
 import InfoCatagoriesUser from "./InfoCatagoriesUser";
 import Reports from "./Reports";
 import HeaderComp from "./HeaderComp";
-import MarqueeText from 'react-native-marquee';
-import MarqueeLabelVertical from 'react-native-lahk-marquee-label-vertical';
-import Update from "./Update"
 
 function HomePageUserScreen({ navigation }) {
     return (
@@ -32,7 +29,6 @@ function HomePageUserScreen({ navigation }) {
                     </View>
                 </View>
             </TouchableWithoutFeedback>
-            
 
             <View style={styles.routesStyle}>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate('RouUs')}>
@@ -148,7 +144,6 @@ function HomePageUser() { //for navigation. not in use yet
 export default HomePageUser;
 
 const styles = {
-
     textStyle: {
         position: 'absolute',
         left: 0,
@@ -171,18 +166,6 @@ const styles = {
         fontSize: 20,
         width: "90%",
         height: "26%",
-        alignSelf: "center",
-        marginTop: 10
-    },
-    infoStyleBar: {
-        backgroundColor: "#F0B27A",
-        borderColor: "#F0B27A",
-        overflow: 'hidden',
-        borderRadius: 25,
-        borderWidth: 2,
-        fontSize: 20,
-        width: "95%",
-        height: "10%",
         alignSelf: "center",
         marginTop: 10
     },
