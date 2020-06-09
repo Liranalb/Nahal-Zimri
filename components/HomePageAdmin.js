@@ -16,7 +16,6 @@ import HeaderComp from './HeaderComp'
 import Reports from './Reports'
 import InformationAdminPage from './InformationAdminPage'
 
-import EventAdmin from './EventAdmin'
 import InfoAdmin from './InfoAdmin'
 
 //  import {Test} from './InfoCatagories';

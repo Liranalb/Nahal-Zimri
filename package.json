@@ -10,21 +10,20 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@react-native-community/async-storage": "^1.11.0",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/bottom-tabs": "^5.5.2",
     "@react-navigation/drawer": "^5.8.1",
     "@react-navigation/native": "^5.5.0",
     "@react-navigation/stack": "^5.4.1",
     "accordion-collapse-react-native": "^0.3.1",
-    "expo-constants": "^9.0.0",
-    "expo-media-library": "^8.1.0",
     "firebase": "^7.15.0",
     "native-base": "2.13.12",
     "react": "16.11.0",
     "react-native": "0.62.2",
+    "react-native-camera": "^3.28.0",
     "react-native-elements": "2.0.0",
     "react-native-gesture-handler": "^1.6.1",
+    "react-native-image-crop-picker": "^0.31.1",
     "react-native-indicator": "^1.2.0",
     "react-native-lahk-marquee-label-vertical": "^1.1.1",
     "react-native-marquee": "^0.3.2",
@@ -32,7 +31,6 @@
     "react-native-safe-area-context": "^3.0.2",
     "react-native-screens": "^2.8.0",
     "react-native-snap-carousel": "^3.9.1",
-    "react-native-unimodules": "^0.9.1",
     "react-navigation": "^4.3.9"
   },
   "devDependencies": {

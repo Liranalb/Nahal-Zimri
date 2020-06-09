@@ -5,13 +5,12 @@ import { CheckBox } from "react-native-elements"
 
 import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from "./HeaderComp"
-import { Asset, Constants, FileSystem, Permissions } from 'react-native-unimodules';
+
 
 import { Collapse, CollapseHeader, CollapseBody } from "accordion-collapse-react-native";
 import ReportFormComp from "./ReportFormComp"
-//import ImagePicker from 'react-native-image-picker';
 
-
+import ImagePicker from 'react-native-image-crop-picker';
 
 
 
@@ -100,12 +99,24 @@ class ReportForm extends Component {
 
                         <View style={{ marginLeft: 12, marginTop: 20 }}>
                             <TouchableWithoutFeedback
-                                onPress={() => this.onCamera()}
+                                onPress={() => ImagePicker.openCamera({
+                                    width: 300,
+                                    height: 400,
+                                    cropping: true,
+                                  }).then(image => {
+                                    console.log(image);
+                                  })
+                                }
                             >
                                 <View><Icon name="camera" size={30} color="#505050" /></View>
                             </TouchableWithoutFeedback>
                             <TouchableWithoutFeedback
-                                onPress={() => this.onImages()}
+                                onPress={() => ImagePicker.openPicker({
+                                    multiple: true
+                                  }).then(images => {
+                                    console.log(images);
+                                  })
+                                }
                             >
                                 <View style={{ marginTop: 20 }}><Icon name="images" size={30} color="#505050" /></View>
                             </TouchableWithoutFeedback>

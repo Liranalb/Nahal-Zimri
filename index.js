@@ -20,27 +20,15 @@ import ReportsAdmin from "./components/ReportsAdmin";
 import HomePageAdmin from './components/HomePageAdmin';
 import EventAdmin from './components/EventAdmin';
 import ReportForm from './components/ReportForm'
-<<<<<<< HEAD
 import InfoComp from './components/InfoComp';
 import InformationAdminPage from './components/InformationAdminPage';
-=======
 import Reports from './components/Reports'
+import ReportBox from './components/explore/ReportBox';
 
->>>>>>> d5613389d413b123eef29a51293ca4626af11695
 
 
-<<<<<<< HEAD
-AppRegistry.registerComponent(appName, () => Reports);
-=======
->>>>>>> bb3ed748dd46bb73a4d0b66ecc0ce43e8b6d6541
+AppRegistry.registerComponent(appName, () => ReportForm);
 
-<<<<<<< HEAD
-
-AppRegistry.registerComponent(appName, () => HomePageAdmin);
-=======
->>>>>>> d5613389d413b123eef29a51293ca4626af11695
-
-AppRegistry.registerComponent(appName, () =>Reports);
 
 
 

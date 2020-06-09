@@ -122,6 +122,8 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
+    // compileSdkVersion 28
+    // buildToolsVersion = "28.0.3"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -134,6 +136,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true  //8.6   crop
+        targetSdkVersion 27     //8.6   crop
+        missingDimensionStrategy 'react-native-camera', 'general' // 8.6
     }
     splits {
         abi {
@@ -186,13 +191,13 @@ android {
         }
     }
 }
-apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
+
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    addUnimodulesDependencies() // 5.6 added by Rotem
+    
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
