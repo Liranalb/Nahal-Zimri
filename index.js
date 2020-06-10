@@ -11,8 +11,8 @@ import HomePageUser from "./components/HomePageUser"
 import InfoUser from "./components/InfoUser"
 import RoutesUser from "./components/RoutesUser"
 import UnitRoutes from "./components/UnitRoutes"
-import AdminInfoUser from "./components/AdminInfoUser"
-import AdminUnitInfoUser from"./components/AdminUnitInfoUser"
+// import AdminInfoUser from "./components/AdminInfoUser"
+// import AdminUnitInfoUser from"./components/AdminUnitInfoUser"
 import {name as appName} from './app.json';
 import RegForm from './components/RegForm';
 import MainLogin from './components/MainLogin';
@@ -27,12 +27,6 @@ import ReportBox from './components/explore/ReportBox';
 
 
 
-<<<<<<< HEAD
-AppRegistry.registerComponent(appName, () => ReportForm);
-
-
-=======
 AppRegistry.registerComponent(appName, () => Reports);
->>>>>>> d63f40f58f5d52a0c4083fb623bf363b0afb7ed9
 
 

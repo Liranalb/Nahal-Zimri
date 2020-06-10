@@ -10,6 +10,7 @@ import HeaderComp from "./HeaderComp"
 import firebase from "../config/Firebase"
 import ImagePicker from 'react-native-image-crop-picker';
 
+import { f, db } from './config/Firebase'
 
 
 // const db=firebase.firestore();
