@@ -28,21 +28,21 @@ function InfoUserScreen({ navigation }) {
                         <CheckBox
                             center
                             title='כתבות'
-                            //checked={this.state.checked} //Use Hooking!
+                        //checked={this.state.checked} //Use Hooking!
                         />
                     </View>
                     <View style={styles.CheckBoxStyle}>
                         <CheckBox
                             center
                             title='עדכונים'
-                            //checked={this.state.checked} //Use Hooking!
+                        //checked={this.state.checked} //Use Hooking!
                         />
                     </View>
-                    <View style={styles.CheckBoxStyle}> 
+                    <View style={styles.CheckBoxStyle}>
                         <CheckBox
                             center
                             title='חידות'
-                            //checked={this.state.checked} //Use Hooking!
+                        //checked={this.state.checked} //Use Hooking!
                         />
                     </View>
                 </View>
@@ -165,15 +165,13 @@ const logStack = createStackNavigator();
 
 function InfoUser() { //for navigation. not in use yet
     return (
-        <NavigationContainer>
-            <logStack.Navigator initialRouteName="infoU">
-                <logStack.Screen options={{ headerShown: false }} name="infoU" component={InfoUserScreen} />
+        <logStack.Navigator initialRouteName="infoU">
+            <logStack.Screen options={{ headerShown: false }} name="infoU" component={InfoUserScreen} />
 
-                <logStack.Screen name="newOpAr" options={{ headerShown: false }}
-                    component={NewOpenArtScreen} />
+            <logStack.Screen name="newOpAr" options={{ headerShown: false }}
+                component={NewOpenArtScreen} />
 
-            </logStack.Navigator>
-        </NavigationContainer>
+        </logStack.Navigator>
     );
 }
 
