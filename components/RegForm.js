@@ -77,9 +77,6 @@ class RegForm extends Component {
         }
       }
 
-    //   {this.state.show ? (
-
-    //   ) : null}
 
     componentDidMount() {
         this.keyboardDidShowListener = Keyboard.addListener(
@@ -125,14 +122,14 @@ class RegForm extends Component {
                             onPress={this.ShowHideComponent}
                             onChangeText = {(val) => this.updateInputVal(val, 'displayName')}
                             value = {this.state.displayName}
-                            //onTouchStart={()=> this.ShowHideComponent()}
+                           
                         />
                 </View>
 
                 
                     
                 <View style={styles.inputView }>
-                {/* <TouchableOpacity onPress={this.ShowHideComponent}> */}
+                
 
                     <TextInput
                             style = { styles.TextInputStyle}
@@ -144,7 +141,7 @@ class RegForm extends Component {
                             onPress={this.ShowHideComponent}
                             onChangeText={(val) => this.updateInputVal(val, 'email')}
                             value = {this.state.email}
-                            //onTouchStart={()=> this.ShowHideComponent()}
+                           
                         />
 
                 </View>
@@ -161,7 +158,7 @@ class RegForm extends Component {
                             onPress={this.ShowHideComponent}
                             onChangeText={(val) => this.updateInputVal(val, 'password')}
                             value = {this.state.password}
-                            //onTouchStart={()=> this.ShowHideComponent()}
+                            
                         />
                 </View>
                     
