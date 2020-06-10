@@ -176,7 +176,6 @@ const logStack = createStackNavigator();
 
 function RoutesUser() { //for navigation. not in use yet
     return (
-        <NavigationContainer>
             <logStack.Navigator initialRouteName="routesU">
                 <logStack.Screen options={{ headerShown: false }} name="routesU" component={RoutesUserScreen} />
 
@@ -184,7 +183,6 @@ function RoutesUser() { //for navigation. not in use yet
                     component={NewOpenRouteScreen} />
 
             </logStack.Navigator>
-        </NavigationContainer>
     );
 }
 
