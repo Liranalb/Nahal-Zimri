@@ -1,5 +1,5 @@
 import React, { Component } from "react" //import react library
-import { Image, ImageBackground, StyleSheet ,TextInput, Button } from "react-native"
+import { Keyboard, Image, ImageBackground, StyleSheet ,TextInput, Button } from "react-native"
 import { View } from "native-base"
 import firebase from "../config/Firebase"
 import { DotIndicator } from "indicators";
@@ -14,9 +14,26 @@ class LoginForm extends Component {
             email: "",
             password: "",
             username: "",
-            loading: false
+            loading: false,
+            show: true
         }
     }
+
+    ShowHideComponent = () => {
+        if (this.state.show == true) {
+          this.setState({ show: false });
+        } else {
+          this.setState({ show: true });
+        }
+      };
+
+    //This function is being called when the user starts typing in 
+    //the input field and updates the user registration form values.
+    updateInputVal = (val, prop) => {
+        const state = this.state;
+        state[prop] = val;
+        this.setState(state);
+      }
 
     onLoginSuccess() {
         Alert.alert(
@@ -59,14 +76,32 @@ class LoginForm extends Component {
         )
     }  
 
+    componentDidMount() {
+        this.keyboardDidShowListener = Keyboard.addListener(
+          'keyboardDidShow',
+          this.ShowHideComponent,
+        );
+        this.keyboardDidHideListener = Keyboard.addListener(
+          'keyboardDidHide',
+          this.ShowHideComponent,
+        );
+      }
+    
+      componentWillUnmount() {
+        this.keyboardDidShowListener.remove();
+        this.keyboardDidHideListener.remove();
+      }
+
     render() {
         return(
             
 
             <View style={styles.background}>
                  <View style={styles.logoView}>
+                 {this.state.show ? (
                  <Image source={require('../assets/img/logo.png')}
                  style={styles.logo}/>
+                 ) : null}
                  </View>
                
 
@@ -165,11 +200,10 @@ const styles = {
     },
 
     logoView:{
-        paddingTop: 30,
-        paddingBottom: 355,
-        height: 300,
+        paddingBottom: 40,
+        //paddingTop: 320,
+        //height: 300,
         alignItems: 'center'
-        
     }
 
     /*
