@@ -27,12 +27,6 @@ import ReportBox from './components/explore/ReportBox';
 
 
 
-<<<<<<< HEAD
-AppRegistry.registerComponent(appName, () => ReportForm);
-
-
-=======
 AppRegistry.registerComponent(appName, () => Reports);
->>>>>>> d63f40f58f5d52a0c4083fb623bf363b0afb7ed9
 
 
