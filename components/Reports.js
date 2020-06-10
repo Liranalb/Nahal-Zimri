@@ -164,7 +164,6 @@ function ReportsScreen ({ navigation }) {
     
     function Reports() { 
         return (
-            <NavigationContainer>
                 <logStack.Navigator initialRouteName="rep">
                     <logStack.Screen options={{ headerShown: false }} name="rep" component={ReportsScreen} />
     
@@ -172,7 +171,6 @@ function ReportsScreen ({ navigation }) {
                         component={ReportFormScreen} />
     
                 </logStack.Navigator>
-            </NavigationContainer>
         );
     }
 
