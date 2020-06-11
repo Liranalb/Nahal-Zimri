@@ -17,7 +17,7 @@ class EditReports extends Component {
     render() {
         return (
 
-            <View style={{ height: 260, width: 150, marginLeft: 10, borderWidth: 0.8, borderColor: '#dddddd' }}>
+            <View style={{ height: 260, width: 150, marginLeft: 10, borderWidth: 0.8, borderColor: '#dddddd',backgroundColor:'white' }}>
                 <View style={{ flex: 6 }}>
                     <Image source={this.props.imageUri}
                         style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
@@ -45,8 +45,9 @@ class EditReports extends Component {
                     />
                 </View>
 
-                <View style={{ flex: 1, paddingLeft: 10, paddingTop: 10 }}>
-                    <Text>מגיש הדיווח</Text>
+                <View style={{ flex: 2, paddingLeft: 10, paddingTop: 10 }}>
+                    <Text>מגיש הדיווח :{this.props.reporter}</Text>
+                <Text>מאושר: {this.props.approved}</Text>
                 </View>
 
                 <View style={{ width: "40%", flex: 2, paddingLeft: 3, paddingTop: 10 , flexDirection:'row'}}>

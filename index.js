@@ -27,6 +27,6 @@ import ReportBox from './components/explore/ReportBox';
 
 
 
-AppRegistry.registerComponent(appName, () => Reports);
+AppRegistry.registerComponent(appName, () => InformationAdminPage);
 
 

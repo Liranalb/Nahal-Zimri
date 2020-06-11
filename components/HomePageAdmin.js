@@ -4,18 +4,15 @@ import { Header, ListItem } from "react-native-elements"
 /*import { createStackNavigator } from 'react-navigation-stack';*/
 import { Image, View, TouchableWithoutFeedback, TextInput, Text, Button, ScrollView, TouchableOpacity, Alert, unstable_enableLogBox } from "react-native"
 import { Footer, Container } from "native-base"
+import LogoHeaderComponent from "./explore/LogoHeaderComponent";
+import Icon from 'react-native-vector-icons/Entypo';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ReportsAdmin from './ReportsAdmin'
+import InformationAdminPage from './InformationAdminPage'
 import PathCatagories from './PathCatagories'
 import EventAdmin from './EventAdmin'
-import InfoCatagoriesAdmin from "./InfoCatagoriesAdmin"
-import HeaderComp from './HeaderComp'
-
-import Reports from './Reports'
-import InformationAdminPage from './InformationAdminPage'
-
 import InfoAdmin from './InfoAdmin'
 
 //  import {Test} from './InfoCatagories';
@@ -28,11 +25,15 @@ function HomeAdminScreen( {navigation} ) {
 
         return (
             <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
-                
-                <HeaderComp />
-                
+                <View>
+                    <Header style={{ width: "100%", height: "100%" }}
+                        backgroundColor='#FAE5D3'
+                        leftComponent={<Icon name="user" size={30} color='black' />}
+                        centerComponent={<LogoHeaderComponent imageUri={require('../assets/img/logo.png')} />}
+                        rightComponent={{ icon: 'menu', color: 'black' }}
+                    />
+                </View>
                 <TouchableWithoutFeedback onPress={() => navigation.navigate('InfAd')}>
-
                     <View style={styles.infoStyle}>
                         <Image
                             source={require('../assets/img/article.jpg')}
@@ -98,9 +99,9 @@ function HomeAdminScreen( {navigation} ) {
     
 }
 
-  function ReportsScreen() {
+  function ReportsAdminScreen() {
     return (
-      <Reports/>
+      <ReportsAdmin/>
     );
   }
 
@@ -110,7 +111,13 @@ function HomeAdminScreen( {navigation} ) {
     );
   }
 
-  function EventsAdminScreen() { 
+  function InfoCatagoriesScreen(){
+    return (
+        <InfoCatagories/>
+      );
+  }
+
+  function EventAdminScreen() { 
     return (
       <EventAdmin/>
     );
@@ -119,18 +126,18 @@ function HomeAdminScreen( {navigation} ) {
 
   const Stack = createStackNavigator();
 
-
 function HomePageAdmin() {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="HomeAdmin"  >
-          <Stack.Screen options={{headerShown: false}} name="HomeAdmin" component={HomeAdminScreen} />
-          <Stack.Screen  name="InfAd" options={{headerShown: false}} component={InfoAdminScreen} />
 
-          <Stack.Screen options={{headerShown: false}} name="Reports" component={ReportsScreen} />
-          <Stack.Screen options={{headerShown: false}} name="Articles" component={ReportsScreen} />
-          <Stack.Screen options={{headerShown: false}} name="EventsAdmin" component={EventAdmin} />
-          <Stack.Screen options={{headerShown: false}} name="InfoCat" component={InfoCatagories} />
+          <Stack.Screen options={{headerShown: false}} name="HomeAdmin" component={HomeAdminScreen} />
+          <Stack.Screen  name="InfAd" options={{headerShown: false}}
+                component={InfoAdminScreen} />
+
+          <Stack.Screen options={{headerShown: false}} name="Reports" component={ReportsAdminScreen} />
+          <Stack.Screen options={{headerShown: false}} name="EventsAdmin" component={EventAdminScreen} />
+          <Stack.Screen options={{headerShown: false}} name="InfoCat" component={InfoCatagoriesScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     );

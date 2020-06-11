@@ -11,9 +11,11 @@ import { ScrollView } from "react-native-gesture-handler";
 
 class EditInfoBox extends Component {
 
-    
+  
+
     render() {
         return (
+
 
                 <View style={styles.containerStyle}>
                     <View style={{ flex: 1 }}>
@@ -38,7 +40,7 @@ class EditInfoBox extends Component {
                                 <Button
                                     title="ערוך "
                                     color="green"
-                                    onPress={ this.props.onPress }
+                                    onPress={() => this.editText()}
                                 />
                             </View>
 
@@ -46,7 +48,7 @@ class EditInfoBox extends Component {
                                 <Button
                                     title="מחק "
                                     color="green"
-                                    onPress={ this.props.onPressDel }
+                                    onPress={() => this.editText()}
                                 />
                             </View>
 
@@ -57,7 +59,6 @@ class EditInfoBox extends Component {
 
 
                 </View>
-         
         );
     }
 }

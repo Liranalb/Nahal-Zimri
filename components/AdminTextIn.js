@@ -19,6 +19,8 @@ const styles = StyleSheet.create({
        backgroundColor:'white',
         borderRadius:5,
         height:15,
+       
+
     }
 });
 
