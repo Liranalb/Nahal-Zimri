@@ -26,6 +26,8 @@ import NewOpenRoute from "./components/NewOpenRoute";
 import NewOpenArt from "./components/NewOpenArt";
 import AdminRoutes from "./components/AdminRoutes";
 import AdminUnitRoutes from "./components/AdminUnitRoutes";
+import MainLogin from "./components/MainLogin";
+import RegForm from "./components/RegForm";
 /*
 import InfoUnitAdmin from "./components/InfoUnitAdmin";
 import AdminButton from "./components/AdminButton";
@@ -35,15 +37,15 @@ import RoutesUser from "./components/RoutesUser";
 import InfoComp from "./components/InfoComp";
 import InformationPage from "./components/InformationPage";
 import PathCatagories from "./components/PathCatagories";
-import RegForm from "./components/RegForm";
+
 import ReportBox from "./components/ReportBox";
 import ReportForm from "./components/ReportForm";
 import ReportFormComp from "./components/ReportFormComp";
 import ReportsAdmin from "./components/ReportsAdmin";
-import MainLogin from "./components/MainLogin";
+
 import NewOpenRoute from "./components/NewOpenRoute";
 import HeaderComp from "./components/HeaderComp";
 class App extends Component {
 }
 */
-AppRegistry.registerComponent(appName, () =>HomePageAdmin);
+AppRegistry.registerComponent(appName, () =>MainLogin);
