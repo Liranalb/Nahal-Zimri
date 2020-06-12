@@ -69,12 +69,28 @@ class LoginForm extends Component {
         <View style = { styles.buttonStyle }>
         <Button 
             title = "התחבר"
-            color = "#FF8C37"           
+            color = "#FF8C37"      
+            //onPress= {() => this.onButtonPress()}     
         >
         </Button>   
         </View>
         )
     }  
+
+    onButtonPress() {
+        const { email, password } = this.state
+        this.setState({ loading: true })
+
+        firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(
+            this.onLoginSuccess.bind(this)
+        )
+        .catch(
+            this.onLoginFail.bind(this)
+        )
+    }
 
     componentDidMount() {
         this.keyboardDidShowListener = Keyboard.addListener(
