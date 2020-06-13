@@ -1,10 +1,8 @@
 import React, { Component } from "react" //import react library
-import { Keyboard, Image, ImageBackground, StyleSheet ,TextInput, Button } from "react-native"
+import { Keyboard, Image, ImageBackground, StyleSheet ,TextInput, Button, Alert } from "react-native"
 import { View } from "native-base"
 import firebase from "../config/Firebase"
-import { DotIndicator } from "indicators";
-
-
+import { DotIndicator } from "react-native-indicators";
 
 
 class LoginForm extends Component {
@@ -19,6 +17,24 @@ class LoginForm extends Component {
         }
     }
 
+// ---------------- HIDE LOGO WHEN KEYBOARD IS ON ------------------
+    componentDidMount() {
+        this.keyboardDidShowListener = Keyboard.addListener(
+          'keyboardDidShow',
+          this.ShowHideComponent,
+        );
+        this.keyboardDidHideListener = Keyboard.addListener(
+          'keyboardDidHide',
+          this.ShowHideComponent,
+        );
+      }
+    
+      componentWillUnmount() {
+        this.keyboardDidShowListener.remove();
+
+      }
+
+
     ShowHideComponent = () => {
         if (this.state.show == true) {
           this.setState({ show: false });
@@ -26,6 +42,8 @@ class LoginForm extends Component {
           this.setState({ show: true });
         }
       };
+
+// ---------------- HIDE LOGO WHEN KEYBOARD IS ON ------------------
 
     //This function is being called when the user starts typing in 
     //the input field and updates the user registration form values.
@@ -70,7 +88,7 @@ class LoginForm extends Component {
         <Button 
             title = "התחבר"
             color = "#FF8C37"      
-            //onPress= {() => this.onButtonPress()}     
+            onPress= {() => this.onButtonPress()}     
         >
         </Button>   
         </View>
@@ -78,12 +96,13 @@ class LoginForm extends Component {
     }  
 
     onButtonPress() {
-        const { email, password } = this.state
+       
+
         this.setState({ loading: true })
 
         firebase
         .auth()
-        .signInWithEmailAndPassword(email, password)
+        .signInWithEmailAndPassword(this.state.email, this.state.password)
         .then(
             this.onLoginSuccess.bind(this)
         )
@@ -92,21 +111,7 @@ class LoginForm extends Component {
         )
     }
 
-    componentDidMount() {
-        this.keyboardDidShowListener = Keyboard.addListener(
-          'keyboardDidShow',
-          this.ShowHideComponent,
-        );
-        this.keyboardDidHideListener = Keyboard.addListener(
-          'keyboardDidHide',
-          this.ShowHideComponent,
-        );
-      }
-    
-      componentWillUnmount() {
-        this.keyboardDidShowListener.remove();
-        this.keyboardDidHideListener.remove();
-      }
+
 
     render() {
         return(
@@ -132,7 +137,8 @@ class LoginForm extends Component {
                             placeholderTextColor = "#FF8C37"
                             height = {45}
                             autoCorrect = {false}
-                            onChangeText = { email => this.setState({ email })}
+                            onChangeText={(val) => this.updateInputVal(val, 'email')}
+                            //onChangeText = { email => this.setState({ email })}
                             value = {this.state.email}
                         />
                 </View>
@@ -146,18 +152,13 @@ class LoginForm extends Component {
                             secureTextEntry = {true}
                             height = {45}
                             autoCorrect = {false}
-                            onChangeText = { password => this.setState({ password })}
+                            onChangeText={(val) => this.updateInputVal(val, 'password')}
+                            //onChangeText = { password => this.setState({ password })}
                             value = {this.state.password}
                         />
                 </View>
                 <View>{ this.renderButton()}</View>   
-                {/* <View style = { styles.buttonStyle }>
-                        <Button 
-                            title = "התחבר"
-                            color = "#FF8C37"           
-                        >
-                        </Button>   
-                </View> */}
+
                     
             </View>
                
