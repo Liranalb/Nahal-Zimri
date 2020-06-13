@@ -1,19 +1,19 @@
 import React, { Component } from "react" //import react library
-import {Keyboard, TouchableOpacity, Image, StyleSheet ,TextInput, Button, ActivityIndicator, Alety  } from "react-native"
+import {Keyboard, TouchableOpacity, Image, StyleSheet ,TextInput, Button, ActivityIndicator, Alert  } from "react-native"
 import { View } from "native-base"
 import firebase from "../config/Firebase"
 import MainLogin from "./MainLogin";
+import { DotIndicator } from "react-native-indicators"
+
+// import React, { Component } from "react"
+// import { TextInput, Button, Alert } from "react-native"
+// import { View } from "native-base"
+// import firebase from "../config/Firebase"
+// import { DotIndicator } from "indicators"
 
 
-const database = firebase.database();
-const auth = firebase.auth();
-
-
-// registerUser = (name, email, password) => {
-//     console.log(name, email, password);
-//     auth.createUserWithEmailAndPassword;
-// }
-
+//const database = firebase.database();
+//const auth = firebase.auth();
 
 
 
@@ -21,17 +21,132 @@ const auth = firebase.auth();
 class RegForm extends Component {
     constructor(){
         super();
+        this.usersRef = firebase.firestore().collection('Users')
         this.state = {
             displayName: '',
             email: '',
             password: '',
-            isLoading: false,
+            loading: false,
             show: true
         }
-
-        
     }
     
+
+    /////////////////CHECK IF WORKS!!
+    addUserToFire() {
+        if(this.state.email === '' || this.state.password === '') {
+          Alert.alert('אנא מלא שם מלא, מייל וסיסמא')
+        } 
+        
+        else {
+          
+          
+          
+          this.setState({loading: true})
+          firebase
+          .auth()
+          .createUserWithEmailAndPassword(this.state.email, this.state.password)
+          .then((res) => {
+            // res.user.updateProfile({
+            //   DisplayName: this.state.displayName
+            // })
+            Alert.alert('User registered successfully!')
+            this.setState({
+              isLoading: false,
+              displayName: '',
+              email: '', 
+              password: ''
+            })
+            
+          })
+          
+          .catch(error => {
+            Alert.alert("Error:" + error.message);
+            this.setState({load_failed: true});
+          })      
+        }
+
+        this.setState({
+            loading: false
+          })
+      }
+
+      onButtonPress() {
+        firebase.auth().onAuthStateChanged((user) => {
+            if(user != null) {
+                this.addUserToFire()
+            }
+        })
+    
+        const { email, password } = this.state
+        this.setState({ loading: true })
+    
+        firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(
+            this.onLoginSuccess.bind(this)
+        )
+        .catch(
+            this.onLoginFail.bind(this)
+        )
+    }
+    // addUserToFire() {
+    //     this.usersRef.add({
+    //         Uid: firebase.auth().currentUser.uid,
+    //         DisplayName: this.state.displayName
+    //     })
+
+    // }
+
+    onLoginSuccess() {
+      Alert.alert(
+          "נרשמת בהצלחה",
+          "You are now part of the chat",
+          [{ text: "OK"}],
+          { cancelable: false}
+      )
+      this.setState({
+          email: "",
+          password: "",
+          loading: false
+      })
+  }
+
+  onLoginFail() {
+      this.setState({ loading: false})
+      Alert.alert(
+          "Error",
+          "Email or password are incorrect",
+          [{ text: "OK"}],
+          { cancelable: false}
+      )
+  }
+
+
+
+
+
+
+
+renderButton() {
+  if (this.state.loading) {
+      return <DotIndicator color = "#FF8C37"/>
+  }
+
+  return (
+    <View style = { styles.buttonStyle }>
+    <Button 
+        title = "הרשמה"
+        onPress={() => this.addUserToFire()}
+        color = "#FF8C37"           
+    >
+    </Button>   
+    </View>
+  )
+}
+
+
     ShowHideComponent = () => {
         if (this.state.show == true) {
           this.setState({ show: false });
@@ -40,42 +155,42 @@ class RegForm extends Component {
         }
       };
 
-    //This function is being called when the user starts typing in 
-    //the input field and updates the user registration form values.
-    updateInputVal = (val, prop) => {
-        const state = this.state;
-        state[prop] = val;
-        this.setState(state);
-      }
+    // //This function is being called when the user starts typing in 
+    // //the input field and updates the user registration form values.
+    // updateInputVal = (val, prop) => {
+    //     const state = this.state;
+    //     state[prop] = val;
+    //     this.setState(state);
+    //   }
 
     // This  method is handling the user registration; we are signing up using 
     //createUserWithEmailAndPassword(email, password) method via Firebase API.
-    registerUser = () => {
-        if(this.state.email === '' && this.state.password === '') {
-          Alert.alert('מלא את הפרטים הדרושים לצורך הרשמה')
-        } else {
-          this.setState({
-            isLoading: true,
-          })
-          firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.state.email, this.state.password)
-          .then((res) => {
-            res.user.updateProfile({
-              displayName: this.state.displayName
-            })
-            console.log('User registered successfully!')
-            this.setState({
-              isLoading: false,
-              displayName: '',
-              email: '', 
-              password: ''
-            })
-            this.props.navigation.navigate('Login')
-          })
-          .catch(error => this.setState({ errorMessage: error.message }))      
-        }
-      }
+    // registerUser = () => {
+    //     if(this.state.email === '' && this.state.password === '') {
+    //       Alert.alert('מלא את הפרטים הדרושים לצורך הרשמה')
+    //     } else {
+    //       this.setState({
+    //         isLoading: true,
+    //       })
+    //       firebase
+    //       .auth()
+    //       .createUserWithEmailAndPassword(this.state.email, this.state.password)
+    //       .then((res) => {
+    //         res.user.updateProfile({
+    //           displayName: this.state.displayName
+    //         })
+    //         console.log('User registered successfully!')
+    //         this.setState({
+    //           isLoading: false,
+    //           displayName: '',
+    //           email: '', 
+    //           password: ''
+    //         })
+    //         this.props.navigation.navigate('Login')
+    //       })
+    //       .catch(error => this.setState({ errorMessage: error.message }))      
+    //     }
+    //   }
 
 
     componentDidMount() {
@@ -91,12 +206,16 @@ class RegForm extends Component {
     
       componentWillUnmount() {
         this.keyboardDidShowListener.remove();
-        this.keyboardDidHideListener.remove();
+        //this.keyboardDidHideListener.remove();
       }
     
 
     
-
+      updateInputVal = (val, prop) => {
+        const state = this.state;
+        state[prop] = val;
+        this.setState(state);
+      }
 
     render() {
         return(
@@ -120,7 +239,8 @@ class RegForm extends Component {
                             height = {45}
                             autoCorrect = {false}
                             onPress={this.ShowHideComponent}
-                            onChangeText = {(val) => this.updateInputVal(val, 'displayName')}
+                            //onChangeText = {displayName => this.setState({ displayName })}
+                            onChangeText={(val) => this.updateInputVal(val, 'displayName')}
                             value = {this.state.displayName}
                            
                         />
@@ -139,6 +259,7 @@ class RegForm extends Component {
                             height = {45}
                             autoCorrect = {false}
                             onPress={this.ShowHideComponent}
+                            //onChangeText = {email => this.setState({ email })}
                             onChangeText={(val) => this.updateInputVal(val, 'email')}
                             value = {this.state.email}
                            
@@ -156,20 +277,15 @@ class RegForm extends Component {
                             height = {45}
                             autoCorrect = {false}
                             onPress={this.ShowHideComponent}
+                            //onChangeText = {password => this.setState({ password })}
                             onChangeText={(val) => this.updateInputVal(val, 'password')}
                             value = {this.state.password}
                             
                         />
                 </View>
-                    
-                <View style = { styles.buttonStyle }>
-                        <Button 
-                            title = "הרשמה"
-                            onPress={() => this.registerUser()}
-                            color = "#FF8C37"           
-                        >
-                        </Button>   
-                </View>
+
+                <View>{this.renderButton()}</View>    
+
                     
             </View>             
         )
