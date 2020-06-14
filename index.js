@@ -1,19 +1,20 @@
 /**
  * @format
  */
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import App from './App';
+
 import LoginForm from "./components/LoginForm"
+
+
+
+//Do not delete
+// import * as React from 'react';   not working for me ( can't find variable Component)
+import React, { Component } from "react" 
+import MainLogin from "./components/MainLogin";
 import HomePageUser from "./components/HomePageUser"
 import firebase from "./config/Firebase"
-
-// import AdminInfoUser from "./components/AdminInfoUser"
-// import AdminUnitInfoUser from"./components/AdminUnitInfoUser"
-
 import {AppRegistry, View} from 'react-native';
 import {name as appName} from './app.json';
-
+// End of do not delete
 
 
 //Testing area Rotem
@@ -23,7 +24,7 @@ import Reports from "./components/Reports";
 // End of testing area
 
 
-AppRegistry.registerComponent(appName, () =>ReportForm);
+
 import HomePageAdmin from "./components/HomePageAdmin";
 import InfoUser from "./components/InfoUser";
 import UnitInfoUser from "./components/UnitInfoUser";
@@ -36,7 +37,7 @@ import NewOpenRoute from "./components/NewOpenRoute";
 import NewOpenArt from "./components/NewOpenArt";
 import AdminRoutes from "./components/AdminRoutes";
 import AdminUnitRoutes from "./components/AdminUnitRoutes";
-import MainLogin from "./components/MainLogin";
+
 import RegForm from "./components/RegForm";
 
 
@@ -70,4 +71,4 @@ class loginHelper extends Component {
     }
 }
 
-AppRegistry.registerComponent(appName, () => loginHelper);
+AppRegistry.registerComponent(appName, () => HomePageAdmin);

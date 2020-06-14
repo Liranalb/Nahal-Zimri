@@ -10,14 +10,13 @@ import Icon from 'react-native-vector-icons/Entypo';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ReportsAdmin from './ReportsAdmin'
-import InformationAdminPage from './InformationAdminPage'
 import PathCatagories from './PathCatagories'
 import EventAdmin from './EventAdmin'
 import AdminRoutes from './AdminRoutes'
 import InfoAdmin from './InfoAdmin'
 
 //  import {Test} from './InfoCatagories';
-import InfoCatagories from './InfoCatagories'
+import InfoCatagoriesAdmin from './InfoCatagoriesAdmin'
 // import {Test} from './InfoCatagories';
 
 
@@ -120,7 +119,7 @@ function AdminRoutesScreen() {
 
 function InfoCatagoriesScreen() {
     return (
-        <InfoCatagories />
+        <InfoCatagoriesAdmin />
     );
 }
 

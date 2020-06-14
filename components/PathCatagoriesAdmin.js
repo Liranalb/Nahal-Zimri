@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Button, Header, ListItem } from "react-native-elements"
-/*import { createStackNavigator } from 'react-navigation-stack';*/
+import { createStackNavigator } from 'react-navigation-stack'
 import {
     Image,
     View,

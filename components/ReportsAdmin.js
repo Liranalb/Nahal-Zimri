@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { useState } from "react"
 import { TextInput, Button, Alert, ScrollView, Text, TouchableOpacity } from "react-native"
 import { View } from "native-base"
 import { Header, ListItem, CheckBox } from "react-native-elements"
@@ -16,6 +16,8 @@ import { db } from '../config/Firebase'
 
 
 export function ReportsAdminScreen({ navigation }) {
+    let reportsArray = [];
+    const [loaded, setLoaded] = useState(false);
 
     let data = null;
     db.ref('Reports').on('value', function (snapshot) {
@@ -23,24 +25,32 @@ export function ReportsAdminScreen({ navigation }) {
         if (exist) {
             data = snapshot.val();
             console.log("data loaded");
+            if( loaded === false) {
+                setLoaded( true );
+            }
         }
     });
 
-    // const [data1, initData] = useState(data);
+
     
 
     let convertDataToArray = (data,reportsArray) => {
+
         if (data === null)
             return null;
         for (var report in data) {
             if (data.hasOwnProperty(report)) {
-                if (data[report].Approved === 'true')
+                if (data[report].Approved === true) {
                     reportsArray.push(data[report]);
+                  
+                }
+                    
             }
         }
+        
     }
     
-    let reportsArray = [];
+    
     convertDataToArray(data,reportsArray);
 
 
@@ -159,20 +169,20 @@ export function ReportsAdminScreen({ navigation }) {
 }
 
 function goToReportForm() {
-    return <ReportForm navigation = {navigation }/>
+    return <ReportForm />
 
 }
 const repAdminStack = createStackNavigator();
 
 function ReportsAdmin() {
     return (
-        <NavigationContainer>
+       
             <repAdminStack.Navigator initialRouteName="reportsAdmin">
                 <repAdminStack.Screen options={{ headerShown: false }} name="reportsAdmin" component={ReportsAdminScreen} />
                 <repAdminStack.Screen options={{ headerShown: false }} name="repFo" component={goToReportForm} />
 
             </repAdminStack.Navigator>
-        </NavigationContainer>
+   
     );
 
 }

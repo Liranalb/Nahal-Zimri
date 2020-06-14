@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useState } from "react"
 import { TextInput, Alert, ScrollView, Text, TouchableWithoutFeedback } from "react-native"
 import { View } from "native-base"
 import { Header, ListItem, CheckBox, Button } from "react-native-elements"
@@ -18,43 +18,54 @@ import { db } from '../config/Firebase'
 
 
 
-function InformationAdminScreen({ navigation }) {
+function InformationAdminScreen(props, { navigation }) {
 
-    
-    let currentType = "Blossom"
-
+    let infoArray = [];
+    let currentType = props.dataType;
+    const [loaded, setLoaded] = useState(false);
     let data = null;
     db.ref('Information').on('value', function (snapshot) {
         const exist = (snapshot.val() !== null);
         if (exist) {
             data = snapshot.val();
             console.log("data loaded");
+            if( loaded === false) {
+                setLoaded( true );
+            }
         }
     });
 
-    // const [data1, initData] = useState(data);
+
 
 
     let convertDataToArray = (data, infoArray) => {
+        console.log("in convert");
         if (data === null)
             return null;
+
         for (var info in data) {
             if (data.hasOwnProperty(info)) {
-                //if (data[info].Type === currentType)
-                infoArray.push(data[info]);
+                console.log("checking type: "+ data[info].Type);
+                if (data[info].Type === currentType) {
+                    infoArray.push(data[info]);
+                    console.log("Added to array: "+info);
+                }
+                else
+                    console.log("not fit");
+                   
             }
         }
     }
 
-    let infoArray = [];
+    
     convertDataToArray(data, infoArray);
-    console.log(infoArray);
+    console.log(infoArray.length);
 
 
     return (
         <View>
             <HeaderComp />
-            {/* <Text>  {this.props.dataType}</Text> */}
+         
             <View style={styles.containerStyle}>
 
                 <View style={{ height: "100%", width: "100%", backgroundColor: '#E9DFD1' }}>
@@ -82,56 +93,7 @@ function InformationAdminScreen({ navigation }) {
                                 )
                             })}
 
-                            {/* <TouchableWithoutFeedback
-                                onPress= { ()=> navigation.navigate('infoAdminComp')}
-                                >
-                                <View>
-                                <EditInfoBox imageUri={require('../assets/img/purple.jpg')}
-                                    headline="הדרדר הכחול"
-                                    body="דַּרְדַּר כָּחֹל הוא צמח חד-שנתי ממשפחת המורכבים. לפרחי הסוג דַּרְדַּר שפע צבעים, המשותף לאבקנים ולעלי הכותרת מצבעים בהירים כמו: לבן, צהוב, כתום, קרם עד לצבעים כהים יותר כמו: ורוד, לילך, כחול, סגול ואפילו אדום. "
-                                />
-                                </View>
-                            </TouchableWithoutFeedback>
-
-                            <EditInfoBox imageUri={require('../assets/img/blossom.jpg')}
-                                headline=" flower"
-                                body="ב"
-                            />
-
-                            <EditInfoBox imageUri={require('../assets/img/Sunflower.jpg')}
-                                headline=" flower"
-                                body="בלה בלה בלה"
-                            />
-
-                            <EditInfoBox imageUri={require('../assets/img/bird.jpg')}
-                                headline=" flower"
-                                body="בלה בלה בלה"
-                            />
-
-                            <EditInfoBox imageUri={require('../assets/img/Pisga.jpg')}
-                                headline="flower"
-                                body="בלה בלה בלה"
-                            />
-
-                            <EditInfoBox imageUri={require('../assets/img/Shafan.jpg')}
-                                headline=" flower"
-                                body="בלה בלה בלה"
-                            />
-
-                            <EditInfoBox imageUri={require('../assets/img/purple.jpg')}
-                                headline=" flower"
-                                body="בלה בלה בלה"
-                            />
-
-                            <EditInfoBox imageUri={require('../assets/img/mammal.jpg')}
-                                headline=" flower"
-                                body="בלה בלה בלה"
-                            />
-
-                            <EditInfoBox imageUri={require('../assets/img/arch.jpg')}
-                                headline=" flower"
-                                body="בלה בלה בלה"
-                            /> */}
+                            
 
 
                         </ScrollView>
@@ -206,18 +168,19 @@ function InfoAdminComponent() {
     return <InfoComp />;
 }
 
-function InformationAdminPage() {
-    return (
-        <NavigationContainer>
-            <InfoCompStack.Navigator initialRouteName="infoAdminScreen">
 
-                <InfoCompStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InformationAdminScreen} />
+function InformationAdminPage(props) {
+
+    function InfoAdminScreenFunction() {
+        return <InformationAdminScreen dataType={props.dataType}/>
+    }
+
+    return (
+            <InfoCompStack.Navigator initialRouteName="infoAdminScreen">
+                <InfoCompStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoAdminScreenFunction} />
                 <InfoCompStack.Screen options={{ headerShown: false }} name="infoAdminComp" component={InfoAdminComponent} />
             </InfoCompStack.Navigator>
-        </NavigationContainer>
     );
-
-
 }
 
 export default InformationAdminPage;

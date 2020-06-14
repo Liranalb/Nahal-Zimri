@@ -55,7 +55,7 @@ function InfoAdminScreen({ navigation }) {
                         />
                     </View>
                 </View>
-
+            
             </View>
 
             <ScrollView>

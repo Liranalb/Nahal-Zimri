@@ -30,8 +30,10 @@ function ReportsScreen({ navigation }) {
         if (exist) {
             data = snapshot.val();
             console.log("data loaded: " + loaded);
-            if( loaded === false)
+            if( loaded === false) {
                 setLoaded( true );
+            }
+                
 
         }
     });
@@ -42,13 +44,14 @@ function ReportsScreen({ navigation }) {
     let convertDataToArray = (data,reportsArray) => { 
         if (data === null)
             return null;
+
         for (var report in data) {
             if (data.hasOwnProperty(report)) {
-                if (data[report].Approved === 'true')
+                if (data[report].Approved === true) {
                     reportsArray.push(data[report]);
+                }  
             }
         }
-        
     }
 
     convertDataToArray(data,reportsArray);
@@ -110,7 +113,7 @@ function ReportsScreen({ navigation }) {
                                 console.log("second"),
                                 reportsArray.map((item) => { 
                                     return (
-                                        <ReportBox imageUri={{ uri: item.imageLink }}
+                                        <ReportBox imageUri={{ uri: item.ImageLink }}
                                             name={item.Description}
                                             date={item.Date}
                                             catagory={item.Catagory}
@@ -172,13 +175,14 @@ const logStack = createStackNavigator();
 
 function Reports() {
     return (
-            <logStack.Navigator initialRouteName="rep">
-                <logStack.Screen options={{ headerShown: false }} name="rep" component={ReportsScreen} />
+        <logStack.Navigator initialRouteName="rep">
+            <logStack.Screen options={{ headerShown: false }} name="rep" component={ReportsScreen} />
 
-                <logStack.Screen name="repFo" options={{ headerShown: false }}
-                    component={ReportFormScreen} />
+            <logStack.Screen name="repFo" options={{ headerShown: false }}
+                component={ReportFormScreen} />
 
-            </logStack.Navigator>
+        </logStack.Navigator>
+
 
     );
 }
