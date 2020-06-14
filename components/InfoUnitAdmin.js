@@ -6,12 +6,12 @@ import {
     Image,
     
 } from "react-native";
-import AdminButton from "./AdminButton"
+
 
 class InfoUnitAdmin extends React.Component {
     render() {
         return (
-            <View style={styles.routeStyle}>
+            <View >
                 <View style={styles.imageStyle}>
                     <Image
                         source={this.props.imageUri}
@@ -30,9 +30,7 @@ class InfoUnitAdmin extends React.Component {
                 <View style={styles.dateStyle}>
                     <Text style={styles.textDetailStyle}> תאריך העלאה | {this.props.date}  </Text>
                 </View>
-                <View style={styles.ButtonStyle}>
-                <AdminButton/>
-                </View>
+               
             </View>
         );
     }
