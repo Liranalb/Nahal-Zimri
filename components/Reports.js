@@ -172,7 +172,6 @@ const logStack = createStackNavigator();
 
 function Reports() {
     return (
-        <NavigationContainer>
             <logStack.Navigator initialRouteName="rep">
                 <logStack.Screen options={{ headerShown: false }} name="rep" component={ReportsScreen} />
 
@@ -180,7 +179,7 @@ function Reports() {
                     component={ReportFormScreen} />
 
             </logStack.Navigator>
-        </NavigationContainer>
+
     );
 }
 
