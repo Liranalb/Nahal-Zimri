@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { useEffect } from "react"
 import { TextInput, Alert, ScrollView, Text, TouchableWithoutFeedback } from "react-native"
 import { View } from "native-base"
 import { Header, ListItem, CheckBox, Button } from "react-native-elements"
@@ -19,6 +19,8 @@ import { db } from '../config/Firebase'
 
 
 function InformationAdminScreen({ navigation }) {
+
+    
     let currentType = "Blossom"
 
     let data = null;
@@ -39,7 +41,7 @@ function InformationAdminScreen({ navigation }) {
         for (var info in data) {
             if (data.hasOwnProperty(info)) {
                 //if (data[info].Type === currentType)
-                    infoArray.push(data[info]);
+                infoArray.push(data[info]);
             }
         }
     }
@@ -65,16 +67,18 @@ function InformationAdminScreen({ navigation }) {
 
                             {infoArray.map((item) => {
                                 return (
-                                    <TouchableWithoutFeedback
-                                        onPress={() => navigation.navigate('infoAdminComp')}
-                                    >
-                                        <View>
-                                            <EditInfoBox imageUri={{ uri: item.Images }}
-                                                headline={item.Title}
-                                                body={item.Content}
-                                            />
-                                        </View>
-                                    </TouchableWithoutFeedback>
+                                    <View key={item}>
+                                        <TouchableWithoutFeedback
+                                            onPress={() => navigation.navigate('infoAdminComp')}
+                                        >
+                                            <View>
+                                                <EditInfoBox imageUri={{ uri: item.Images }}
+                                                    headline={item.Title}
+                                                    body={item.Content}
+                                                />
+                                            </View>
+                                        </TouchableWithoutFeedback>
+                                    </View>
                                 )
                             })}
 

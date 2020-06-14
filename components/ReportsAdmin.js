@@ -158,7 +158,10 @@ export function ReportsAdminScreen({ navigation }) {
     )
 }
 
+function goToReportForm() {
+    return <ReportForm navigation = {navigation }/>
 
+}
 const repAdminStack = createStackNavigator();
 
 function ReportsAdmin() {
@@ -166,7 +169,7 @@ function ReportsAdmin() {
         <NavigationContainer>
             <repAdminStack.Navigator initialRouteName="reportsAdmin">
                 <repAdminStack.Screen options={{ headerShown: false }} name="reportsAdmin" component={ReportsAdminScreen} />
-                <repAdminStack.Screen options={{ headerShown: false }} name="repFo" component={ReportForm} />
+                <repAdminStack.Screen options={{ headerShown: false }} name="repFo" component={goToReportForm} />
 
             </repAdminStack.Navigator>
         </NavigationContainer>

@@ -1,33 +1,33 @@
 import React, { Component } from "react"
-import { TextInput, Alert, ScrollView, Text, TouchableWithoutFeedback,ImageBackground } from "react-native"
+import { TextInput, Alert, ScrollView, Text, TouchableWithoutFeedback, ImageBackground, Button } from "react-native"
 import { View, Thumbnail, List, ListItem } from "native-base"
 import { CheckBox } from "react-native-elements"
 
 import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from "./HeaderComp"
-
+import { storage, db,auth } from '../config/Firebase'
 
 import { Collapse, CollapseHeader, CollapseBody } from "accordion-collapse-react-native";
 import ReportFormComp from "./ReportFormComp"
 
 import ImagePicker from 'react-native-image-crop-picker';
-
+import sayCheese from '../assets/functions/takePhoto'
+import uploadImage from '../assets/functions/uploadSingleImage'
 
 
 class ReportForm extends Component {
 
-
-
-    //   backgroundColor="#FAE5D3"
+    
     render() {
+
         return (
             <View style={{ height: "100%", width: "100%" }}>
                 <ImageBackground source={require('../assets/img/homePageAdmin_background.jpg')}
-                    style={{ flex: 1, resizeMode: 'cover' }}/>
+                    style={{ flex: 1, resizeMode: 'cover' }} >
                 <View style={{ backgroundColor: '#FAE5D3', height: "100%", width: "90%", alignSelf: 'center' }}>
 
 
-                    <View style={{ width: "100%", height: "70%" }}>
+                    <View style={{ width: "100%", height: "69%" }}>
                         <ScrollView>
                             <Collapse>
                                 <CollapseHeader style={styles.typeStyle}>
@@ -95,32 +95,25 @@ class ReportForm extends Component {
                         </ScrollView>
                     </View>
 
-                    <View style={{ flexDirection: 'row' }}>
+                    <View style={{ flexDirection: 'row', marginBottom:1 }}>
 
                         <View style={{ marginLeft: 12, marginTop: 20 }}>
                             <TouchableWithoutFeedback
-                                onPress={() => ImagePicker.openCamera({
-                                    width: 300,
-                                    height: 400,
-                                    cropping: true,
-                                  }).then(image => {
-                                    console.log(image);
-                                  })
+                                onPress={() => sayCheese('uploads/myPhoto1.jpg','Reports/rep3')
+                                
                                 }
                             >
                                 <View><Icon name="camera" size={30} color="#505050" /></View>
                             </TouchableWithoutFeedback>
                             <TouchableWithoutFeedback
-                                onPress={() => ImagePicker.openPicker({
-                                    multiple: true
-                                  }).then(images => {
-                                    console.log(images);
-                                  })
+                                onPress={() => uploadImage('uploads/mydduse.jpg')
                                 }
                             >
                                 <View style={{ marginTop: 20 }}><Icon name="images" size={30} color="#505050" /></View>
                             </TouchableWithoutFeedback>
+                            
                         </View>
+                       
 
 
 
@@ -137,15 +130,18 @@ class ReportForm extends Component {
 
 
                     </View>
-                    <TouchableWithoutFeedback onPress={() => alert('Pressed!')}>
-                        <View style={styles.buttonStyle}>
-                            <Text style={styles.textStyleHeaders}>שלח דיווח</Text>
+                    <View style= {{width:"100%",height:"20%",backgroundColor:'yellow'}}>
+                        <TouchableWithoutFeedback onPress={() => alert("pressed")}>
+                            <View style={styles.buttonStyle}>
+                                <Text style={styles.textStyleHeaders}>שלח דיווח</Text>
 
-                        </View>
-                    </TouchableWithoutFeedback>
+                            </View>
+                        </TouchableWithoutFeedback>
+                    </View>
 
 
                 </View>
+                </ImageBackground>
             </View>
         )
     }
@@ -184,9 +180,7 @@ const styles = {
         borderWidth: 1,
         fontSize: 20,
         width: "100%",
-        height: 20,
         alignSelf: "center",
-        marginTop: 20,
         overflow: 'hidden',
         backgroundColor: "#424242"
 
