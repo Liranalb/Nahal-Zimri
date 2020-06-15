@@ -5,6 +5,7 @@ import firebase from "../config/Firebase"
 import MainLogin from "./MainLogin";
 import { DotIndicator } from "react-native-indicators"
 
+let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; //regular expression for mail validation
 
 class RegForm extends Component {
   constructor() {
@@ -21,13 +22,16 @@ class RegForm extends Component {
 
 
   addUserToFire() {
-    if (this.state.email === '' || this.state.password === '') {
-      Alert.alert('אנא מלא שם מלא, מייל וסיסמא')
-    }
-
+    if (this.state.email === '' || this.state.password === '' ||  this.state.displayName === '') 
+      Alert.alert('יש למלא את כל הפרטים')
+    
+    else if (reg.test(this.state.email) === false) 
+      Alert.alert('כתובת המייל שהוזנה אינה תקינה')  
+    
+    else if (this.state.password.length < 6) 
+      Alert.alert('על הסיסמא להיות באורך של לפחות 6 תווים')
+  
     else {
-
-
 
       this.setState({ loading: true })
       firebase
@@ -37,7 +41,7 @@ class RegForm extends Component {
           // res.user.updateProfile({
           //   DisplayName: this.state.displayName
           // })
-          Alert.alert('User registered successfully!')
+          Alert.alert('נרשמת בהצלחה')
           this.setState({
             isLoading: false,
             displayName: '',
