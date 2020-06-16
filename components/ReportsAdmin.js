@@ -163,13 +163,11 @@ const repAdminStack = createStackNavigator();
 
 function ReportsAdmin() {
     return (
-        <NavigationContainer>
             <repAdminStack.Navigator initialRouteName="reportsAdmin">
                 <repAdminStack.Screen options={{ headerShown: false }} name="reportsAdmin" component={ReportsAdminScreen} />
                 <repAdminStack.Screen options={{ headerShown: false }} name="repFo" component={ReportForm} />
 
             </repAdminStack.Navigator>
-        </NavigationContainer>
     );
 
 }
