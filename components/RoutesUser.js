@@ -14,7 +14,8 @@ import UnitRoutes from "./UnitRoutes"
 var currItem;
 var currImg;
 
-function RoutesUserScreen({ navigation }) {
+function RoutesUserScreen(props, { navigation }) {
+    let currentType = props.dataType;
     let routesArray = [];
     const [loaded, setLoaded] = useState(false);
 
@@ -39,7 +40,10 @@ function RoutesUserScreen({ navigation }) {
             return null;
         for (var route in data) {
             if (data.hasOwnProperty(route)) {
-                routesArray.push(data[route]);
+                if (data[route].PathType === currentType) {
+                    routesArray.push(data[route]);
+ 
+                }
             }
         }
 
@@ -87,10 +91,14 @@ function NewOpenRouteScreen() {
 
 const logStack = createStackNavigator();
 
-function RoutesUser() { 
+function RoutesUser( props ) { 
+    console.log(props.dataType);
+    function RoutesUserScreenFunc () { 
+        return <RoutesUserScreen dataType={props.dataType}/>
+    }
     return (
         <logStack.Navigator initialRouteName="routesU">
-            <logStack.Screen options={{ headerShown: false }} name="routesU" component={RoutesUserScreen} />
+            <logStack.Screen options={{ headerShown: false }} name="routesU" component={RoutesUserScreenFunc} />
 
             <logStack.Screen name="newOpRo" options={{ headerShown: false }}
                 component={NewOpenRouteScreen}/>

@@ -46,8 +46,22 @@ function HomeAdminScreen({ navigation }) {
             </TouchableWithoutFeedback>
 
             <View style={styles.routesStyle}>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('RouAd')}>
+                 <TouchableWithoutFeedback
+                    onPress={() => navigation.navigate('InfoCat')}>
+
                     <View style={styles.routesStyleLeft}>
+                        <Image
+                            source={require('../assets/img/flower.jpg')}
+                            style={{ width: "100%", height: "100%" }}
+                        />
+                        <View style={styles.textStyle}>
+                            <Text>מידע</Text>
+                        </View>
+                    </View>
+                </TouchableWithoutFeedback>
+
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('RouAd')}>
+                    <View style={styles.routesStyleRight}>
                         <Image
                             source={require('../assets/img/travel.jpg')}
                             style={{ width: "100%", height: "100%" }}
@@ -58,19 +72,7 @@ function HomeAdminScreen({ navigation }) {
                     </View>
                 </TouchableWithoutFeedback>
 
-                <TouchableWithoutFeedback
-                    onPress={() => navigation.navigate('InfoCat')}>
-
-                    <View style={styles.routesStyleRight}>
-                        <Image
-                            source={require('../assets/img/flower.jpg')}
-                            style={{ width: "100%", height: "100%" }}
-                        />
-                        <View style={styles.textStyle}>
-                            <Text>מידע</Text>
-                        </View>
-                    </View>
-                </TouchableWithoutFeedback>
+                
             </View>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('EventsAdmin')}>
                 <View style={styles.infoStyle}>

@@ -22,7 +22,7 @@ export function PathCatagoriesScreen({ navigation }) {
     return (
         <View style={{ width: "100%", height: "100%" }}>
             <ImageBackground source={require('../assets/img/homePageAdmin_background.jpg')}
-                style={{ flex: 1, resizeMode: 'cover' }}>
+                style={{ flex:1, resizeMode: 'cover' }}>
 
 
                 <View style={styles.rowStyle1}>

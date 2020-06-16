@@ -32,25 +32,26 @@ function HomePageUserScreen({ navigation }) {
             </TouchableWithoutFeedback>
 
             <View style={styles.routesStyle}>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('RouUs')}>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('InfCaUs')}>
                     <View style={styles.routesStyleLeft}>
-                        <Image
-                            source={require('../assets/img/travel.jpg')}
-                            style={{ width: "100%", height: "100%" }}
-                        />
-                        <View style={styles.textStyle}>
-                            <Text>מסלולים</Text>
-                        </View>
-                    </View>
-                </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('InfCaUs')}>
-                    <View style={styles.routesStyleRight}>
                         <Image
                             source={require('../assets/img/flower.jpg')}
                             style={{ width: "100%", height: "100%" }}
                         />
                         <View style={styles.textStyle}>
                             <Text>מידע</Text>
+                        </View>
+                    </View>
+                </TouchableWithoutFeedback>
+
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('RouUs')}>
+                    <View style={styles.routesStyleRight}>
+                        <Image
+                            source={require('../assets/img/travel.jpg')}
+                            style={{ width: "100%", height: "100%" }}
+                        />
+                        <View style={styles.textStyle}>
+                            <Text>מסלולים</Text>
                         </View>
                     </View>
                 </TouchableWithoutFeedback>

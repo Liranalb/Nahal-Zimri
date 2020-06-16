@@ -7,8 +7,8 @@ import LoginForm from "./components/LoginForm"
 
 
 //Do not delete
-// import * as React from 'react';   not working for me ( can't find variable Component)
-import React, { Component } from "react" 
+// import * as React from 'react';   not working for me 
+import React, { Component } from "react"
 import MainLogin from "./components/MainLogin";
 import HomePageUser from "./components/HomePageUser"
 import firebase from "./config/Firebase"
@@ -39,7 +39,6 @@ import AdminRoutes from "./components/AdminRoutes";
 import AdminUnitRoutes from "./components/AdminUnitRoutes";
 
 import RegForm from "./components/RegForm";
-import PathCatagoriesAdmin from "./components/PathCatagoriesAdmin";
 
 
 class loginHelper extends Component {
@@ -72,4 +71,4 @@ class loginHelper extends Component {
     }
 }
 
-AppRegistry.registerComponent(appName, () => HomePageUser);
+AppRegistry.registerComponent(appName, () => HomePageAdmin);

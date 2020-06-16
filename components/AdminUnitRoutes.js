@@ -12,43 +12,45 @@ class AdminUnitRoutes extends React.Component {
     render() {
         return (
             <View style={styles.routeStyle}>
+                
+                <View >
+                    <View style={styles.textStyle}>
+                        <Text style={styles.textTitleStyle}>שם המסלול:</Text>
+                        <View style={styles.ButtonStyle}>
+                            <Text >{this.props.name} </Text>
+                        </View>
+                    </View>
+                    <View style={styles.textStyle}>
+                        <Text style={styles.textTitleStyle}>רמת הקושי:</Text>
+                        <Text >{this.props.level} </Text>
+                    </View>
+                    <View style={styles.textStyle}>
+                        <Text style={styles.textTitleStyle}> ק"מ: </Text>
+                        <Text >{this.props.km}</Text>
+                    </View>
+                    <View style={styles.textStyle}>
+                        <Text style={styles.textTitleStyle}>משך זמן ההליכה:</Text>
+                        <Text >{this.props.duration} </Text>
+                    </View>
+                    <View style={styles.textStyle}>
+                        <Text style={styles.textTitleStyle}>סוג המסלול:</Text>
+                        <Text >{this.props.type} </Text>
+                    </View>
+                    <View style={styles.textStyle}>
+                        <Text style={styles.textTitleStyle}> פרטים:</Text>
+                        <Text  >{this.props.details} </Text>
+                    </View>
+                </View>
                 <View style={styles.imageStyle}>
                     <Image
                         source={this.props.imageUri}
                         style={{ width: "100%", height: "100%" }}
                     />
-                </View >
-                <View >
-                <View style={styles.textStyle}>
-                    <Text style={styles.textTitleStyle}>שם המסלול:</Text>
-                    <View style={styles.ButtonStyle}>
-                    <Text >{this.props.nameOfRoutes} </Text>
+                    <View style={styles.textStyle}>
+                        <AdminButton />
                     </View>
-                </View>
-                <View style={styles.textStyle}>
-                    <Text style={styles.textTitleStyle}>רמת הקושי:</Text>
-                    <Text >{this.props.diff} </Text>
-                </View>
-                <View style={styles.textStyle}>
-                    <Text style={styles.textTitleStyle}> ק"מ: </Text>
-                    <Text >{this.props.km}</Text>
-                </View>
-                <View style={styles.textStyle}>
-                    <Text style={styles.textTitleStyle}>משך זמן ההליכה:</Text>
-                    <Text >{this.props.time} </Text>
-                </View>
-                <View style={styles.textStyle}>
-                    <Text style={styles.textTitleStyle}>סוג המסלול:</Text>
-                    <Text >{this.props.kind} </Text>
-                </View>
-                <View style={styles.textStyle}>
-                    <Text style={styles.textTitleStyle}> פרטים:</Text>
-                        <Text  >{this.props.detail} </Text>
-                </View>
-                </View>
-                <View style={styles.textStyle}>
-                    <AdminButton />
-                </View>
+                </View >
+                
 
             </View>
 
@@ -66,10 +68,13 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         borderWidth: 2,
         fontSize: 20,
-        marginTop: 10
+        marginTop: 10,
+        flexDirection: 'row-reverse',
+        width:'97%',
+        alignSelf: 'center'
     },
     imageStyle: {
-        marginTop: 10,
+        marginTop: 1,
         marginLeft: 10,
         borderColor: "#FFAF50",
         position: 'absolute',
@@ -78,14 +83,14 @@ const styles = StyleSheet.create({
         width: "30%"
     },
     textStyle: {
-        flexDirection: 'row-reverse',
-     
+        flexDirection: 'row',
+
 
     },
     ButtonStyle: {
-        width:"69%",
-       // marginLeft:100,
-       
+        width: "69%",
+        // marginLeft:100,
+
 
 
     },
@@ -93,7 +98,7 @@ const styles = StyleSheet.create({
         height: 50,
         width: "69%",
         marginLeft: 111,
-         height: "75%",
+        height: "75%",
 
     },
     dateStyle: {
@@ -104,7 +109,7 @@ const styles = StyleSheet.create({
 
     },
     textTitleStyle: {
-       // alignSelf: "center",
+        // alignSelf: "center",
         fontWeight: "bold",
         fontSize: 18,
         marginLeft: 2
