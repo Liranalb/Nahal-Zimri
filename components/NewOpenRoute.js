@@ -6,7 +6,7 @@ import { Footer, Container, Right } from "native-base"
 import HeaderComp from "./HeaderComp";
 import ReportBox from "./explore/ReportBox";
 
-class RoutesUser extends Component {
+class NewOpenRoute extends Component {
 
     render() {
         return (
@@ -16,7 +16,7 @@ class RoutesUser extends Component {
                 </View>
                 <View style={styles.imageStyle}>
                     <Image
-                        source={require('../assets/img/route.png')}
+                        source={this.props.img}
                         style={{ width: "100%", height: "100%" }}
                     />
                 </View>
@@ -24,35 +24,35 @@ class RoutesUser extends Component {
                     <ScrollView>
                         <View style={styles.textStyle}>
                             <Text style={styles.textTitleStyle}>שם המסלול</Text>
-                            <Text style={styles.textDetailStyle}>גל-קראוס שביל ימין</Text>
+                            <Text style={styles.textDetailStyle}>{this.props.item.name}</Text>
                         </View>
                         <View style={styles.textStyle}>
                             <Text style={styles.textTitleStyle}>רמת קושי</Text>
-                            <Text style={styles.textDetailStyle}>קל</Text>
+                            <Text style={styles.textDetailStyle}>{this.props.item.level}</Text>
                         </View>
                         <View style={styles.textStyle}>
                             <Text style={styles.textTitleStyle}>ק"מ</Text>
-                            <Text style={styles.textDetailStyle}>2.5</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textTitleStyle}>פרטים</Text>
-                            <Text style={styles.textDetailStyle}>מתאים לילדים ולמשפחות</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textTitleStyle}>נ.צ</Text>
-                            <Text style={styles.textDetailStyle}>123.123.123</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textTitleStyle}>המלצות</Text>
-                            <Text style={styles.textDetailStyle}>"מסלול מרתק ולא קשה מידיי!" "נהנינו מכל רגע!"</Text>
+                            <Text style={styles.textDetailStyle}>{this.props.item.km}</Text>
                         </View>
                         <View style={styles.textStyle}>
                             <Text style={styles.textTitleStyle}>בעלי החיים במסלול</Text>
-                            <Text style={styles.textDetailStyle}>צבאים, שפני סלע.</Text>
+                            <Text style={styles.textDetailStyle}>{this.props.item.animals}</Text>
                         </View>
                         <View style={styles.textStyle}>
                             <Text style={styles.textTitleStyle}>סימון</Text>
-                            <Text style={styles.textDetailStyle}>כחול לבן</Text>
+                            <Text style={styles.textDetailStyle}>{this.props.item.mark}</Text>
+                        </View>
+                        <View style={styles.textStyle}>
+                            <Text style={styles.textTitleStyle}>שם המסלול:</Text>
+                            <Text style={styles.textDetailStyle}>{this.props.item.name}</Text>
+                        </View>
+                        <View style={styles.textStyle}>
+                            <Text style={styles.textTitleStyle}>סוג המסלול</Text>
+                            <Text style={styles.textDetailStyle}>{this.props.item.type}</Text>
+                        </View>
+                        <View style={styles.textStyle}>
+                            <Text style={styles.textTitleStyle}>פרטים</Text>
+                            <Text style={styles.textDetailStyle}>{this.props.item.details}</Text>
                         </View>
                     </ScrollView>
                 </View>
@@ -61,7 +61,16 @@ class RoutesUser extends Component {
     }
 }
 
-export default RoutesUser;
+/*
+<UnitRoutes imageUri={{ uri: item.imageLink }}
+                                            name={item.name}
+                                            level={item.level}
+                                            km={item.km}
+                                            duration={item.duration}
+                                            type={item.type}
+                                            details={item.details}
+*/
+export default NewOpenRoute;
 
 const styles = {
     imageStyle: {
