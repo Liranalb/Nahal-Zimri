@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState , useEffect} from "react"
 import { TextInput, Alert, ScrollView, Text, TouchableWithoutFeedback } from "react-native"
 import { View } from "native-base"
 import { Header, ListItem, CheckBox, Button } from "react-native-elements"
@@ -12,13 +12,37 @@ import EditInfoBox from './explore/EditInfoBox'
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import InfoComp from "./InfoComp"
-import { db } from '../config/Firebase'
-
+import { db,storage } from '../config/Firebase'
+import uploadImage from '../assets/functions/uploadSingleImage'
+import sayCheese from '../assets/functions/takePhoto'
 //import ImagePicker from 'react-native-image-picker';
 
 
+function pressPhoto (keyID,photoUploaded) {
+    // setting the paths
+    let imageID = "img"+keyID+".jpg";       
+    let dataPath = 'Information/info'+keyID;
+    let storagePath = "Images/Information/"+imageID;
 
+    console.log("imageID is : " + imageID + "\n dataPath is:  "+ dataPath + "/n storagePath"+ storagePath);
+
+    if (sayCheese(storagePath,dataPath)===0)
+        photoUploaded=true;
+
+}
+
+function sendData ( photoUploaded,body,title) {
+    alert(body);
+    if(photoUploaded===false)
+        alert("Upload image first");
+}
 function InformationAdminScreen(props, { navigation }) {
+    const [body, onChangeBody] = useState('');
+    const [title, onChangeTitle] = useState('');
+
+    let keyID;
+    let photoUploaded=false; 
+    let dataUploaded=false; 
 
     let infoArray = [];
     let currentType = props.dataType;
@@ -34,10 +58,24 @@ function InformationAdminScreen(props, { navigation }) {
             }
         }
     });
+    
+    let newPostKey = () => {
+        return db.ref().child('Inforamtion').push().key;
+    }
+    
+    // on mount
+    useEffect(() =>  {
+        keyID = newPostKey();
+        console.log("keyID" + keyID);
 
-
-
-
+    },[]);
+    // on unmount
+    useEffect( () => {
+        return () => {
+            
+        }
+    },[]);
+    
     let convertDataToArray = (data, infoArray) => {
         console.log("in convert");
         if (data === null)
@@ -45,21 +83,20 @@ function InformationAdminScreen(props, { navigation }) {
 
         for (var info in data) {
             if (data.hasOwnProperty(info)) {
-                console.log("checking type: "+ data[info].Type);
                 if (data[info].Type === currentType) {
                     infoArray.push(data[info]);
-                    console.log("Added to array: "+info);
+ 
                 }
-                else
-                    console.log("not fit");
+
                    
             }
         }
     }
 
     
+
     convertDataToArray(data, infoArray);
-    console.log(infoArray.length);
+
 
 
     return (
@@ -103,21 +140,21 @@ function InformationAdminScreen(props, { navigation }) {
                         <View style={{ flex: 1 }}>
                             <View style={{ marginLeft: 12, marginTop: 20 }}>
                                 <TouchableWithoutFeedback
-                                    onPress={() => this.onCamera()}
+                                    onPress={() => pressPhoto(keyID,photoUploaded)}
                                 >
                                     <View style={{ marginLeft: 12 }}>
                                         <Icon name="camera" size={30} color="white" />
                                     </View>
                                 </TouchableWithoutFeedback>
                                 <TouchableWithoutFeedback
-                                    onPress={() => this.onImages()}
+                                    onPress={() => pressPhoto(keyID)}
                                 >
                                     <View style={{ marginTop: 20, marginLeft: 12 }}>
                                         <Icon name="images" size={30} color="white" />
                                     </View>
                                 </TouchableWithoutFeedback>
                                 <TouchableWithoutFeedback
-                                    onPress={() => this.onImages()}
+                                    onPress={() => sendData(photoUploaded,body,title)}
                                 >
                                     <View style={styles.buttonStyle}>
                                         <Text
@@ -131,6 +168,8 @@ function InformationAdminScreen(props, { navigation }) {
                             <TextInput
                                 style={styles.headlineInputStyle}
                                 placeholder="הכנס כותרת"
+                                value= {title}
+                                onChangeText= {text => onChangeTitle(text)}
                             />
 
                             <TextInput
@@ -138,7 +177,8 @@ function InformationAdminScreen(props, { navigation }) {
                                 placeholder="הכנס תוכן"
                                 multiline={true}
                                 numberOfLines={4}
-                            //  onChangeText = {(text)}
+                                onChangeText= {text => onChangeBody(text)}
+                                value= {body}
                             />
 
                         </View>

@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { Header, CheckBox, ListItem } from "react-native-elements"
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import { Image, View, TextInput, Text, StyleSheet, ScrollView, TouchableWithoutFeedback, Button, Alert, unstable_enableLogBox } from "react-native"
 import { Footer, Container, Right } from "native-base"
@@ -13,15 +12,7 @@ import NewOpenRoute from "./NewOpenRoute";
 import { Icon } from 'react-native-elements'
 
 function AdminRoutesScreen({ navigation }) {
-    /*constructor() {
-        super();
-        this.state = {
-            text: "",
-            username: "",
-            catagory: "",
-            loading: false
-        }
-    }*/
+  
 
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
@@ -124,6 +115,7 @@ const logStack = createStackNavigator();
 
 function AdminRoutes() { //for navigation. not in use yet
     return (
+        
         <logStack.Navigator initialRouteName="routesA">
             <logStack.Screen options={{ headerShown: false }} name="routesA" component={AdminRoutesScreen} />
 
@@ -131,6 +123,7 @@ function AdminRoutes() { //for navigation. not in use yet
                 component={NewOpenRouteScreen} />
 
         </logStack.Navigator>
+        
     );
 }
 

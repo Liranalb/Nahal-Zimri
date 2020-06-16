@@ -10,6 +10,7 @@ import RoutesUser from "./RoutesUser";
 import InfoCatagoriesUser from "./InfoCatagoriesUser";
 import Reports from "./Reports";
 import HeaderComp from "./HeaderComp";
+import PathCatagories from "./PathCatagories";
 
 function HomePageUserScreen({ navigation }) {
     return (
@@ -95,7 +96,7 @@ function InfoUserScreen() {
 
   function RoutesUserScreen() {
     return (
-      <RoutesUser/>
+      <PathCatagories/>
     );
   }
 

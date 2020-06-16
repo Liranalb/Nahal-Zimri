@@ -39,7 +39,11 @@ uriToBlob = (uri) => {
       });
     });
   }
+/*
+Gets two locations , storage and DB and , recive a photo from the
+client and put it in the right paths
 
+*/
   sayCheese = (location, DB_Path) => { console.log("start");
   
     ImagePicker.openCamera({
@@ -70,11 +74,11 @@ uriToBlob = (uri) => {
    
     }).catch((error)=>{
       console.log("\n\nCanceled\n\n");
-      return;
+      return -1;
 
 
     }); 
-
+      return 0;
   }
 
   export default sayCheese;

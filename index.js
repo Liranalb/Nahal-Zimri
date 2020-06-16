@@ -39,6 +39,7 @@ import AdminRoutes from "./components/AdminRoutes";
 import AdminUnitRoutes from "./components/AdminUnitRoutes";
 
 import RegForm from "./components/RegForm";
+import PathCatagoriesAdmin from "./components/PathCatagoriesAdmin";
 
 
 class loginHelper extends Component {
@@ -71,4 +72,4 @@ class loginHelper extends Component {
     }
 }
 
-AppRegistry.registerComponent(appName, () => HomePageAdmin);
+AppRegistry.registerComponent(appName, () => HomePageUser);
