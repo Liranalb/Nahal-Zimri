@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import AdminButton from "./AdminButton";
 
-class UnitRoutes extends React.Component {
+class UnitRoutes extends Component {
     render() {
         return (
             <View style={styles.routeStyle}>
@@ -19,22 +19,20 @@ class UnitRoutes extends React.Component {
                     />
                 </View>
                 <View style={styles.textStyle}>
-                    <Text style={styles.textTitleStyle}>שם המסלול:{this.props.nameOfRoutes}</Text>
+                    <Text style={styles.textTitleStyle}>שם המסלול:</Text>
+                    <Text style={styles.textDetailStyle}>{this.props.name}</Text>
                 </View>
                 <View style={styles.textStyle}>
-                    <Text style={styles.textTitleStyle}>רמת הקושי:{this.props.diff} </Text>
+                    <Text style={styles.textTitleStyle}>רמת הקושי:</Text>
+                    <Text style={styles.textDetailStyle}>{this.props.level}</Text>
                 </View>
                 <View style={styles.textStyle}>
-                    <Text style={styles.textTitleStyle}> ק"מ:{this.props.km} </Text>
+                    <Text style={styles.textTitleStyle}>ק"מ:</Text>
+                    <Text style={styles.textDetailStyle}>{this.props.km}</Text>
                 </View>
                 <View style={styles.textStyle}>
-                    <Text style={styles.textTitleStyle}>משך זמן ההליכה:{this.props.time} </Text>
-                </View>
-                <View style={styles.textStyle}>
-                    <Text style={styles.textTitleStyle}>סוג המסלול:{this.props.kind} </Text>
-                </View>
-                <View style={styles.textStyle}>
-                    <Text style={styles.textTitleStyle}> פרטים: {this.props.detail}  </Text>
+                    <Text style={styles.textTitleStyle}>משך זמן ההליכה:</Text>
+                    <Text style={styles.textDetailStyle}>{this.props.duration}</Text>
                 </View>
             </View>
         );
