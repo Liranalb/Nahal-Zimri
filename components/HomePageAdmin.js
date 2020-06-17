@@ -9,13 +9,14 @@ import Icon from 'react-native-vector-icons/Entypo';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ReportsAdmin from './ReportsAdmin'
+import InformationAdminPage from './InformationAdminPage'
+import PathCatagories from './PathCatagories'
 import EventAdmin from './EventAdmin'
 import AdminRoutes from './AdminRoutes'
 import InfoAdmin from './InfoAdmin'
 
 //  import {Test} from './InfoCatagories';
-import InfoCatagoriesAdmin from './InfoCatagoriesAdmin'
-import PathCatagoriesAdmin from './PathCatagoriesAdmin';
+import InfoCatagories from './InfoCatagories'
 // import {Test} from './InfoCatagories';
 
 
@@ -39,39 +40,37 @@ function HomeAdminScreen({ navigation }) {
                         style={{ width: "100%", height: "100%" }}
                     />
                     <View style={styles.textStyle}>
-                        <Text>כתבות</Text>
+                        <Text style={{fontWeight: "bold",fontSize: 20}}>כתבות</Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
 
             <View style={styles.routesStyle}>
-                 <TouchableWithoutFeedback
-                    onPress={() => navigation.navigate('InfoCat')}>
-
-                    <View style={styles.routesStyleLeft}>
-                        <Image
-                            source={require('../assets/img/flower.jpg')}
-                            style={{ width: "100%", height: "100%" }}
-                        />
-                        <View style={styles.textStyle}>
-                            <Text>מידע</Text>
-                        </View>
-                    </View>
-                </TouchableWithoutFeedback>
-
                 <TouchableWithoutFeedback onPress={() => navigation.navigate('RouAd')}>
-                    <View style={styles.routesStyleRight}>
+                    <View style={styles.routesStyleLeft}>
                         <Image
                             source={require('../assets/img/travel.jpg')}
                             style={{ width: "100%", height: "100%" }}
                         />
                         <View style={styles.textStyle}>
-                            <Text>מסלולים</Text>
+                            <Text style={{fontWeight: "bold",fontSize: 20}}>מסלולים</Text>
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
 
-                
+                <TouchableWithoutFeedback
+                    onPress={() => navigation.navigate('InfoCat')}>
+
+                    <View style={styles.routesStyleRight}>
+                        <Image
+                            source={require('../assets/img/flower.jpg')}
+                            style={{ width: "100%", height: "100%" }}
+                        />
+                        <View style={styles.textStyle}>
+                            <Text style={{fontWeight: "bold",fontSize: 20}}>מידע</Text>
+                        </View>
+                    </View>
+                </TouchableWithoutFeedback>
             </View>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('EventsAdmin')}>
                 <View style={styles.infoStyle}>
@@ -80,7 +79,7 @@ function HomeAdminScreen({ navigation }) {
                         style={{ width: "100%", height: "100%" }}
                     />
                     <View style={styles.textStyle}>
-                        <Text>אירועים</Text>
+                        <Text style={{fontWeight: "bold",fontSize: 20}}>אירועים</Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -91,7 +90,7 @@ function HomeAdminScreen({ navigation }) {
                         style={{ width: "100%", height: "100%" }}
                     />
                     <View style={styles.textStyle}>
-                        <Text>תצפיות</Text>
+                        <Text style={{fontWeight: "bold",fontSize: 20}}>תצפיות</Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -114,13 +113,13 @@ function InfoAdminScreen() {
 
 function AdminRoutesScreen() {
     return (
-        <PathCatagoriesAdmin />
+        <AdminRoutes />
     );
 }
 
 function InfoCatagoriesScreen() {
     return (
-        <InfoCatagoriesAdmin />
+        <InfoCatagories />
     );
 }
 
@@ -159,7 +158,7 @@ const styles = {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: '#F0B27A',
+        backgroundColor: '#FF8C37',
         justifyContent: 'center',
         alignItems: 'center',
         color: 'black'
@@ -169,7 +168,7 @@ const styles = {
     },
     infoStyle: {
         backgroundColor: "#F0B27A",
-        borderColor: "#F0B27A",
+        borderColor: "#FF8C37",
         overflow: 'hidden',
         borderRadius: 25,
         borderWidth: 2,
@@ -188,8 +187,8 @@ const styles = {
         marginTop: 10
     },
     routesStyleLeft: {
-        backgroundColor: "#ff8c00",
-        borderColor: "#F0B27A",
+        backgroundColor: "#FF8C37",
+        borderColor: "#FF8C37",
         overflow: 'hidden',
         borderRadius: 25,
         borderWidth: 2,
@@ -200,8 +199,8 @@ const styles = {
         marginRight: 10
     },
     routesStyleRight: {
-        backgroundColor: "#ff8c00",
-        borderColor: "#F0B27A",
+        backgroundColor: "#FF8C37",
+        borderColor: "#FF8C37",
         overflow: 'hidden',
         borderRadius: 25,
         borderWidth: 2,
@@ -211,8 +210,8 @@ const styles = {
         alignSelf: "center",
     },
     observationsStyle: {
-        backgroundColor: "#F0B27A",
-        borderColor: "#F0B27A",
+        backgroundColor: "#FF8C37",
+        borderColor: "#FF8C37",
         overflow: 'hidden',
         borderRadius: 25,
         borderWidth: 2,
