@@ -1,12 +1,17 @@
-import React, { Component } from "react"
+import React, { Component, useState } from "react"
 import { Header, CheckBox, ListItem } from "react-native-elements"
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import { Image, View, TextInput, Text, StyleSheet, ScrollView, TouchableWithoutFeedback, Button, Alert, unstable_enableLogBox } from "react-native"
-import { Footer, Container, Right } from "native-base"
+import { Footer, Container, Right } from "native-base";
 import HeaderComp from "./HeaderComp";
-import ReportBox from "./explore/ReportBox"
+import ReportBox from "./explore/ReportBox";
 import NewOpenArt from "./NewOpenArt";
+import UnitInfoUser from "./UnitInfoUser";
+import { db } from '../config/Firebase';
+
+var currItem;
+var currImg;
 
 function InfoUserScreen({ navigation }) {
     /*constructor() {
@@ -18,6 +23,36 @@ function InfoUserScreen({ navigation }) {
             loading: false
         }
     }*/
+    
+    let articlesArray = [];
+    const [loaded, setLoaded] = useState(false);
+
+    //load data
+    let data = null;
+    db.ref('Articles').on('value', function (snapshot) {
+        const exist = (snapshot.val() !== null);
+        if (exist) {
+            data = snapshot.val();
+            console.log("data loaded: " + loaded);
+            if (loaded === false)
+                setLoaded(true);
+
+        }
+    });
+
+
+    let convertDataToArray = (data, articlesArray) => {
+        if (data === null)
+            return null;
+        for (var article in data) {
+            if (data.hasOwnProperty(article)) {
+                articlesArray.push(data[article]);
+            }
+        }
+
+    }
+
+    convertDataToArray(data, articlesArray);
 
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
@@ -38,117 +73,29 @@ function InfoUserScreen({ navigation }) {
                         //checked={this.state.checked} //Use Hooking!
                         />
                     </View>
-                    <View style={styles.CheckBoxStyle}>
-                        <CheckBox
-                            center
-                            title='חידות'
-                        //checked={this.state.checked} //Use Hooking!
-                        />
-                    </View>
                 </View>
 
             </View>
             <ScrollView>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('newOpAr')}>
-                    <View style={styles.routeStyle}>
-                        <View style={styles.imageStyle}>
-                            <Image
-                                source={require('../assets/img/im5.jpeg')}
-                                style={{ width: "100%", height: "100%" }}
-                            />
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textTitleStyle}>כתבות</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textTitleStyle}>החיים בלילה בנחל</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textDetailStyle}>תיאור מעניין על בעלי החיים</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textDetailStyle}>והתנהגותם באתר בשעות הלילה.</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textDetailStyle}>תאריך העלאה | 2.2.20</Text>
-                        </View>
-                    </View>
-                </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('newOpAr')}>
-                    <View style={styles.routeStyle}>
-                        <View style={styles.imageStyle}>
-                            <Image
-                                source={require('../assets/img/im1.jpeg')}
-                                style={{ width: "100%", height: "100%" }}
-                            />
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textTitleStyle}>עדכונים</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textTitleStyle}>פעילות בתי הספר</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textDetailStyle}>בתי הספר של פסגת זאב השתתפו השבוע</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textDetailStyle}>בפעילות ניקיון הנחל. יישר כוח!</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textDetailStyle}>תאריך העלאה | 3.1.20</Text>
-                        </View>
-                    </View>
-                </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('newOpAr')}>
-                    <View style={styles.routeStyle}>
-                        <View style={styles.imageStyle}>
-                            <Image
-                                source={require('../assets/img/im4.jpeg')}
-                                style={{ width: "100%", height: "100%" }}
-                            />
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textTitleStyle}>חידות</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textTitleStyle}>חידת הציפור</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textDetailStyle}>ילדים יקרים, לפניכם חידה מעניינת.</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textDetailStyle}>מצאו מה חסר לציפור בתמונה.</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textDetailStyle}>תאריך העלאה | 31.12.20</Text>
-                        </View>
-                    </View>
-                </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('newOpAr')}>
-                    <View style={styles.routeStyle}>
-                        <View style={styles.imageStyle}>
-                            <Image
-                                source={require('../assets/img/im2.jpeg')}
-                                style={{ width: "100%", height: "100%" }}
-                            />
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textTitleStyle}>כתבות</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textTitleStyle}>חנוכת הנחל</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textDetailStyle}>הטקס הרשמי התקיים ב12.12.19</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textDetailStyle}>בהשתתפות ראש העיר וסגניו.</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textDetailStyle}>תאריך העלאה | 13.12.20</Text>
-                        </View>
-                    </View>
-                </TouchableWithoutFeedback>
+                {
+                    console.log("second"),
+                    articlesArray.map((item) => {
+                        return (
+                            <View>
+                                <TouchableWithoutFeedback onPress={() => {navigation.navigate('newOpAr'); currItem = item;  currImg={ uri: item.imageLink }}}>
+                                    <View>
+                                        <UnitInfoUser imageUri={{ uri: item.imageLink }}
+                                            catagory={item.Catagory}
+                                            title={item.Title}
+                                            subTitle={item.SubTitle}
+                                            date={item.Date}
+                                        />
+                                    </View>
+                                </TouchableWithoutFeedback>
+                            </View>
+                        )
+                    })
+                }
             </ScrollView>
         </View>
     )
@@ -157,7 +104,7 @@ function InfoUserScreen({ navigation }) {
 
 function NewOpenArtScreen() {
     return (
-        <NewOpenArt />
+        <NewOpenArt item={currItem} img={currImg}/>
     );
 }
 
