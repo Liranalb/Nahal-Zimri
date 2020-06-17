@@ -11,9 +11,13 @@ import NewOpenRoute from "./NewOpenRoute";
 import { Icon } from 'react-native-elements'
 import { db } from '../config/Firebase'
 
-function AdminRoutesScreen(props, { navigation }) {
+var currItem;
+var currImg;
+var dataType;
+
+function AdminRoutesScreen({ navigation }) {
   
-    let currentType = props.dataType;
+    let currentType = dataType;
     let routesArray = [];
     const [loaded, setLoaded] = useState(false);
 
@@ -166,22 +170,19 @@ function AdminRoutesScreen(props, { navigation }) {
 
 function NewOpenRouteScreen() {
     return (
-        <NewOpenRoute />
+        <NewOpenRoute item={currItem} img={currImg}/>
     );
 }
 
 const logStack = createStackNavigator();
 
 function AdminRoutes(props) { //for navigation. not in use yet
-
-    function AdminRoutesScreenFunc () { 
-        return <AdminRoutesScreen dataType={props.dataType}/>
-    }
+    dataType= props.dataType;
 
     return (
         
         <logStack.Navigator initialRouteName="routesA">
-            <logStack.Screen options={{ headerShown: false }} name="routesA" component={AdminRoutesScreenFunc} />
+            <logStack.Screen options={{ headerShown: false }} name="routesA" component={AdminRoutesScreen} />
 
             <logStack.Screen name="newOpRo" options={{ headerShown: false }}
                 component={NewOpenRouteScreen} />

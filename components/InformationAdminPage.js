@@ -15,6 +15,7 @@ import InfoComp from "./InfoComp"
 import { db,storage } from '../config/Firebase'
 import uploadImage from '../assets/functions/uploadSingleImage'
 import sayCheese from '../assets/functions/takePhoto'
+
 //import ImagePicker from 'react-native-image-picker';
 
 
@@ -28,7 +29,7 @@ function getDate () {
     let dateStr = date + "." + month + "." + year;
     return dateStr;
 }
-async function pressPhoto () {
+async function pressPhoto (source) {
 
     // setting the paths
     let imageID = "img"+keyID+".jpg";       
@@ -37,9 +38,11 @@ async function pressPhoto () {
 
     
     console.log("imageID is : " + imageID +  "\n storagePath"+ storagePath);
-
- 
-    const result = await sayCheese(storagePath);
+    let result;
+    if(source==="camera")
+        result = await sayCheese(storagePath);
+    else
+        result = await uploadImage(storagePath);
     console.log(" test \n"+result);
     if (result===-1) {
         
@@ -65,7 +68,7 @@ async function pressPhoto () {
         
     else {
 
-    
+    let infoId = 'info'+keyID;
     let dataPath = 'Information/info'+keyID;
     let imageID = "img"+keyID+".jpg";  
     let storagePath = "Images/Information/"+imageID;
@@ -77,7 +80,8 @@ async function pressPhoto () {
                 Body: body,
                 Title: title,
                 Type: currentType,
-                ImageLink: url
+                ImageLink: url,
+                id: infoId
             }
             db.ref(dataPath).set(newInfo);
       })
@@ -89,24 +93,28 @@ async function pressPhoto () {
 }
 
  function InformationAdminScreen(props, { navigation }) {
+
     const [body, onChangeBody] = useState('');
     const [title, onChangeTitle] = useState('');
-    const [dataAdded, onDataAdded] = useState(false);
-    //const keyID="aaa";
+    const [photoAdded, onPhotoAdded] = useState(false);
+    const [loaded, setLoaded] = useState(false);
+    let infoArray = [];
+    let currentType = props.dataType;
+
     
     function refreshPage () {
         onChangeBody("");
         onChangeTitle("");
-        setLoaded(false);
+        setLoaded({loaded: false});
         keyID = newPostKey();
+        photoUploaded= false;
     } 
 
 
     let dataUploaded=false; 
 
-    let infoArray = [];
-    let currentType = props.dataType;
-    const [loaded, setLoaded] = useState(false);
+    
+    
     let data = null;
     db.ref('Information').on('value', function (snapshot) {
         const exist = (snapshot.val() !== null);
@@ -176,14 +184,33 @@ async function pressPhoto () {
 
                             {infoArray.map((item) => {
                                 return (
-                                    <View key={item}>
+                                    <View key={item.id}>
                                         <TouchableWithoutFeedback
+                                            key={item.id}
                                             onPress={() => navigation.navigate('infoAdminComp')}
                                         >
-                                            <View>
+                                            <View key>
                                                 <EditInfoBox imageUri={{ uri: item.ImageLink }}
                                                     headline={item.Title}
                                                     body={item.Body}
+                                                    onDelete= { () => {
+                                                        Alert.alert(
+                                                            //title
+                                                            'Hello',
+                                                            //body
+                                                            'האם למחוק את פריט המידע הזה?',
+                                                            [
+                                                              {text: 'כן', onPress: () => {
+                                                                  db.ref('Information/').child(item.id).remove();
+                                                                  setLoaded({loaded: false});
+                                                              }},
+                                                              {text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel'},
+                                                            ],
+                                                            { cancelable: false }
+                                                            //clicking out side of alert will not cancel
+                                                          );
+                                                        }
+                                                    }
                                                 />
                                             </View>
                                         </TouchableWithoutFeedback>
@@ -201,14 +228,14 @@ async function pressPhoto () {
                         <View style={{ flex: 1 }}>
                             <View style={{ marginLeft: 12, marginTop: 20 }}>
                                 <TouchableWithoutFeedback
-                                    onPress={() => {console.log("before func: "+keyID); pressPhoto();}}
+                                    onPress={() => {console.log("before func: "+keyID); pressPhoto("camera");}}
                                 >
                                     <View style={{ marginLeft: 12 }}>
                                         <Icon name="camera" size={30} color="white" />
                                     </View>
                                 </TouchableWithoutFeedback>
                                 <TouchableWithoutFeedback
-                                    onPress={() => pressPhoto(keyID)}
+                                    onPress={() => pressPhoto("upload")}
                                 >
                                     <View style={{ marginTop: 20, marginLeft: 12 }}>
                                         <Icon name="images" size={30} color="white" />

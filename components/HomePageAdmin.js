@@ -9,15 +9,13 @@ import Icon from 'react-native-vector-icons/Entypo';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ReportsAdmin from './ReportsAdmin'
-import InformationAdminPage from './InformationAdminPage'
-import PathCatagories from './PathCatagories'
 import EventAdmin from './EventAdmin'
 import AdminRoutes from './AdminRoutes'
 import InfoAdmin from './InfoAdmin'
 
-//  import {Test} from './InfoCatagories';
-import InfoCatagories from './InfoCatagories'
-// import {Test} from './InfoCatagories';
+import InfoCatagoriesAdmin from './InfoCatagoriesAdmin'
+import PathCatagoriesAdmin from './PathCatagoriesAdmin';
+
 
 
 
@@ -46,8 +44,22 @@ function HomeAdminScreen({ navigation }) {
             </TouchableWithoutFeedback>
 
             <View style={styles.routesStyle}>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('RouAd')}>
+                 <TouchableWithoutFeedback
+                    onPress={() => navigation.navigate('InfoCat')}>
+
                     <View style={styles.routesStyleLeft}>
+                        <Image
+                            source={require('../assets/img/flower.jpg')}
+                            style={{ width: "100%", height: "100%" }}
+                        />
+                        <View style={styles.textStyle}>
+                            <Text style={{fontWeight: "bold",fontSize: 20}}>מידע</Text>
+                        </View>
+                    </View>
+                </TouchableWithoutFeedback>
+
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('RouAd')}>
+                    <View style={styles.routesStyleRight}>
                         <Image
                             source={require('../assets/img/travel.jpg')}
                             style={{ width: "100%", height: "100%" }}
@@ -58,19 +70,7 @@ function HomeAdminScreen({ navigation }) {
                     </View>
                 </TouchableWithoutFeedback>
 
-                <TouchableWithoutFeedback
-                    onPress={() => navigation.navigate('InfoCat')}>
-
-                    <View style={styles.routesStyleRight}>
-                        <Image
-                            source={require('../assets/img/flower.jpg')}
-                            style={{ width: "100%", height: "100%" }}
-                        />
-                        <View style={styles.textStyle}>
-                            <Text style={{fontWeight: "bold",fontSize: 20}}>מידע</Text>
-                        </View>
-                    </View>
-                </TouchableWithoutFeedback>
+                
             </View>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('EventsAdmin')}>
                 <View style={styles.infoStyle}>
@@ -113,13 +113,13 @@ function InfoAdminScreen() {
 
 function AdminRoutesScreen() {
     return (
-        <AdminRoutes />
+        <PathCatagoriesAdmin />
     );
 }
 
 function InfoCatagoriesScreen() {
     return (
-        <InfoCatagories />
+        <InfoCatagoriesAdmin />
     );
 }
 

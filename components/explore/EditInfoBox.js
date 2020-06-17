@@ -49,7 +49,7 @@ class EditInfoBox extends Component {
                                 <Button
                                     title="מחק "
                                     color="green"
-                                    onPress={() => this.editText()}
+                                    onPress={this.props.onDelete}
                                 />
                             </View>
 

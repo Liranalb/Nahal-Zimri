@@ -13,9 +13,11 @@ import UnitRoutes from "./UnitRoutes"
 
 var currItem;
 var currImg;
-
-function RoutesUserScreen(props, { navigation }) {
-    let currentType = props.dataType;
+var dataType;
+//,{ navigation }
+function RoutesUserScreen({ navigation }) {
+  
+    let currentType = dataType;
     let routesArray = [];
     const [loaded, setLoaded] = useState(false);
 
@@ -62,7 +64,11 @@ function RoutesUserScreen(props, { navigation }) {
                     routesArray.map((item) => {
                         return (
                             <View>
-                                <TouchableWithoutFeedback onPress={() => {navigation.navigate('newOpRo'); currItem = item;  currImg={ uri: item.imageLink }}}>
+                                <TouchableWithoutFeedback onPress={() => {
+                                    navigation.navigate('newOpRo'); 
+                                    currItem = item;  
+                                    currImg={ uri: item.imageLink }
+                                    }}>
                                     <View>
                                         <UnitRoutes imageUri={{ uri: item.imageLink }}
                                             name={item.name}
@@ -90,15 +96,14 @@ function NewOpenRouteScreen() {
 }
 
 const logStack = createStackNavigator();
-
+//dataType={props.dataType} navigation={{navigation}}
 function RoutesUser( props ) { 
-    console.log(props.dataType);
-    function RoutesUserScreenFunc () { 
-        return <RoutesUserScreen dataType={props.dataType}/>
-    }
+    dataType= props.dataType;
+    
+    
     return (
         <logStack.Navigator initialRouteName="routesU">
-            <logStack.Screen options={{ headerShown: false }} name="routesU" component={RoutesUserScreenFunc} />
+            <logStack.Screen options={{ headerShown: false }} name="routesU" component={RoutesUserScreen} />
 
             <logStack.Screen name="newOpRo" options={{ headerShown: false }}
                 component={NewOpenRouteScreen}/>

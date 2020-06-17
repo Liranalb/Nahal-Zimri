@@ -11,7 +11,7 @@ import {
 class EventBoxUser extends React.Component {
     render() {
         return (
-            <View style={styles.routeStyle}>
+            <View style={styles.eventStyle}>
                 <View style={styles.imageStyle}>
                     <Image
                         source={this.props.imageUri}
@@ -54,7 +54,7 @@ export default EventBoxUser;
 
 const styles = StyleSheet.create({
 
-    routeStyle: {
+    eventStyle: {
         backgroundColor: "#F6D365",
         borderColor: "#FFAF50",
         overflow: 'hidden',
