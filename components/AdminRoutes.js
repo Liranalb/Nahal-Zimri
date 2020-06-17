@@ -55,7 +55,59 @@ function AdminRoutesScreen(props, { navigation }) {
                 <HeaderComp />
             </View>
             <ScrollView>
-               
+                {/* <TouchableWithoutFeedback onPress={() => navigation.navigate('newOpRo')}>
+                    <View>
+                        <AdminUnitRoutes
+                            imageUri={require('../assets/img/map.png')}
+                            nameOfRoutes="גל-קראוס שביל ימין"
+                            diff="בינוני"
+                            km="2.5"
+                            time="40 דקות"
+                            kind="מעגלי"
+                            detail="כל הציבור מוזמן"
+                        />
+                    </View>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('newOpRo')}>
+                    <View>
+                        <AdminUnitRoutes
+                            imageUri={require('../assets/img/map.png')}
+                            nameOfRoutes="שביל לאורך הפריחה"
+                            diff="קשה"
+                            km="4"
+                            time="70 דקות"
+                            kind="הלוך חזור"
+                            detail="מסלול למיטיבי לכת"
+                        />
+                    </View>
+                </TouchableWithoutFeedback>
+
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('newOpRo')}>
+                    <View>
+                        <AdminUnitRoutes
+                            imageUri={require('../assets/img/map.png')}
+                            nameOfRoutes="ביקור בבית הצבאים"
+                            diff="קל"
+                            km="2"
+                            time="35 דקות"
+                            kind="קו"
+                            detail="טיול מהנה"
+                        />
+                    </View>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('newOpRo')}>
+                    <View>
+                        <AdminUnitRoutes
+                            imageUri={require('../assets/img/map.png')}
+                            nameOfRoutes="גל-קראוס שביל שמאל"
+                            diff="בינוני"
+                            km="3.5"
+                            time="60 דקות"
+                            kind="הלוך-חזור"
+                            detail="כל הציבור מוזמן"
+                        />
+                    </View>
+                </TouchableWithoutFeedback> */}
                 {
                     console.log("second"),
                     routesArray.map((item) => {

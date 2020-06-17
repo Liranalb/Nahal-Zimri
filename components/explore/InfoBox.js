@@ -6,7 +6,7 @@ import {
     Image,
     TouchableOpacity
 } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+
 
 class InfoBox extends Component {
 
@@ -19,7 +19,6 @@ class InfoBox extends Component {
             <TouchableOpacity
                 onPress={() => openInfo()}
             >
-
 
                 <View style={styles.containerStyle}>
                     <View style={{ flex: 1}}>
@@ -42,8 +41,8 @@ class InfoBox extends Component {
 
                     </View>
 
-
                 </View>
+
             </TouchableOpacity>
         );
     }

@@ -39,14 +39,10 @@ uriToBlob = (uri) => {
       });
     });
   }
-/*
-Gets two locations , storage and DB and , recive a photo from the
-client and put it in the right paths
 
-*/
-  sayCheese = (location, DB_Path) => { console.log("start");
+  sayCheese = (location, DB_Path) => { 
   
-    ImagePicker.openCamera({
+   return ImagePicker.openCamera({
         width: 400,
         height: 500,
 
@@ -67,10 +63,11 @@ client and put it in the right paths
 
     }).then((snapshot)=>{
 
-      console.log("File uploaded ");
-      storage.ref().child(location).getDownloadURL().then( (url) => {
-            db.ref(DB_Path+"/imageLink").set(url)
-      })
+      console.log("File uploaded to storage");
+      // storage.ref().child(location).getDownloadURL().then( (url) => {
+      //       db.ref(DB_Path+"/imageLink").set(url)
+      //       return 0;
+      // })
    
     }).catch((error)=>{
       console.log("\n\nCanceled\n\n");
@@ -78,7 +75,7 @@ client and put it in the right paths
 
 
     }); 
-      return 0;
+
   }
 
   export default sayCheese;

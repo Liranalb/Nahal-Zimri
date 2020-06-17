@@ -3,7 +3,15 @@ import { Header, CheckBox, ListItem } from "react-native-elements"
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 /*import { createStackNavigator } from 'react-navigation-stack';*/
-import { Image, View, TextInput, Text, StyleSheet, ScrollView, TouchableWithoutFeedback, Button, Alert, unstable_enableLogBox } from "react-native"
+import { Image, 
+    View, 
+    TextInput, 
+    Text, 
+    ScrollView, 
+    TouchableWithoutFeedback, 
+    Button, 
+    Alert, 
+    unstable_enableLogBox } from "react-native"
 import { Footer, Container, Right } from "native-base"
 import HeaderComp from "./HeaderComp";
 /*import ReportBox from "./ReportBox"*/

@@ -1,4 +1,3 @@
-import 'react-native-gesture-handler';
 import React, { Component } from "react" //import react library
 import { Text, Image, ImageBackground, StyleSheet, TextInput, Button, TouchableOpacity } from "react-native"
 import { View } from "native-base"

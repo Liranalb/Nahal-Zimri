@@ -5,9 +5,10 @@ import {
     StyleSheet,
     Image,
     TouchableOpacity,
-    Button
+    Button,
+    ScrollView
 } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+
 
 class EditInfoBox extends Component {
 
@@ -77,7 +78,7 @@ const styles = {
         borderWidth: 1.1,
         borderColor: '#A3A3A3',
         borderRadius: 10,
-        flexDirection: 'row',
+        flexDirection: 'row-reverse',
         backgroundColor: '#F4D5A7',
         marginBottom: 5
 

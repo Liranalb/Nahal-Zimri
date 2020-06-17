@@ -18,30 +18,90 @@ import sayCheese from '../assets/functions/takePhoto'
 //import ImagePicker from 'react-native-image-picker';
 
 
-function pressPhoto (keyID,photoUploaded) {
+let photoUploaded=false; 
+let keyID;
+
+function getDate () {
+    var date = new Date().getDate(); //To get the Current Date
+    var month = new Date().getMonth() + 1; //To get the Current Month
+    var year = new Date().getFullYear(); //To get the Current Year
+    let dateStr = date + "." + month + "." + year;
+    return dateStr;
+}
+async function pressPhoto () {
+
     // setting the paths
     let imageID = "img"+keyID+".jpg";       
     let dataPath = 'Information/info'+keyID;
     let storagePath = "Images/Information/"+imageID;
 
-    console.log("imageID is : " + imageID + "\n dataPath is:  "+ dataPath + "/n storagePath"+ storagePath);
+    
+    console.log("imageID is : " + imageID +  "\n storagePath"+ storagePath);
 
-    if (sayCheese(storagePath,dataPath)===0)
-        photoUploaded=true;
-
+ 
+    const result = await sayCheese(storagePath);
+    console.log(" test \n"+result);
+    if (result===-1) {
+        
+        console.log("\n\n ----------------failed ----------------\n\n");
+        return -1;
+        
+    }
+    photoUploaded=true;
+    console.log("Out : "+photoUploaded) ;
+    
+//     storage.ref().child(location).getDownloadURL().then( (url) => {
+//     db.ref(DB_Path+"/imageLink").set(url)
+//     return 0;
+//   })
 }
 
-function sendData ( photoUploaded,body,title) {
-    alert(body);
-    if(photoUploaded===false)
+ function sendData ( body,title,currentType) {
+
+    if(photoUploaded===false) {
         alert("Upload image first");
+        return -1;
+    }
+        
+    else {
+
+    
+    let dataPath = 'Information/info'+keyID;
+    let imageID = "img"+keyID+".jpg";  
+    let storagePath = "Images/Information/"+imageID;
+    storage.ref().child(storagePath).getDownloadURL().then( (url) => {
+            
+            let date= getDate();
+            let newInfo = {
+                Date: date,
+                Body: body,
+                Title: title,
+                Type: currentType,
+                ImageLink: url
+            }
+            db.ref(dataPath).set(newInfo);
+      })
+    }
+ 
+    return 0;
+    
+   
 }
-function InformationAdminScreen(props, { navigation }) {
+
+ function InformationAdminScreen(props, { navigation }) {
     const [body, onChangeBody] = useState('');
     const [title, onChangeTitle] = useState('');
+    const [dataAdded, onDataAdded] = useState(false);
+    //const keyID="aaa";
+    
+    function refreshPage () {
+        onChangeBody("");
+        onChangeTitle("");
+        setLoaded(false);
+        keyID = newPostKey();
+    } 
 
-    let keyID;
-    let photoUploaded=false; 
+
     let dataUploaded=false; 
 
     let infoArray = [];
@@ -63,10 +123,11 @@ function InformationAdminScreen(props, { navigation }) {
         return db.ref().child('Inforamtion').push().key;
     }
     
+    
     // on mount
     useEffect(() =>  {
         keyID = newPostKey();
-        console.log("keyID" + keyID);
+        console.log("Produced key:  "+ keyID);
 
     },[]);
     // on unmount
@@ -77,7 +138,6 @@ function InformationAdminScreen(props, { navigation }) {
     },[]);
     
     let convertDataToArray = (data, infoArray) => {
-        console.log("in convert");
         if (data === null)
             return null;
 
@@ -101,6 +161,7 @@ function InformationAdminScreen(props, { navigation }) {
 
     return (
         <View>
+            {console.log("rendered, key is :  "+keyID)}
             <HeaderComp />
          
             <View style={styles.containerStyle}>
@@ -120,9 +181,9 @@ function InformationAdminScreen(props, { navigation }) {
                                             onPress={() => navigation.navigate('infoAdminComp')}
                                         >
                                             <View>
-                                                <EditInfoBox imageUri={{ uri: item.Images }}
+                                                <EditInfoBox imageUri={{ uri: item.ImageLink }}
                                                     headline={item.Title}
-                                                    body={item.Content}
+                                                    body={item.Body}
                                                 />
                                             </View>
                                         </TouchableWithoutFeedback>
@@ -140,7 +201,7 @@ function InformationAdminScreen(props, { navigation }) {
                         <View style={{ flex: 1 }}>
                             <View style={{ marginLeft: 12, marginTop: 20 }}>
                                 <TouchableWithoutFeedback
-                                    onPress={() => pressPhoto(keyID,photoUploaded)}
+                                    onPress={() => {console.log("before func: "+keyID); pressPhoto();}}
                                 >
                                     <View style={{ marginLeft: 12 }}>
                                         <Icon name="camera" size={30} color="white" />
@@ -154,7 +215,12 @@ function InformationAdminScreen(props, { navigation }) {
                                     </View>
                                 </TouchableWithoutFeedback>
                                 <TouchableWithoutFeedback
-                                    onPress={() => sendData(photoUploaded,body,title)}
+                                    onPress={ () => {
+                                        let result=  sendData(body,title,currentType);
+                                        console.log("result is: "+result);
+                                        if(result===0)
+                                            refreshPage();
+                                    }}
                                 >
                                     <View style={styles.buttonStyle}>
                                         <Text
