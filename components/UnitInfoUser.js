@@ -21,13 +21,13 @@ class UnitInfoUser extends React.Component {
                     <Text style={styles.textTitleStyle}>{this.props.catagory}</Text>
                 </View>
                 <View style={styles.textStyle}>
-                    <Text style={styles.textTitleStyle}>{this.props.title} </Text>
+                    <Text style={styles.textTitleStyle}>{this.props.title}</Text>
                 </View>
                 <View style={styles.detailStyle}>
-                    <Text style={styles.textDetailStyle}> {this.props.detail} </Text>
+                    <Text style={styles.textDetailStyle}>{this.props.subTitle}</Text>
                 </View>
                 <View style={styles.dateStyle}>
-                    <Text style={styles.textDetailStyle}> תאריך העלאה | {this.props.date}  </Text>
+                    <Text style={styles.textDetailStyle}> תאריך העלאה | {this.props.date}</Text>
                 </View>
             </View>
         );
@@ -60,13 +60,13 @@ const styles = StyleSheet.create({
     detailStyle: {
        height: 50,
        width: "69%",
-       marginLeft: 111,
+       marginLeft: "31%",
 
     },
     dateStyle:{
         height: 30,
        width: "50%",
-       marginLeft: 180,
+       marginLeft: "51%",
        marginTop:10
 
     },
