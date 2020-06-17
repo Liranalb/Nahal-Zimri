@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component, useState } from "react"
 import { Header, CheckBox, ListItem } from "react-native-elements"
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
@@ -15,8 +15,10 @@ function InfoAdminScreen({ navigation }) {
     const [detail, onChange] = useState('');
     const [detail1, onChange1] = useState('');
     const [detail2, onChange2] = useState('');
+    const [detail3, onChange3] = useState('');
+
     let data = null;
-    db.ref('InfoUser').on('value', function (snapshot) {
+    db.ref('Articles1').on('value', function (snapshot) {
         const exist = (snapshot.val() !== null);
         if (exist) {
 
@@ -36,23 +38,39 @@ function InfoAdminScreen({ navigation }) {
     }
     let infoArray = [];
     convertDataToArray(data, infoArray);
+    function removeItem(id) {
+        db.ref('Articles1/').child(id).remove()
 
-    function onSubmit(type, title, content) {
+    }
+
+    function onSubmit(type, title, content, description) {
         if (type != "" && title != "" && content != "") {
             var date = new Date().getDate(); //To get the Current Date
             var month = new Date().getMonth() + 1; //To get the Current Month
             var year = new Date().getFullYear(); //To get the Current Year
+            var newKey = db.ref().push().key
             var newData = {
+                Id: newKey,
                 Title: title,
                 Date: date + "." + month + "." + year,
                 Content: content,
-                Description: " ",
+                Description: description,
                 Catagory: type,
             }
-            var myRef = db.ref('InfoUser/').push(newData);
-
+            db.ref('Articles1/' + newKey).set(newData, function (error) {
+                if (error) {
+                    console.log('The write failed...')
+                } else {
+                    console.log('Data saved successfully!')
+                }
+            });
         }
+
+
+
+
     }
+
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
             <View>
@@ -119,7 +137,7 @@ function InfoAdminScreen({ navigation }) {
                                                     <Button
                                                         title="ערוך "
                                                         color="green"
-                                                        onPress={(event) => { alert(event.val()) }}
+                                                        onPress={(event) => { alert("hi") }}
                                                     />
                                                 </View>
 
@@ -130,7 +148,7 @@ function InfoAdminScreen({ navigation }) {
                                                         title="מחק "
                                                         color="green"
                                                         onPress={() => {
-                                                            alert(Button.title)
+                                                            removeItem(item.Id)
 
                                                         }}
                                                     />
@@ -167,18 +185,25 @@ function InfoAdminScreen({ navigation }) {
                         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
                         onChangeText={text1 => onChange1(text1)}
                         value={detail1}
-                    /><Text>תוכן המידע:</Text>
+                    /><Text>תיאור:</Text>
                     <  TextInput
 
                         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
                         onChangeText={text2 => onChange2(text2)}
                         value={detail2}
                     />
+                    <Text>תוכן המידע:</Text>
+                    <  TextInput
+
+                        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                        onChangeText={text3 => onChange3(text3)}
+                        value={detail3}
+                    />
 
                 </View>
                 <Button
 
-                    onPress={() => onSubmit(detail, detail1, detail2)}
+                    onPress={() => onSubmit(detail, detail1, detail2, detail3)}
                     title="עדכן"
 
 
