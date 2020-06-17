@@ -16,20 +16,20 @@ class NewOpenArt extends Component {
                 </View>
                 <View style={styles.imageStyle}>
                     <Image
-                        source={require('../assets/img/im2.jpeg')}
+                        source={this.props.img}
                         style={{ width: "100%", height: "100%" }}
                     />
                 </View>
                 <View>
                     <ScrollView>
                         <View style={styles.textStyle}>
-                            <Text style={styles.textTitleHeaderStyle}>טקס רשמי בהשתתפות ראש העיר</Text>
+                            <Text style={styles.textTitleHeaderStyle}>{this.props.item.Title}</Text>
                         </View>
                         <View style={styles.textStyle}>
-                            <Text style={styles.textTitleStyle}>ביום שני השבוע התקיים טקס חניכת פינת הישיבה החדשה בנחל בהשתתפות ראש העיר</Text>
+                            <Text style={styles.textTitleStyle}>{this.props.item.SubTitle}</Text>
                         </View>
                         <View style={styles.textStyle}>
-                            <Text style={styles.textDetailStyle}>הטקס התקיים ברוב עם והדרת מלך, בטקס נשאו דברים חברי המנהל הקהילתי, חברי מועצת העיר וראש העיר. תושבים רבים מהשכונה הגיעו.</Text>
+                            <Text style={styles.textDetailStyle}>{this.props.item.Description}</Text>
                         </View>
                     </ScrollView>
                 </View>
