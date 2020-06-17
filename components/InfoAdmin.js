@@ -104,7 +104,7 @@ function InfoAdminScreen({ navigation }) {
                         />
                     </View>
                 </View>
-
+            
             </View>
 
             <ScrollView scrollEventThrottle={16}>

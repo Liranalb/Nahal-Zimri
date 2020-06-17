@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { useState , useEffect} from "react"
 import { TextInput, Alert, ScrollView, Text, TouchableWithoutFeedback } from "react-native"
 import { View } from "native-base"
 import { Header, ListItem, CheckBox, Button } from "react-native-elements"
@@ -12,47 +12,97 @@ import EditInfoBox from './explore/EditInfoBox'
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import InfoComp from "./InfoComp"
-import { db } from '../config/Firebase'
-
+import { db,storage } from '../config/Firebase'
+import uploadImage from '../assets/functions/uploadSingleImage'
+import sayCheese from '../assets/functions/takePhoto'
 //import ImagePicker from 'react-native-image-picker';
 
 
+function pressPhoto (keyID,photoUploaded) {
+    // setting the paths
+    let imageID = "img"+keyID+".jpg";       
+    let dataPath = 'Information/info'+keyID;
+    let storagePath = "Images/Information/"+imageID;
 
-function InformationAdminScreen({ navigation }) {
-    let currentType = "Blossom"
+    console.log("imageID is : " + imageID + "\n dataPath is:  "+ dataPath + "/n storagePath"+ storagePath);
 
+    if (sayCheese(storagePath,dataPath)===0)
+        photoUploaded=true;
+
+}
+
+function sendData ( photoUploaded,body,title) {
+    alert(body);
+    if(photoUploaded===false)
+        alert("Upload image first");
+}
+function InformationAdminScreen(props, { navigation }) {
+    const [body, onChangeBody] = useState('');
+    const [title, onChangeTitle] = useState('');
+
+    let keyID;
+    let photoUploaded=false; 
+    let dataUploaded=false; 
+
+    let infoArray = [];
+    let currentType = props.dataType;
+    const [loaded, setLoaded] = useState(false);
     let data = null;
     db.ref('Information').on('value', function (snapshot) {
         const exist = (snapshot.val() !== null);
         if (exist) {
             data = snapshot.val();
             console.log("data loaded");
+            if( loaded === false) {
+                setLoaded( true );
+            }
         }
     });
+    
+    let newPostKey = () => {
+        return db.ref().child('Inforamtion').push().key;
+    }
+    
+    // on mount
+    useEffect(() =>  {
+        keyID = newPostKey();
+        console.log("keyID" + keyID);
 
-    // const [data1, initData] = useState(data);
-
-
+    },[]);
+    // on unmount
+    useEffect( () => {
+        return () => {
+            
+        }
+    },[]);
+    
     let convertDataToArray = (data, infoArray) => {
+        console.log("in convert");
         if (data === null)
             return null;
+
         for (var info in data) {
             if (data.hasOwnProperty(info)) {
-                //if (data[info].Type === currentType)
+                if (data[info].Type === currentType) {
                     infoArray.push(data[info]);
+ 
+                }
+
+                   
             }
         }
     }
 
-    let infoArray = [];
+    
+
     convertDataToArray(data, infoArray);
-    console.log(infoArray);
+
 
 
     return (
         <View>
             <HeaderComp />
-            {/* <Text>  {this.props.dataType}</Text> */}
+         
             <View style={styles.containerStyle}>
 
                 <View style={{ height: "100%", width: "100%", backgroundColor: '#E9DFD1' }}>
@@ -65,69 +115,22 @@ function InformationAdminScreen({ navigation }) {
 
                             {infoArray.map((item) => {
                                 return (
-                                    <TouchableWithoutFeedback
-                                        onPress={() => navigation.navigate('infoAdminComp')}
-                                    >
-                                        <View>
-                                            <EditInfoBox imageUri={{ uri: item.Images }}
-                                                headline={item.Title}
-                                                body={item.Content}
-                                            />
-                                        </View>
-                                    </TouchableWithoutFeedback>
+                                    <View key={item}>
+                                        <TouchableWithoutFeedback
+                                            onPress={() => navigation.navigate('infoAdminComp')}
+                                        >
+                                            <View>
+                                                <EditInfoBox imageUri={{ uri: item.Images }}
+                                                    headline={item.Title}
+                                                    body={item.Content}
+                                                />
+                                            </View>
+                                        </TouchableWithoutFeedback>
+                                    </View>
                                 )
                             })}
 
-                            {/* <TouchableWithoutFeedback
-                                onPress= { ()=> navigation.navigate('infoAdminComp')}
-                                >
-                                <View>
-                                <EditInfoBox imageUri={require('../assets/img/purple.jpg')}
-                                    headline="הדרדר הכחול"
-                                    body="דַּרְדַּר כָּחֹל הוא צמח חד-שנתי ממשפחת המורכבים. לפרחי הסוג דַּרְדַּר שפע צבעים, המשותף לאבקנים ולעלי הכותרת מצבעים בהירים כמו: לבן, צהוב, כתום, קרם עד לצבעים כהים יותר כמו: ורוד, לילך, כחול, סגול ואפילו אדום. "
-                                />
-                                </View>
-                            </TouchableWithoutFeedback>
-
-                            <EditInfoBox imageUri={require('../assets/img/blossom.jpg')}
-                                headline=" flower"
-                                body="ב"
-                            />
-
-                            <EditInfoBox imageUri={require('../assets/img/Sunflower.jpg')}
-                                headline=" flower"
-                                body="בלה בלה בלה"
-                            />
-
-                            <EditInfoBox imageUri={require('../assets/img/bird.jpg')}
-                                headline=" flower"
-                                body="בלה בלה בלה"
-                            />
-
-                            <EditInfoBox imageUri={require('../assets/img/Pisga.jpg')}
-                                headline="flower"
-                                body="בלה בלה בלה"
-                            />
-
-                            <EditInfoBox imageUri={require('../assets/img/Shafan.jpg')}
-                                headline=" flower"
-                                body="בלה בלה בלה"
-                            />
-
-                            <EditInfoBox imageUri={require('../assets/img/purple.jpg')}
-                                headline=" flower"
-                                body="בלה בלה בלה"
-                            />
-
-                            <EditInfoBox imageUri={require('../assets/img/mammal.jpg')}
-                                headline=" flower"
-                                body="בלה בלה בלה"
-                            />
-
-                            <EditInfoBox imageUri={require('../assets/img/arch.jpg')}
-                                headline=" flower"
-                                body="בלה בלה בלה"
-                            /> */}
+                            
 
 
                         </ScrollView>
@@ -137,21 +140,21 @@ function InformationAdminScreen({ navigation }) {
                         <View style={{ flex: 1 }}>
                             <View style={{ marginLeft: 12, marginTop: 20 }}>
                                 <TouchableWithoutFeedback
-                                    onPress={() => this.onCamera()}
+                                    onPress={() => pressPhoto(keyID,photoUploaded)}
                                 >
                                     <View style={{ marginLeft: 12 }}>
                                         <Icon name="camera" size={30} color="white" />
                                     </View>
                                 </TouchableWithoutFeedback>
                                 <TouchableWithoutFeedback
-                                    onPress={() => this.onImages()}
+                                    onPress={() => pressPhoto(keyID)}
                                 >
                                     <View style={{ marginTop: 20, marginLeft: 12 }}>
                                         <Icon name="images" size={30} color="white" />
                                     </View>
                                 </TouchableWithoutFeedback>
                                 <TouchableWithoutFeedback
-                                    onPress={() => this.onImages()}
+                                    onPress={() => sendData(photoUploaded,body,title)}
                                 >
                                     <View style={styles.buttonStyle}>
                                         <Text
@@ -165,6 +168,8 @@ function InformationAdminScreen({ navigation }) {
                             <TextInput
                                 style={styles.headlineInputStyle}
                                 placeholder="הכנס כותרת"
+                                value= {title}
+                                onChangeText= {text => onChangeTitle(text)}
                             />
 
                             <TextInput
@@ -172,7 +177,8 @@ function InformationAdminScreen({ navigation }) {
                                 placeholder="הכנס תוכן"
                                 multiline={true}
                                 numberOfLines={4}
-                            //  onChangeText = {(text)}
+                                onChangeText= {text => onChangeBody(text)}
+                                value= {body}
                             />
 
                         </View>
@@ -202,18 +208,19 @@ function InfoAdminComponent() {
     return <InfoComp />;
 }
 
-function InformationAdminPage() {
-    return (
-        <NavigationContainer>
-            <InfoCompStack.Navigator initialRouteName="infoAdminScreen">
 
-                <InfoCompStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InformationAdminScreen} />
+function InformationAdminPage(props) {
+
+    function InfoAdminScreenFunction() {
+        return <InformationAdminScreen dataType={props.dataType}/>
+    }
+
+    return (
+            <InfoCompStack.Navigator initialRouteName="infoAdminScreen">
+                <InfoCompStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoAdminScreenFunction} />
                 <InfoCompStack.Screen options={{ headerShown: false }} name="infoAdminComp" component={InfoAdminComponent} />
             </InfoCompStack.Navigator>
-        </NavigationContainer>
     );
-
-
 }
 
 export default InformationAdminPage;

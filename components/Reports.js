@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState,useEffect,useLayoutEffect } from "react"
 import { TextInput, Alert, ScrollView, Text, TouchableOpacity } from "react-native"
 import { View } from "native-base"
 import { NavigationContainer } from '@react-navigation/native';
@@ -12,13 +12,16 @@ import HeaderComp from "./HeaderComp"
 //import firebase from "../config/Firebase"
 import ImagePicker from 'react-native-image-crop-picker';
 
-import { db } from '../config/Firebase'
+import { db,storage } from '../config/Firebase'
 
 import ReportForm from "./ReportForm";
 
 
 
 function ReportsScreen({ navigation }) {
+    let reportsArray = [];
+    const [loaded, setLoaded] = useState(false);
+
 
     //load data
     let data = null;
@@ -26,28 +29,32 @@ function ReportsScreen({ navigation }) {
         const exist = (snapshot.val() !== null);
         if (exist) {
             data = snapshot.val();
-            console.log("data loaded");
+            console.log("data loaded: " + loaded);
+            if( loaded === false) {
+                setLoaded( true );
+            }
+                
+
         }
     });
 
-    const [data1, initData] = useState(data);
+    
     
 
-    let convertDataToArray = (data,reportsArray) => {
+    let convertDataToArray = (data,reportsArray) => { 
         if (data === null)
             return null;
+
         for (var report in data) {
             if (data.hasOwnProperty(report)) {
-                if (data[report].Approved === 'true')
+                if (data[report].Approved === true) {
                     reportsArray.push(data[report]);
+                }  
             }
         }
     }
-    
-    let reportsArray = [];
-    convertDataToArray(data,reportsArray);
 
-    
+    convertDataToArray(data,reportsArray);
 
 
 
@@ -83,6 +90,7 @@ function ReportsScreen({ navigation }) {
                             containerStyle={{ backgroundColor: '#F4D5A7' }}
                         />
                     </View>
+            
 
                 </View>
 
@@ -101,16 +109,18 @@ function ReportsScreen({ navigation }) {
                                 showsHorizontalScrollIndicator={false}
                                 style={{ flex: 1 }}
                             >
-
-                                {reportsArray.map((item) => {
+                                {
+                                console.log("second"),
+                                reportsArray.map((item) => { 
                                     return (
-                                        <ReportBox imageUri={{ uri: item.imageLink }}
+                                        <ReportBox imageUri={{ uri: item.ImageLink }}
                                             name={item.Description}
                                             date={item.Date}
                                             catagory={item.Catagory}
                                         />
                                     )
-                                })}
+                                })
+                                }
 
 
                             </ScrollView>
@@ -124,8 +134,7 @@ function ReportsScreen({ navigation }) {
 
                 <View style={{ width:"100%",height:"14%"}}>
 
-
-
+                    
                     {/* optional map */}
 
 
@@ -166,15 +175,15 @@ const logStack = createStackNavigator();
 
 function Reports() {
     return (
-        <NavigationContainer>
-            <logStack.Navigator initialRouteName="rep">
-                <logStack.Screen options={{ headerShown: false }} name="rep" component={ReportsScreen} />
+        <logStack.Navigator initialRouteName="rep">
+            <logStack.Screen options={{ headerShown: false }} name="rep" component={ReportsScreen} />
 
-                <logStack.Screen name="repFo" options={{ headerShown: false }}
-                    component={ReportFormScreen} />
+            <logStack.Screen name="repFo" options={{ headerShown: false }}
+                component={ReportFormScreen} />
 
-            </logStack.Navigator>
-        </NavigationContainer>
+        </logStack.Navigator>
+
+
     );
 }
 

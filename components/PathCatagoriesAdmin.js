@@ -1,67 +1,96 @@
 import React, { Component } from "react"
 import { Button, Header, ListItem } from "react-native-elements"
-/*import { createStackNavigator } from 'react-navigation-stack';*/
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import {
     Image,
     View,
     TextInput,
     Text,
     TouchableOpacity,
-    ImageBackground
+    ImageBackground,
+    TouchableWithoutFeedback
 } from "react-native"
+import AdminRoutes from "./AdminRoutes";
+import Reports from './Reports';
 
-
-
+let typeName = {
+    type: "none"
+};
 
 export function PathCatagoriesScreen({ navigation }) {
-        return (
-            <View style={{ width: "100%", height: "100%"}}>
-                <ImageBackground source = {require('../assets/img/homePageAdmin_background.jpg') }
-                                style= {{flex:1, resizeMode: 'cover'}}>
-                    
-                
+    return (
+        <View style={{ width: "100%", height: "100%" }}>
+            <ImageBackground source={require('../assets/img/homePageAdmin_background.jpg')}
+                style={{ flex:1, resizeMode: 'cover' }}>
+
+
                 <View style={styles.rowStyle1}>
-                    <View style={styles.infoStyle}>
-                        <Image
-                            source={require('../assets/img/hike.jpg')}
-                            style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                        />
-                        <View style={styles.textStyle}>
-                            <Text>מסלולי טבע</Text>
-                        </View>
-                    </View>
 
-                    <View style={styles.infoStyle}>
-                        <Image
-                            source={require('../assets/img/blossomPath.jpg')}
-                            style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                        />
-                        <View style={styles.textStyle}>
-                            <Text>מסלולי פריחה</Text>
-                        </View>
-                    </View>
+                    <TouchableWithoutFeedback
 
+                        onPress={() => {
+                            typeName.type = "HikePath";
+                            navigation.navigate('PathAdminScreen');
+                        }
+                        }
+                    >
+                        <View style={styles.infoStyle}>
+                            <Image
+                                source={require('../assets/img/hike.jpg')}
+                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                            />
+                            <View style={styles.textStyle}>
+                                <Text>מסלולי טבע</Text>
+                            </View>
+                        </View>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback
+
+                        onPress={() => {
+                            typeName.type = "BlossomPath";
+                            navigation.navigate('PathAdminScreen');
+                        }
+                        }
+                    >
+                        <View style={styles.infoStyle}>
+                            <Image
+                                source={require('../assets/img/blossomPath.jpg')}
+                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                            />
+                            <View style={styles.textStyle}>
+                                <Text>מסלולי פריחה</Text>
+                            </View>
+                        </View>
+                    </TouchableWithoutFeedback>
 
                 </View>
-                
+
                 <View style={styles.rowStyle2}>
 
-                    
 
-                    
-                    <View style={styles.infoStyle2}>
-                    
-                        <Image
-                            source={require('../assets/img/arch.jpg')}
-                            //   style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                            style={{ width: "100%", height: "100%" }}
-                        />
-                        
-                        <View style={styles.textStyle}>
-                            <Text>מסלולי ארכיאולוגיה</Text>
+
+                    <TouchableWithoutFeedback
+
+                        onPress={() => {
+                            typeName.type = "ArchPath";
+                            navigation.navigate('PathAdminScreen');
+                        }
+                        }
+                    >
+                        <View style={styles.infoStyle2}>
+
+                            <Image
+                                source={require('../assets/img/arch.jpg')}
+                                //   style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                style={{ width: "100%", height: "100%" }}
+                            />
+
+                            <View style={styles.textStyle}>
+                                <Text>מסלולי ארכיאולוגיה</Text>
+                            </View>
                         </View>
-                    </View>
-                    
+                    </TouchableWithoutFeedback>
 
 
                 </View>
@@ -72,25 +101,35 @@ export function PathCatagoriesScreen({ navigation }) {
 
 
 
-                </ImageBackground>
-            </View>
-        )
-    }
+            </ImageBackground>
+        </View>
+    )
+}
 
 
-    const PathStack = createStackNavigator();
+const PathStack = createStackNavigator();
 
-    function PathCatagoriesAdmin() { 
-        return(
-            <PathStack.Navigator initialRouteName="InfoCatScreen">
-                <PathStack.Screen options={{ headerShown: false }} name="InfoCatScreen" component={PathCatagoriesScreen} />
-                 {/* <PathStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoAdmin} /> */}
-    
-            </PathStack.Navigator>
-            );
-    }
-    
-    export default PathCatagoriesAdmin;
+function InfoAdmin() {
+
+    return (
+
+        <AdminRoutes dataType={typeName.type} />
+    );
+}
+
+function PathCatagoriesAdmin() {
+    return (
+
+        <PathStack.Navigator initialRouteName="InfoCatScreen">
+            <PathStack.Screen options={{ headerShown: false }} name="InfoCatScreen" component={PathCatagoriesScreen} />
+            <PathStack.Screen options={{ headerShown: false }} name="PathAdminScreen" component={InfoAdmin} />
+
+        </PathStack.Navigator>
+
+    );
+}
+
+export default PathCatagoriesAdmin;
 
 const styles = {
     rowStyle1: {

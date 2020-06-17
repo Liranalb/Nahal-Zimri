@@ -1,5 +1,5 @@
-import React, { Component } from "react"
-import { TextInput, Button, Alert, ScrollView, Text, TouchableOpacity } from "react-native"
+import React, { useState } from "react"
+import { TextInput, Button, Alert, ScrollView, Text, TouchableWithoutFeedback } from "react-native"
 import { View } from "native-base"
 import { Header, ListItem, CheckBox } from "react-native-elements"
 import ReportBox from "./explore/ReportBox"
@@ -7,22 +7,57 @@ import LogoHeaderComponent from "./explore/LogoHeaderComponent"
 import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from "./HeaderComp"
 import InfoBox from './explore/InfoBox'
-//import ImagePicker from 'react-native-image-picker';
+import { createStackNavigator } from '@react-navigation/stack';
+import InfoComp from "./InfoComp"
+import { db } from '../config/Firebase'
+
+let typeName = {
+    type: "none"
+};
+
+function InformationUserScreen(props, { navigation }) {
+
+    let infoArray = [];
+    let currentType = props.dataType;
+    const [loaded, setLoaded] = useState(false);
+    let data = null;
+    db.ref('Information').on('value', function (snapshot) {
+        const exist = (snapshot.val() !== null);
+        if (exist) {
+            data = snapshot.val();
+            console.log("data loaded");
+            if( loaded === false) {
+                setLoaded( true );
+            }
+        }
+    });
 
 
 
-class InformationPage extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            headline: "",
-            body: "",
-            loading: false
+    let convertDataToArray = (data, infoArray) => {
+        console.log("in convert");
+        if (data === null)
+            return null;
+
+        for (var info in data) {
+            if (data.hasOwnProperty(info)) {
+                console.log("checking type: "+ data[info].Type);
+                if (data[info].Type === currentType) {
+                    infoArray.push(data[info]);
+                    console.log("Added to array: "+info);
+                }
+                else
+                    console.log("not fit");
+                   
+            }
         }
     }
-    //   backgroundColor="#FAE5D3"
-    render() {
+
+    
+    convertDataToArray(data, infoArray);
+    console.log(infoArray.length);
+
         return (
             <View>
                 <HeaderComp />
@@ -42,50 +77,22 @@ class InformationPage extends Component {
                                 horizontal={false}
                                 showsHorizontalScrollIndicator={false}
                             >
-                                <InfoBox imageUri={require('../assets/img/purple.jpg')}
-                                    headline="הדרדר הכחול"
-                                    body="דַּרְדַּר כָּחֹל הוא צמח חד-שנתי ממשפחת המורכבים. לפרחי הסוג דַּרְדַּר שפע צבעים, המשותף לאבקנים ולעלי הכותרת מצבעים בהירים כמו: לבן, צהוב, כתום, קרם עד לצבעים כהים יותר כמו: ורוד, לילך, כחול, סגול ואפילו אדום. "
-                                />
-
-                                <InfoBox imageUri={require('../assets/img/blossom.jpg')}
-                                    headline=" flower"
-                                    body="ב"
-                                />
-
-                                <InfoBox imageUri={require('../assets/img/Sunflower.jpg')}
-                                    headline=" flower"
-                                    body="בלה בלה בלה"
-                                />
-
-                                <InfoBox imageUri={require('../assets/img/bird.jpg')}
-                                    headline=" flower"
-                                    body="בלה בלה בלה"
-                                />
-
-                                <InfoBox imageUri={require('../assets/img/Pisga.jpg')}
-                                    headline="flower"
-                                    body="בלה בלה בלה"
-                                />
-
-                                <InfoBox imageUri={require('../assets/img/Shafan.jpg')}
-                                    headline=" flower"
-                                    body="בלה בלה בלה"
-                                />
-
-                                <InfoBox imageUri={require('../assets/img/purple.jpg')}
-                                    headline=" flower"
-                                    body="בלה בלה בלה"
-                                />
-
-                                <InfoBox imageUri={require('../assets/img/mammal.jpg')}
-                                    headline=" flower"
-                                    body="בלה בלה בלה"
-                                />
-
-                                <InfoBox imageUri={require('../assets/img/arch.jpg')}
-                                    headline=" flower"
-                                    body="בלה בלה בלה"
-                                />
+                                {infoArray.map((item) => {
+                                return (
+                                    <View key={item}>
+                                        <TouchableWithoutFeedback
+                                            onPress={() => navigation.navigate('infoAdminComp')}
+                                        >
+                                            <View>
+                                                <InfoBox imageUri={{ uri: item.Images }}
+                                                    headline={item.Title}
+                                                    body={item.Content}
+                                                />
+                                            </View>
+                                        </TouchableWithoutFeedback>
+                                    </View>
+                                )
+                            })}
 
 
                             </ScrollView>
@@ -115,8 +122,30 @@ class InformationPage extends Component {
     }
 
 
+const InfoCompStack = createStackNavigator();
 
+
+function InfoUserComponent() {
+
+    return <InfoComp />;
 }
+
+
+function InformationPage(props) {
+
+    function InfoUserScreenFunction() {
+        return <InformationUserScreen dataType={props.dataType}/>
+    }
+
+    return (
+            <InfoCompStack.Navigator initialRouteName="infoAdminScreen">
+                <InfoCompStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoUserScreenFunction} />
+                <InfoCompStack.Screen options={{ headerShown: false }} name="infoAdminComp" component={InfoUserComponent} />
+            </InfoCompStack.Navigator>
+    );
+}
+
+
 
 export default InformationPage;
 

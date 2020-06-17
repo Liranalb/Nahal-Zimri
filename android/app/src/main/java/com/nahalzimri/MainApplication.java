@@ -6,9 +6,7 @@ package com.nahalzimri;
 import android.app.Application;
 // import android.util.Log; // 5.6
 
-// import org.unimodules.adapters.react.ModuleRegistryAdapter;
-// import org.unimodules.adapters.react.ReactModuleRegistryProvider;
-// import org.unimodules.core.interfaces.SingletonModule;
+
 
 // import com.facebook.hermes.reactexecutor.HermesExecutorFactory; //5.6
 // import com.facebook.react.bridge.JavaScriptExecutorFactory; //5.6 
@@ -43,8 +41,6 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
-
- 
           return packages;
         }
 

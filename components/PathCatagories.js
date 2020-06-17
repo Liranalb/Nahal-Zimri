@@ -1,68 +1,96 @@
 import React, { Component } from "react"
 import { Button, Header, ListItem } from "react-native-elements"
-/*import { createStackNavigator } from 'react-navigation-stack';*/
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import {
     Image,
     View,
     TextInput,
     Text,
     TouchableOpacity,
-    ImageBackground
+    ImageBackground,
+    TouchableWithoutFeedback
 } from "react-native"
+import RoutesUser from "./RoutesUser";
 
 
+let typeName = {
+    type: "none"
+};
+
+export function PathCatagoriesScreen({ navigation }) {
+    return (
+        <View style={{ width: "100%", height: "100%" }}>
+            <ImageBackground source={require('../assets/img/homePageAdmin_background.jpg')}
+                style={{ flex: 1, resizeMode: 'cover' }}>
 
 
-class PathCatagories extends Component {
-    render() {
-        return (
-            <View style={{ width: "100%", height: "100%"}}>
-                <ImageBackground source = {require('../assets/img/homePageAdmin_background.jpg') }
-                                style= {{flex:1, resizeMode: 'cover'}}>
-                    
-                
                 <View style={styles.rowStyle1}>
-                    <View style={styles.infoStyle}>
-                        <Image
-                            source={require('../assets/img/hike.jpg')}
-                            style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                        />
-                        <View style={styles.textStyle}>
-                            <Text>מסלולי טבע</Text>
-                        </View>
-                    </View>
 
-                    <View style={styles.infoStyle}>
-                        <Image
-                            source={require('../assets/img/blossomPath.jpg')}
-                            style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                        />
-                        <View style={styles.textStyle}>
-                            <Text>מסלולי פריחה</Text>
-                        </View>
-                    </View>
+                    <TouchableWithoutFeedback
 
+                        onPress={() => {
+                            typeName.type = "HikePath";
+                            navigation.navigate('PathUserScreen');
+                        }
+                        }
+                    >
+                        <View style={styles.infoStyle}>
+                            <Image
+                                source={require('../assets/img/hike.jpg')}
+                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                            />
+                            <View style={styles.textStyle}>
+                                <Text>מסלולי טבע</Text>
+                            </View>
+                        </View>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback
+
+                        onPress={() => {
+                            typeName.type = "BlossomPath";
+                            navigation.navigate('PathUserScreen');
+                        }
+                        }
+                    >
+                        <View style={styles.infoStyle}>
+                            <Image
+                                source={require('../assets/img/blossomPath.jpg')}
+                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                            />
+                            <View style={styles.textStyle}>
+                                <Text>מסלולי פריחה</Text>
+                            </View>
+                        </View>
+                    </TouchableWithoutFeedback>
 
                 </View>
-                
+
                 <View style={styles.rowStyle2}>
 
-                    
 
-                    
-                    <View style={styles.infoStyle2}>
-                    
-                        <Image
-                            source={require('../assets/img/arch.jpg')}
-                            //   style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                            style={{ width: "100%", height: "100%" }}
-                        />
-                        
-                        <View style={styles.textStyle}>
-                            <Text>מסלולי ארכיאולוגיה</Text>
+
+                    <TouchableWithoutFeedback
+
+                        onPress={() => {
+                            typeName.type = "ArchPath";
+                            navigation.navigate('PathUserScreen');
+                        }
+                        }
+                    >
+                        <View style={styles.infoStyle2}>
+
+                            <Image
+                                source={require('../assets/img/arch.jpg')}
+                                //   style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                style={{ width: "100%", height: "100%" }}
+                            />
+
+                            <View style={styles.textStyle}>
+                                <Text>מסלולי ארכיאולוגיה</Text>
+                            </View>
                         </View>
-                    </View>
-                    
+                    </TouchableWithoutFeedback>
 
 
                 </View>
@@ -73,13 +101,35 @@ class PathCatagories extends Component {
 
 
 
-                </ImageBackground>
-            </View>
-        )
-    }
+            </ImageBackground>
+        </View>
+    )
 }
 
-export default PathCatagories;
+
+const PathStack = createStackNavigator();
+
+function PathUser() {
+
+    return (
+
+        <RoutesUser dataType={typeName.type} />
+    );
+}
+
+function PathCatagoriesUser() {
+    return (
+
+        <PathStack.Navigator initialRouteName="UserPathScreen">
+            <PathStack.Screen options={{ headerShown: false }} name="UserPathScreen" component={PathCatagoriesScreen} />
+            <PathStack.Screen options={{ headerShown: false }} name="PathUserScreen" component={PathUser} />
+
+        </PathStack.Navigator>
+
+    );
+}
+
+export default PathCatagoriesUser;
 
 const styles = {
     rowStyle1: {

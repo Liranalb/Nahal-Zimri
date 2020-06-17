@@ -30,7 +30,7 @@ export function InfoCatagoriesScreen({ navigation }) {
                     <TouchableWithoutFeedback
 
                         onPress={() => {
-                            typeName.type = "mammals";
+                            typeName.type = "Mammals";
                             navigation.navigate('InfoAdminScreen' );
                         }
                         }
@@ -47,7 +47,7 @@ export function InfoCatagoriesScreen({ navigation }) {
                     </TouchableWithoutFeedback>
 
                     <TouchableWithoutFeedback onPress={() => {
-                        typeName.type = "birds";
+                        typeName.type = "Birds";
                         navigation.navigate('InfoAdminScreen');
                     }
                     }>
@@ -68,7 +68,7 @@ export function InfoCatagoriesScreen({ navigation }) {
 
                 <View style={styles.rowStyle2}>
                     <TouchableWithoutFeedback onPress={() => {
-                        typeName.type = "blossom";
+                        typeName.type = "Blossom";
                         navigation.navigate('InfoAdminScreen');
                     }
                     } >
@@ -129,7 +129,13 @@ export function InfoCatagoriesScreen({ navigation }) {
     )
 
 }
+function InfoAdmin() {
 
+    return (
+        
+        <InformationAdminPage dataType={typeName.type} />
+    );
+}
 
 
 const InfoStack = createStackNavigator();
@@ -138,7 +144,7 @@ function InfoCatagoriesAdmin() {
     return(
         <InfoStack.Navigator initialRouteName="InfoCatScreen">
             <InfoStack.Screen options={{ headerShown: false }} name="InfoCatScreen" component={InfoCatagoriesScreen} />
-             <InfoStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InformationAdminPage} />
+             <InfoStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoAdmin} />
 
         </InfoStack.Navigator>
         );

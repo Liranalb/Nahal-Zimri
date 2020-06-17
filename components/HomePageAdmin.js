@@ -41,7 +41,7 @@ function HomeAdminScreen({ navigation }) {
                         style={{ width: "100%", height: "100%" }}
                     />
                     <View style={styles.textStyle}>
-                        <Text>כתבות</Text>
+                        <Text style={{fontWeight: "bold",fontSize: 20}}>כתבות</Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -54,7 +54,7 @@ function HomeAdminScreen({ navigation }) {
                             style={{ width: "100%", height: "100%" }}
                         />
                         <View style={styles.textStyle}>
-                            <Text>מסלולים</Text>
+                            <Text style={{fontWeight: "bold",fontSize: 20}}>מסלולים</Text>
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
@@ -68,7 +68,7 @@ function HomeAdminScreen({ navigation }) {
                             style={{ width: "100%", height: "100%" }}
                         />
                         <View style={styles.textStyle}>
-                            <Text>מידע</Text>
+                            <Text style={{fontWeight: "bold",fontSize: 20}}>מידע</Text>
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
@@ -80,7 +80,7 @@ function HomeAdminScreen({ navigation }) {
                         style={{ width: "100%", height: "100%" }}
                     />
                     <View style={styles.textStyle}>
-                        <Text>אירועים</Text>
+                        <Text style={{fontWeight: "bold",fontSize: 20}}>אירועים</Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -91,7 +91,7 @@ function HomeAdminScreen({ navigation }) {
                         style={{ width: "100%", height: "100%" }}
                     />
                     <View style={styles.textStyle}>
-                        <Text>תצפיות</Text>
+                        <Text style={{fontWeight: "bold",fontSize: 20}}>תצפיות</Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -159,7 +159,7 @@ const styles = {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: '#F0B27A',
+        backgroundColor: '#FF8C37',
         justifyContent: 'center',
         alignItems: 'center',
         color: 'black'
@@ -169,7 +169,7 @@ const styles = {
     },
     infoStyle: {
         backgroundColor: "#F0B27A",
-        borderColor: "#F0B27A",
+        borderColor: "#FF8C37",
         overflow: 'hidden',
         borderRadius: 25,
         borderWidth: 2,
@@ -188,8 +188,8 @@ const styles = {
         marginTop: 10
     },
     routesStyleLeft: {
-        backgroundColor: "#ff8c00",
-        borderColor: "#F0B27A",
+        backgroundColor: "#FF8C37",
+        borderColor: "#FF8C37",
         overflow: 'hidden',
         borderRadius: 25,
         borderWidth: 2,
@@ -200,8 +200,8 @@ const styles = {
         marginRight: 10
     },
     routesStyleRight: {
-        backgroundColor: "#ff8c00",
-        borderColor: "#F0B27A",
+        backgroundColor: "#FF8C37",
+        borderColor: "#FF8C37",
         overflow: 'hidden',
         borderRadius: 25,
         borderWidth: 2,
@@ -211,8 +211,8 @@ const styles = {
         alignSelf: "center",
     },
     observationsStyle: {
-        backgroundColor: "#F0B27A",
-        borderColor: "#F0B27A",
+        backgroundColor: "#FF8C37",
+        borderColor: "#FF8C37",
         overflow: 'hidden',
         borderRadius: 25,
         borderWidth: 2,
