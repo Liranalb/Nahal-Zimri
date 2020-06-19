@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import {
     View,
@@ -7,8 +6,9 @@ import {
     Image,
 
 } from "react-native";
+import AdminButton from './AdminButton'
 
-class EventBoxUser extends React.Component {
+class EventBoxAdmin extends React.Component {
     render() {
         return (
             <View style={styles.eventStyle}>
@@ -17,6 +17,9 @@ class EventBoxUser extends React.Component {
                         source={this.props.imageUri}
                         style={{ width: "100%", height: "100%" }}
                     />
+                    <View style={styles.textStyle}>
+                        <AdminButton />
+                    </View>
                 </View >
                 <View >
                     <View style={styles.textStyle}>
@@ -50,7 +53,7 @@ class EventBoxUser extends React.Component {
         );
     }
 }
-export default EventBoxUser;
+export default EventBoxAdmin;
 
 const styles = StyleSheet.create({
 
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
         borderColor: "#FFAF50",
         position: 'absolute',
         borderWidth: 4,
-        height: "85%",
+        height: "60%",
         width: "30%"
     },
     textStyle: {
@@ -111,4 +114,3 @@ const styles = StyleSheet.create({
     }
 
 });
-

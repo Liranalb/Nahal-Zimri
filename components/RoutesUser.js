@@ -96,7 +96,7 @@ function NewOpenRouteScreen() {
 }
 
 const logStack = createStackNavigator();
-
+//dataType={props.dataType} navigation={{navigation}}
 function RoutesUser( props ) { 
     dataType= props.dataType;
     

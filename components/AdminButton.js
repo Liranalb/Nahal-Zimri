@@ -7,7 +7,7 @@ class AdminButton extends Component {
             <View style={{ width: "40%", flex: 2, paddingLeft: 3, paddingTop: 10 , flexDirection:'row'}}>
                 <View style={styles.editButtons}>
                         <Button
-                            title="ערוך "
+                            title="מחק"
                             color="green"
                             onPress={() => this.editText()}
                         />
@@ -15,7 +15,7 @@ class AdminButton extends Component {
 
                     <View style={styles.editButtons}>
                         <Button
-                            title="מחק "
+                            title="ערוך"
                             color="green"
                             onPress={() => this.editText()}
                         />

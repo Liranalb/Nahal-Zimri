@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         fontSize: 20,
         marginTop: 10,
-        flexDirection: 'row-reverse',
         width:'97%',
         alignSelf: 'center'
     },
@@ -83,7 +82,7 @@ const styles = StyleSheet.create({
         width: "30%"
     },
     textStyle: {
-        flexDirection: 'row',
+        flexDirection: 'row-reverse'
 
 
     },
