@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView
 } from "react-native";
 
 
@@ -16,10 +17,6 @@ class InfoBox extends Component {
 
     render() {
         return (
-            <TouchableOpacity
-                onPress={() => openInfo()}
-            >
-
                 <View style={styles.containerStyle}>
                     <View style={{ flex: 1}}>
                         <Image source={this.props.imageUri}
@@ -42,8 +39,6 @@ class InfoBox extends Component {
                     </View>
 
                 </View>
-
-            </TouchableOpacity>
         );
     }
 }

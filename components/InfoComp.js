@@ -55,7 +55,7 @@ class InfoComp extends Component {
                 <View style={styles.imgStyle}>
                     
                     <View style={{ flex: 1, flexDirection:'row', justifyContent: 'center', }}>
-                        <Carousel
+                        {/* <Carousel
                         layout={"default"}
                         ref={ref => this.carousel = ref}
                         data={this.state.carouselItems} //change to database 
@@ -63,7 +63,10 @@ class InfoComp extends Component {
                         itemWidth={412}
                         enableSnap= {true}
                         renderItem={this._renderItem}
-                        onSnapToItem = { index => this.setState({activeIndex:index}) } />
+                        onSnapToItem = { index => this.setState({activeIndex:index}) } /> */}
+                        <Image source={this.props.imageUri}
+                        style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                    />
                         
                     </View>
                    
@@ -86,13 +89,13 @@ class InfoComp extends Component {
                         
 
 
-</ScrollView>
+                    </ScrollView>
                     </View>
 
                     <View style={{ width: "100%", height: "8%", alignSelf: 'center' }}>
                         
                         <TouchableOpacity
-                            onPress = {() => alert("Press")}
+                            onPress = {this.props.onCrossPress}
                             >
                             <Icon name="cross" size={50} color='gray'
                                 style={{ alignSelf: 'center' }}
@@ -113,9 +116,9 @@ const styles = {
     imgStyle: {
         width: "100%",
         height: "40%",
-        backgroundColor: '#FAE5D3',
+       // backgroundColor: '#FAE5D3',
         alignSelf: 'center',
-        backgroundColor: '#434343'
+       // backgroundColor: '#434343'
     },
     textStyle: {
         alignItems: 'center',

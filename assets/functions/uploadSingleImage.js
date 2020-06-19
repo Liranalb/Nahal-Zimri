@@ -40,7 +40,7 @@ uriToBlob = (uri) => {
 
   uploadImage = (location, DB_Path) => { console.log("start");
 
-  ImagePicker.openPicker({
+  return ImagePicker.openPicker({
         multiple: false,
         cropping: true,
     }).then((result)=>{ 
@@ -61,9 +61,9 @@ uriToBlob = (uri) => {
     }).then((snapshot)=>{
 
       console.log("File uploaded " + snapshot);
-      storage.ref().child(location).getDownloadURL().then( (url) => {
-        db.ref(DB_Path+"/imageLink").set(url)
-  })
+  //     storage.ref().child(location).getDownloadURL().then( (url) => {
+  //       db.ref(DB_Path+"/imageLink").set(url)
+  // })
    
     }).catch((error)=>{
       console.log("\n\nCanceled\n\n");

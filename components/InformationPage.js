@@ -1,25 +1,25 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { TextInput, Button, Alert, ScrollView, Text, TouchableWithoutFeedback } from "react-native"
 import { View } from "native-base"
-import { Header, ListItem, CheckBox } from "react-native-elements"
-import ReportBox from "./explore/ReportBox"
-import LogoHeaderComponent from "./explore/LogoHeaderComponent"
-import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from "./HeaderComp"
 import InfoBox from './explore/InfoBox'
 import { createStackNavigator } from '@react-navigation/stack';
 import InfoComp from "./InfoComp"
 import { db } from '../config/Firebase'
+import Reports from './Reports'
 
-let typeName = {
-    type: "none"
-};
+let keyID,dataType,currItem;
 
-function InformationUserScreen(props, { navigation }) {
 
-    let infoArray = [];
-    let currentType = props.dataType;
+
+
+function InformationUserScreen({ navigation }) {
+
     const [loaded, setLoaded] = useState(false);
+    let infoArray = [];
+    let currentType = dataType;
+
+
     let data = null;
     db.ref('Information').on('value', function (snapshot) {
         const exist = (snapshot.val() !== null);
@@ -34,7 +34,6 @@ function InformationUserScreen(props, { navigation }) {
 
 
 
-
     let convertDataToArray = (data, infoArray) => {
         console.log("in convert");
         if (data === null)
@@ -42,51 +41,41 @@ function InformationUserScreen(props, { navigation }) {
 
         for (var info in data) {
             if (data.hasOwnProperty(info)) {
-                console.log("checking type: "+ data[info].Type);
                 if (data[info].Type === currentType) {
                     infoArray.push(data[info]);
-                    console.log("Added to array: "+info);
                 }
-                else
-                    console.log("not fit");
-                   
             }
         }
     }
-
     
     convertDataToArray(data, infoArray);
-    console.log(infoArray.length);
+
 
         return (
             <View>
                 <HeaderComp />
 
                 <View style={styles.containerStyle}>
-
-
-
-
-
-
-
+                               
                     <View style={{ height: "100%", width: "100%", backgroundColor: '#E9DFD1' }}>
 
                         <View style={{ height: "100%", width: "100%" }}>
-                            <ScrollView
-                                horizontal={false}
-                                showsHorizontalScrollIndicator={false}
-                            >
+                            <ScrollView>
+
                                 {infoArray.map((item) => {
                                 return (
-                                    <View key={item}>
+                                    <View>
                                         <TouchableWithoutFeedback
-                                            onPress={() => navigation.navigate('infoAdminComp')}
+                                            onPress={() => {
+                                                currItem = item;
+                                                navigation.navigate('infoAdminComp');
+                                            }}
                                         >
+                                       
                                             <View>
-                                                <InfoBox imageUri={{ uri: item.Images }}
+                                                <InfoBox imageUri={{ uri: item.ImageLink }}
                                                     headline={item.Title}
-                                                    body={item.Content}
+                                                    body={item.Body}
                                                 />
                                             </View>
                                         </TouchableWithoutFeedback>
@@ -103,20 +92,6 @@ function InformationUserScreen(props, { navigation }) {
 
                 </View>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </View>
         )
     }
@@ -125,21 +100,25 @@ function InformationUserScreen(props, { navigation }) {
 const InfoCompStack = createStackNavigator();
 
 
-function InfoUserComponent() {
+function InfoUserComponent( {navigation}) {
+    console.log("cureItem is : " + currItem.ImageLink);
+    return (<InfoComp 
+                headline={currItem.Title}
+                body={currItem.Body}
+                onCrossPress= { () => navigation.goBack()}
+                imageUri={{ uri: currItem.ImageLink }}
+                /> );
 
-    return <InfoComp />;
 }
 
 
 function InformationPage(props) {
 
-    function InfoUserScreenFunction() {
-        return <InformationUserScreen dataType={props.dataType}/>
-    }
+    dataType= props.dataType;
 
     return (
             <InfoCompStack.Navigator initialRouteName="infoAdminScreen">
-                <InfoCompStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoUserScreenFunction} />
+                <InfoCompStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InformationUserScreen} />
                 <InfoCompStack.Screen options={{ headerShown: false }} name="infoAdminComp" component={InfoUserComponent} />
             </InfoCompStack.Navigator>
     );
