@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Button, Header, ListItem } from "react-native-elements"
-import { Image, View, TouchableWithoutFeedback, TextInput, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, unstable_enableLogBox } from "react-native"
+import { Image, SafeAreaView, Dimensions, View, TouchableWithoutFeedback, TextInput, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, unstable_enableLogBox } from "react-native"
 import { Footer, Container } from "native-base";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
@@ -9,14 +9,64 @@ import EventUser from "./EventUser";
 import RoutesUser from "./RoutesUser";
 import InfoCatagoriesUser from "./InfoCatagoriesUser";
 import Reports from "./Reports";
+import { DrawerContent } from "./DrawerContent";
+import About from "./About";
 import HeaderComp from "./HeaderComp";
-import PathCatagories from "./PathCatagories";
+import { createDrawerNavigator,
+    DrawerItem,
+    DefaultTheme} 
+    from '@react-navigation/drawer';
+import Icon from 'react-native-vector-icons/Entypo';
+import CurrentUser from "./CorrentUser"
+
+
+import LogoHeaderComponent from "./LogoHeaderComponent"
+
+const MyTheme = {
+    dark: false,
+    colors: {
+      primary: '#FF8C37',
+      background: '#FF8C37',
+      card: '#FAE5D3',
+      text: 'black',
+      border: '#FF8C37',
+    },
+    
+  };
+
+const CustomDrawer = (props) => (
+    <SafeAreaView style={{ flex: 1}}>
+        <ScrollView>
+            <DrawerItem {...props}/>
+        </ScrollView>
+    </SafeAreaView>
+)
 
 function HomePageUserScreen({ navigation }) {
     return (
-        <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
-            <View>
-                <HeaderComp />
+
+
+         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
+             <View>
+                 <View>
+
+                     <Header
+                 backgroundColor='#FAE5D3'
+
+                         leftComponent={<TouchableOpacity
+                            onPress={() => navigation.navigate('Current')}>
+                            <Icon name="user" size={30} color="black" />
+                        </TouchableOpacity>}
+
+                        centerComponent={<LogoHeaderComponent imageUri={require('../assets/img/logo.png')} />}
+
+
+                        rightComponent={<TouchableOpacity
+                            onPress={() => navigation.dangerouslyGetParent().openDrawer()}>
+                            <Icon name="menu" size={30} color="black" />
+                        </TouchableOpacity>}
+                    />
+                </View>
             </View>
 
             <TouchableWithoutFeedback onPress={() => navigation.navigate('InfUs')}>
@@ -26,7 +76,7 @@ function HomePageUserScreen({ navigation }) {
                         style={{ width: "100%", height: "100%" }}
                     />
                     <View style={styles.textStyle}>
-                        <Text style={{fontWeight: "bold",fontSize: 20}}>כתבות</Text>
+                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>כתבות</Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -39,7 +89,7 @@ function HomePageUserScreen({ navigation }) {
                             style={{ width: "100%", height: "100%" }}
                         />
                         <View style={styles.textStyle}>
-                            <Text style={{fontWeight: "bold",fontSize: 20}}>מסלולים</Text>
+                            <Text style={{ fontWeight: "bold", fontSize: 20 }}>מסלולים</Text>
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
@@ -50,7 +100,7 @@ function HomePageUserScreen({ navigation }) {
                             style={{ width: "100%", height: "100%" }}
                         />
                         <View style={styles.textStyle}>
-                            <Text style={{fontWeight: "bold",fontSize: 20}}>מידע</Text>
+                            <Text style={{ fontWeight: "bold", fontSize: 20 }}>מידע</Text>
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
@@ -62,7 +112,7 @@ function HomePageUserScreen({ navigation }) {
                         style={{ width: "100%", height: "100%" }}
                     />
                     <View style={styles.textStyle}>
-                        <Text style={{fontWeight: "bold",fontSize: 20}}>אירועים</Text>
+                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>אירועים</Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -73,76 +123,117 @@ function HomePageUserScreen({ navigation }) {
                         style={{ width: "100%", height: "100%" }}
                     />
                     <View style={styles.textStyle}>
-                        <Text style={{fontWeight: "bold",fontSize: 20}}>תצפיות</Text>
+                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>תצפיות</Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
+            
         </View>
+        
+        
+        
+
+
     )
+    
 }
 
+function CorrentUserScreen(){
+    return(
+        <CurrentUser/>
+    );
+}
 
 function InfoUserScreen() {
     return (
-      <InfoUser/>
+        <InfoUser />
     );
-  }
+}
 
-  function EventUserScreen() {
+function EventUserScreen() {
     return (
-      <EventUser/>
+        <EventUser />
     );
-  }
+}
 
-  function RoutesUserScreen() {
+function RoutesUserScreen() {
     return (
-      <PathCatagories/>
+        <RoutesUser />
     );
-  }
+}
 
-  function InfoCatagoriesUserScreen() {
+function InfoCatagoriesUserScreen() {
     return (
-      <InfoCatagoriesUser/>
+        <InfoCatagoriesUser />
     );
-  }
+}
 
-  function ReportsScreen() {
+function ReportsScreen() {
     return (
-      <Reports/>
+        <Reports />
     );
-  }
+}
+
+function AboutScreen() {
+    return (
+        <About />
+    );
+}
+
+const linking = {
+    prefixes: ['https://mychat.com', 'mychat://'],
+  };
+
 
 const logStack = createStackNavigator();
+const DrawerR = createDrawerNavigator();
 
-function HomePageUser() { //for navigation. not in use yet
+
+
+function HomePageUserStack() { //for navigation. not in use yet
     return (
-        <NavigationContainer>
+        
+        
             <logStack.Navigator initialRouteName="homeP">
-                <logStack.Screen options={{headerShown: false}} name="homeP" component={HomePageUserScreen} />
-                
-                <logStack.Screen  name="InfUs" options={{headerShown: false}}
-                component={InfoUserScreen} />
+                <logStack.Screen options={{ headerShown: false }} name="homeP" component={HomePageUserScreen} />
 
-                <logStack.Screen name="EveUs" options={{headerShown: false}} 
-                component={EventUserScreen} />
+                <logStack.Screen name="InfUs" options={{ headerShown: false }}
+                    component={InfoUserScreen} />
 
-                <logStack.Screen name="RouUs" options={{headerShown: false}} 
-                component={RoutesUserScreen} />
+                <logStack.Screen name="EveUs" options={{ headerShown: false }}
+                    component={EventUserScreen} />
 
-                <logStack.Screen name="InfCaUs" options={{headerShown: false}} 
-                component={InfoCatagoriesUserScreen} />
+                <logStack.Screen name="RouUs" options={{ headerShown: false }}
+                    component={RoutesUserScreen} />
 
-                <logStack.Screen name="Rep" options={{headerShown: false}} 
-                component={ReportsScreen} />
-                
-            </logStack.Navigator>
-        </NavigationContainer>
+                <logStack.Screen name="InfCaUs" options={{ headerShown: false }}
+                    component={InfoCatagoriesUserScreen} />
+
+                <logStack.Screen name="Rep" options={{ headerShown: false }}
+                    component={ReportsScreen} />
+                <logStack.Screen name="Abo" options={{ headerShown: false }}
+                    component={AboutScreen} />  
+                <logStack.Screen name="Current" options={{ headerShown: false }}
+                    component={CorrentUserScreen} />  
+            </logStack.Navigator> 
     );
 }
 
 
+export default function HomePageUser(){
+    return(
+        <NavigationContainer theme={MyTheme}>
+        <DrawerR.Navigator initialRouteName="home" drawerPosition="right"
+         drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>         
+        <DrawerR.Screen name="מסך הבית" component={HomePageUserStack} />
+ 
+      </DrawerR.Navigator>
 
-export default HomePageUser;
+   
+      </NavigationContainer>
+
+    );
+}
 
 const styles = {
     textStyle: {
@@ -158,6 +249,7 @@ const styles = {
     dataStyle: {
         backgroundColor: "#FAE5D3"
     },
+
     infoStyle: {
         backgroundColor: "#F0B27A",
         borderColor: "#FF8C37",
@@ -212,5 +304,50 @@ const styles = {
         height: "10%",
         alignSelf: "center",
         marginTop: 10
-    }
+    },
+    drawerContent: {
+        flex: 1,
+      },
+      userInfoSection: {
+        paddingLeft: 20,
+      },
+      title: {
+        fontSize: 16,
+        marginTop: 3,
+        fontWeight: 'bold',
+      },
+      caption: {
+        fontSize: 14,
+        lineHeight: 14,
+      },
+      row: {
+        marginTop: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      section: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: 15,
+      },
+      paragraph: {
+        fontWeight: 'bold',
+        marginRight: 3,
+      },
+      drawerSection: {
+        marginTop: 15,
+      },
+      bottomDrawerSection: {
+          marginBottom: 15,
+          borderTopColor: '#f4f4f4',
+          borderTopWidth: 1
+      },
+      preference: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingVertical: 12,
+        paddingHorizontal: 16,
+      }
+
+    
 }
