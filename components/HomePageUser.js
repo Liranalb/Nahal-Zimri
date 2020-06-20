@@ -17,8 +17,8 @@ import { createDrawerNavigator,
     DefaultTheme} 
     from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/Entypo';
-import CurrentUser from "./CorrentUser"
-
+import CurrentUser from "./CurrentUser"
+import PathCatagories from "./PathCatagories";
 
 import LogoHeaderComponent from "./LogoHeaderComponent"
 
@@ -138,7 +138,7 @@ function HomePageUserScreen({ navigation }) {
     
 }
 
-function CorrentUserScreen(){
+function CurrentUserScreen(){
     return(
         <CurrentUser/>
     );
@@ -158,7 +158,7 @@ function EventUserScreen() {
 
 function RoutesUserScreen() {
     return (
-        <RoutesUser />
+        <PathCatagories />
     );
 }
 
@@ -214,7 +214,7 @@ function HomePageUserStack() { //for navigation. not in use yet
                 <logStack.Screen name="Abo" options={{ headerShown: false }}
                     component={AboutScreen} />  
                 <logStack.Screen name="Current" options={{ headerShown: false }}
-                    component={CorrentUserScreen} />  
+                    component={CurrentUserScreen} />  
             </logStack.Navigator> 
     );
 }

@@ -32,7 +32,7 @@ class EditReports extends Component {
     render() {
         return (
 
-            <View style={{ height: 390, width: 150, marginLeft: 10, borderWidth: 0.8, borderColor: '#dddddd', backgroundColor: '#F4D5A7' }}>
+            <View style={{ height: 320, width: 150, marginLeft: 10, borderWidth: 0.8, borderColor: '#dddddd', backgroundColor: 'white' }}>
                 <View style={{ flex: 4 }}>
                     <Image source={this.props.imageUri}
                         style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
@@ -50,7 +50,7 @@ class EditReports extends Component {
                         />
                     </View>
 
-                    <View style={{ flex: 5 }}>
+                    <View style={{ flex: 4 }}>
                         <ScrollView>
                             <TextInput
 
@@ -74,7 +74,7 @@ class EditReports extends Component {
                     </View> 
                 </View>
                 
-                <View style={{ width: "100%", flex: 1, paddingLeft: 3, paddingTop: 3, flexDirection: 'row'}}>
+                <View style={{ width: "100%", flex: 1, paddingLeft: 3, paddingTop: 3, flexDirection: 'row', backgroundColor: 'pink' }}>
                     <View style={styles.editButtons}>
                         <Button
                             title="ערוך "

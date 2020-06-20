@@ -16,7 +16,7 @@ import { db } from '../config/Firebase'
 
 
 export function ReportsAdminScreen({ navigation }) {
-    let reportsArray = [];
+    let reportsArray = [], approvedText = "";
     const [loaded, setLoaded] = useState(false);
 
     let data = null;
@@ -25,16 +25,16 @@ export function ReportsAdminScreen({ navigation }) {
         if (exist) {
             data = snapshot.val();
             console.log("data loaded");
-            if( loaded === false) {
-                setLoaded( true );
+            if (loaded === false) {
+                setLoaded(true);
             }
         }
     });
 
 
-    
 
-    let convertDataToArray = (data,reportsArray) => {
+
+    let convertDataToArray = (data, reportsArray) => {
 
         if (data === null)
             return null;
@@ -42,73 +42,106 @@ export function ReportsAdminScreen({ navigation }) {
             if (data.hasOwnProperty(report)) {
                 if (data[report].Approved === true) {
                     reportsArray.push(data[report]);
-                  
+
                 }
-                    
+
             }
         }
-        
+
     }
-    
-    
-    convertDataToArray(data,reportsArray);
+
+
+    convertDataToArray(data, reportsArray);
 
 
     return (
-        <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3'}}>
+        <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
 
             <HeaderComp />
 
 
             <View style={{ width: "100%", height: "97%" }}>
-            <View style={{ flexDirection: 'row', width:"100%",height:"9%" }}>
-                <View style={styles.CheckBoxStyle}>
-                    <CheckBox
+                <View style={{ flexDirection: 'row', width: "100%", height: "9%" }}>
+                    <View style={styles.CheckBoxStyle}>
+                        <CheckBox
 
-                        center
-                        title='פריחה'
-                    // checked={this.state.checked}
-                    />
+                            center
+                            title='פריחה'
+                            containerStyle={styles.CheckBoxContainerStyle} 
+                        // checked={this.state.checked}
+                        />
+                    </View>
+                    <View style={styles.CheckBoxStyle}>
+                        <CheckBox
+                            center
+                            title='בע"ח'
+                            containerStyle={styles.CheckBoxContainerStyle} 
+                        // checked={this.state.checked}
+                        />
+                    </View>
+                    <View style={styles.CheckBoxStyle}>
+                        <CheckBox
+                            center
+                            title='אחר'
+                            containerStyle={styles.CheckBoxContainerStyle} 
+                        //  checked={this.state.checked}
+                        />
+                    </View>
+
                 </View>
-                <View style={styles.CheckBoxStyle}>
-                    <CheckBox
-                        center
-                        title='בע"ח'
-                    // checked={this.state.checked}
-                    />
-                </View>
-                <View style={styles.CheckBoxStyle}>
-                    <CheckBox
-                        center
-                        title='אחר'
-                    //  checked={this.state.checked}
-                    />
-                </View>
 
-            </View>
+                <ScrollView
+                    scrollEventThrottle={16}
+                >
+                    <View style={{ width: "100%" }}>
 
-            <ScrollView
-                scrollEventThrottle={16}
-            >
-                <View style={{ width:"100%"}}>
+                        <View style={{ height: "100%", flex: 1 }}>
+                            <ScrollView
+                                horizontal={true}
+                                showsHorizontalScrollIndicator={false}
+                            >
+                                {reportsArray.map((item) => {
 
-                    <View style={{ height: "100%", flex: 1}}>
-                        <ScrollView
-                            horizontal={true}
-                            showsHorizontalScrollIndicator={false}
-                        >
-                            {reportsArray.map((item) => {
+
+                                    if (item.Approved)
+                                        approvedText = "מאושר"
+                                    else
+                                        approvedText = "לא מאושר"
+
                                     return (
-                                        <EditReports imageUri={{ uri: item.imageLink }}
-                                            name={item.Description}
+                                        <EditReports imageUri={{ uri: item.ImageLink }}
+                                            id={item.id}
+                                            body={item.Description}
                                             date={item.Date}
+                                            type={item.Type}
                                             catagory={item.Catagory}
-                                            approvrd= {item.Approved}
-                                            reporter= {item.ReporterName}
+                                            approved={item.Approved}
+                                            approvedText={approvedText}
+                                            reporter={item.ReporterName}
+                                            onDelete={() => {
+                                                Alert.alert(
+                                                    //title
+                                                    'שלום',
+                                                    //body
+                                                    'האם למחוק דיווח הזה?',
+                                                    [
+                                                        {
+                                                            text: 'כן', onPress: () => {
+                                                                db.ref('Reports/').child(item.id).remove();
+                                                                setLoaded({ loaded: false });
+                                                                // delete image not working yet
+                                                            }
+                                                        },
+                                                        { text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel' },
+                                                    ],
+                                                    { cancelable: false }
+                                                    //clicking out side of alert will not cancel
+                                                );
+                                            }}
                                         />
                                     )
                                 })}
-                            {/* <EditReports imageUri={require('../assets/img/purple.jpg')}
+                                {/* <EditReports imageUri={require('../assets/img/purple.jpg')}
                                 name="purple flower"
                                 date="23.01.2020"
                                 catagory="פריחה"
@@ -133,14 +166,14 @@ export function ReportsAdminScreen({ navigation }) {
                                 name="Sunflower"
                                 date="23.01.2020"
                             /> */}
-                        </ScrollView>
+                            </ScrollView>
+                        </View>
+
                     </View>
+                </ScrollView>
 
-                </View>
-            </ScrollView>
-            
 
-                <View style={{ width:"100%",height:"5%"}}>
+                <View style={{ width: "100%", height: "5%" }}>
 
 
 
@@ -150,7 +183,7 @@ export function ReportsAdminScreen({ navigation }) {
 
 
                 </View>
-                <View style={{ width:"100%",height:"24%" }}>
+                <View style={{ width: "100%", height: "24%" }}>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('repFo')}
                     >
@@ -162,7 +195,7 @@ export function ReportsAdminScreen({ navigation }) {
                 </View>
 
 
-                </View>
+            </View>
 
         </View>
     )
@@ -176,13 +209,13 @@ const repAdminStack = createStackNavigator();
 
 function ReportsAdmin() {
     return (
-       
-            <repAdminStack.Navigator initialRouteName="reportsAdmin">
-                <repAdminStack.Screen options={{ headerShown: false }} name="reportsAdmin" component={ReportsAdminScreen} />
-                <repAdminStack.Screen options={{ headerShown: false }} name="repFo" component={goToReportForm} />
 
-            </repAdminStack.Navigator>
-   
+        <repAdminStack.Navigator initialRouteName="reportsAdmin">
+            <repAdminStack.Screen options={{ headerShown: false }} name="reportsAdmin" component={ReportsAdminScreen} />
+            <repAdminStack.Screen options={{ headerShown: false }} name="repFo" component={goToReportForm} />
+
+        </repAdminStack.Navigator>
+
     );
 
 }
@@ -193,7 +226,7 @@ function ReportsAdmin() {
 export default ReportsAdmin;
 
 const styles = {
-    
+
     textInputStyle: {
         backgroundColor: "#D7D8D7",
         borderColor: "#004577",
@@ -206,9 +239,21 @@ const styles = {
         marginTop: 10
     },
     CheckBoxStyle: {
+        // backgroundColor: "#F6D365",
+        // borderWidth: 2,
+        // borderColor: "#FFAF50",
+        // width: "30%",
+        // flex: 1,
         width: "30%",
         flex: 1,
-        marginTop: "0.4%"
+        marginTop: "0.4%",
+        backgroundColor: "#FAE5D3",
+        
+    },
+    CheckBoxContainerStyle: {
+        borderColor: "#FFAF50",
+        borderWidth: 1,
+        backgroundColor: '#F4D5A7'
     },
     textStyleHeaders: {
         color: 'white',

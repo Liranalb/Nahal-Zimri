@@ -55,7 +55,7 @@ export default EventBoxUser;
 const styles = StyleSheet.create({
 
     eventStyle: {
-        backgroundColor: "#F6D365",
+        backgroundColor: "#F4D5A7",
         borderColor: "#FFAF50",
         overflow: 'hidden',
         borderRadius: 15,

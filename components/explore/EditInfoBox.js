@@ -63,6 +63,7 @@ class EditInfoBox extends Component {
                                         updates[dataPath + "/Body"] = this.state.bodyText;
                                         updates[dataPath + '/Title'] = this.state.headText;
                                         db.ref().update(updates);
+                                        this.setState({changed : false});
                                         console.log("Data updated successfully to : " + dataPath);
                                     }
                                 }

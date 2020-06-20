@@ -4,16 +4,13 @@ import {
     Text,
     StyleSheet,
     Image,
-    TouchableOpacity,
     ScrollView
 } from "react-native";
 
 
 class InfoBox extends Component {
 
-    openInfo() {
-
-    }
+    
 
     render() {
         return (
@@ -55,7 +52,7 @@ const styles = {
         width: 380,
         alignSelf: 'center',
         borderWidth: 1.1,
-        borderColor: '#A3A3A3',
+        borderColor: '#FFAF50',
         borderRadius: 10,
         flexDirection: 'row',
         backgroundColor: '#F4D5A7',

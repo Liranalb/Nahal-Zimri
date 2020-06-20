@@ -63,6 +63,7 @@ function InfoUserScreen({ navigation }) {
                         <CheckBox
                             center
                             title='כתבות'
+                            containerStyle={styles.CheckBoxContainerStyle} 
                         //checked={this.state.checked} //Use Hooking!
                         />
                     </View>
@@ -70,6 +71,7 @@ function InfoUserScreen({ navigation }) {
                         <CheckBox
                             center
                             title='עדכונים'
+                            containerStyle={styles.CheckBoxContainerStyle} 
                         //checked={this.state.checked} //Use Hooking!
                         />
                     </View>
@@ -158,11 +160,20 @@ const styles = {
         alignSelf: "center"
     },
     CheckBoxStyle: {
-        backgroundColor: "#F6D365",
-        borderWidth: 2,
-        borderColor: "#FFAF50",
+        // backgroundColor: "#F6D365",
+        // borderWidth: 2,
+        // borderColor: "#FFAF50",
+        // width: "30%",
+        // flex: 1,
         width: "30%",
         flex: 1,
-        marginTop: 10
+        marginTop: "0.4%",
+        backgroundColor: "#FAE5D3",
+        
+    },
+    CheckBoxContainerStyle: {
+        borderColor: "#FFAF50",
+        borderWidth: 1,
+        backgroundColor: '#F4D5A7'
     }
 }

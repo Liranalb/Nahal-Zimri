@@ -1,10 +1,11 @@
+
 import React, { Component } from "react";
 import {
     View,
     Text,
     StyleSheet,
     Image,
-
+    Button
 } from "react-native";
 import AdminButton from './AdminButton'
 
@@ -17,8 +18,12 @@ class EventBoxAdmin extends React.Component {
                         source={this.props.imageUri}
                         style={{ width: "100%", height: "100%" }}
                     />
-                    <View style={styles.textStyle}>
-                        <AdminButton />
+                    <View>
+                        <Button
+                            title="מחק"
+                            color="green"
+                            onPress={this.props.onDelete}
+                        />
                     </View>
                 </View >
                 <View >
@@ -58,7 +63,7 @@ export default EventBoxAdmin;
 const styles = StyleSheet.create({
 
     eventStyle: {
-        backgroundColor: "#F6D365",
+        backgroundColor: "#F4D5A7",
         borderColor: "#FFAF50",
         overflow: 'hidden',
         borderRadius: 15,
@@ -114,3 +119,4 @@ const styles = StyleSheet.create({
     }
 
 });
+

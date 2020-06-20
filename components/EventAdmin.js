@@ -1,17 +1,57 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState , useEffect} from "react";
 import { Header, ListItem } from "react-native-elements"
 /*import { createStackNavigator } from 'react-navigation-stack';*/
-import { Image, View, TextInput, Text, StyleSheet, ScrollView, TouchableOpacity, Button, Alert, unstable_enableLogBox } from "react-native"
+import { Image, View, TextInput, Text, StyleSheet, ScrollView, TouchableOpacity, Button, Alert, unstable_enableLogBox, TouchableWithoutFeedback } from "react-native"
 import { Footer, Container, Right } from "native-base"
 import HeaderComp from "./HeaderComp";
 import AdminButton from "./AdminButton";
 import { db } from '../config/Firebase'
 import EventBoxAdmin from "./EventBoxAdmin";
 
+//let photoUploaded = false;
+let keyID;
+
+function sendData(name, date, day, hour, location, link, details) {
+    let eveId = 'eve' + keyID;
+    let dataPath = 'Events/eve' + keyID;
+    let newEve = {
+        name:name,
+        date:date,
+        weekday:day,
+        hour:hour,
+        location:location,
+        imageLink:link,
+        details:details,
+        id: eveId
+    }
+    db.ref(dataPath).set(newEve);
+    return 0;
+}
+
 function EventAdmin() {
     let eventsArray = [];
+    const [name, onChangeName] = useState('');
+    const [date, onChangeDate] = useState('');
+    const [day, onChangeDay] = useState('');
+    const [hour, onChangeHour] = useState('');
+    const [location, onChangeLocation] = useState('');
+    const [link, onChangeLink] = useState('');
+    const [details, onChangeDetails] = useState('');
     const [loaded, setLoaded] = useState(false);
 
+
+    function refreshPage() {
+        onChangeName("");
+        onChangeDate("");
+        onChangeDay("");
+        onChangeHour("");
+        onChangeLocation("");
+        onChangeLink("");
+        onChangeDetails("");
+        setLoaded({ loaded: false });
+        keyID = newPostKey();
+        //photoUploaded = false;
+    }
 
     //load data
     let data = null;
@@ -26,8 +66,23 @@ function EventAdmin() {
         }
     });
 
+    let newPostKey = () => {
+        return db.ref().child('Inforamtion').push().key;
+    }
 
 
+    // on mount
+    useEffect(() => {
+        keyID = newPostKey();
+        console.log("Produced key:  " + keyID);
+
+    }, []);
+    // on unmount
+    useEffect(() => {
+        return () => {
+
+        }
+    }, []);
 
     let convertDataToArray = (data, eventsArray) => {
         if (data === null)
@@ -59,6 +114,25 @@ function EventAdmin() {
                                 hour={item.hour}
                                 location={item.location}
                                 details={item.details}
+                                item={item}
+                                onDelete= { () => {
+                                    Alert.alert(
+                                        //title
+                                        'Hello',
+                                        //body
+                                        'האם למחוק את פריט המידע הזה?',
+                                        [
+                                          {text: 'כן', onPress: () => {
+                                              db.ref('Events/').child(item.id).remove();
+                                              setLoaded({loaded: false});
+                                          }},
+                                          {text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel'},
+                                        ],
+                                        { cancelable: false }
+                                        //clicking out side of alert will not cancel
+                                      );
+                                    }
+                                }
                             />
                         )
                     })
@@ -74,50 +148,66 @@ function EventAdmin() {
                     <Text>שם האירוע:</Text>
                     <  TextInput
                         style={styles.textInput}
-                        onChangeText={text => onChange(text)}
-                    //value={detail}
+                        onChangeText={text => onChangeName(text)}
+                        value={name}
                     />
                     <Text>תאריך:</Text>
                     <  TextInput
                         style={styles.textInput}
-                        onChangeText={text1 => onChange1(text1)}
-                    //value={detail1}
+                        onChangeText={text => onChangeDate(text)}
+                        value={date}
                     /><Text>יום:</Text>
                     <  TextInput
 
                         style={styles.textInput}
-                        onChangeText={text2 => onChange2(text2)}
-                    //value={detail2}
+                        onChangeText={text => onChangeDay(text)}
+                        value={day}
                     />
                     <Text>שעה:</Text>
                     <  TextInput
 
                         style={styles.textInput}
-                        onChangeText={text2 => onChange2(text2)}
-                    //value={detail2}
+                        onChangeText={text => onChangeHour(text)}
+                        value={hour}
                     />
                     <Text>מיקום:</Text>
                     <  TextInput
 
                         style={styles.textInput}
-                        onChangeText={text2 => onChange2(text2)}
-                    //value={detail2}
+                        onChangeText={text => onChangeLocation(text)}
+                        value={location}
+                    />
+                    <Text>לינק:</Text>
+                    <  TextInput
+
+                        style={styles.textInput}
+                        onChangeText={text => onChangeLink(text)}
+                        value={link}
                     />
                     <Text>פרטים:</Text>
                     <  TextInput
 
-                        style={{ height: 80, borderColor: 'gray', borderWidth: 1, backgroundColor: 'white' }}
-                        onChangeText={text2 => onChange2(text2)}
-                    //value={detail2}
+                        style={styles.textInput}
+                        onChangeText={text => onChangeDetails(text)}
+                        value={details}
                     />
 
 
                 </View>
-                <View style={styles.buttonStyle}>
-                    <TouchableOpacity>
-                        <Text style={{ color: 'white' }}>הוסף</Text>
-                    </TouchableOpacity >
-                </View>
+                <TouchableWithoutFeedback
+                    onPress={() => {
+                        let result = sendData(name, date, day, hour, location, link, details);
+                        console.log("result is: " + result);
+                        if (result === 0)
+                            refreshPage();
+                    }}
+                >
+                    <View style={styles.buttonStyle}>
+                        <Text
+                            style={{ alignSelf: 'center', marginTop: "5%", fontSize: 18 }}
+                        >הוסף</Text>
+                    </View>
+                </TouchableWithoutFeedback>
             </ScrollView>
         </View>
 
@@ -132,10 +222,19 @@ const styles = {
 
 
     textInput: {
-        height: 30,
+        backgroundColor: "#FFF4E3",
+        borderColor: "green",
+        width: "90%",
+        borderRadius: 10,
+        borderWidth: 2,
+        fontSize: 20,
+        alignSelf: "center",
+        textAlignVertical: 'top',
+        marginTop: 5
+        /*height: 5,
         borderColor: 'gray',
         borderWidth: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white'*/
     },
 
     buttonStyle: {
@@ -147,9 +246,9 @@ const styles = {
         borderWidth: 2,
         fontSize: 10,
         width: "30%",
-        height: "6%",
+        height: "5%",
         alignSelf: "center",
-        marginTop: 5,
+        marginTop: "5%",
         marginBottom: "10%",
         overflow: 'hidden'
     },

@@ -70,7 +70,7 @@ function ReportsScreen({ navigation }) {
                             center
                             title='פריחה'
                             //checked={this.state.checked}
-                            containerStyle={{ backgroundColor: '#F4D5A7' }}
+                            containerStyle={styles.CheckBoxContainerStyle} 
 
                         />
                     </View>
@@ -79,7 +79,7 @@ function ReportsScreen({ navigation }) {
                             center
                             title='בע"ח'
                             //checked={this.state.checked}
-                            containerStyle={{ backgroundColor: '#F4D5A7' }}
+                            containerStyle={styles.CheckBoxContainerStyle} 
                         />
                     </View>
                     <View style={styles.CheckBoxStyle}>
@@ -87,7 +87,7 @@ function ReportsScreen({ navigation }) {
                             center
                             title='אחר'
                             //checked={this.state.checked}
-                            containerStyle={{ backgroundColor: '#F4D5A7' }}
+                            containerStyle={styles.CheckBoxContainerStyle} 
                         />
                     </View>
             
@@ -202,13 +202,6 @@ const styles = {
         textAlignVertical: 'top',
         marginTop: 10
     },
-    CheckBoxStyle: {
-        width: "30%",
-        flex: 1,
-        marginTop: "0.4%",
-        backgroundColor: "#FAE5D3"
-
-    },
     textStyleHeaders: {
         color: 'white',
         fontSize: 30,
@@ -226,6 +219,22 @@ const styles = {
         backgroundColor: "#424242"
 
 
+    },
+    CheckBoxStyle: {
+        // backgroundColor: "#F6D365",
+        // borderWidth: 2,
+        // borderColor: "#FFAF50",
+        // width: "30%",
+        // flex: 1,
+        width: "30%",
+        flex: 1,
+        marginTop: "0.4%",
+        backgroundColor: "#FAE5D3",
+        
+    },
+    CheckBoxContainerStyle: {
+        borderColor: "#FFAF50",
+        borderWidth: 1,
+        backgroundColor: '#F4D5A7'
     }
-
 }

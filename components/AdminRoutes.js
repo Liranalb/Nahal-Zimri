@@ -154,20 +154,37 @@ function AdminRoutesScreen({ navigation }) {
                     <Text>פרטים:</Text>
                     <TextInput style={styles.textInput}> </TextInput>
                 </View>
-                <Icon name="camera" size={30}
-                    color="black" />
-                <Button
-                    onPress={() => alert('Pressed!')}
-                    title="עדכן"
-
-
-                />
+                
+                 <TouchableWithoutFeedback
+                    onPress={() => {
+                        /*let result = sendData(name, date, day, hour, location, link, details);
+                        console.log("result is: " + result);
+                        if (result === 0)
+                            refreshPage();*/
+                    }}
+                >
+                    <View style={styles.buttonStyle}>
+                        <Text
+                            style={{ alignSelf: 'center', marginTop: "5%", fontSize: 18 }}
+                        >הוסף</Text>
+                    </View>
+                </TouchableWithoutFeedback>
+                
             </ScrollView>
         </View>
     )
 }
 
+/*
+<Icon name="camera" size={30}
+                    color="black" />
+<Button style={styles.buttonStyle}
+                    onPress={() => alert('Pressed!')}
+                    title="עדכן"
 
+
+                />
+*/
 function NewOpenRouteScreen() {
     return (
         <NewOpenRoute item={currItem} img={currImg}/>
@@ -196,12 +213,42 @@ function AdminRoutes(props) { //for navigation. not in use yet
 export default AdminRoutes;
 
 const styles = {
-    textInput: {
+    
+    /*textInput: {
         backgroundColor: 'white',
         borderRadius: 5,
         height: 15,
+    },*/
+    textInput: {
+        backgroundColor: "#FFF4E3",
+        borderColor: "green",
+        width: "90%",
+        borderRadius: 10,
+        borderWidth: 2,
+        fontSize: 20,
+        alignSelf: "center",
+        textAlignVertical: 'top',
+        marginTop: 5
+        /*height: 5,
+        borderColor: 'gray',
+        borderWidth: 1,
+        backgroundColor: 'white'*/
     },
-
+    buttonStyle: {
+        justifyContent: 'center',
+        alignItems: "center",
+        alignSelf: "center",
+        backgroundColor: "green",
+        borderColor: "green",
+        borderWidth: 2,
+        fontSize: 10,
+        width: "30%",
+        height: "7%",
+        alignSelf: "center",
+        marginTop: "5%",
+        marginBottom: "10%",
+        overflow: 'hidden'
+    },
     CheckBoxStyle: {
         backgroundColor: "#F6D365",
         borderColor: "#FFAF50",
