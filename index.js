@@ -39,15 +39,34 @@ import AdminRoutes from "./components/AdminRoutes";
 import AdminUnitRoutes from "./components/AdminUnitRoutes";
 
 import RegForm from "./components/RegForm";
+import { set } from "react-native-reanimated";
 
 
 class loginHelper extends Component {
+    state = {loggedIn: false, adminStatus: false}
+    
+    async adminCheck() { 
+        db.ref('Users/'+user.uid+'/Admin').once('value', function (snapshot) {
+            const exist = (snapshot.val() !== null);
 
-    state = {loggedIn: false}
+         if (exist) {
+            var Admin = snapshot.val();
+            set.state({adminStatus: Admin})
+            alert(set.state.adminStatus);
+            console.log("user data loaded");
+
+         }
+     });
+    }
+
+    
 
     componentWillMount() {
+        //firebase.auth().signOut();
         firebase.auth().onAuthStateChanged((user) => {
             if(user) {
+                global.uid = user.uid;
+                console.log(global.uid);
                 this.setState({loggedIn: true})
             }
             else {
@@ -71,4 +90,17 @@ class loginHelper extends Component {
     }
 }
 
-AppRegistry.registerComponent(appName, () => HomePageAdmin);
+AppRegistry.registerComponent(appName, () => loginHelper);
+
+// function adminCheck() { 
+//     db.ref('Users/'+user.uid+'/Admin').once('value', function (snapshot) {
+//          const exist = (snapshot.val() !== null);
+
+//          if (exist) {
+//             Admin = snapshot.val();
+//             alert(Admin);
+//             console.log("user data loaded");
+
+//          }
+//      });
+//     }
