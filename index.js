@@ -104,7 +104,12 @@ class loginHelper extends Component {
     }
 }
 
-AppRegistry.registerComponent(appName, () => loginHelper);
+AppRegistry.registerComponent(appName, () => HomePageAdmin );
+
+//HomePageUser
+//loginHelper
+//HomePageAdmin
+//Admin: 123456
 
 // function adminCheck() { 
 //     db.ref('Users/'+user.uid+'/Admin').once('value', function (snapshot) {
