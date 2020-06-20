@@ -41,26 +41,59 @@ import AdminUnitRoutes from "./components/AdminUnitRoutes";
 import RegForm from "./components/RegForm";
 
 
+
 class loginHelper extends Component {
+    state = {loggedIn: false, isAdmin: false}
 
-    state = {loggedIn: false}
+    async adminCheck(user) { 
+        console.log("adminCheck")
+        const eventref = firebase.database().ref('Users/'+user.uid+'/Admin');
+        const snapshot = await eventref.once('value');
+        this.isAdmin = snapshot.val();
+    //     firebase.database().ref('Users/'+user.uid+'/Admin').once('value', (snapshot) => {
+    //         const exist = (snapshot.val() !== null);
+    //         console.log("exist ", exist)
+    //         if (exist) { 
+    //             var Admin = snapshot.val();
+    //             // state.adminStatus = Admin;
+    //             // this.state({adminStatus: Admin})
+    //             // alert(state.adminStatus);
+    //             // console.log("user data loaded");
+    //             this.Admin = Admin;
+    //         }
+    //  });
+    }
 
-    componentWillMount() {
-        firebase.auth().onAuthStateChanged((user) => {
+    
+
+    async componentDidMount() {
+        console.log("componentDidMount")
+        firebase.auth().onAuthStateChanged(async (user) => {
+            console.log("user", user)
+            let isAdmin = false;
             if(user) {
-                this.setState({loggedIn: true})
+                global.uid = user.uid;
+                await this.adminCheck(user)
+                this.setState({loggedIn: true, isAdmin: this.isAdmin})
             }
             else {
-                this.setState({loggedIn: false})
+                this.setState({loggedIn: false, isAdmin: this.isAdmin})
             }
+            //this.forceUpdate();
         })
     }
 
     renderContent() {
-
+        //firebase.auth().signOut();
+        console.log("renderContent ")
+        console.log("isAdmin: " + this.isAdmin + " isLoggedin " +this.loggedIn );
         if(!this.state.loggedIn) {
             return (<MainLogin/>)
         }
+        else if(this.state.isAdmin){
+            return <HomePageAdmin/>
+        }
+
         else return <HomePageUser/>
     }
 
@@ -71,4 +104,6 @@ class loginHelper extends Component {
     }
 }
 
-AppRegistry.registerComponent(appName, () => HomePageUser);
+AppRegistry.registerComponent(appName, () => loginHelper);
+
+
