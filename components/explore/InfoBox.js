@@ -11,9 +11,7 @@ import {
 
 class InfoBox extends Component {
 
-    openInfo() {
-
-    }
+    
 
     render() {
         return (

@@ -6,12 +6,17 @@ import {
     Image,
   
 } from "react-native";
-import {  CheckBox, Button } from "react-native-elements"
+import {  CheckBox } from "react-native-elements"
 import Icon from 'react-native-vector-icons/FontAwesome';
 class ReportFormComp extends Component {
     state= {
         checked: false
     }
+
+    handleChange = event => {
+        this.props.onchange(event.target.value);
+    };
+    
     render() {
         return (
             <View style={styles.container}>
@@ -26,7 +31,11 @@ class ReportFormComp extends Component {
                         checkedIcon={<Icon name="check" size={40} color="#48D347" />}
                         uncheckedIcon={<Icon name="plus" size={40} color="#505050" />}
                         checked={this.state.checked}
-                        onPress={() => this.setState({checked: !this.state.checked})}
+                        // onPress={() => {
+                        //     this.setState({checked: !this.state.checked});
+                        //     console.log(this.props.nnn);
+                        // }}
+                        onPress={this.handleChange}
                     
                     />
                     </View>
@@ -34,8 +43,8 @@ class ReportFormComp extends Component {
                     <View style = {{flex: 1}}>
                         <Text style= {styles.textStyle}>קטגוריה:     {this.props.catagory}</Text>
                     </View>
-                    
-                    
+
+
                 </View>
                 
                 

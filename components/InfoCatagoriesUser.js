@@ -8,11 +8,8 @@ import {
     Text,
     TouchableWithoutFeedback,
     ImageBackground,
-    ImageBackgroundBase
 } from "react-native"
 import InformationPage from "./InformationPage"
-import HomeAdminPage from'./HomePageAdmin'
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 

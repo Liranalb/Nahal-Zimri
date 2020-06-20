@@ -40,7 +40,7 @@ uriToBlob = (uri) => {
     });
   }
 
-  sayCheese = (location, DB_Path) => { 
+  sayCheese = (location) => { 
   
    return ImagePicker.openCamera({
         width: 400,
