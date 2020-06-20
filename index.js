@@ -39,47 +39,61 @@ import AdminRoutes from "./components/AdminRoutes";
 import AdminUnitRoutes from "./components/AdminUnitRoutes";
 
 import RegForm from "./components/RegForm";
-import { set } from "react-native-reanimated";
+
 
 
 class loginHelper extends Component {
-    state = {loggedIn: false, adminStatus: false}
-    
-    async adminCheck() { 
-        db.ref('Users/'+user.uid+'/Admin').once('value', function (snapshot) {
-            const exist = (snapshot.val() !== null);
+    state = {loggedIn: false, isAdmin: false}
 
-         if (exist) {
-            var Admin = snapshot.val();
-            set.state({adminStatus: Admin})
-            alert(set.state.adminStatus);
-            console.log("user data loaded");
-
-         }
-     });
+    async adminCheck(user) { 
+        console.log("adminCheck")
+        const eventref = firebase.database().ref('Users/'+user.uid+'/Admin');
+        const snapshot = await eventref.once('value');
+        this.isAdmin = snapshot.val();
+    //     firebase.database().ref('Users/'+user.uid+'/Admin').once('value', (snapshot) => {
+    //         const exist = (snapshot.val() !== null);
+    //         console.log("exist ", exist)
+    //         if (exist) { 
+    //             var Admin = snapshot.val();
+    //             // state.adminStatus = Admin;
+    //             // this.state({adminStatus: Admin})
+    //             // alert(state.adminStatus);
+    //             // console.log("user data loaded");
+    //             this.Admin = Admin;
+    //         }
+    //  });
     }
 
     
 
-    componentWillMount() {
-        //firebase.auth().signOut();
-        firebase.auth().onAuthStateChanged((user) => {
+    async componentDidMount() {
+        console.log("componentDidMount")
+        firebase.auth().onAuthStateChanged(async (user) => {
+            console.log("user", user)
+            let isAdmin = false;
             if(user) {
                 global.uid = user.uid;
-                console.log(global.uid);
-                this.setState({loggedIn: true})
+                await this.adminCheck(user)
+                this.setState({loggedIn: true, isAdmin: this.isAdmin})
             }
             else {
-                this.setState({loggedIn: false})
+                this.setState({loggedIn: false, isAdmin: this.isAdmin})
             }
+            //this.forceUpdate();
         })
     }
 
     renderContent() {
-
+        //firebase.auth().signOut();
+        console.log("renderContent ")
+        console.log("isAdmin: " + this.isAdmin + " isLoggedin " +this.loggedIn );
         if(!this.state.loggedIn) {
             return (<MainLogin/>)
         }
+        else if(this.state.isAdmin){
+            return <HomePageAdmin/>
+        }
+
         else return <HomePageUser/>
     }
 
