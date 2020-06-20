@@ -64,5 +64,3 @@ const styles = {
         alignSelf: "center"
     }
 }
-
-
