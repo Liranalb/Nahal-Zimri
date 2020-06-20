@@ -168,10 +168,7 @@ export default InfoUnitAdmin;
 
 const styles = StyleSheet.create({
     textStyle: {
-        margin:1,
-        borderRadius: 4,
-        borderColor:"gray",
-        borderWidth:1,
+        //margin:1,
         width: "56%",
         flexDirection: 'row-reverse',
         alignSelf: "flex-end",
