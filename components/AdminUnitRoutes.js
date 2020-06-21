@@ -4,9 +4,10 @@ import {
     Text,
     StyleSheet,
     Image,
-
+    TouchableWithoutFeedback 
 } from "react-native";
 import AdminButton from "./AdminButton";
+import Icon from 'react-native-vector-icons/Entypo';
 
 class AdminUnitRoutes extends React.Component {
     render() {
@@ -40,6 +41,16 @@ class AdminUnitRoutes extends React.Component {
                         <Text style={styles.textTitleStyle}> פרטים:</Text>
                         <Text  >{this.props.details} </Text>
                     </View>
+                    <View style={styles.textStyle}>
+                        <Text style={styles.textTitleStyle}>החלפת תמונה:</Text>
+                        <TouchableWithoutFeedback 
+                        // onPress={() => uploadImage('uploads/mydduse.jpg')}
+                        //onPress={() => pressPhoto("upload")}
+                        >
+                            <View style={{width:"10%",marginLeft:"83%" ,borderColor: "#FFAF50", borderRadius: 10,borderWidth: 2,}}><Icon name="images" size={30} color="#505050" /></View>
+                        
+                        </TouchableWithoutFeedback>
+                    </View>
                 </View>
                 <View style={styles.imageStyle}>
                     <Image
@@ -49,6 +60,7 @@ class AdminUnitRoutes extends React.Component {
                     <View style={styles.textStyle}>
                         <AdminButton />
                     </View>
+                    
                 </View >
                 
 
