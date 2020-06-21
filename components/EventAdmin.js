@@ -1,4 +1,4 @@
-import React, { Component, useState , useEffect} from "react";
+import React, { Component, useState, useEffect } from "react";
 import { Header, ListItem } from "react-native-elements"
 /*import { createStackNavigator } from 'react-navigation-stack';*/
 import { Image, View, TextInput, Text, StyleSheet, ScrollView, TouchableOpacity, Button, Alert, unstable_enableLogBox, TouchableWithoutFeedback } from "react-native"
@@ -9,35 +9,34 @@ import { db } from '../config/Firebase'
 import EventBoxAdmin from "./EventBoxAdmin";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContent } from "./DrawerContent";
+import Icon from 'react-native-vector-icons/Entypo';
 
 //let photoUploaded = false;
 let keyID;
 
-function sendData(name, date, day, hour, location, link, details) {
+function sendData(name, date, day, hour, location, details) {
     let eveId = 'eve' + keyID;
     let dataPath = 'Events/eve' + keyID;
     let newEve = {
-        name:name,
-        date:date,
-        weekday:day,
-        hour:hour,
-        location:location,
-        imageLink:link,
-        details:details,
+        name: name,
+        date: date,
+        weekday: day,
+        hour: hour,
+        location: location,
+        details: details,
         id: eveId
     }
     db.ref(dataPath).set(newEve);
     return 0;
 }
 
-function EventAdminScreen( { navigation } ) {
+function EventAdminScreen({ navigation }) {
     let eventsArray = [];
     const [name, onChangeName] = useState('');
     const [date, onChangeDate] = useState('');
     const [day, onChangeDay] = useState('');
     const [hour, onChangeHour] = useState('');
     const [location, onChangeLocation] = useState('');
-    const [link, onChangeLink] = useState('');
     const [details, onChangeDetails] = useState('');
     const [loaded, setLoaded] = useState(false);
 
@@ -48,7 +47,6 @@ function EventAdminScreen( { navigation } ) {
         onChangeDay("");
         onChangeHour("");
         onChangeLocation("");
-        onChangeLink("");
         onChangeDetails("");
         setLoaded({ loaded: false });
         keyID = newPostKey();
@@ -69,7 +67,7 @@ function EventAdminScreen( { navigation } ) {
     });
 
     let newPostKey = () => {
-        return db.ref().child('Inforamtion').push().key;
+        return db.ref().child('Events').push().key;
     }
 
 
@@ -118,76 +116,66 @@ function EventAdminScreen( { navigation } ) {
                                 location={item.location}
                                 details={item.details}
                                 item={item}
-                                onDelete= { () => {
+                                onDelete={() => {
                                     Alert.alert(
                                         //title
                                         'Hello',
                                         //body
                                         'האם למחוק את פריט המידע הזה?',
                                         [
-                                          {text: 'כן', onPress: () => {
-                                              db.ref('Events/').child(item.id).remove();
-                                              setLoaded({loaded: false});
-                                          }},
-                                          {text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel'},
+                                            {
+                                                text: 'כן', onPress: () => {
+                                                    db.ref('Events/').child(item.id).remove();
+                                                    setLoaded({ loaded: false });
+                                                }
+                                            },
+                                            { text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel' },
                                         ],
                                         { cancelable: false }
                                         //clicking out side of alert will not cancel
-                                      );
-                                    }
+                                    );
+                                }
                                 }
                             />
                         )
                     })
                 }
                 <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('newOpAr')}>
-
-                        <View style={{ alignItems: "center" }}>
-                            <Text style={{ fontWeight: "bold" }} > טען יותר...</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    <Text>שם האירוע:</Text>
+                    <Text style={{ fontSize: 18,fontWeight: "bold", alignSelf:"center", alignItems: "center"}} >הוספת אירוע:</Text>
+                      
+                    <Text style={{ fontSize: 16}}>שם האירוע:</Text>
                     <  TextInput
                         style={styles.textInput}
                         onChangeText={text => onChangeName(text)}
                         value={name}
                     />
-                    <Text>תאריך:</Text>
+                    <Text style={{ fontSize: 16}}>תאריך:</Text>
                     <  TextInput
                         style={styles.textInput}
                         onChangeText={text => onChangeDate(text)}
                         value={date}
-                    /><Text>יום:</Text>
+                    /><Text style={{ fontSize: 16}}>יום:</Text>
                     <  TextInput
 
                         style={styles.textInput}
                         onChangeText={text => onChangeDay(text)}
                         value={day}
                     />
-                    <Text>שעה:</Text>
+                    <Text style={{ fontSize: 16}}>שעה:</Text>
                     <  TextInput
 
                         style={styles.textInput}
                         onChangeText={text => onChangeHour(text)}
                         value={hour}
                     />
-                    <Text>מיקום:</Text>
+                    <Text style={{ fontSize: 16}}>מיקום:</Text>
                     <  TextInput
 
                         style={styles.textInput}
                         onChangeText={text => onChangeLocation(text)}
                         value={location}
                     />
-                    <Text>לינק:</Text>
-                    <  TextInput
-
-                        style={styles.textInput}
-                        onChangeText={text => onChangeLink(text)}
-                        value={link}
-                    />
-                    <Text>פרטים:</Text>
+                    <Text style={{ fontSize: 16}}>פרטים:</Text>
                     <  TextInput
 
                         style={styles.textInput}
@@ -197,9 +185,17 @@ function EventAdminScreen( { navigation } ) {
 
 
                 </View>
+                <Text style={{ fontSize: 16}}>הוספת תמונה:</Text>
+                <TouchableWithoutFeedback 
+                // onPress={() => uploadImage('uploads/mydduse.jpg')}
+                //onPress={() => pressPhoto("upload")}
+                >
+                    <View style={{width:"10%",marginLeft:"85%", marginTop: "5%" ,borderColor: "green", borderRadius: 10,borderWidth: 2,}}><Icon name="images" size={30} color="#505050" /></View>
+                
+                </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback
                     onPress={() => {
-                        let result = sendData(name, date, day, hour, location, link, details);
+                        let result = sendData(name, date, day, hour, location, details);
                         console.log("result is: " + result);
                         if (result === 0)
                             refreshPage();
