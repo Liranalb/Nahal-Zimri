@@ -51,6 +51,9 @@ class EditInfoBox extends Component {
                         />
                         {/* // this.props.onEditText */}
                     </ScrollView>
+                    
+                    
+                    
                     <View style={styles.buttonsContainer}>
                         <View style={styles.editButtons}>
                             <Button
@@ -115,7 +118,8 @@ const styles = {
         borderColor: '#A3A3A3',
         borderRadius: 10,
         flexDirection: 'row-reverse',
-        backgroundColor: '#F4D5A7'
+        backgroundColor: '#F4D5A7',
+        overflow: 'hidden'
 
 
     },

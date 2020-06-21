@@ -40,7 +40,7 @@ import AdminUnitRoutes from "./components/AdminUnitRoutes";
 
 import RegForm from "./components/RegForm";
 
-
+console.disableYellowBox = true;
 
 class loginHelper extends Component {
     state = {loggedIn: false, isAdmin: false}
@@ -104,6 +104,6 @@ class loginHelper extends Component {
     }
 }
 
-AppRegistry.registerComponent(appName, () => loginHelper);
+AppRegistry.registerComponent(appName, () => HomePageAdmin);
 
 

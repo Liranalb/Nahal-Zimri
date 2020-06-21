@@ -1,5 +1,12 @@
 import React, { Component } from "react"
-import { TextInput, Alert, ScrollView, Text, TouchableWithoutFeedback, ImageBackground, Button, Image } from "react-native"
+import {
+    TextInput,
+    Alert,
+    ScrollView,
+    Text,
+    KeyboardAvoidingView, // not working :( 
+    TouchableWithoutFeedback, Image
+} from "react-native"
 import { View, Thumbnail, List, ListItem } from "native-base"
 import { CheckBox } from "react-native-elements"
 
@@ -9,8 +16,7 @@ import HeaderComp from "./HeaderComp"
 import { storage, db, auth } from '../config/Firebase'
 
 import { Collapse, CollapseHeader, CollapseBody } from "accordion-collapse-react-native";
-import ReportFormComp from "./ReportFormComp"
-
+import { Divider } from 'react-native-paper';
 import ImagePicker from 'react-native-image-crop-picker';
 import sayCheese from '../assets/functions/takePhoto'
 import uploadImage from '../assets/functions/uploadSingleImage'
@@ -54,7 +60,17 @@ async function pressPhoto(source) {
 function sendData(body, type, genre) {
 
     if (photoUploaded === false) {
-        alert("Upload image first");
+        Alert.alert(
+            "שים לב",
+            "יש להעלות תמונה תחילה."
+        );
+        return -1;
+    }
+    else if (type === "") {
+        Alert.alert(
+            ",שים לב",
+            "יש  לבחור סוג דיווח תחילה."
+        );
         return -1;
     }
 
@@ -71,8 +87,8 @@ function sendData(body, type, genre) {
                 Approved: true,
                 Date: date,
                 Description: body,
-                Catagory: type,
-                Type: genre,
+                Catagory: genre,
+                Type: type,
                 ImageLink: url,
                 id: repId,
                 ReporterName: "reportter name"
@@ -83,7 +99,7 @@ function sendData(body, type, genre) {
 
     return 0;
 }
-const ITEMS = ["One", "Two", "Three", "Four", "Five"];
+const ITEMS = ["One", "Two", "Three", "Four", "Five", "Six","Seven","Eight"];
 
 
 
@@ -102,30 +118,30 @@ class ReportForm extends Component {
             ),
             body: "",
             reportType: "",
-            type:"",
-            genre:""
+            type: "",
+            genre: ""
 
         }
     }
 
-    handlePress = (checkNumber,value, genre) => {
-        let checkItems= {...this.state.checkItems} , val=value; 
+    handlePress = (checkNumber, value, genre) => {
+        let checkItems = { ...this.state.checkItems }, val = value;
         Object.keys(this.state.checkItems).forEach(checkbox => {
-            if(!Object.is(checkNumber,checkbox))
-                checkItems[checkbox]=false;
+            if (!Object.is(checkNumber, checkbox))
+                checkItems[checkbox] = false;
             else {
-                if (checkItems[checkbox]===false)
-                    checkItems[checkbox]=true;
+                if (checkItems[checkbox] === false)
+                    checkItems[checkbox] = true;
                 else {
-                    checkItems[checkbox]=false;
-                    val=""
+                    checkItems[checkbox] = false;
+                    val = ""
                 }
             }
         });
         this.setState({ checkItems, type: val, genre: genre })
     };
 
-    
+
 
     componentDidMount() {
         keyID = db.ref().child('Reports').push().key;
@@ -137,239 +153,316 @@ class ReportForm extends Component {
 
 
         let refreshPage = () => {
-            this.setState({ body: "" });
+            this.setState({ body: "", type: "", genre: "" });
             keyID = db.ref().child('Reports').push().key;
             photoUploaded = false;
+            this.handlePress("None", "", "");
         }
 
 
 
 
         return (
-            <View style={{ height: "100%", width: "100%" }}>
-                <ImageBackground source={require('../assets/img/homePageAdmin_background.jpg')}
-                    style={{ flex: 1, resizeMode: 'cover' }} >
-                    <View style={{ backgroundColor: '#FAE5D3', height: "100%", width: "90%", alignSelf: 'center' }}>
+            <View style={{ height: "100%", width: "100%", backgroundColor: '#FAE5D3' }}>
+                <HeaderComp />
+                {/* <ImageBackground source={require('../assets/img/homePageAdmin_background.jpg')} */}
+                {/* style={{ flex: 1, resizeMode: 'cover' }} > */}
+                <View style={{ backgroundColor: '#FAE5D3', height: "89%", width: "90%", alignSelf: 'center' }}>
 
 
-                        <View style={{ width: "100%", height: "69%" }}>
-                            <ScrollView>
-                                <Collapse>
-                                    <CollapseHeader style={styles.typeStyle}>
+                    <View style={{ width: "100%", height: "69%" }}>
+                        <ScrollView>
+                            <Collapse>
+                                <CollapseHeader style={styles.typeStyle}>
 
-                                        <View style={styles.innerViewStyle}>
-                                            <Text style={styles.textStyleHeaders}>ציפורים</Text>
-                                        </View>
+                                    <View style={styles.innerViewStyle}>
+                                        <Text style={styles.textStyleHeaders}>ציפורים</Text>
+                                    </View>
 
-                                    </CollapseHeader>
-                                    
-                                    <CollapseBody>  
+                                </CollapseHeader>
 
-
-    
-
-                                        <View style={styles.container}>
-                                            <View style={{ flex: 1}}>
-                                                <Image source={require('../assets/img/bird.jpg')}
-                                                    style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                                                />
-                                            </View>
-                                            <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
-                                                <View style={{ flex: 1 }}>
-                                                    <CheckBox
-                                                        checkedIcon={<IconA name="check" size={40} color="#48D347" />}
-                                                        uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                        checked={this.state.checkItems['One']}
-                                                        onPress={() =>  this.handlePress('One', 'דרור','Birds')}
-                                                    />
-                                                </View>
-                                                <View style={{ flex: 1 }}>
-                                                    <Text style={styles.textStyle}>דרור</Text>
-                                                </View>
-                                            </View>
-                                        </View>
-
-                                        
-                                        <View style={styles.container}>
-                                            <View style={{ flex: 1 }}>
-                                                <Image source={require('../assets/img/BigHankan.jpg')}
-                                                    style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                                                />
-                                            </View>
-                                            <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
-                                                <View style={{ flex: 1 }}>
-                                                    <CheckBox
-                                                        checkedIcon={<IconA name="check" size={40} color="#48D347" />}
-                                                        uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                        checked={this.state.checkItems['Two']}
-                                                        onPress={() =>  this.handlePress('Two', 'חנקן גדול','Birds')}
-                                                    />
-                                                </View>
-                                                <View style={{ flex: 1 }}>
-                                                    <Text style={styles.textStyle}>חנקן גדול</Text>
-                                                </View>
-                                            </View>
-                                        </View>
-                                        
+                                <CollapseBody>
 
 
 
-                                    </CollapseBody>
-                                
-                                </Collapse>
-
-                                <Collapse>
-                                    <CollapseHeader style={styles.typeStyle}>
-                                        <View style={styles.innerViewStyle}>
-                                            <Text style={styles.textStyleHeaders}>יונקים</Text>
-                                        </View>
-
-
-                                    </CollapseHeader>
-                                    <CollapseBody>
 
                                     <View style={styles.container}>
-                                            <View style={{ flex: 1}}>
-                                                <Image source={require('../assets/img/fox.jpg')}
-                                                    style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                                                />
-                                            </View>
-                                            <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
-                                                <View style={{ flex: 1 }}>
-                                                    <CheckBox
-                                                        checkedIcon={<IconA name="check" size={40} color="#48D347" />}
-                                                        uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                        checked={this.state.checkItems['Three']}
-                                                        onPress={() =>  this.handlePress('Three', 'שועל מצוי','Mammals')}
-                                                    />
-                                                </View>
-                                                <View style={{ flex: 1 }}>
-                                                    <Text style={styles.textStyle}>שועל מצוי</Text>
-                                                </View>
-                                            </View>
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={require('../assets/img/bird.jpg')}
+                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                            />
                                         </View>
-
-                                        <View style={styles.container}>
+                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
                                             <View style={{ flex: 1 }}>
-                                                <Image source={require('../assets/img/Shafan.jpg')}
-                                                    style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                                <CheckBox
+                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
+                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
+                                                    checked={this.state.checkItems['One']}
+                                                    onPress={() => this.handlePress('One', 'בעלי חיים', 'דרור')}
                                                 />
                                             </View>
-                                            <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
-                                                <View style={{ flex: 1 }}>
-                                                    <CheckBox
-                                                        checkedIcon={<IconA name="check" size={40} color="#48D347" />}
-                                                        uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                        checked={this.state.checkItems['Four']}
-                                                        onPress={() =>  this.handlePress('Four', 'שפן סלע','Mammals')}
-                                                    />
-                                                </View>
-                                                <View style={{ flex: 1 }}>
-                                                    <Text style={styles.textStyle}>שפן סלע</Text>
-                                                </View>
+                                            <View style={{ flex: 1 }}>
+                                                <Text style={styles.textStyle}>דרור</Text>
                                             </View>
                                         </View>
+                                    </View>
 
-
-                                    </CollapseBody>
-                                
-                                </Collapse>
-                                
-                                <Collapse>
-                                    <CollapseHeader style={styles.typeStyle}>
-
-                                        <View style={styles.innerViewStyle}>
-                                            <Text style={styles.textStyleHeaders}>מפגעים</Text>
-                                        </View>
-
-
-                                    </CollapseHeader>
-                                    <CollapseBody>
 
                                     <View style={styles.container}>
-                                            <View style={{ flex: 1}}>
-                                                <Image source={require('../assets/img/garbage.jpg')}
-                                                    style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={require('../assets/img/BigHankan.jpg')}
+                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                            />
+                                        </View>
+                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
+                                            <View style={{ flex: 1 }}>
+                                                <CheckBox
+                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
+                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
+                                                    checked={this.state.checkItems['Two']}
+                                                    onPress={() => this.handlePress('Two', 'בעלי חיים', 'חנקן גדול')}
                                                 />
                                             </View>
-                                            <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
-                                                <View style={{ flex: 1 }}>
-                                                    <CheckBox
-                                                        checkedIcon={<IconA name="check" size={40} color="#48D347" />}
-                                                        uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                        checked={this.state.checkItems['Five']}
-                                                        onPress={() =>  this.handlePress('Five', 'פסולת','Other')}
-                                                    />
-                                                </View>
-                                                <View style={{ flex: 1 }}>
-                                                    <Text style={styles.textStyle}>פסולת</Text>
-                                                </View>
+                                            <View style={{ flex: 1 }}>
+                                                <Text style={styles.textStyle}>חנקן גדול</Text>
                                             </View>
                                         </View>
-
-                                      
-
-                                    </CollapseBody>
-                                </Collapse>
-
-
-                            </ScrollView>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', marginBottom: 1 }}>
-
-                            <View style={{ marginLeft: 12, marginTop: 20 }}>
-                                <TouchableWithoutFeedback
-                                    // onPress={() => sayCheese('uploads/myPhoto1.jpg','Reports/rep3')}
-                                    onPress={() => pressPhoto("camera")}
-
-                                >
-                                    <View><Icon name="camera" size={30} color="#505050" /></View>
-                                </TouchableWithoutFeedback>
-                                <TouchableWithoutFeedback
-                                    // onPress={() => uploadImage('uploads/mydduse.jpg')}
-                                    onPress={() => pressPhoto("upload")}
-                                >
-                                    <View style={{ marginTop: 20 }}><Icon name="images" size={30} color="#505050" /></View>
-                                </TouchableWithoutFeedback>
-
-                            </View>
+                                    </View>
 
 
 
 
+                                </CollapseBody>
 
-                            <View style={{ width: "90%" }}>
-                                <TextInput
-                                    style={styles.textInputStyle}
-                                    placeholder="הכנס פרטים"
-                                    multiline={true}
-                                    numberOfLines={3}
-                                    onChangeText={text => this.setState({ body: text })}
-                                    value={this.state.body}
-                                />
-                            </View>
+                            </Collapse>
+
+                            <Collapse>
+                                <CollapseHeader style={styles.typeStyle}>
+                                    <View style={styles.innerViewStyle}>
+                                        <Text style={styles.textStyleHeaders}>יונקים</Text>
+                                    </View>
 
 
-                        </View>
-                        <View style={{ width: "100%", height: "20%", backgroundColor: 'yellow' }}>
-                            <TouchableWithoutFeedback onPress={() => {
-                                let result = sendData(this.state.body,this.state.type, this.state.genre);
-                                console.log("result is: " + result);
-                                // if (result === 0)
-                                //     refreshPage();
-                            }}>
-                                <View style={styles.buttonStyle}>
-                                    <Text style={styles.textStyleHeaders}>שלח דיווח</Text>
+                                </CollapseHeader>
+                                <CollapseBody>
 
-                                </View>
+                                    <View style={styles.container}>
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={require('../assets/img/fox.jpg')}
+                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                            />
+                                        </View>
+                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
+                                            <View style={{ flex: 1 }}>
+                                                <CheckBox
+                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
+                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
+                                                    checked={this.state.checkItems['Three']}
+                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'שועל מצוי')}
+                                                />
+                                            </View>
+                                            <View style={{ flex: 1 }}>
+                                                <Text style={styles.textStyle}>שועל מצוי</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+
+                                    <View style={styles.container}>
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={require('../assets/img/deer.jpg')}
+                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                            />
+                                        </View>
+                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
+                                            <View style={{ flex: 1 }}>
+                                                <CheckBox
+                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
+                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
+                                                    checked={this.state.checkItems['Six']}
+                                                    onPress={() => this.handlePress('Six', 'בעלי חיים', 'צבי')}
+                                                />
+                                            </View>
+                                            <View style={{ flex: 1 }}>
+                                                <Text style={styles.textStyle}>שועל מצוי</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+
+                                    <View style={styles.container}>
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={require('../assets/img/Shafan.jpg')}
+                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                            />
+                                        </View>
+                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
+                                            <View style={{ flex: 1 }}>
+                                                <CheckBox
+                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
+                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
+                                                    checked={this.state.checkItems['Four']}
+                                                    onPress={() => this.handlePress('Four', 'בעלי חיים', 'שפן סלע')}
+                                                />
+                                            </View>
+                                            <View style={{ flex: 1 }}>
+                                                <Text style={styles.textStyle}>שפן סלע</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+
+
+                                </CollapseBody>
+
+                            </Collapse>
+
+                            <Collapse>
+                                <CollapseHeader style={styles.typeStyle}>
+
+                                    <View style={styles.innerViewStyle}>
+                                        <Text style={styles.textStyleHeaders}>מפגעים</Text>
+                                    </View>
+
+
+                                </CollapseHeader>
+                                <CollapseBody>
+
+                                    <View style={styles.container}>
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={require('../assets/img/garbage.jpg')}
+                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                            />
+                                        </View>
+                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
+                                            <View style={{ flex: 1 }}>
+                                                <CheckBox
+                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
+                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
+                                                    checked={this.state.checkItems['Five']}
+                                                    onPress={() => this.handlePress('Five', 'אחר', "פסולת")}
+                                                />
+                                            </View>
+                                            <View style={{ flex: 1 }}>
+                                                <Text style={styles.textStyle}>פסולת</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+
+
+
+                                </CollapseBody>
+
+                                <CollapseHeader style={styles.typeStyle}>
+
+                                    <View style={styles.innerViewStyle}>
+                                        <Text style={styles.textStyleHeaders}>פריחה</Text>
+                                    </View>
+
+
+                                </CollapseHeader>
+                                <CollapseBody>
+
+                                    <View style={styles.container}>
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={require('../assets/img/sahlav.jpg')}
+                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                            />
+                                        </View>
+                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
+                                            <View style={{ flex: 1 }}>
+                                                <CheckBox
+                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
+                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
+                                                    checked={this.state.checkItems['Seven']}
+                                                    onPress={() => this.handlePress('Seven', 'פריחה', "סחלב")}
+                                                />
+                                            </View>
+                                            <View style={{ flex: 1 }}>
+                                                <Text style={styles.textStyle}>סחלב</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+
+                                    <View style={styles.container}>
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={require('../assets/img/rakefet.jpg')}
+                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                            />
+                                        </View>
+                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
+                                            <View style={{ flex: 1 }}>
+                                                <CheckBox
+                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
+                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
+                                                    checked={this.state.checkItems['Eight']}
+                                                    onPress={() => this.handlePress('Eight', 'פריחה', "רקפת")}
+                                                />
+                                            </View>
+                                            <View style={{ flex: 1 }}>
+                                                <Text style={styles.textStyle}>רקפת</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+
+
+
+                                </CollapseBody>
+                            </Collapse>
+
+
+                        </ScrollView>
+                    </View>
+                    <Divider />
+                    <View style={{ height: "17%", flexDirection: 'row' }}>
+
+                        <View style={{ marginLeft: 12, marginTop: 20 }}>
+                            <TouchableWithoutFeedback
+                                // onPress={() => sayCheese('uploads/myPhoto1.jpg','Reports/rep3')}
+                                onPress={() => pressPhoto("camera")}
+
+                            >
+                                <View><Icon name="camera" size={30} color="#505050" /></View>
                             </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback
+                                // onPress={() => uploadImage('uploads/mydduse.jpg')}
+                                onPress={() => pressPhoto("upload")}
+                            >
+                                <View style={{ marginTop: 20 }}><Icon name="images" size={30} color="#505050" /></View>
+                            </TouchableWithoutFeedback>
+
+                        </View>
+
+
+
+
+
+                        <View style={{ width: "90%" }}>
+                            <TextInput
+                                style={styles.textInputStyle}
+                                placeholder="הכנס פרטים"
+                                multiline={true}
+                                numberOfLines={3}
+                                onChangeText={text => this.setState({ body: text })}
+                                value={this.state.body}
+                            />
                         </View>
 
 
                     </View>
-                </ImageBackground>
-                {console.log("render")}
+                    <View style={{ width: "100%", height: "14%" }}>
+                        <TouchableWithoutFeedback onPress={() => {
+                            let result = sendData(this.state.body, this.state.type, this.state.genre);
+                            if (result === 0)
+                                refreshPage();
+
+                        }}>
+                            <View style={styles.buttonStyle}>
+                                <Text style={styles.textStyleSendReport}>שלח דיווח</Text>
+
+                            </View>
+                        </TouchableWithoutFeedback>
+                    </View>
+
+
+                </View>
             </View>
         )
     }
@@ -396,7 +489,13 @@ const styles = {
         color: 'white',
         fontSize: 30,
         alignSelf: 'center',
-        marginTop: "6%"
+        marginTop: "5%"
+    },
+    textStyleSendReport: {
+        color: 'white',
+        fontSize: 30,
+        alignSelf: 'center',
+        marginTop: "8%"
     },
 
     checkBoxStyle: {

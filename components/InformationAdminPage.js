@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { TextInput, Alert, ScrollView, Text, TouchableWithoutFeedback } from "react-native"
+import { RefreshControl,TextInput, Alert, ScrollView, Text, TouchableWithoutFeedback } from "react-native"
 import { View } from "native-base"
 import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from "./HeaderComp"
@@ -14,7 +14,13 @@ import sayCheese from '../assets/functions/takePhoto'
 
 
 let photoUploaded = false;
-let keyID,dataType,currItem;
+let keyID, dataType, currItem;
+
+function wait(timeout) {
+    return new Promise(resolve => {
+      setTimeout(resolve, timeout);
+    });
+  }
 
 function getDate() {
     var date = new Date().getDate(); //To get the Current Date
@@ -26,7 +32,7 @@ function getDate() {
 async function pressPhoto(source) {
 
     // setting the paths
-    let imageID = "rep" + keyID + ".jpg";
+    let imageID = "img" + keyID + ".jpg";
     let dataPath = 'Information/info' + keyID;
     let storagePath = "Images/Information/" + imageID;
 
@@ -61,13 +67,14 @@ function sendData(body, title, currentType) {
     }
 
     else {
-
+        console.log("key is : " + keyID);
         let infoId = 'info' + keyID;
         let dataPath = 'Information/info' + keyID;
         let imageID = "img" + keyID + ".jpg";
         let storagePath = "Images/Information/" + imageID;
+        
         storage.ref().child(storagePath).getDownloadURL().then((url) => {
-
+            
             let date = getDate();
             let newInfo = {
                 Date: date,
@@ -78,7 +85,7 @@ function sendData(body, title, currentType) {
                 id: infoId
             }
             db.ref(dataPath).set(newInfo);
-        })
+        }).catch( (error) => console.log(error))
     }
 
     return 0;
@@ -92,8 +99,9 @@ function InformationAdminScreen({ navigation }) {
     const [title, onChangeTitle] = useState('');
     // const [photoAdded, onPhotoAdded] = useState(false); 
     const [loaded, setLoaded] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
     let infoArray = [];
-    let currentType = dataType;   
+    let currentType = dataType;
 
     // refreshing the page after successfully adding data
     function refreshPage() {
@@ -104,7 +112,11 @@ function InformationAdminScreen({ navigation }) {
         photoUploaded = false;
     }
 
-
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+    
+        wait(1000).then(() => setRefreshing(false));
+      }, [refreshing]);
 
 
     let data = null;
@@ -172,137 +184,136 @@ function InformationAdminScreen({ navigation }) {
 
 
     return (
-        <View>
-            {console.log("rendered, key is :  " + keyID)}
+        <View style={{ height: "100%", width: "100%", backgroundColor: '#FAE5D3' }}>
+
             <HeaderComp />
 
             <View style={styles.containerStyle}>
 
-                <View style={{ height: "100%", width: "100%", backgroundColor: '#E9DFD1' }}>
+                <View style={{ height: "71%", width: "100%"}}>
+                    <ScrollView
+                        horizontal={false}
+                        showsHorizontalScrollIndicator={false}
+                        refreshControl={ <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+                    >
 
-                    <View style={{ height: "50%", width: "100%" }}>
-                        <ScrollView
-                            horizontal={false}
-                            showsHorizontalScrollIndicator={false}
-                        >
+                        {infoArray.map((item) => {
+                            return (
+                                <View key={item.id} style={{marginTop:"1.5%"}}>
 
-                            {infoArray.map((item) => {
-                                return (
-                                    <View key={item.id}>
-                                       
-                                        <View key>
-                                            <EditInfoBox imageUri={{ uri: item.ImageLink }}
-                                                headline={item.Title}
-                                                body={item.Body}
-                                                onDelete={() => {
-                                                    Alert.alert(
-                                                        //title
-                                                        'Hello',
-                                                        //body
-                                                        'האם למחוק את פריט המידע הזה?',
-                                                        [
-                                                            {
-                                                                text: 'כן', onPress: () => {
-                                                                    db.ref('Information/').child(item.id).remove();
-                                                                    setLoaded({ loaded: false });
-                                                                }
-                                                            },
-                                                            { text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel' },
-                                                        ],
-                                                        { cancelable: false }
-                                                        //clicking out side of alert will not cancel
-                                                    );
-                                                }}
-                                                id={item.id}
-                                                onExpandPress = { () => {
-                                                    currItem= item;
-                                                    navigation.navigate('infoAdminComp');
-                                                }}
-                                            />
-                                        </View>
-                                        
+                                    <View>
+                                        <EditInfoBox imageUri={{ uri: item.ImageLink }}
+                                            headline={item.Title}
+                                            body={item.Body}
+                                            onDelete={() => {
+                                                Alert.alert(
+                                                    //title
+                                                    'Hello',
+                                                    //body
+                                                    'האם למחוק את פריט המידע הזה?',
+                                                    [
+                                                        {
+                                                            text: 'כן', onPress: () => {
+                                                                db.ref('Information/').child(item.id).remove();
+                                                                setLoaded({ loaded: false });
+                                                            }
+                                                        },
+                                                        { text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel' },
+                                                    ],
+                                                    { cancelable: false }
+                                                    //clicking out side of alert will not cancel
+                                                );
+                                            }}
+                                            id={item.id}
+                                            onExpandPress={() => {
+                                                currItem = item;
+                                                navigation.navigate('infoAdminComp');
+                                            }}
+                                        />
                                     </View>
-                                )
-                            })}
+
+                                </View>
+                            )
+                        })}
 
 
 
 
-                        </ScrollView>
-                    </View>
+                    </ScrollView>
+                </View>
 
-                    <View style={styles.editBoxStyle}>
-                        <View style={{ flex: 1 }}>
-                            <View style={{ marginLeft: 12, marginTop: 20 }}>
-                                <TouchableWithoutFeedback
-                                    onPress={() => { console.log("before func: " + keyID); pressPhoto("camera"); }}
-                                >
-                                    <View style={{ marginLeft: 12 }}>
-                                        <Icon name="camera" size={30} color="white" />
-                                    </View>
-                                </TouchableWithoutFeedback>
-                                <TouchableWithoutFeedback
-                                    onPress={() => pressPhoto("upload")}
-                                >
-                                    <View style={{ marginTop: 20, marginLeft: 12 }}>
-                                        <Icon name="images" size={30} color="white" />
-                                    </View>
-                                </TouchableWithoutFeedback>
-                                <TouchableWithoutFeedback
-                                    onPress={() => {
-                                        let result = sendData(body, title, currentType);
-                                        console.log("result is: " + result);
-                                        if (result === 0)
-                                            refreshPage();
-                                    }}
-                                >
-                                    <View style={styles.buttonStyle}>
-                                        <Text
-                                            style={{ alignSelf: 'center', marginTop: 20, fontSize: 18 }}
-                                        >הוסף</Text>
-                                    </View>
-                                </TouchableWithoutFeedback>
-                            </View>
-                        </View>
-                        <View style={{ flex: 5 }}>
-                            <TextInput
-                                style={styles.headlineInputStyle}
-                                placeholder="הכנס כותרת"
-                                value={title}
-                                onChangeText={text => onChangeTitle(text)}
-                            />
-
-                            <TextInput
-                                style={styles.textInputStyle}
-                                placeholder="הכנס תוכן"
-                                multiline={true}
-                                numberOfLines={4}
-                                onChangeText={text => onChangeBody(text)}
-                                value={body}
-                            />
+                <View style={styles.editBoxStyle}>
+                    <View style={{ flex: 1 }}>
+                        <View style={{ marginLeft: 12, marginTop: 20 }}>
+                            <TouchableWithoutFeedback
+                                onPress={() => { console.log("before func: " + keyID); pressPhoto("camera"); }}
+                            >
+                                <View style={{ marginLeft: 12 }}>
+                                    <Icon name="camera" size={30} color="white" />
+                                </View>
+                            </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback
+                                onPress={() => pressPhoto("upload")}
+                            >
+                                <View style={{ marginTop: 20, marginLeft: 12 }}>
+                                    <Icon name="images" size={30} color="white" />
+                                </View>
+                            </TouchableWithoutFeedback>
                             <TouchableWithoutFeedback
                                 onPress={() => {
-                                    alert("photo should be deleted!");
-                                    //Images/Inforamtion/img-MA2ccI8hczWJSg_91_K.jpg
-                                    var desertRef = storage.ref().child('gs://nahal-zimri.appspot.com/Images/Information/img-MA2ccI8hczWJSg_91_K.jpg');
-                                    //Delete the file
-                                    desertRef.delete().then(function () {
-                                        console.log("deleted successfully")
-                                    }).catch(function (error) {
-                                        console.log("delete failed:  " + error);
-
-                                    });
-                                }}>
-                                <Text>JJJJJ</Text>
+                                    let result = sendData(body, title, currentType);
+                                    console.log("result is: " + result);
+                                    if (result === 0)
+                                        refreshPage();
+                                }}
+                            >
+                                <View style={styles.buttonStyle}>
+                                    <Text
+                                        style={{ alignSelf: 'center', marginTop: 20, fontSize: 18 }}
+                                    >הוסף</Text>
+                                </View>
                             </TouchableWithoutFeedback>
                         </View>
+                    </View>
+                    <View style={{ flex: 5 }}>
+                        <TextInput
+                            style={styles.headlineInputStyle}
+                            placeholder="הכנס כותרת"
+                            value={title}
+                            onChangeText={text => onChangeTitle(text)}
+                        />
 
+                        <TextInput
+                            style={styles.textInputStyle}
+                            placeholder="הכנס תוכן"
+                            multiline={true}
+                            numberOfLines={4}
+                            onChangeText={text => onChangeBody(text)}
+                            value={body}
+                        />
+                        {/* <TouchableWithoutFeedback
+                            onPress={() => {
+                                alert("photo should be deleted!");
+                                //Images/Inforamtion/img-MA2ccI8hczWJSg_91_K.jpg
+                                var desertRef = storage.ref().child('gs://nahal-zimri.appspot.com/Images/Information/img-MA2ccI8hczWJSg_91_K.jpg');
+                                //Delete the file
+                                desertRef.delete().then(function () {
+                                    console.log("deleted successfully")
+                                }).catch(function (error) {
+                                    console.log("delete failed:  " + error);
+
+                                });
+                            }}>
+                            <Text>JJJJJ</Text>
+                        </TouchableWithoutFeedback> */}
                     </View>
 
                 </View>
 
-
             </View>
+
+
+
 
         </View>
     )
@@ -317,21 +328,21 @@ const InfoCompStack = createStackNavigator();
 
 
 
-function InfoAdminComponent( {navigation}) {
+function InfoAdminComponent({ navigation }) {
 
-    return (<InfoComp 
+    return (<InfoComp
         headline={currItem.Title}
         body={currItem.Body}
-        onCrossPress= { () => navigation.goBack()}
+        onCrossPress={() => navigation.goBack()}
         imageUri={{ uri: currItem.ImageLink }}
-        /> );
+    />);
 }
 
 
 function InformationAdminPage(props) {
 
     dataType = props.dataType;
-    
+
 
     return (
         <InfoCompStack.Navigator initialRouteName="infoAdminScreen">
@@ -346,8 +357,7 @@ export default InformationAdminPage;
 const styles = {
     containerStyle: {
         width: "100%",
-        height: "100%",
-        backgroundColor: "#FAE5D3",
+        height: "89%",
         borderWidth: 1,
         borderColor: 'gray'
 

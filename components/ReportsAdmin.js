@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { TextInput, Button, Alert, ScrollView, Text, TouchableOpacity } from "react-native"
+import { RefreshControl, Button, Alert, ScrollView, Text, TouchableOpacity } from "react-native"
 import { View } from "native-base"
 import { Header, ListItem, CheckBox } from "react-native-elements"
 import EditReports from "./explore/EditReports"
@@ -11,13 +11,23 @@ import HeaderComp from "./HeaderComp"
 import ReportForm from "./ReportForm"
 //import ImagePicker from 'react-native-image-picker';
 import { db } from '../config/Firebase'
+import ReportsFullComp from './ReportsFullComp'
 
+let dataType, currItem, isCheckOn = false;
 
-
+function wait(timeout) {
+    return new Promise(resolve => {
+      setTimeout(resolve, timeout);
+    });
+  }
 
 export function ReportsAdminScreen({ navigation }) {
     let reportsArray = [], approvedText = "";
     const [loaded, setLoaded] = useState(false);
+    const [checkBoxState1, setChangeBox1] = useState(false);
+    const [checkBoxState2, setChangeBox2] = useState(false);
+    const [checkBoxState3, setChangeBox3] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
 
     let data = null;
     db.ref('Reports').on('value', function (snapshot) {
@@ -40,16 +50,52 @@ export function ReportsAdminScreen({ navigation }) {
             return null;
         for (var report in data) {
             if (data.hasOwnProperty(report)) {
-                if (data[report].Approved === true) {
+                if ((!isCheckOn) || data[report].Type === dataType)
                     reportsArray.push(data[report]);
-
-                }
 
             }
         }
 
     }
 
+    let handlePress = (type) => {
+        if (type === dataType) {
+            dataType = ""
+            isCheckOn = false
+        }
+        else {
+            dataType = type
+            isCheckOn = true
+        }
+        if (type === 'פריחה') {
+            setChangeBox1(!checkBoxState1)
+            if (checkBoxState2 || checkBoxState3) {
+                setChangeBox2(false)
+                setChangeBox3(false)
+            }
+        }
+        if (type == 'בעלי חיים') {
+            setChangeBox2(!checkBoxState2)
+            if (checkBoxState1 || checkBoxState3) {
+                setChangeBox3(false)
+                setChangeBox1(false)
+            }
+        }
+        if (type == 'אחר') {
+            setChangeBox3(!checkBoxState3)
+            if (checkBoxState2 || checkBoxState1) {
+                setChangeBox2(false)
+                setChangeBox1(false)
+            }
+        }
+
+    }
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+    
+        wait(1000).then(() => setRefreshing(false));
+      }, [refreshing]);
 
     convertDataToArray(data, reportsArray);
 
@@ -60,35 +106,46 @@ export function ReportsAdminScreen({ navigation }) {
             <HeaderComp />
 
 
-            <View style={{ width: "100%", height: "97%" }}>
+            <View style={{ width: "100%", height: "89%" }}>
                 <View style={{ flexDirection: 'row', width: "100%", height: "9%" }}>
                     <View style={styles.CheckBoxStyle}>
                         <CheckBox
 
                             center
                             title='פריחה'
-                        // checked={this.state.checked}
+                            checked={checkBoxState1}
+                            onPress={() => handlePress('פריחה')}
+                            containerStyle={styles.CheckBoxContainerStyle}
+
                         />
                     </View>
                     <View style={styles.CheckBoxStyle}>
                         <CheckBox
                             center
                             title='בע"ח'
-                        // checked={this.state.checked}
+                            checked={checkBoxState2}
+                            onPress={() => handlePress('בעלי חיים')}
+                            containerStyle={styles.CheckBoxContainerStyle}
                         />
                     </View>
                     <View style={styles.CheckBoxStyle}>
                         <CheckBox
                             center
                             title='אחר'
-                        //  checked={this.state.checked}
+                            checked={checkBoxState3}
+                            onPress={() => handlePress('אחר')}
+                            containerStyle={styles.CheckBoxContainerStyle}
                         />
                     </View>
 
                 </View>
 
+                <View style={{width:"98%",height:"77%"}}>
                 <ScrollView
                     scrollEventThrottle={16}
+                    refreshControl={
+                        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                      }
                 >
                     <View style={{ width: "100%" }}>
 
@@ -106,81 +163,55 @@ export function ReportsAdminScreen({ navigation }) {
                                         approvedText = "לא מאושר"
 
                                     return (
-                                        <EditReports imageUri={{ uri: item.ImageLink }}
-                                            id={item.id}
-                                            body={item.Description}
-                                            date={item.Date}
-                                            type={item.Type}
-                                            catagory={item.Catagory}
-                                            approved={item.Approved}
-                                            approvedText={approvedText}
-                                            reporter={item.ReporterName}
-                                            onDelete={() => {
-                                                Alert.alert(
-                                                    //title
-                                                    'שלום',
-                                                    //body
-                                                    'האם למחוק דיווח הזה?',
-                                                    [
-                                                        {
-                                                            text: 'כן', onPress: () => {
-                                                                db.ref('Reports/').child(item.id).remove();
-                                                                setLoaded({ loaded: false });
-                                                                // delete image not working yet
-                                                            }
-                                                        },
-                                                        { text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel' },
-                                                    ],
-                                                    { cancelable: false }
-                                                    //clicking out side of alert will not cancel
-                                                );
-                                            }}
-                                        />
+                                        <View key={item.id}>
+                                            <EditReports imageUri={{ uri: item.ImageLink }}
+                                                id={item.id}
+                                                body={item.Description}
+                                                date={item.Date}
+                                                type={item.Type}
+                                                catagory={item.Catagory}
+                                                approved={item.Approved}
+                                                approvedText={approvedText}
+                                                reporter={item.ReporterName}
+                                                onExpand={() => {
+                                                    currItem = item;
+                                                    navigation.navigate('repFullComp');
+                                                }}
+                                                onDelete={() => {
+                                                    Alert.alert(
+                                                        //title
+                                                        'שלום',
+                                                        //body
+                                                        'האם למחוק דיווח הזה?',
+                                                        [
+                                                            {
+                                                                text: 'כן', onPress: () => {
+                                                                    db.ref('Reports/').child(item.id).remove();
+                                                                    setLoaded({ loaded: false });
+                                                                    // delete image not working yet
+                                                                }
+                                                            },
+                                                            { text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel' },
+                                                        ],
+                                                        { cancelable: false }
+                                                        //clicking out side of alert will not cancel
+                                                    );
+                                                }}
+                                            />
+                                        </View>
                                     )
                                 })}
-                                {/* <EditReports imageUri={require('../assets/img/purple.jpg')}
-                                name="purple flower"
-                                date="23.01.2020"
-                                catagory="פריחה"
-                            />
-                            <EditReports imageUri={require('../assets/img/Shafan.jpg')}
-                                name="Shafan"
-                                date="23.01.2020"
-                            />
-                            <EditReports imageUri={require('../assets/img/Sunflower.jpg')}
-                                name="Sunflower"
-                                date="23.01.2020"
-                            />
-                            <EditReports imageUri={require('../assets/img/purple.jpg')}
-                                name="purple flower"
-                                date="23.01.2020"
-                            />
-                            <EditReports imageUri={require('../assets/img/Shafan.jpg')}
-                                name="Shafan"
-                                date="23.01.2020"
-                            />
-                            <EditReports imageUri={require('../assets/img/Sunflower.jpg')}
-                                name="Sunflower"
-                                date="23.01.2020"
-                            /> */}
+
                             </ScrollView>
                         </View>
 
                     </View>
                 </ScrollView>
+            </View>
 
+                
 
-                <View style={{ width: "100%", height: "5%" }}>
-
-
-
-                    {/* optional map */}
-
-
-
-
-                </View>
-                <View style={{ width: "100%", height: "24%" }}>
+                <View style={{ width: "100%", height: "14%" }}>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('repFo')}
                     >
@@ -202,6 +233,20 @@ function goToReportForm() {
     return <ReportForm />
 
 }
+function ReportsFullCompFunc({ navigation }) {
+    return (
+        <ReportsFullComp
+            headline={currItem.Catagory}
+            body={currItem.Description}
+            onCrossPress={() => navigation.goBack()}
+            imageUri={{ uri: currItem.ImageLink }}
+            date={currItem.Date}
+            reporter={currItem.ReporterName}
+        />
+    );
+}
+
+
 const repAdminStack = createStackNavigator();
 
 function ReportsAdmin() {
@@ -211,6 +256,7 @@ function ReportsAdmin() {
             <repAdminStack.Screen options={{ headerShown: false }} name="reportsAdmin" component={ReportsAdminScreen} />
             <repAdminStack.Screen options={{ headerShown: false }} name="repFo" component={goToReportForm} />
 
+            <repAdminStack.Screen name="repFullComp" options={{ headerShown: false }} component={ReportsFullCompFunc} />
         </repAdminStack.Navigator>
 
     );
@@ -248,16 +294,19 @@ const styles = {
     },
 
     buttonStyle: {
-        width: "70%",
-        height: "73%",
+        width: "90%",
+        height:"100%",
         borderColor: "black",
         borderWidth: 1,
         alignSelf: "center",
-        marginTop: "1%",
-        backgroundColor: "#424242",
-        marginBottom: 30
+        backgroundColor: "#424242"
 
 
+    },
+    CheckBoxContainerStyle: {
+        borderColor: "#FFAF50",
+        borderWidth: 1,
+        backgroundColor: '#F4D5A7'
     }
 
 

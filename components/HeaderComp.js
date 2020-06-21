@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 class HeaderComp extends Component {
     render() {
         return (
-            <View>
+            <View style= {{width:"100%",height:"11%"}}>
 
                 <Header
                     backgroundColor='#FAE5D3'

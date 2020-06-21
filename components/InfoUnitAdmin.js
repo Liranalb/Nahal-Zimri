@@ -33,7 +33,7 @@ class InfoUnitAdmin extends React.Component {
         return (
             <View style={{
                 flexDirection: 'row',
-              
+
             }} >
                 <View style={styles.imageStyle}>
                     <Image
@@ -42,26 +42,26 @@ class InfoUnitAdmin extends React.Component {
                     />
                 </View>
                 <View style={{
-                    flex: 1,
+                    flex: 1
                 }} >
-                    
+
                     <View style={
                         styles.textStyle
                     }>
-                        
+
                         <TextInput style={{
                             fontWeight: "bold",
                             fontSize: 18,
                         }} multiline
                             onChangeText={(catagory) => this.setState({ catagory, changed: true })}
                             maxHeight={40}>
-                                
+
                             {this.props.catagory}</TextInput>
-                            
+
                     </View>
                     <View style={
                         styles.textStyle
-                    }> 
+                    }>
                         <TextInput style={{
                             fontWeight: "bold",
                             fontSize: 18,
@@ -69,7 +69,7 @@ class InfoUnitAdmin extends React.Component {
                             onChangeText={(title) => this.setState({ title, changed: true })}
                             maxHeight={90}
                         >{this.props.title} </TextInput>
-                      
+
                     </View>
 
                     <View style={
@@ -168,14 +168,14 @@ export default InfoUnitAdmin;
 
 const styles = StyleSheet.create({
     textStyle: {
-        margin:1,
+        margin: 1,
         borderRadius: 4,
-        borderColor:"gray",
-        borderWidth:1,
+        borderColor: "gray",
+        borderWidth: 1,
         width: "56%",
         flexDirection: 'row-reverse',
         alignSelf: "flex-end",
-       
+
 
     },
     imageStyle: {

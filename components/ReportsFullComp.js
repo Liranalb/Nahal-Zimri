@@ -14,33 +14,32 @@ import {
 } from "react-native"
 import Icon from 'react-native-vector-icons/Entypo'
 import Carousel from 'react-native-snap-carousel'
+import { Divider } from 'react-native-paper';
 
 
 
 
+class ReportsFullComp extends Component {
 
-class InfoComp extends Component {
-
-    constructor()
-    {
+    constructor() {
         super()
         this.state = {
-          activeIndex:0,
-          carouselItems: [
-          {path: require('../assets/img/bird.jpg')},
-          {path: require('../assets/img/mammal.jpg')},
-          {path: require('../assets/img/fox.jpg')},
-          {path: require('../assets/img/blossom.jpg')},    
-        ]
-      }
+            activeIndex: 0,
+            //   carouselItems: [
+            //   {path: require('../assets/img/bird.jpg')},
+            //   {path: require('../assets/img/mammal.jpg')},
+            //   {path: require('../assets/img/fox.jpg')},
+            //   {path: require('../assets/img/blossom.jpg')},    
+            // ]
+        }
     }
 
-    _renderItem({item,index}){
-        return(
+    _renderItem({ item, index }) {
+        return (
             <View style={styles.carouselStyle}>
                 <Image source={item.path}
-                        style={{ flex: 1, width: "100%", height: "100%", resizeMode: 'cover' }}
-                    />
+                    style={{ flex: 1, width: "100%", height: "100%", resizeMode: 'cover' }}
+                />
             </View>
         );
     }
@@ -53,8 +52,8 @@ class InfoComp extends Component {
             <View style={{ width: "100%", height: "100%" }}>
 
                 <View style={styles.imgStyle}>
-                    
-                    <View style={{ flex: 1, flexDirection:'row', justifyContent: 'center', }}>
+
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
                         {/* <Carousel
                         layout={"default"}
                         ref={ref => this.carousel = ref}
@@ -65,38 +64,46 @@ class InfoComp extends Component {
                         renderItem={this._renderItem}
                         onSnapToItem = { index => this.setState({activeIndex:index}) } /> */}
                         <Image source={this.props.imageUri}
-                        style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                    />
-                        
+                            style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                        />
+
                     </View>
-                   
+
                 </View>
 
                 <View style={{ width: "100%", height: "100%", backgroundColor: "#FAE5D3" }}>
+                    <View style={{ width: "98%" }}>
+                        <Text style={{ fontSize: 16 }}>
+                            {this.props.date}
+                        </Text>
+                    </View>
                     <View style={styles.textVStyle}>
                         <Text
                             style={styles.textStyle}
                         >{this.props.headline}</Text>
                     </View>
+
                     <View style={styles.mainStyle}>
-                        <ScrollView>
+                        <View style={{width:"100%",height:"90%"}}>
+                            <ScrollView>
+                                <Text
+                                    style={styles.mainTextStyle}
+                                >{this.props.body}
 
-                        <Text
-                            style={styles.mainTextStyle}
-                        >{this.props.body} 
-                        
-                        </Text>
-                        
-
-
-                    </ScrollView>
+                                </Text>
+                            </ScrollView>
+                        </View>
+                        <Divider/>
+                        <View style={{width:"100%",height:"10%"}}>
+                            <Text style={{fontSize:20}}> מגיש הדיווח: {this.props.reporter}</Text>
+                        </View>
                     </View>
 
                     <View style={{ width: "100%", height: "8%", alignSelf: 'center' }}>
-                        
+
                         <TouchableOpacity
-                            onPress = {this.props.onCrossPress}
-                            >
+                            onPress={this.props.onCrossPress}
+                        >
                             <Icon name="cross" size={50} color='gray'
                                 style={{ alignSelf: 'center' }}
                             />
@@ -110,15 +117,14 @@ class InfoComp extends Component {
     }
 }
 
-export default InfoComp;
+export default ReportsFullComp;
 
 const styles = {
     imgStyle: {
         width: "100%",
         height: "40%",
-       // backgroundColor: '#FAE5D3',
         alignSelf: 'center',
-       // backgroundColor: '#434343'
+        backgroundColor: '#434343'
     },
     textStyle: {
         alignItems: 'center',
@@ -131,9 +137,8 @@ const styles = {
     },
     textVStyle: {
         alignItems: 'center',
-        marginTop: "3%",
         width: "100%",
-        height: "10%"
+        height: "5%"
     },
     mainStyle: {
         width: "92%",
@@ -145,16 +150,16 @@ const styles = {
         borderColor: "#CECECE"
     },
     mainTextStyle: {
-        fontSize:16,
-        marginRight:"4%",
-        marginLeft:"4%"
+        fontSize: 16,
+        marginRight: "4%",
+        marginLeft: "4%"
     },
     carouselStyle: {
         borderRadius: 5,
         backgroundColor: "white",
         height: "100%",
         width: "100%"
-        
+
     }
 
 

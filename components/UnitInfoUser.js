@@ -4,10 +4,11 @@ import {
     Text,
     StyleSheet,
     Image,
-    
+
 } from "react-native";
 
 class UnitInfoUser extends React.Component {
+    
     render() {
         return (
             <View style={styles.routeStyle}>
@@ -17,17 +18,19 @@ class UnitInfoUser extends React.Component {
                         style={{ width: "100%", height: "100%" }}
                     />
                 </View>
-                <View style={styles.textStyle}>
-                    <Text style={styles.textTitleStyle}>{this.props.catagory}</Text>
-                </View>
-                <View style={styles.textStyle}>
-                    <Text style={styles.textTitleStyle}>{this.props.title}</Text>
-                </View>
-                <View style={styles.detailStyle}>
-                    <Text style={styles.textDetailStyle}>{this.props.subTitle}</Text>
-                </View>
-                <View style={styles.dateStyle}>
-                    <Text style={styles.textDetailStyle}> תאריך העלאה | {this.props.date}</Text>
+                <View >
+                    <View style={styles.textStyle}>
+                        <Text style={styles.textTitleStyle}>{this.props.catagory}</Text>
+                    </View>
+                    <View style={styles.textStyle}>
+                        <Text style={styles.textTitleStyle}>{this.props.title}</Text>
+                    </View>
+                    <View style={styles.detailStyle}>
+                        <Text style={styles.textDetailStyle}>{this.props.subTitle}</Text>
+                    </View>
+                    <View style={styles.dateStyle}>
+                        <Text style={styles.textDetailStyle}> תאריך העלאה | {this.props.date}</Text>
+                    </View>
                 </View>
             </View>
         );
@@ -37,20 +40,20 @@ export default UnitInfoUser;
 
 const styles = StyleSheet.create({
     routeStyle: {
-        backgroundColor: "#F6D365",
+        backgroundColor: "#F4D5A7",
         borderColor: "#FFAF50",
         overflow: 'hidden',
         borderRadius: 15,
-        borderWidth: 2,
+        borderWidth: 1,
         fontSize: 20,
-        marginTop: 10
+        marginTop: "2%"
     },
     imageStyle: {
         marginTop: 10,
         marginLeft: 10,
         borderColor: "#FFAF50",
         position: 'absolute',
-        borderWidth: 4,
+        borderWidth: 2,
         height: "85%",
         width: "30%"
     },
@@ -58,16 +61,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row-reverse'
     },
     detailStyle: {
-       height: 50,
-       width: "69%",
-       marginLeft: "31%",
+        height: 50,
+        width: "69%",
+        marginLeft: "31%",
 
     },
-    dateStyle:{
+    dateStyle: {
         height: 30,
-       width: "50%",
-       marginLeft: "51%",
-       marginTop:10
+        width: "50%",
+        marginLeft: "51%",
+        marginTop: 10
 
     },
     textTitleStyle: {

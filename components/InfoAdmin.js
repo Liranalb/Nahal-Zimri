@@ -30,8 +30,8 @@ async function pressPhoto(source) {
 
     // setting the paths
     let imageID = "img" + keyID + ".jpg";
-    let dataPath = 'Articles1/info' + keyID;
-    let storagePath = "Images/Articles1/" + imageID;
+    let dataPath = 'Articles/info' + keyID;
+    let storagePath = "Images/Articles/" + imageID;
 
 
     console.log("imageID is : " + imageID + "\n storagePath" + storagePath);
@@ -63,11 +63,11 @@ function sendData(id) {
     else {
 
         let infoId = 'info' + keyID;
-        let dataPath = 'Articles1/info' + keyID;
+        let dataPath = 'Articles/info' + keyID;
         let imageID = "img" + keyID + ".jpg";
-        let storagePath = "Images/Articles1/" + imageID;
+        let storagePath = "Images/Articles/" + imageID;
         storage.ref().child(storagePath).getDownloadURL().then((url) => {
-            db.ref('Articles1/' + id).child('imageLink/').set(url)
+            db.ref('Articles/' + id).child('imageLink/').set(url)
 
 
 
@@ -101,7 +101,7 @@ function InfoAdminScreen({ navigation }) {
             if (photoUploaded === true) {
                 alert("photo should be deleted!");
                 let imageID = "img" + keyID + ".jpg";
-                var desertRef = storage.ref().child('Images/Articles1/' + imageID);
+                var desertRef = storage.ref().child('Images/Articles/' + imageID);
                 //Delete the file
                 desertRef.delete().then(function () {
                     console.log("deleted successfully")
@@ -124,7 +124,7 @@ function InfoAdminScreen({ navigation }) {
         photoUploaded = false;
     }
 
-    db.ref('Articles1').on('value', function (snapshot) {
+    db.ref('Articles').on('value', function (snapshot) {
         const exist = (snapshot.val() !== null);
         if (exist) {
             data = snapshot.val();
@@ -135,7 +135,7 @@ function InfoAdminScreen({ navigation }) {
         }
     });
     function removeItem(id) {
-        db.ref('Articles1/').child(id).remove()
+        db.ref('Articles/').child(id).remove()
 
     }
     function onSubmit(type, title, content, description) {
@@ -155,21 +155,21 @@ function InfoAdminScreen({ navigation }) {
                 return -1
             }
                 let infoId = 'info' + keyID;
-                let dataPath = 'Articles1/info' + keyID;
+                let dataPath = 'Articles/info' + keyID;
                 let imageID = "img" + keyID + ".jpg";
-                let storagePath = "Images/Articles1/" + imageID;
+                let storagePath = "Images/Articles/" + imageID;
                 let date=getDate()
                 storage.ref().child(storagePath).getDownloadURL().then((url)=>{
                 var newData = {
                     Id: keyID ,
                     Title: title,
                     Date:date,
-                    Content: content,
-                    Description: description,
+                    Description: content,
+                   SubTitle: description,
                     Catagory: type,
                     imageLink: url
                 }
-                db.ref('Articles1/' + keyID).set(newData, function (error) {
+                db.ref('Articles/' + keyID).set(newData, function (error) {
 
                     if (error) {
                         console.log('The write failed...')
@@ -234,8 +234,8 @@ function InfoAdminScreen({ navigation }) {
     }
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
+            <HeaderComp />
             <View>
-                <HeaderComp />
                 <View style={{ flexDirection: 'row' }}>
 
                     <View style={styles.CheckBoxStyle} >
@@ -299,7 +299,7 @@ function InfoAdminScreen({ navigation }) {
                                                 title={item.Title}
                                                 date={item.Date}
                                                 catagory={item.Catagory}
-                                                detail={item.Description}
+                                                detail={item.SubTitle}
                                                 idFromParent={item.Id}
                                                 addPhoto={() => sendData(item.Id)}
                                                 upLoadPhoto={() => pressPhoto("upload")}
@@ -312,7 +312,7 @@ function InfoAdminScreen({ navigation }) {
                                                         [
                                                             {
                                                                 text: 'כן', onPress: () => {
-                                                                    db.ref('Articles1/').child(item.Id).remove()
+                                                                    db.ref('Articles/').child(item.Id).remove()
                                                                     setLoaded({ loaded: false });
                                                                 }
                                                             },
@@ -415,8 +415,8 @@ function AdminNewOpenArtScreen() {
     return (
         <AdminNewOpenArt
             title={currItem.Title}
-            detail={currItem.Description}
-            content={currItem.Content}
+            detail={currItem.SubTitle}
+            content={currItem.Description}
             imageUri={{ uri: currItem.imageLink }}
 
 
@@ -455,7 +455,7 @@ const styles = {
         marginTop: 10
     },
     routeStyle: {
-        backgroundColor: "#F6D365",
+        backgroundColor: "#F4D5A7",
         borderColor: "#FFAF50",
         overflow: 'hidden',
         borderRadius: 15,

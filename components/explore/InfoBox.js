@@ -16,7 +16,7 @@ class InfoBox extends Component {
     render() {
         return (
                 <View style={styles.containerStyle}>
-                    <View style={{ flex: 1}}>
+                    <View style={{ flex: 1,paddingRight: 3}}>
                         <Image source={this.props.imageUri}
                             style={styles.imageStyle}
                         />
@@ -46,18 +46,19 @@ const styles = {
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        
     },
     containerStyle: {
         height: 150,
         width: 380,
         alignSelf: 'center',
         borderWidth: 1.1,
-        borderColor: '#A3A3A3',
+        borderColor: '#FFAF50',      // A3A3A3
         borderRadius: 10,
         flexDirection: 'row',
         backgroundColor: '#F4D5A7',
-        marginBottom:5
+        overflow: 'hidden'
 
     },
     headlineStyle: {
