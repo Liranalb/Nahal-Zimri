@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, {useState, useEffect } from "react"
 import { Header, CheckBox, ListItem } from "react-native-elements"
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import { Image, View, TextInput, Text, StyleSheet, ScrollView, TouchableWithoutFeedback, Button, Alert, unstable_enableLogBox } from "react-native"
@@ -8,20 +8,64 @@ import UnitRoutes from "./UnitRoutes";
 import AdminButton from "./AdminButton";
 import AdminUnitRoutes from './AdminUnitRoutes'
 import NewOpenRoute from "./NewOpenRoute";
-import { Icon } from 'react-native-elements'
 import { db } from '../config/Firebase'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContent } from "./DrawerContent";
+import Icon from 'react-native-vector-icons/Entypo';
 
 var currItem;
 var currImg;
 var dataType;
 
+//let photoUploaded = false;
+let keyID;
+
+function sendData(name, mark, level, type, details, animals, duration, km) {
+    let rouId = 'rou' + keyID;
+    let dataPath = 'Routes/rou' + keyID;
+    let newRou = {
+        name: name,
+        PathType: dataType,
+        mark: mark,
+        level: level,
+        km: km,
+        duration: duration,
+        details: details,
+        id: rouId, 
+        type: type,
+        animals: animals
+    }
+    db.ref(dataPath).set(newRou);
+    return 0;
+}
+
 function AdminRoutesScreen({ navigation }) {
   
     let currentType = dataType;
     let routesArray = [];
+    const [name, onChangeName] = useState('');
+    const [mark, onChangeMark] = useState('');
+    const [level, onChangeLevel] = useState('');
+    const [km, onChangeKm] = useState('');
+    const [duration, onChangeDuration] = useState('');
+    const [details, onChangeDetails] = useState('');
+    const [type, onChangeType] = useState('');
+    const [animals, onChangeAnimals] = useState('');
     const [loaded, setLoaded] = useState(false);
+
+    function refreshPage() {
+        onChangeName("");
+        onChangeMark("");
+        onChangeLevel("");
+        onChangeKm("");
+        onChangeDuration("");
+        onChangeDetails("");
+        onChangeType("");
+        onChangeAnimals("");
+        setLoaded({ loaded: false });
+        keyID = newPostKey();
+        //photoUploaded = false;
+    }
 
     //load data
     let data = null;
@@ -36,8 +80,25 @@ function AdminRoutesScreen({ navigation }) {
         }
     });
 
+    
+    let newPostKey = () => {
+        return db.ref().child('Routes').push().key;
+    }
 
 
+    
+    // on mount
+    useEffect(() => {
+        keyID = newPostKey();
+        console.log("Produced key:  " + keyID);
+
+    }, []);
+    // on unmount
+    useEffect(() => {
+        return () => {
+
+        }
+    }, []);
 
     let convertDataToArray = (data, routesArray) => {
         if (data === null)
@@ -62,59 +123,6 @@ function AdminRoutesScreen({ navigation }) {
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
             />
             <ScrollView>
-                {/* <TouchableWithoutFeedback onPress={() => navigation.navigate('newOpRo')}>
-                    <View>
-                        <AdminUnitRoutes
-                            imageUri={require('../assets/img/map.png')}
-                            nameOfRoutes="גל-קראוס שביל ימין"
-                            diff="בינוני"
-                            km="2.5"
-                            time="40 דקות"
-                            kind="מעגלי"
-                            detail="כל הציבור מוזמן"
-                        />
-                    </View>
-                </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('newOpRo')}>
-                    <View>
-                        <AdminUnitRoutes
-                            imageUri={require('../assets/img/map.png')}
-                            nameOfRoutes="שביל לאורך הפריחה"
-                            diff="קשה"
-                            km="4"
-                            time="70 דקות"
-                            kind="הלוך חזור"
-                            detail="מסלול למיטיבי לכת"
-                        />
-                    </View>
-                </TouchableWithoutFeedback>
-
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('newOpRo')}>
-                    <View>
-                        <AdminUnitRoutes
-                            imageUri={require('../assets/img/map.png')}
-                            nameOfRoutes="ביקור בבית הצבאים"
-                            diff="קל"
-                            km="2"
-                            time="35 דקות"
-                            kind="קו"
-                            detail="טיול מהנה"
-                        />
-                    </View>
-                </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('newOpRo')}>
-                    <View>
-                        <AdminUnitRoutes
-                            imageUri={require('../assets/img/map.png')}
-                            nameOfRoutes="גל-קראוס שביל שמאל"
-                            diff="בינוני"
-                            km="3.5"
-                            time="60 דקות"
-                            kind="הלוך-חזור"
-                            detail="כל הציבור מוזמן"
-                        />
-                    </View>
-                </TouchableWithoutFeedback> */}
                 {
                     console.log("second"),
                     routesArray.map((item) => {
@@ -137,33 +145,71 @@ function AdminRoutesScreen({ navigation }) {
                     })
                 }
 
-
-
-                <TouchableWithoutFeedback onPress={() => alert("alert!")}>
-                    <Text style={{ fontWeight: "bold" }} > טען יותר...</Text>
-                </TouchableWithoutFeedback>
-                <Text>הוספת מסלול</Text>
                 <View>
-                    <Text>שם המסלול :</Text>
-                    <TextInput style={styles.textInput}> </TextInput>
-                    <Text>רמת הקושי:</Text>
-                    <TextInput style={styles.textInput}> </TextInput>
-                    <Text>ק"מ:</Text>
-                    <TextInput style={styles.textInput}> </TextInput>
-                    <Text>משך זמן ההליכה:</Text>
-                    <TextInput style={styles.textInput}> </TextInput>
-                    <Text>סוג המסלול:</Text>
-                    <TextInput style={styles.textInput}> </TextInput>
-                    <Text>פרטים:</Text>
-                    <TextInput style={styles.textInput}> </TextInput>
+                <Text style={{ fontSize: 18,fontWeight: "bold", alignSelf:"center", alignItems: "center"}} >הוספת מסלול:</Text>
+                    <Text style={{ fontSize: 16}}>שם המסלול:</Text>
+                    <  TextInput
+                        style={styles.textInput}
+                        onChangeText={text => onChangeName(text)}
+                        value={name}
+                    />
+                    <Text style={{ fontSize: 16}}>רמת הקושי:</Text>
+                    <  TextInput
+                        style={styles.textInput}
+                        onChangeText={text => onChangeLevel(text)}
+                        value={level}
+                    />
+                    <Text style={{ fontSize: 16}}>ק"מ:</Text>
+                    <  TextInput
+                        style={styles.textInput}
+                        onChangeText={text => onChangeKm(text)}
+                        value={km}
+                    />
+                    <Text style={{ fontSize: 16}}>משך זמן ההליכה:</Text>
+                    <  TextInput
+                        style={styles.textInput}
+                        onChangeText={text => onChangeDuration(text)}
+                        value={duration}
+                    />
+                    <Text style={{ fontSize: 16}}>סוג המסלול:</Text>
+                    <  TextInput
+                        style={styles.textInput}
+                        onChangeText={text => onChangeType(text)}
+                        value={type}
+                    />
+                     <Text style={{ fontSize: 16}}>בעלי חיים במסלול:</Text>
+                    <  TextInput
+                        style={styles.textInput}
+                        onChangeText={text => onChangeAnimals(text)}
+                        value={animals}
+                    />
+                    <Text style={{ fontSize: 16}}>סימון:</Text>
+                    <  TextInput
+                        style={styles.textInput}
+                        onChangeText={text => onChangeMark(text)}
+                        value={mark}
+                    />
+                    <Text style={{ fontSize: 16}}>פרטים:</Text>
+                    <  TextInput
+                        style={styles.textInput}
+                        onChangeText={text => onChangeDetails(text)}
+                        value={details}
+                    />
                 </View>
+                <Text style={{ fontSize: 16}}>הוספת תמונה:</Text>
+                <TouchableWithoutFeedback 
+                // onPress={() => uploadImage('uploads/mydduse.jpg')}
+                //onPress={() => pressPhoto("upload")}
+                >
+                    <View style={{width:"10%",marginLeft:"85%", marginTop: "5%" ,borderColor: "green", borderRadius: 10,borderWidth: 2,}}><Icon name="images" size={30} color="#505050" /></View>
                 
+                </TouchableWithoutFeedback>
                  <TouchableWithoutFeedback
                     onPress={() => {
-                        /*let result = sendData(name, date, day, hour, location, link, details);
+                        let result = sendData(name, mark, level, type, details, animals, duration, km);
                         console.log("result is: " + result);
                         if (result === 0)
-                            refreshPage();*/
+                            refreshPage();
                     }}
                 >
                     <View style={styles.buttonStyle}>
@@ -184,9 +230,11 @@ function AdminRoutesScreen({ navigation }) {
 <Button style={styles.buttonStyle}
                     onPress={() => alert('Pressed!')}
                     title="עדכן"
-
-
                 />
+*/
+
+/*
+
 */
 function NewOpenRouteScreen() {
     return (
@@ -197,8 +245,8 @@ function NewOpenRouteScreen() {
 const logStack = createStackNavigator();
 const DrawerRoute = createDrawerNavigator();
 
-function AdminRoutesStack(props) { //for navigation. not in use yet
-    dataType= props.dataType;
+function AdminRoutesStack() { //for navigation. not in use yet
+    
 
     return (
         
@@ -213,7 +261,8 @@ function AdminRoutesStack(props) { //for navigation. not in use yet
     );
 }
 
-function AdminRoutes() {
+function AdminRoutes(props) {
+    dataType= props.dataType;
     return (
         <DrawerRoute.Navigator initialRouteName="reports" drawerPosition="right"
             drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
