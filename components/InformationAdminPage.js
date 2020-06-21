@@ -32,7 +32,7 @@ function getDate() {
 async function pressPhoto(source) {
 
     // setting the paths
-    let imageID = "img" + keyID + ".jpg";
+    let imageID = "rep" + keyID + ".jpg";
     let dataPath = 'Information/info' + keyID;
     let storagePath = "Images/Information/" + imageID;
 

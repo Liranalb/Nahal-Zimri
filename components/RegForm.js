@@ -10,7 +10,7 @@ let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; //regular expression 
 class RegForm extends Component {
   constructor() {
     super();
-    this.usersRef = firebase.firestore().collection('Users')
+    //this.usersRef = firebase.firestore().collection('Users')
     this.state = {
       displayName: '',
       email: '',
@@ -19,7 +19,6 @@ class RegForm extends Component {
       show: true
     }
   }
-
 
   addUserToFire() {
     if (this.state.email === '' || this.state.password === '' ||  this.state.displayName === '') 
@@ -32,15 +31,20 @@ class RegForm extends Component {
       Alert.alert('על הסיסמא להיות באורך של לפחות 6 תווים')
   
     else {
-
+      
       this.setState({ loading: true })
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then((res) => {
-          // res.user.updateProfile({
-          //   DisplayName: this.state.displayName
-          // })
+          console.log(res)
+          
+          firebase.database().ref('Users/' + firebase.auth().currentUser.uid).set({
+            Uid: firebase.auth().currentUser.uid,
+            email:  this.state.email,
+            Username: this.state.displayName,
+            Admin: false
+          })
           Alert.alert('נרשמת בהצלחה')
           this.setState({
             isLoading: false,
@@ -48,7 +52,6 @@ class RegForm extends Component {
             email: '',
             password: ''
           })
-
         })
 
         .catch(error => {

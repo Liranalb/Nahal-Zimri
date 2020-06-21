@@ -214,7 +214,6 @@ const styles = {
         flex: 1,
         marginTop: "0.4%",
         backgroundColor: "#FAE5D3",
-
     },
     CheckBoxContainerStyle: {
         borderColor: "#FFAF50",

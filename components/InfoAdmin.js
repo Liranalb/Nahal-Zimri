@@ -447,7 +447,7 @@ const styles = {
     },
     CheckBoxStyle: {
         flexDirection: 'row',
-        backgroundColor: "#F6D365",
+        backgroundColor: "#F4D5A7",
         borderWidth: 2,
         borderColor: "#FFAF50",
         width: "30%",

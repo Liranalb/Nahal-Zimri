@@ -15,7 +15,7 @@ import InfoAdmin from './InfoAdmin'
 
 import InfoCatagoriesAdmin from './InfoCatagoriesAdmin'
 import PathCatagoriesAdmin from './PathCatagoriesAdmin';
-
+import CurrentUser from "./CurrentUser"
 
 
 
@@ -26,7 +26,7 @@ function HomeAdminScreen({ navigation }) {
             <View>
                 <Header style={{ width: "100%", height: "100%" }}
                     backgroundColor='#FAE5D3'
-                    leftComponent={<Icon name="user" size={30} color='black' />}
+                    leftComponent={<Icon name="user" size={30} color='black'  onPress={() => navigation.navigate('Current')} />}
                     centerComponent={<LogoHeaderComponent imageUri={require('../assets/img/logo.png')} />}
                     rightComponent={{ icon: 'menu', color: 'black' }}
                 />
@@ -129,6 +129,11 @@ function EventAdminScreen() {
     );
 }
 
+function CurrentUserScreen(){
+    return(
+        <CurrentUser/>
+    );
+}
 
 const Stack = createStackNavigator();
 
@@ -144,6 +149,8 @@ function HomePageAdmin() {
                 <Stack.Screen options={{ headerShown: false }} name="Reports" component={ReportsAdminScreen} />
                 <Stack.Screen options={{ headerShown: false }} name="EventsAdmin" component={EventAdminScreen} />
                 <Stack.Screen options={{ headerShown: false }} name="InfoCat" component={InfoCatagoriesScreen} />
+                <Stack.Screen name="Current" options={{ headerShown: false }}
+                    component={CurrentUserScreen} />  
             </Stack.Navigator>
         </NavigationContainer>
     );

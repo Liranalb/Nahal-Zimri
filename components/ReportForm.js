@@ -283,7 +283,7 @@ class ReportForm extends Component {
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
-                                                <Text style={styles.textStyle}>צבי מצוי</Text>
+                                                <Text style={styles.textStyle}>שועל מצוי</Text>
                                             </View>
                                         </View>
                                     </View>
