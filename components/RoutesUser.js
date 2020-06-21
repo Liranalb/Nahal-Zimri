@@ -10,6 +10,8 @@ import NewOpenRoute from "./NewOpenRoute"
 import ReportBox from "./explore/ReportBox"
 import { db } from '../config/Firebase'
 import UnitRoutes from "./UnitRoutes"
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { DrawerContent } from "./DrawerContent";
 
 var currItem;
 var currImg;
@@ -55,9 +57,10 @@ function RoutesUserScreen({ navigation }) {
 
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
-            <View>
-                <HeaderComp />
-            </View>
+            <HeaderComp
+                openUserProfile={() => navigation.navigate('Current')}
+                openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
+            />
             <ScrollView>
                 {
                     console.log("second"),
@@ -96,9 +99,10 @@ function NewOpenRouteScreen() {
 }
 
 const logStack = createStackNavigator();
-//dataType={props.dataType} navigation={{navigation}}
-function RoutesUser( props ) { 
-    dataType= props.dataType;
+const DrawerRoute = createDrawerNavigator();
+
+function RoutesUserStack(  ) { 
+    
     
     
     return (
@@ -111,6 +115,19 @@ function RoutesUser( props ) {
         </logStack.Navigator>
     );
 }
+
+function RoutesUser(props) {
+    dataType= props.dataType;
+    return (
+        <DrawerRoute.Navigator initialRouteName="reports" drawerPosition="right"
+            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            <DrawerRoute.Screen name="reports" component={RoutesUserStack} />
+
+        </DrawerRoute.Navigator>
+
+    );
+}
+
 
 export default RoutesUser;
 

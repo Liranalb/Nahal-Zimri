@@ -13,8 +13,10 @@ import HeaderComp from "./HeaderComp"
 import ImagePicker from 'react-native-image-crop-picker';
 import { db } from '../config/Firebase'
 import EventBoxUser from "./EventBoxUser";
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { DrawerContent } from "./DrawerContent";
 
-function EventUser() {
+function EventUserScreen( {navigation }) {
 
         let eventsArray = [];
         const [loaded, setLoaded] = useState(false); 
@@ -51,9 +53,10 @@ function EventUser() {
 
         return (
             <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
-                <View>
-                    <HeaderComp />
-                </View>
+                <HeaderComp
+                openUserProfile={() => navigation.navigate('Current')}
+                openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
+            />
                 <ScrollView>
                     {
                         console.log("second"),
@@ -74,6 +77,19 @@ function EventUser() {
             </View>
         )
     }
+
+const DrawerEvent = createDrawerNavigator();
+
+function EventUser() {
+    return (
+        <DrawerEvent.Navigator initialRouteName="reports" drawerPosition="right"
+            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            <DrawerEvent.Screen name="eventPage" component={EventUserScreen} />
+
+        </DrawerEvent.Navigator>
+
+    );
+}
 
 
 export default EventUser;

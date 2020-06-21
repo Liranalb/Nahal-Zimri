@@ -6,16 +6,18 @@ import InfoBox from './explore/InfoBox'
 import { createStackNavigator } from '@react-navigation/stack';
 import InfoComp from "./InfoComp"
 import { db } from '../config/Firebase'
-import Reports from './Reports'
+import CurrentUser from "./CurrentUser"
+import { DrawerContent } from "./DrawerContent";
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 let keyID, dataType, currItem;
 
 
 function wait(timeout) {
     return new Promise(resolve => {
-      setTimeout(resolve, timeout);
+        setTimeout(resolve, timeout);
     });
-  }
+}
 
 function InformationUserScreen({ navigation }) {
 
@@ -39,9 +41,9 @@ function InformationUserScreen({ navigation }) {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-    
+
         wait(1000).then(() => setRefreshing(false));
-      }, [refreshing]);
+    }, [refreshing]);
 
 
     let convertDataToArray = (data, infoArray) => {
@@ -63,7 +65,10 @@ function InformationUserScreen({ navigation }) {
 
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
-            <HeaderComp />
+            <HeaderComp
+                openUserProfile={() => navigation.navigate('Current')}
+                openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
+            />
 
             <View style={{ width: "100%", height: "87%", marginTop: "2%" }}>
 
@@ -71,8 +76,8 @@ function InformationUserScreen({ navigation }) {
 
                 <View style={{ height: "100%", width: "100%" }}>
                     <ScrollView
-                        refreshControl={ <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-                        >
+                        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+                    >
 
                         {infoArray.map((item) => {
                             return (
@@ -107,7 +112,7 @@ function InformationUserScreen({ navigation }) {
 
 
 const InfoCompStack = createStackNavigator();
-
+const DrawerInfo = createDrawerNavigator();
 
 function InfoUserComponent({ navigation }) {
     console.log("cureItem is : " + currItem.ImageLink);
@@ -121,9 +126,8 @@ function InfoUserComponent({ navigation }) {
 }
 
 
-function InformationPage(props) {
+function InformationPageStack() {
 
-    dataType = props.dataType;
 
     return (
         <InfoCompStack.Navigator initialRouteName="infoAdminScreen">
@@ -133,7 +137,21 @@ function InformationPage(props) {
     );
 }
 
+function InformationPage(props) {
+    dataType = props.dataType;
+    return (
 
+        <DrawerInfo.Navigator initialRouteName="home" drawerPosition="right"
+            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            <DrawerInfo.Screen name="מסך הבית" component={InformationPageStack} />
+
+        </DrawerInfo.Navigator>
+
+
+
+
+    );
+}
 
 export default InformationPage;
 

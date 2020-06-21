@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { RefreshControl,TextInput, Alert, ScrollView, Text, TouchableWithoutFeedback } from "react-native"
+import { RefreshControl, TextInput, Alert, ScrollView, Text, TouchableWithoutFeedback } from "react-native"
 import { View } from "native-base"
 import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from "./HeaderComp"
@@ -9,6 +9,8 @@ import InfoComp from "./InfoComp"
 import { db, storage } from '../config/Firebase'
 import uploadImage from '../assets/functions/uploadSingleImage'
 import sayCheese from '../assets/functions/takePhoto'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { DrawerContent } from "./DrawerContent";
 
 //import ImagePicker from 'react-native-image-picker';
 
@@ -18,9 +20,9 @@ let keyID, dataType, currItem;
 
 function wait(timeout) {
     return new Promise(resolve => {
-      setTimeout(resolve, timeout);
+        setTimeout(resolve, timeout);
     });
-  }
+}
 
 function getDate() {
     var date = new Date().getDate(); //To get the Current Date
@@ -72,9 +74,9 @@ function sendData(body, title, currentType) {
         let dataPath = 'Information/info' + keyID;
         let imageID = "img" + keyID + ".jpg";
         let storagePath = "Images/Information/" + imageID;
-        
+
         storage.ref().child(storagePath).getDownloadURL().then((url) => {
-            
+
             let date = getDate();
             let newInfo = {
                 Date: date,
@@ -85,7 +87,7 @@ function sendData(body, title, currentType) {
                 id: infoId
             }
             db.ref(dataPath).set(newInfo);
-        }).catch( (error) => console.log(error))
+        }).catch((error) => console.log(error))
     }
 
     return 0;
@@ -114,9 +116,9 @@ function InformationAdminScreen({ navigation }) {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-    
+
         wait(1000).then(() => setRefreshing(false));
-      }, [refreshing]);
+    }, [refreshing]);
 
 
     let data = null;
@@ -186,20 +188,23 @@ function InformationAdminScreen({ navigation }) {
     return (
         <View style={{ height: "100%", width: "100%", backgroundColor: '#FAE5D3' }}>
 
-            <HeaderComp />
+            <HeaderComp
+                openUserProfile={() => navigation.navigate('Current')}
+                openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
+            />
 
             <View style={styles.containerStyle}>
 
-                <View style={{ height: "71%", width: "100%"}}>
+                <View style={{ height: "71%", width: "100%" }}>
                     <ScrollView
                         horizontal={false}
                         showsHorizontalScrollIndicator={false}
-                        refreshControl={ <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+                        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
                     >
 
                         {infoArray.map((item) => {
                             return (
-                                <View key={item.id} style={{marginTop:"1.5%"}}>
+                                <View key={item.id} style={{ marginTop: "1.5%" }}>
 
                                     <View>
                                         <EditInfoBox imageUri={{ uri: item.ImageLink }}
@@ -325,7 +330,7 @@ function InformationAdminScreen({ navigation }) {
 
 
 const InfoCompStack = createStackNavigator();
-
+const DrawerInfo = createDrawerNavigator();
 
 
 function InfoAdminComponent({ navigation }) {
@@ -339,7 +344,7 @@ function InfoAdminComponent({ navigation }) {
 }
 
 
-function InformationAdminPage(props) {
+function InformationAdminPageStack(props) {
 
     dataType = props.dataType;
 
@@ -351,6 +356,18 @@ function InformationAdminPage(props) {
         </InfoCompStack.Navigator>
     );
 }
+
+function InformationAdminPage() {
+    return (
+        <DrawerInfo.Navigator initialRouteName="reports" drawerPosition="right"
+            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            <DrawerInfo.Screen name="reports" component={InformationAdminPageStack} />
+
+        </DrawerInfo.Navigator>
+
+    );
+}
+
 
 export default InformationAdminPage;
 

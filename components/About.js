@@ -14,19 +14,19 @@ import ImagePicker from 'react-native-image-crop-picker';
 import { db } from '../config/Firebase'
 import EventBoxUser from "./EventBoxUser";
 
+
 function About() {
 
 
         return (
             <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
-                <View>
-                    <HeaderComp />
-                </View>
+                <HeaderComp/>
                 
             </View>
         )
     }
 
+    
 
 export default About;
 

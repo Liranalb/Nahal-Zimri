@@ -5,31 +5,51 @@ import { Image, View, TouchableWithoutFeedback, TextInput, Text, Button, ScrollV
 import { Footer, Container } from "native-base"
 import LogoHeaderComponent from "./explore/LogoHeaderComponent";
 import Icon from 'react-native-vector-icons/Entypo';
-
+import HeaderComp from './HeaderComp'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ReportsAdmin from './ReportsAdmin'
 import EventAdmin from './EventAdmin'
 import AdminRoutes from './AdminRoutes'
 import InfoAdmin from './InfoAdmin'
-
+import { createDrawerNavigator,
+    DrawerItem,
+    DefaultTheme} from '@react-navigation/drawer';
 import InfoCatagoriesAdmin from './InfoCatagoriesAdmin'
 import PathCatagoriesAdmin from './PathCatagoriesAdmin';
 import CurrentUser from "./CurrentUser"
+import { DrawerContent } from "./DrawerContent";
 
+const MyTheme = {
+    dark: false,
+    colors: {
+      primary: '#FF8C37',
+      background: '#FF8C37',
+      card: '#FAE5D3',
+      text: 'black',
+      border: '#FF8C37',
+    },
+    
+  };
 
+const CustomDrawer = (props) => (
+    <SafeAreaView style={{ flex: 1}}>
+        <ScrollView>
+            <DrawerItem {...props}/>
+        </ScrollView>
+    </SafeAreaView>
+)
 
 function HomeAdminScreen({ navigation }) {
 
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
+            <HeaderComp 
+                        openUserProfile = {() => navigation.navigate('Current')}
+                        openUserMenu = {() => navigation.dangerouslyGetParent().openDrawer()}
+                        />
             <View>
-                <Header style={{ width: "100%", height: "100%" }}
-                    backgroundColor='#FAE5D3'
-                    leftComponent={<Icon name="user" size={30} color='black'  onPress={() => navigation.navigate('Current')} />}
-                    centerComponent={<LogoHeaderComponent imageUri={require('../assets/img/logo.png')} />}
-                    rightComponent={{ icon: 'menu', color: 'black' }}
-                />
+               
             </View>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('InfAd')}>
                 <View style={styles.infoStyle}>
@@ -135,11 +155,23 @@ function CurrentUserScreen(){
     );
 }
 
-const Stack = createStackNavigator();
-
-function HomePageAdmin() {
+function AboutScreen() {
     return (
-        <NavigationContainer>
+        <About />
+    );
+}
+
+const linking = {
+    prefixes: ['https://mychat.com', 'mychat://'],
+  };
+
+
+const Stack = createStackNavigator();
+const DrawerR = createDrawerNavigator();
+
+function HomePageAdminStack() {
+    return (
+      
             <Stack.Navigator initialRouteName="HomeAdmin"  >
 
                 <Stack.Screen options={{ headerShown: false }} name="HomeAdmin" component={HomeAdminScreen} />
@@ -152,7 +184,22 @@ function HomePageAdmin() {
                 <Stack.Screen name="Current" options={{ headerShown: false }}
                     component={CurrentUserScreen} />  
             </Stack.Navigator>
-        </NavigationContainer>
+    
+    );
+}
+
+function HomePageAdmin(){
+    return(
+        <NavigationContainer theme={MyTheme}>
+        <DrawerR.Navigator initialRouteName="home" drawerPosition="right"
+         drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>         
+        <DrawerR.Screen name="מסך הבית" component={HomePageAdminStack} />
+ 
+      </DrawerR.Navigator>
+
+   
+      </NavigationContainer>
+
     );
 }
 
@@ -227,5 +274,11 @@ const styles = {
         height: "10%",
         alignSelf: "center",
         marginTop: 10
-    }
+    },
+    drawerSection: {
+        marginTop: 15,
+      },
+      drawerContent: {
+        flex: 1,
+      }
 }

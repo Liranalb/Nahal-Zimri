@@ -12,14 +12,19 @@ import ReportForm from "./ReportForm"
 //import ImagePicker from 'react-native-image-picker';
 import { db } from '../config/Firebase'
 import ReportsFullComp from './ReportsFullComp'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { DrawerContent } from "./DrawerContent";
+
+
+
 
 let dataType, currItem, isCheckOn = false;
 
 function wait(timeout) {
     return new Promise(resolve => {
-      setTimeout(resolve, timeout);
+        setTimeout(resolve, timeout);
     });
-  }
+}
 
 export function ReportsAdminScreen({ navigation }) {
     let reportsArray = [], approvedText = "";
@@ -93,9 +98,9 @@ export function ReportsAdminScreen({ navigation }) {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-    
+
         wait(1000).then(() => setRefreshing(false));
-      }, [refreshing]);
+    }, [refreshing]);
 
     convertDataToArray(data, reportsArray);
 
@@ -103,7 +108,10 @@ export function ReportsAdminScreen({ navigation }) {
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
 
-            <HeaderComp />
+            <HeaderComp
+                openUserProfile={() => navigation.navigate('Current')}
+                openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
+            />
 
 
             <View style={{ width: "100%", height: "89%" }}>
@@ -140,76 +148,76 @@ export function ReportsAdminScreen({ navigation }) {
 
                 </View>
 
-                <View style={{width:"98%",height:"77%"}}>
-                <ScrollView
-                    scrollEventThrottle={16}
-                    refreshControl={
-                        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-                      }
-                >
-                    <View style={{ width: "100%" }}>
+                <View style={{ width: "98%", height: "77%" }}>
+                    <ScrollView
+                        scrollEventThrottle={16}
+                        refreshControl={
+                            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                        }
+                    >
+                        <View style={{ width: "100%" }}>
 
-                        <View style={{ height: "100%", flex: 1 }}>
-                            <ScrollView
-                                horizontal={true}
-                                showsHorizontalScrollIndicator={false}
-                            >
-                                {reportsArray.map((item) => {
+                            <View style={{ height: "100%", flex: 1 }}>
+                                <ScrollView
+                                    horizontal={true}
+                                    showsHorizontalScrollIndicator={false}
+                                >
+                                    {reportsArray.map((item) => {
 
 
-                                    if (item.Approved)
-                                        approvedText = "מאושר"
-                                    else
-                                        approvedText = "לא מאושר"
+                                        if (item.Approved)
+                                            approvedText = "מאושר"
+                                        else
+                                            approvedText = "לא מאושר"
 
-                                    return (
-                                        <View key={item.id}>
-                                            <EditReports imageUri={{ uri: item.ImageLink }}
-                                                id={item.id}
-                                                body={item.Description}
-                                                date={item.Date}
-                                                type={item.Type}
-                                                catagory={item.Catagory}
-                                                approved={item.Approved}
-                                                approvedText={approvedText}
-                                                reporter={item.ReporterName}
-                                                onExpand={() => {
-                                                    currItem = item;
-                                                    navigation.navigate('repFullComp');
-                                                }}
-                                                onDelete={() => {
-                                                    Alert.alert(
-                                                        //title
-                                                        'שלום',
-                                                        //body
-                                                        'האם למחוק דיווח הזה?',
-                                                        [
-                                                            {
-                                                                text: 'כן', onPress: () => {
-                                                                    db.ref('Reports/').child(item.id).remove();
-                                                                    setLoaded({ loaded: false });
-                                                                    // delete image not working yet
-                                                                }
-                                                            },
-                                                            { text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel' },
-                                                        ],
-                                                        { cancelable: false }
-                                                        //clicking out side of alert will not cancel
-                                                    );
-                                                }}
-                                            />
-                                        </View>
-                                    )
-                                })}
+                                        return (
+                                            <View key={item.id}>
+                                                <EditReports imageUri={{ uri: item.ImageLink }}
+                                                    id={item.id}
+                                                    body={item.Description}
+                                                    date={item.Date}
+                                                    type={item.Type}
+                                                    catagory={item.Catagory}
+                                                    approved={item.Approved}
+                                                    approvedText={approvedText}
+                                                    reporter={item.ReporterName}
+                                                    onExpand={() => {
+                                                        currItem = item;
+                                                        navigation.navigate('repFullComp');
+                                                    }}
+                                                    onDelete={() => {
+                                                        Alert.alert(
+                                                            //title
+                                                            'שלום',
+                                                            //body
+                                                            'האם למחוק דיווח הזה?',
+                                                            [
+                                                                {
+                                                                    text: 'כן', onPress: () => {
+                                                                        db.ref('Reports/').child(item.id).remove();
+                                                                        setLoaded({ loaded: false });
+                                                                        // delete image not working yet
+                                                                    }
+                                                                },
+                                                                { text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel' },
+                                                            ],
+                                                            { cancelable: false }
+                                                            //clicking out side of alert will not cancel
+                                                        );
+                                                    }}
+                                                />
+                                            </View>
+                                        )
+                                    })}
 
-                            </ScrollView>
+                                </ScrollView>
+                            </View>
+
                         </View>
+                    </ScrollView>
+                </View>
 
-                    </View>
-                </ScrollView>
-            </View>
 
-                
 
                 <View style={{ width: "100%", height: "14%" }}>
                     <TouchableOpacity
@@ -248,8 +256,9 @@ function ReportsFullCompFunc({ navigation }) {
 
 
 const repAdminStack = createStackNavigator();
+const DrawerRep = createDrawerNavigator();
 
-function ReportsAdmin() {
+function ReportsAdminStack() {
     return (
 
         <repAdminStack.Navigator initialRouteName="reportsAdmin">
@@ -263,6 +272,16 @@ function ReportsAdmin() {
 
 }
 
+function ReportsAdmin() {
+    return (
+        <DrawerRep.Navigator initialRouteName="reports" drawerPosition="right"
+            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            <DrawerRep.Screen name="reports" component={ReportsAdminStack} />
+
+        </DrawerRep.Navigator>
+
+    );
+}
 
 
 
@@ -295,7 +314,7 @@ const styles = {
 
     buttonStyle: {
         width: "90%",
-        height:"100%",
+        height: "100%",
         borderColor: "black",
         borderWidth: 1,
         alignSelf: "center",

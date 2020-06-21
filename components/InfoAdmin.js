@@ -13,6 +13,8 @@ import { db, storage } from '../config/Firebase'
 import uploadImage from '../assets/functions/uploadSingleImage'
 import sayCheese from '../assets/functions/takePhoto'
 import Icon from 'react-native-vector-icons/Entypo';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { DrawerContent } from "./DrawerContent";
 
 var isCheckOn = false
 export let dataType = ""
@@ -234,7 +236,10 @@ function InfoAdminScreen({ navigation }) {
     }
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
-            <HeaderComp />
+            <HeaderComp
+                openUserProfile={() => navigation.navigate('Current')}
+                openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
+            />
             <View>
                 <View style={{ flexDirection: 'row' }}>
 
@@ -425,8 +430,9 @@ function AdminNewOpenArtScreen() {
 }
 
 const logStack = createStackNavigator();
+const DrawerRep = createDrawerNavigator();
 
-function InfoAdmin(props) { //for navigation. not in use yet
+function InfoAdminStack(props) { //for navigation. not in use yet
     return (
         <logStack.Navigator initialRouteName="infoA">
             <logStack.Screen options={{ headerShown: false }} name="infoA" component={InfoAdminScreen} />
@@ -436,6 +442,18 @@ function InfoAdmin(props) { //for navigation. not in use yet
         </logStack.Navigator>
     );
 }
+
+function InfoAdmin() {
+    return (
+        <DrawerRep.Navigator initialRouteName="home" drawerPosition="right"
+            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            <DrawerRep.Screen name="artic" component={InfoAdminStack} />
+
+        </DrawerRep.Navigator>
+
+    );
+}
+
 
 export default InfoAdmin;
 

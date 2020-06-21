@@ -8,7 +8,7 @@ import {
     TouchableWithoutFeedback, Image
 } from "react-native"
 import { View, Thumbnail, List, ListItem } from "native-base"
-import { CheckBox } from "react-native-elements"
+import { CheckBox,Header } from "react-native-elements"
 
 import Icon from 'react-native-vector-icons/Entypo';
 import IconA from 'react-native-vector-icons/FontAwesome';
@@ -20,6 +20,7 @@ import { Divider } from 'react-native-paper';
 import ImagePicker from 'react-native-image-crop-picker';
 import sayCheese from '../assets/functions/takePhoto'
 import uploadImage from '../assets/functions/uploadSingleImage'
+import LogoHeaderComponent from "./LogoHeaderComponent"
 
 
 let keyID, photoUploaded = false;
@@ -99,7 +100,7 @@ function sendData(body, type, genre) {
 
     return 0;
 }
-const ITEMS = ["One", "Two", "Three", "Four", "Five", "Six","Seven","Eight"];
+const ITEMS = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight"];
 
 
 
@@ -164,9 +165,13 @@ class ReportForm extends Component {
 
         return (
             <View style={{ height: "100%", width: "100%", backgroundColor: '#FAE5D3' }}>
-                <HeaderComp />
-                {/* <ImageBackground source={require('../assets/img/homePageAdmin_background.jpg')} */}
-                {/* style={{ flex: 1, resizeMode: 'cover' }} > */}
+                <View style={{ width: "100%", height: "11%" }}>
+
+                    <Header
+                        backgroundColor='#FAE5D3'
+                        centerComponent={<LogoHeaderComponent imageUri={require('../assets/img/logo.png')} />}
+                    />
+                </View>
                 <View style={{ backgroundColor: '#FAE5D3', height: "89%", width: "90%", alignSelf: 'center' }}>
 
 
@@ -470,6 +475,8 @@ class ReportForm extends Component {
 
 
 }
+
+
 
 export default ReportForm;
 

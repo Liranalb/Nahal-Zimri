@@ -4,7 +4,7 @@ import {
     Text,
     StyleSheet,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
 } from "react-native";
 import { Header } from "react-native-elements"
 import LogoHeaderComponent from "./LogoHeaderComponent"
@@ -19,7 +19,7 @@ class HeaderComp extends Component {
                     backgroundColor='#FAE5D3'
 
                     leftComponent={<TouchableOpacity
-                        onPress={() => this.openUserMenu()}>
+                        onPress={this.props.openUserProfile}>
                         <Icon name="user" size={30} color="black" />
                     </TouchableOpacity>}
 
@@ -27,7 +27,7 @@ class HeaderComp extends Component {
                     //centerComponent={<LogoHeaderComponent />}
                     
                     rightComponent={<TouchableOpacity
-                        onPress={() => this.openUserMenu()}>
+                        onPress={ this.props.openUserMenu}>
                         <Icon name="menu" size={30} color="black"/>
                     </TouchableOpacity>}
                 />

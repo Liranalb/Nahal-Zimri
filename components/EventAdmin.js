@@ -7,6 +7,8 @@ import HeaderComp from "./HeaderComp";
 import AdminButton from "./AdminButton";
 import { db } from '../config/Firebase'
 import EventBoxAdmin from "./EventBoxAdmin";
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { DrawerContent } from "./DrawerContent";
 
 //let photoUploaded = false;
 let keyID;
@@ -28,7 +30,7 @@ function sendData(name, date, day, hour, location, link, details) {
     return 0;
 }
 
-function EventAdmin() {
+function EventAdminScreen( { navigation } ) {
     let eventsArray = [];
     const [name, onChangeName] = useState('');
     const [date, onChangeDate] = useState('');
@@ -99,9 +101,10 @@ function EventAdmin() {
 
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
-            <View>
-                <HeaderComp />
-            </View>
+            <HeaderComp
+                openUserProfile={() => navigation.navigate('Current')}
+                openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
+            />
             <ScrollView>
                 {
                     console.log("second"),
@@ -214,6 +217,19 @@ function EventAdmin() {
 
     )
 
+}
+
+const DrawerRep = createDrawerNavigator();
+
+function EventAdmin() {
+    return (
+        <DrawerRep.Navigator initialRouteName="reports" drawerPosition="right"
+            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            <DrawerRep.Screen name="eventPage" component={EventAdminScreen} />
+
+        </DrawerRep.Navigator>
+
+    );
 }
 
 export default EventAdmin;

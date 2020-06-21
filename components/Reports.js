@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import {RefreshControl, ScrollView, Text, TouchableOpacity } from "react-native"
+import { RefreshControl, ScrollView, Text, TouchableOpacity } from "react-native"
 import { View } from "native-base"
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import { Header, ListItem, CheckBox, Button } from "react-native-elements"
@@ -11,14 +11,21 @@ import HeaderComp from "./HeaderComp"
 import { db, storage } from '../config/Firebase'
 import ReportsFullComp from "./ReportsFullComp"
 import ReportForm from "./ReportForm";
+import {
+    createDrawerNavigator,
+    DrawerItem,
+    DefaultTheme
+}
+    from '@react-navigation/drawer';
+import { DrawerContent } from "./DrawerContent";
 
 let dataType, currItem, isCheckOn = false;
 
 function wait(timeout) {
     return new Promise(resolve => {
-      setTimeout(resolve, timeout);
+        setTimeout(resolve, timeout);
     });
-  }
+}
 
 function ReportsScreen({ navigation }) {
     let reportsArray = [];
@@ -27,7 +34,7 @@ function ReportsScreen({ navigation }) {
     const [checkBoxState2, setChangeBox2] = useState(false);
     const [checkBoxState3, setChangeBox3] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
-    
+
 
     //load data
     let data = null;
@@ -46,9 +53,9 @@ function ReportsScreen({ navigation }) {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-    
+
         wait(1000).then(() => setRefreshing(false));
-      }, [refreshing]);
+    }, [refreshing]);
 
 
     let convertDataToArray = (data, reportsArray) => {
@@ -106,7 +113,10 @@ function ReportsScreen({ navigation }) {
 
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
-            <HeaderComp />
+            <HeaderComp
+                openUserProfile={() => navigation.navigate('Current')}
+                openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
+            />
             <View style={{ width: "100%", height: "89%" }}>
                 <View style={{ flexDirection: 'row', width: "100%", height: "9%" }}>
                     <View style={styles.CheckBoxStyle}>
@@ -142,12 +152,12 @@ function ReportsScreen({ navigation }) {
 
                 </View>
 
-                <View style={{width:"98%",height:"55%"}}>
+                <View style={{ width: "98%", height: "55%" }}>
                     <ScrollView
                         scrollEventThrottle={16}
-                        refreshControl={ <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+                        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
 
-                          
+
                     >
                         <View style={{ width: "100%", flex: 1 }}>
 
@@ -192,7 +202,7 @@ function ReportsScreen({ navigation }) {
                     </ScrollView>
                 </View>
 
-                <View style={{ width: "100%", height: "23%"}}>
+                <View style={{ width: "100%", height: "23%" }}>
 
 
                     {/* optional map */}
@@ -202,7 +212,7 @@ function ReportsScreen({ navigation }) {
 
                 </View>
 
-                <View style={{ width: "100%", height: "13%"}}>
+                <View style={{ width: "100%", height: "13%" }}>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('repFo')}
                     >
@@ -246,8 +256,9 @@ function ReportsFullCompFunc({ navigation }) {
 
 
 const logStack = createStackNavigator();
+const DrawerRep = createDrawerNavigator();
 
-function Reports() {
+function ReportsStack() {
     return (
         <logStack.Navigator initialRouteName="rep">
             <logStack.Screen options={{ headerShown: false }} name="rep" component={ReportsScreen} />
@@ -258,6 +269,17 @@ function Reports() {
 
         </logStack.Navigator>
 
+
+    );
+}
+
+function Reports() {
+    return (
+        <DrawerRep.Navigator initialRouteName="reports" drawerPosition="right"
+            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            <DrawerRep.Screen name="reports" component={ReportsStack} />
+
+        </DrawerRep.Navigator>
 
     );
 }
@@ -290,10 +312,10 @@ const styles = {
         alignSelf: 'center',
         marginTop: "8%"
     },
-    
+
     buttonStyle: {
         width: "70%",
-        height:"100%",
+        height: "100%",
         borderColor: "black",
         borderWidth: 1,
         alignSelf: "center",
@@ -305,6 +327,9 @@ const styles = {
         borderColor: "#FFAF50",
         borderWidth: 1,
         backgroundColor: '#F4D5A7'
+    },
+    drawerContent: {
+        flex: 1,
     }
 
 }

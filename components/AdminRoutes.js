@@ -10,6 +10,8 @@ import AdminUnitRoutes from './AdminUnitRoutes'
 import NewOpenRoute from "./NewOpenRoute";
 import { Icon } from 'react-native-elements'
 import { db } from '../config/Firebase'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { DrawerContent } from "./DrawerContent";
 
 var currItem;
 var currImg;
@@ -55,9 +57,10 @@ function AdminRoutesScreen({ navigation }) {
 
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
-            <View>
-                <HeaderComp />
-            </View>
+             <HeaderComp
+                openUserProfile={() => navigation.navigate('Current')}
+                openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
+            />
             <ScrollView>
                 {/* <TouchableWithoutFeedback onPress={() => navigation.navigate('newOpRo')}>
                     <View>
@@ -192,8 +195,9 @@ function NewOpenRouteScreen() {
 }
 
 const logStack = createStackNavigator();
+const DrawerRoute = createDrawerNavigator();
 
-function AdminRoutes(props) { //for navigation. not in use yet
+function AdminRoutesStack(props) { //for navigation. not in use yet
     dataType= props.dataType;
 
     return (
@@ -206,6 +210,17 @@ function AdminRoutes(props) { //for navigation. not in use yet
 
         </logStack.Navigator>
         
+    );
+}
+
+function AdminRoutes() {
+    return (
+        <DrawerRoute.Navigator initialRouteName="reports" drawerPosition="right"
+            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            <DrawerRoute.Screen name="reports" component={AdminRoutesStack} />
+
+        </DrawerRoute.Navigator>
+
     );
 }
 

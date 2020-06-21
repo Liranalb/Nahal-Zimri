@@ -45,13 +45,15 @@ const CustomDrawer = (props) => (
 
 function HomePageUserScreen({ navigation }) {
     return (
-
-
          <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
+             <HeaderComp 
+                        openUserProfile = {() => navigation.navigate('Current')}
+                        openUserMenu = {() => navigation.dangerouslyGetParent().openDrawer()}
+                        />
              <View>
                  <View>
-
-                     <Header
+                    
+                     {/* <Header
                  backgroundColor='#FAE5D3'
 
                          leftComponent={<TouchableOpacity
@@ -66,7 +68,7 @@ function HomePageUserScreen({ navigation }) {
                             onPress={() => navigation.dangerouslyGetParent().openDrawer()}>
                             <Icon name="menu" size={30} color="black" />
                         </TouchableOpacity>}
-                    />
+                    /> */}
                 </View>
             </View>
 
