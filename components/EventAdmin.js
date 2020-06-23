@@ -1,45 +1,118 @@
 import React, { Component, useState, useEffect } from "react";
 import { Header, ListItem } from "react-native-elements"
 /*import { createStackNavigator } from 'react-navigation-stack';*/
-import { Image, View, TextInput, Text, StyleSheet, ScrollView, TouchableOpacity, Button, Alert, unstable_enableLogBox, TouchableWithoutFeedback } from "react-native"
+import { Image, View, TextInput, Text, StyleSheet, ScrollView, TouchableOpacity, Button, Alert, unstable_enableLogBox,RefreshControl, TouchableWithoutFeedback } from "react-native"
 import { Footer, Container, Right } from "native-base"
 import HeaderComp from "./HeaderComp";
 import AdminButton from "./AdminButton";
-import { db } from '../config/Firebase'
+import { db, storage } from '../config/Firebase'
 import EventBoxAdmin from "./EventBoxAdmin";
+import uploadImage from '../assets/functions/uploadSingleImage'
+import sayCheese from '../assets/functions/takePhoto'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContent } from "./DrawerContent";
 import Icon from 'react-native-vector-icons/Entypo';
 
-//let photoUploaded = false;
+let photoUploaded = false, replace = false;
+let isLoading = false;
 let keyID;
 
-function sendData(name, date, day, hour, location, details) {
-    let eveId = 'eve' + keyID;
-    let dataPath = 'Events/eve' + keyID;
-    let newEve = {
-        name: name,
-        date: date,
-        weekday: day,
-        hour: hour,
-        location: location,
-        details: details,
-        id: eveId
-    }
-    db.ref(dataPath).set(newEve);
-    return 0;
+function wait(timeout) {
+    return new Promise(resolve => {
+        setTimeout(resolve, timeout);
+    });
 }
 
-function EventAdminScreen({ navigation }) {
-    let eventsArray = [];
+function EventAdminScreen() {
+
+    async function pressPhoto(key) {
+
+        // setting the paths
+        let imageID = "img" + key + ".jpg";
+        let dataPath = 'Events/eve' + key;
+        let storagePath = "Images/Events/" + imageID;
+
+        isLoading = true;
+        let result = await uploadImage(storagePath);
+        
+        if (replace === true) {
+          
+            storage.ref().child("Images/Events/" + imageID).getDownloadURL().then((url) => {
+
+                db.ref('Events/eve' + key + "/ImageLink").set(url);
+                setLoaded(false);
+            
+            }).catch((error) => console.log(error))
+            replace = false;
+        }
+
+        isLoading = false;
+        if (result === -1) {
+            return -1;
+        }
+        else {
+            photoUploaded = true;
+        }
+
+    }
+
+    function sendData(name, date, day, hour, location, details) {
+        if (photoUploaded === false) {
+            if (isLoading === true)
+                alert("Still uploading image");
+            else
+                alert("Upload image first");
+            return -1;
+        }
+        else {
+            let eveId = 'eve' + keyID;
+            let dataPath = 'Events/eve' + keyID;
+            let imageID = "img" + keyID + ".jpg";
+            let storagePath = "Images/Events/" + imageID;
+            storage.ref().child(storagePath).getDownloadURL().then((url) => {
+                let newEve = {
+                    name: name,
+                    date: date,
+                    weekday: day,
+                    hour: hour,
+                    location: location,
+                    details: details,
+                    id: eveId,
+                    imageLink: url
+                }
+                db.ref(dataPath).set(newEve);
+            }).catch((error) => console.log(error))
+        }
+
+        return 0;
+    }
+
+
+    let deleteImageFromStorage = (deleteID) => {
+
+        let imageID = "img" + deleteID + ".jpg";
+        console.log(deleteID);
+        var desertRef = storage.ref("Images").child('Events/' + imageID);
+        
+        //Delete the file
+        desertRef.delete().then(function () {
+            return 0;
+        }).catch(function (error) {
+            return -1;
+        });
+    }
+
+
     const [name, onChangeName] = useState('');
     const [date, onChangeDate] = useState('');
     const [day, onChangeDay] = useState('');
     const [hour, onChangeHour] = useState('');
+    const [imageLink, onChangeImageLink] = useState('');
     const [location, onChangeLocation] = useState('');
     const [details, onChangeDetails] = useState('');
     const [loaded, setLoaded] = useState(false);
-
+    const [refreshing, setRefreshing] = useState(false);
+    let eventsArray = [];
 
     function refreshPage() {
         onChangeName("");
@@ -47,11 +120,18 @@ function EventAdminScreen({ navigation }) {
         onChangeDay("");
         onChangeHour("");
         onChangeLocation("");
+        onChangeImageLink("");
         onChangeDetails("");
         setLoaded({ loaded: false });
         keyID = newPostKey();
-        //photoUploaded = false;
+        photoUploaded = false;
     }
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+
+        wait(1000).then(() => setRefreshing(false));
+    }, [refreshing]);
 
     //load data
     let data = null;
@@ -80,7 +160,8 @@ function EventAdminScreen({ navigation }) {
     // on unmount
     useEffect(() => {
         return () => {
-
+            if (photoUploaded === true)
+                deleteImageFromStorage(keyID);
         }
     }, []);
 
@@ -103,79 +184,89 @@ function EventAdminScreen({ navigation }) {
                 openUserProfile={() => navigation.navigate('Current')}
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
             />
-            <ScrollView>
+            <ScrollView
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
                 {
                     console.log("second"),
                     eventsArray.map((item) => {
                         return (
-                            <EventBoxAdmin imageUri={{ uri: item.imageLink }}
-                                name={item.name}
-                                date={item.date}
-                                weekday={item.weekday}
-                                hour={item.hour}
-                                location={item.location}
-                                details={item.details}
-                                item={item}
-                                onDelete={() => {
-                                    Alert.alert(
-                                        //title
-                                        'Hello',
-                                        //body
-                                        'האם למחוק את פריט המידע הזה?',
-                                        [
-                                            {
-                                                text: 'כן', onPress: () => {
-                                                    db.ref('Events/').child(item.id).remove();
-                                                    setLoaded({ loaded: false });
-                                                }
-                                            },
-                                            { text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel' },
-                                        ],
-                                        { cancelable: false }
-                                        //clicking out side of alert will not cancel
-                                    );
-                                }
-                                }
-                            />
+                            <View key={item.id}>
+                                <EventBoxAdmin imageUri={{ uri: item.imageLink }}
+                                    name={item.name}
+                                    date={item.date}
+                                    weekday={item.weekday}
+                                    hour={item.hour}
+                                    location={item.location}
+                                    details={item.details}
+                                    id={item.id}
+                                    item={item}
+                                    onReplaceImagePress={() => {
+                                        replace=true;
+                                        deleteImageFromStorage(item.id.slice(3));//??
+                                        pressPhoto(item.id.slice(3)); //???
+                                    }}
+                                    onDelete={() => {
+                                        Alert.alert(
+                                            //title
+                                            'Hello',
+                                            //body
+                                            'האם למחוק את פריט המידע הזה?',
+                                            [
+                                                {
+                                                    text: 'כן', onPress: () => {
+                                                        db.ref('Events/').child(item.id).remove();
+                                                        deleteImageFromStorage(item.id.slice(3)); //??
+                                                        setLoaded({ loaded: false });
+                                                    }
+                                                },
+                                                { text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel' },
+                                            ],
+                                            { cancelable: false }
+                                            //clicking out side of alert will not cancel
+                                        );
+                                    }
+                                    }
+                                />
+                            </View>
                         )
                     })
                 }
                 <View>
-                    <Text style={{ fontSize: 18,fontWeight: "bold", alignSelf:"center", alignItems: "center"}} >הוספת אירוע:</Text>
-                      
-                    <Text style={{ fontSize: 16}}>שם האירוע:</Text>
+                    <Text style={{ fontSize: 18, fontWeight: "bold", alignSelf: "center", alignItems: "center" }} >הוספת אירוע:</Text>
+
+                    <Text style={{ fontSize: 16 }}>שם האירוע:</Text>
                     <  TextInput
                         style={styles.textInput}
                         onChangeText={text => onChangeName(text)}
                         value={name}
                     />
-                    <Text style={{ fontSize: 16}}>תאריך:</Text>
+                    <Text style={{ fontSize: 16 }}>תאריך:</Text>
                     <  TextInput
                         style={styles.textInput}
                         onChangeText={text => onChangeDate(text)}
                         value={date}
-                    /><Text style={{ fontSize: 16}}>יום:</Text>
+                    /><Text style={{ fontSize: 16 }}>יום:</Text>
                     <  TextInput
 
                         style={styles.textInput}
                         onChangeText={text => onChangeDay(text)}
                         value={day}
                     />
-                    <Text style={{ fontSize: 16}}>שעה:</Text>
+                    <Text style={{ fontSize: 16 }}>שעה:</Text>
                     <  TextInput
 
                         style={styles.textInput}
                         onChangeText={text => onChangeHour(text)}
                         value={hour}
                     />
-                    <Text style={{ fontSize: 16}}>מיקום:</Text>
+                    <Text style={{ fontSize: 16 }}>מיקום:</Text>
                     <  TextInput
 
                         style={styles.textInput}
                         onChangeText={text => onChangeLocation(text)}
                         value={location}
                     />
-                    <Text style={{ fontSize: 16}}>פרטים:</Text>
+                    <Text style={{ fontSize: 16 }}>פרטים:</Text>
                     <  TextInput
 
                         style={styles.textInput}
@@ -185,13 +276,13 @@ function EventAdminScreen({ navigation }) {
 
 
                 </View>
-                <Text style={{ fontSize: 16}}>הוספת תמונה:</Text>
-                <TouchableWithoutFeedback 
-                // onPress={() => uploadImage('uploads/mydduse.jpg')}
-                //onPress={() => pressPhoto("upload")}
+                <Text style={{ fontSize: 16 }}>הוספת תמונה:</Text>
+                <TouchableWithoutFeedback
+                    // onPress={() => uploadImage('uploads/mydduse.jpg')}
+                    onPress={() => pressPhoto(keyID)}
                 >
-                    <View style={{width:"10%",marginLeft:"85%", marginTop: "5%" ,borderColor: "green", borderRadius: 10,borderWidth: 2,}}><Icon name="images" size={30} color="#505050" /></View>
-                
+                    <View style={{ width: "10%", marginLeft: "85%", marginTop: "5%", borderColor: "green", borderRadius: 10, borderWidth: 2, }}><Icon name="images" size={30} color="#505050" /></View>
+
                 </TouchableWithoutFeedback>
                 <TouchableWithoutFeedback
                     onPress={() => {
