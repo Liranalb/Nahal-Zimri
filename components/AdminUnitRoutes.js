@@ -9,15 +9,21 @@ import {
 import AdminButton from "./AdminButton";
 import Icon from 'react-native-vector-icons/Entypo';
 
+
 class AdminUnitRoutes extends React.Component {
     render() {
         return (
             <View style={styles.routeStyle}>
-                
+                <View style={styles.imageStyle}>
+                    <Image
+                        source={this.props.imageUri}
+                        style={{ width: "100%", height: "100%" }}
+                    />   
+                </View >
                 <View >
                     <View style={styles.textStyle}>
                         <Text style={styles.textTitleStyle}>שם המסלול:</Text>
-                        <View style={styles.ButtonStyle}>
+                        <View style={styles.textTitleStyle}>
                             <Text >{this.props.name} </Text>
                         </View>
                     </View>
@@ -44,24 +50,38 @@ class AdminUnitRoutes extends React.Component {
                     <View style={styles.textStyle}>
                         <Text style={styles.textTitleStyle}>החלפת תמונה:</Text>
                         <TouchableWithoutFeedback 
-                        // onPress={() => uploadImage('uploads/mydduse.jpg')}
-                        //onPress={() => pressPhoto("upload")}
+                            onPress={this.props.onReplaceImagePress}
                         >
                             <View style={{width:"10%",marginLeft:"83%" ,borderColor: "#FFAF50", borderRadius: 10,borderWidth: 2,}}><Icon name="images" size={30} color="#505050" /></View>
                         
                         </TouchableWithoutFeedback>
                     </View>
-                </View>
-                <View style={styles.imageStyle}>
-                    <Image
-                        source={this.props.imageUri}
-                        style={{ width: "100%", height: "100%" }}
-                    />
-                    <View style={styles.textStyle}>
-                        <AdminButton />
+                    <View style={{flexDirection:'row',marginLeft:"2%", width:"25%",marginBottom:"2%" }}>
+                        <View style={{backgroundColor: "green" ,borderColor: "green", borderWidth: 2,marginLeft:"5%"}}>
+                            <TouchableWithoutFeedback
+                                onPress={this.props.onDelete}
+                            >
+                                <View >
+                                    <Text
+                                        style={{ alignSelf: 'center', marginTop: "5%", fontSize: 18 }}
+                                    >  מחק  </Text>
+                                </View>
+                            </TouchableWithoutFeedback>
+                        </View>
+                        <View style={{backgroundColor: "green", borderColor: "green", borderWidth: 2,marginLeft:"13%"}}>
+                            <TouchableWithoutFeedback
+                                
+                            >
+                                <View >
+                                    <Text
+                                        style={{ alignSelf: 'center', marginTop: "5%", fontSize: 18 }}
+                                    >  ערוך  </Text>
+                                </View>
+                            </TouchableWithoutFeedback>
+                        </View>
                     </View>
-                    
-                </View >
+                </View>
+                
                 
 
             </View>
