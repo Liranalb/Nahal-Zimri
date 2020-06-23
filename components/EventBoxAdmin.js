@@ -5,9 +5,12 @@ import {
     Text,
     StyleSheet,
     Image,
-    Button
+    Button,
+    TouchableWithoutFeedback,
+    Alert
 } from "react-native";
-import AdminButton from './AdminButton'
+import AdminButton from './AdminButton';
+import { db } from '../config/Firebase';
 
 class EventBoxAdmin extends React.Component {
     render() {
@@ -18,13 +21,7 @@ class EventBoxAdmin extends React.Component {
                         source={this.props.imageUri}
                         style={{ width: "100%", height: "100%" }}
                     />
-                    <View>
-                        <Button
-                            title="מחק"
-                            color="green"
-                            onPress={this.props.onDelete}
-                        />
-                    </View>
+                    
                 </View >
                 <View >
                     <View style={styles.textStyle}>
@@ -49,15 +46,42 @@ class EventBoxAdmin extends React.Component {
                     </View>
                     <View style={styles.textStyle}>
                         <Text style={styles.textTitleStyle}>פרטים:</Text>
-                        <Text style={styles.textDetailStyle}>{this.props.details} </Text>
+                        <Text multiline style={styles.textDetailStyle}>{this.props.details} </Text>
+                    </View>
+                    <View style={{position:"relative",marginLeft:"8%", width:"20%",marginBottom:"2%", backgroundColor: "green", borderColor: "green", borderWidth: 2 }}>
+                        <TouchableWithoutFeedback
+                            onPress={this.props.onDelete}
+                        >
+                            <View >
+                                <Text
+                                    style={{ alignSelf: 'center', marginTop: "5%", fontSize: 18 }}
+                                >מחק</Text>
+                            </View>
+                        </TouchableWithoutFeedback>
                     </View>
                 </View>
-
             </View>
 
         );
     }
 }
+/*
+  buttonStyle: {
+        justifyContent: 'center',
+        alignItems: "center",
+        alignSelf: "center",
+        backgroundColor: "green",
+        borderColor: "green",
+        borderWidth: 2,
+        fontSize: 10,
+        width: "30%",
+        height: "5%",
+        alignSelf: "center",
+        marginTop: "5%",
+        marginBottom: "10%",
+        overflow: 'hidden'
+    }
+*/
 export default EventBoxAdmin;
 
 const styles = StyleSheet.create({
@@ -84,6 +108,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row-reverse',
 
     },
+
     ButtonStyle: {
         width: "69%",
         // marginLeft:100,
