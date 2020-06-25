@@ -87,7 +87,6 @@ function EventAdminScreen( { navigation }) {
         let imageID = "img" + deleteID + ".jpg";
         console.log(deleteID);
         var desertRef = storage.ref("Images").child('Events/' + imageID);
-
         //Delete the file
         desertRef.delete().then(function () {
             return 0;

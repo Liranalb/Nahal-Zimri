@@ -114,4 +114,7 @@ class loginHelper extends Component {
 
 AppRegistry.registerComponent(appName, () => loginHelper);
 
+//HomePageUser
+//HomePageAdmin
+//loginHelper
 

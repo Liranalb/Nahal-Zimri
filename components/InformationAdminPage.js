@@ -384,7 +384,6 @@ function InformationAdminPageStack() {
 
 function InformationAdminPage(props) {
     dataType = props.dataType;
-
     return (
         <DrawerInfo.Navigator initialRouteName="reports" drawerPosition="right"
             drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContentAdmin {...props} />}>

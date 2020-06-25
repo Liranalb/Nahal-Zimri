@@ -184,7 +184,6 @@ class EventBoxAdmin extends React.Component {
         );
     }
 }
-
 export default EventBoxAdmin;
 
 
