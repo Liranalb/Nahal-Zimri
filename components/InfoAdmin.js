@@ -1,9 +1,9 @@
 import React, { Component, useState, useEffect } from "react"
-import { Header, ListItem } from "react-native-elements"
+import { Header, ListItem, CheckBox } from "react-native-elements"
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 /*import { createStackNavigator } from 'react-navigation-stack';*/
-import { Image, CheckBox, View, TextInput, Text, StyleSheet, ScrollView, TouchableWithoutFeedback, Button, Alert, unstable_enableLogBox } from "react-native"
+import { View, TextInput, Text, RefreshControl, ScrollView, TouchableWithoutFeedback, Alert, TouchableOpacity } from "react-native"
 import { Footer, Container, Right } from "native-base"
 import HeaderComp from "./HeaderComp";
 /*import ReportBox from "./ReportBox"*/
@@ -14,13 +14,19 @@ import uploadImage from '../assets/functions/uploadSingleImage'
 import sayCheese from '../assets/functions/takePhoto'
 import Icon from 'react-native-vector-icons/Entypo';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { DrawerContent } from "./DrawerContent";
+import { DrawerContentAdmin } from "./DrawerContentAdmin";
 
-var isCheckOn = false
-export let dataType = ""
-export let photoUploaded = false;
-export let keyID
-let currItem
+
+let keyID, currItem, dataType = "", photoUploaded = false, isCheckOn = false,isLoading=false;
+let replace = false
+
+
+function wait(timeout) {
+    return new Promise(resolve => {
+        setTimeout(resolve, timeout);
+    });
+}
+
 function getDate() {
     var date = new Date().getDate(); //To get the Current Date
     var month = new Date().getMonth() + 1; //To get the Current Month
@@ -28,21 +34,25 @@ function getDate() {
     let dateStr = date + "." + month + "." + year;
     return dateStr;
 }
-async function pressPhoto(source) {
+
+function InfoAdminScreen({ navigation }) {
+
+async function pressPhoto(source, key) {
 
     // setting the paths
-    let imageID = "img" + keyID + ".jpg";
-    let dataPath = 'Articles/info' + keyID;
+    let imageID = "img" + key + ".jpg";
+    let dataPath = 'Articles/art' + key;
     let storagePath = "Images/Articles/" + imageID;
 
 
     console.log("imageID is : " + imageID + "\n storagePath" + storagePath);
     let result;
+    isLoading = true;
     if (source === "camera")
         result = await sayCheese(storagePath);
     else
         result = await uploadImage(storagePath);
-    console.log(" test \n" + result);
+
     if (result === -1) {
 
         console.log("\n\n ----------------failed ----------------\n\n");
@@ -50,44 +60,48 @@ async function pressPhoto(source) {
 
     }
     photoUploaded = true;
+    if (replace === true) {
+        console.log("replace in  \n\n " + 'Articles/art' + key + "/imageLink\n\n" + "Images/Articles/img" + key);
+        storage.ref().child("Images/Articles/" + imageID).getDownloadURL().then((url) => {
+
+            db.ref('Articles/art' + key + "/imageLink").set(url);
+            setLoaded(false);
+            console.log("uploaded new photo to the DB");
+        }).catch((error) => console.log(error))
+        replace = false;
+        photoUploaded=false;
+    }
+    isLoading = false;
+    
     console.log("Out : " + photoUploaded);
 
 
 }
 
-function sendData(id) {
+let deleteImageFromStorage = (deleteID) => {
 
-    if (photoUploaded === false) {
-        alert("Upload image first");
+    let imageID = "img" + deleteID + ".jpg";
+    console.log("deleting :  " + imageID);
+    var desertRef = storage.ref("Images").child('Articles/' + imageID);
+    //Delete the file
+    desertRef.delete().then(function () {
+        console.log("deleted successfully")
+        return 0;
+    }).catch(function (error) {
+        console.log("delete failed:  " + error);
         return -1;
-    }
-
-    else {
-
-        let infoId = 'info' + keyID;
-        let dataPath = 'Articles/info' + keyID;
-        let imageID = "img" + keyID + ".jpg";
-        let storagePath = "Images/Articles/" + imageID;
-        storage.ref().child(storagePath).getDownloadURL().then((url) => {
-            db.ref('Articles/' + id).child('imageLink/').set(url)
-
-
-
-
-        })
-    }
-    return 0;
-
+    });
 }
 
-function InfoAdminScreen({ navigation }) {
+
     const [detail, onChange] = useState('');
     const [detail1, onChange1] = useState('');
     const [detail2, onChange2] = useState('');
     const [detail3, onChange3] = useState('');
     const [checkBoxState1, setChangeBox1] = useState(false);
     const [checkBoxState2, setChangeBox2] = useState(false);
-  
+    const [refreshing, setRefreshing] = useState(false);
+
     const [loaded, setLoaded] = useState(false);
 
 
@@ -97,6 +111,13 @@ function InfoAdminScreen({ navigation }) {
         console.log("Produced key:  " + keyID);
 
     }, []);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+
+        wait(1000).then(() => setRefreshing(false));
+    }, [refreshing]);
+
     // on unmount
     useEffect(() => {
         return () => {
@@ -121,6 +142,10 @@ function InfoAdminScreen({ navigation }) {
     let data = null;
     console.log("data loaded");
     function refreshPage() {
+        onChange('');
+        onChange1('');
+        onChange2('');
+        onChange3('');
         setLoaded({ loaded: false });
         keyID = newPostKey();
         photoUploaded = false;
@@ -142,49 +167,52 @@ function InfoAdminScreen({ navigation }) {
     }
     function onSubmit(type, title, content, description) {
         if (photoUploaded === false) {
-            alert("Upload image first");
+            if (isLoading === true)
+                alert("Still uploading image")
+            else
+                alert("Upload image first");
             return -1;
         }
-      
-       
-            if ((type != "כתבות" && type!="חידות")) {
-                alert('סוג מידע לא נתמך')
-                return -1
-            }
-            if( title=="" || content=="" || description=="")
-            {
-                alert('אנא מלא\י את כל שדות הטקסט')
-                return -1
-            }
-                let infoId = 'info' + keyID;
-                let dataPath = 'Articles/info' + keyID;
-                let imageID = "img" + keyID + ".jpg";
-                let storagePath = "Images/Articles/" + imageID;
-                let date=getDate()
-                storage.ref().child(storagePath).getDownloadURL().then((url)=>{
-                var newData = {
-                    Id: keyID ,
-                    Title: title,
-                    Date:date,
-                    Description: content,
-                   SubTitle: description,
-                    Catagory: type,
-                    imageLink: url
-                }
-                db.ref('Articles/' + keyID).set(newData, function (error) {
 
-                    if (error) {
-                        console.log('The write failed...')
-                    } else {
-                        console.log('Data saved successfully!')
-                    }
-                });
-               })
-               return 0;
-           
+
+        if ((type != "כתבות" && type != "עדכונים")) {
+            alert('סוג המידע יכול להיות כתבות או עדכונים')
+            return -1
         }
+        if (title == "" || content == "" || description == "") {
+            alert('אנא מלא\י את כל שדות הטקסט')
+            return -1
+        }
+        let infoId = 'art' + keyID;
+        let imageID = "img" + keyID + ".jpg";
+        let storagePath = "Images/Articles/" + imageID;
+        let date = getDate()
+        console.log("key is: "+keyID);
+        storage.ref().child(storagePath).getDownloadURL().then((url) => {
+            var newData = {
+                Id: infoId,
+                Title: title,
+                Date: date,
+                Description: content,
+                SubTitle: description,
+                Catagory: type,
+                imageLink: url
+            }
+            console.log("before dbbdbdb");
+            db.ref('Articles/'+ infoId).set(newData, function (error) {
 
-  
+                if (error) {
+                    console.log('The write failed...')
+                } else {
+                    console.log('Data saved successfully!')
+                }
+            });
+        })
+        return 0;
+
+    }
+
+
     let convertDataToArray = (data, infoArray) => {
         if (data === null)
             return null;
@@ -220,18 +248,18 @@ function InfoAdminScreen({ navigation }) {
         }
         if (type == 'כתבות') {
             setChangeBox1(!checkBoxState1)
-            if (checkBoxState2 ) 
+            if (checkBoxState2)
                 setChangeBox2(false)
-                
+
         }
         if (type == 'עדכונים') {
             setChangeBox2(!checkBoxState2)
-            if (checkBoxState1 )
+            if (checkBoxState1)
                 setChangeBox1(false)
-           
+
         }
-       
-      
+
+
 
     }
     return (
@@ -240,190 +268,211 @@ function InfoAdminScreen({ navigation }) {
                 openUserProfile={() => navigation.navigate('Current')}
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
             />
-            <View>
-                <View style={{ flexDirection: 'row' }}>
+            <View style={{ width: "98%", height: "89%", alignSelf: 'center' }}>
 
-                    <View style={styles.CheckBoxStyle} >
-                        <View style={{ width: "50%" }}>
-                            <CheckBox
-                                value={checkBoxState1}
-                                onChange={() => filter('כתבות')}
+                <View style={{ flexDirection: 'row', width: "100%", height: "9%" }}>
 
-                            />
-                        </View>
-                        <Text style={{
-                            fontWeight: "normal",
-                            fontSize: 18,
-                        }}>כתבות</Text>
+                    <View style={styles.CheckBoxStyle}>
+                        <CheckBox
+
+                            center
+                            title='כתבות'
+                            checked={checkBoxState1}
+                            onPress={() => filter('כתבות')}
+                            containerStyle={styles.CheckBoxContainerStyle}
+
+                        />
                     </View>
-                    <View style={styles.CheckBoxStyle} >
-                        <View style={{ width: "50%" }}>
-                            <CheckBox
-                                value={checkBoxState2}
-                                onChange={() => filter('עדכונים')}
 
-                            />
-                        </View>
-                        <Text style={{
-                            fontWeight: "normal",
-                            fontSize: 18,
-                        }}>עדכונים</Text>
+                    <View style={styles.CheckBoxStyle}>
+                        <CheckBox
+
+                            center
+                            title='עדכונים'
+                            checked={checkBoxState2}
+                            onPress={() => filter('עדכונים')}
+                            containerStyle={styles.CheckBoxContainerStyle}
+
+                        />
                     </View>
-                    
+
+
+
+
+
 
                 </View>
+
+                <ScrollView
+                    refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+                    scrollEventThrottle={16}>
+
+                    <View style={{ width: "100%", flex: 1 }}>
+
+
+
+                        <View style={{ height: "100%", flex: 1 }}>
+
+                            <ScrollView
+                                horizontal={false}
+                                showsHorizontalScrollIndicator={false}
+
+                            >
+
+                                {infoArray.map((item) => {
+
+                                    return (
+
+
+
+                                            <View key={item.id} style={styles.routeStyle}>
+                                                <InfoUnitAdmin imageUri={{ uri: item.imageLink }}
+                                                    title={item.Title}
+                                                    date={item.Date}
+                                                    catagory={item.Catagory}
+                                                    detail={item.SubTitle}
+                                                    idFromParent={item.Id}
+                                                    body={item.Description}
+                                                    onReplaceImagePress={() => {
+                                                        replace = true;
+                                                        deleteImageFromStorage(item.Id.slice(3));//??
+                                                        pressPhoto('upload', item.Id.slice(3)); //???
+                                                    }}
+                                                    upLoadPhoto={() => pressPhoto("upload", keyID)}
+                                                    removeItem={() => {
+                                                        Alert.alert(
+                                                            //title
+                                                            'Hello',
+                                                            //body
+                                                            'האם למחוק את פריט המידע הזה?',
+                                                            [
+                                                                {
+                                                                    text: 'כן', onPress: () => {
+                                                                        console.log("id is : "+item.Id)
+                                                                        db.ref('Articles/').child(item.Id).remove()
+                                                                        deleteImageFromStorage(item.Id.slice(3));
+                                                                        setLoaded({ loaded: false });
+                                                                    }
+                                                                },
+                                                                { text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel' },
+                                                            ],
+                                                            { cancelable: false }
+                                                            //clicking out side of alert will not cancel
+                                                        );
+
+                                                    }}
+                                                    onExpandPress={() => {
+                                                        currItem = item;
+                                                        navigation.navigate('newOpAr');
+                                                    }}
+
+                                                />
+                                            </View>
+
+                                       
+                                    )
+
+                                })}
+
+
+
+                            </ScrollView>
+
+                        </View>
+
+
+                    </View>
+
+
+                    <View style={{ width: "95%", alignSelf: 'center' }}>
+                        <Text style={{ fontSize: 18, fontWeight: "bold", alignSelf: "center", alignItems: "center" }} >הוספת כתבה:</Text>
+
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text style={styles.textAddStyle}>סוג מידע: </Text>
+                            <  TextInput
+                                style={styles.textInput}
+                                onChangeText={text => onChange(text)}
+                                value={detail}
+
+                            />
+                        </View>
+
+                        <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
+                            <Text style={styles.textAddStyle}>כותרת: </Text>
+                            <  TextInput
+                                style={styles.textInput}
+                                onChangeText={text1 => onChange1(text1)}
+                                value={detail1}
+                            />
+                        </View>
+
+
+                        <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
+                            <Text style={styles.textAddStyle}>תיאור: </Text>
+                            <  TextInput
+
+                                style={styles.textInput}
+                                onChangeText={text2 => onChange2(text2)}
+                                value={detail2}
+                            />
+                        </View>
+
+                        <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
+                            <Text style={styles.textAddStyle}>תוכן: </Text>
+                            <  TextInput
+
+                                style={styles.textInput}
+                                onChangeText={text3 => onChange3(text3)}
+                                value={detail3}
+                            />
+                        </View>
+
+
+
+                        <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
+                            <Text style={styles.textAddStyle}>הוספת תמונה:  </Text>
+                            <TouchableWithoutFeedback
+                                onPress={() => pressPhoto("upload",keyID)}
+
+                            >
+                                <Icon name="images" size={40} color="green" />
+
+                            </TouchableWithoutFeedback>
+                        </View>
+
+                    </View>
+
+                    <TouchableOpacity
+                        onPress={() => {
+                            let result = onSubmit(detail, detail1, detail2, detail3, 'add', null)
+                            if (result === 0)
+                                refreshPage()
+                        }}
+                    >
+                        <View style={styles.buttonStyle}>
+                            <Text
+                                style={{ alignSelf: 'center', fontSize: 20, color: 'white' }}
+                            >הוסף</Text>
+                        </View>
+                    </TouchableOpacity>
+
+
+
+                </ScrollView>
 
             </View>
-
-            <ScrollView scrollEventThrottle={16}>
-
-                <View style={{ width: "100%", flex: 1 }}>
-
-
-
-                    <View style={{ height: "100%", flex: 1 }}>
-
-                        <ScrollView
-                            horizontal={false}
-                            showsHorizontalScrollIndicator={false}
-
-                        >
-
-                            {infoArray.map((item) => {
-
-                                return (
-
-
-                                    <TouchableWithoutFeedback onPress={() => {
-                                        currItem = item;
-                                        navigation.navigate('newOpAr')
-                                    }}>
-
-                                        <View style={styles.routeStyle}>
-                                            <InfoUnitAdmin imageUri={{ uri: item.imageLink }}
-                                                title={item.Title}
-                                                date={item.Date}
-                                                catagory={item.Catagory}
-                                                detail={item.SubTitle}
-                                                idFromParent={item.Id}
-                                                addPhoto={() => sendData(item.Id)}
-                                                upLoadPhoto={() => pressPhoto("upload")}
-                                                removeItem={() => {
-                                                    Alert.alert(
-                                                        //title
-                                                        'Hello',
-                                                        //body
-                                                        'האם למחוק את פריט המידע הזה?',
-                                                        [
-                                                            {
-                                                                text: 'כן', onPress: () => {
-                                                                    db.ref('Articles/').child(item.Id).remove()
-                                                                    setLoaded({ loaded: false });
-                                                                }
-                                                            },
-                                                            { text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel' },
-                                                        ],
-                                                        { cancelable: false }
-                                                        //clicking out side of alert will not cancel
-                                                    );
-
-                                                }}
-
-                                            />
-                                        </View>
-
-
-
-                                    </TouchableWithoutFeedback>
-
-
-
-                                )
-
-                            })}
-
-
-
-                        </ScrollView>
-
-                    </View>
-
-
-                </View>
-
-
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('newOpAr')}>
-                    <Text style={{ fontWeight: "bold" }} > טען יותר...</Text>
-                </TouchableWithoutFeedback>
-                <Text>הוספת תוכן</Text>
-                <View>
-
-                    <Text>סוג מידע:</Text>
-                    <  TextInput
-                        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                        onChangeText={text => onChange(text)}
-                        value={detail}
-                    />
-                    <Text>כותרת:</Text>
-                    <  TextInput
-                        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                        onChangeText={text1 => onChange1(text1)}
-                        value={detail1}
-                    /><Text>תיאור:</Text>
-                    <  TextInput
-
-                        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                        onChangeText={text2 => onChange2(text2)}
-                        value={detail2}
-                    />
-                    <Text>תוכן המידע:</Text>
-                    <  TextInput
-
-                        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                        onChangeText={text3 => onChange3(text3)}
-                        value={detail3}
-                    />
-
-                </View>
-                <View style={{
-                    alignSelf: "flex-start",
-                    paddingLeft: 20
-                }} >
-                    <TouchableWithoutFeedback
-                        onPress={() => pressPhoto("upload")}
-                    >
-                        <View >
-                            <Icon name="images" size={30} color="black" />
-                        </View>
-                    </TouchableWithoutFeedback>
-                </View>
-
-                <Button
-
-                    onPress={() =>{ let result= onSubmit(detail, detail1, detail2, detail3, 'add', null)
-                if(result===0)
-                    refreshPage()
-                }}
-                    title="הוספה"
-
-
-                />
-                
-            </ScrollView>
-
-
         </View>
     )
 }
 
-function AdminNewOpenArtScreen() {
+function AdminNewOpenArtScreen( { navigation }) {
     return (
         <AdminNewOpenArt
             title={currItem.Title}
             detail={currItem.SubTitle}
             content={currItem.Description}
             imageUri={{ uri: currItem.imageLink }}
-
+            onCrossPress = { () => navigation.goBack()}
 
         />
     );
@@ -446,7 +495,7 @@ function InfoAdminStack(props) { //for navigation. not in use yet
 function InfoAdmin() {
     return (
         <DrawerRep.Navigator initialRouteName="home" drawerPosition="right"
-            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContentAdmin {...props} />}>
             <DrawerRep.Screen name="artic" component={InfoAdminStack} />
 
         </DrawerRep.Navigator>
@@ -477,8 +526,50 @@ const styles = {
         borderColor: "#FFAF50",
         overflow: 'hidden',
         borderRadius: 15,
+        borderWidth: 1.1,
+        fontSize: 20,
+        marginTop: "2%"
+    },
+    CheckBoxStyle: {
+        width: "30%",
+        flex: 1,
+        marginTop: "0.4%"
+    },
+    CheckBoxContainerStyle: {
+        borderColor: "#FFAF50",
+        borderWidth: 1,
+        backgroundColor: '#F4D5A7'
+    },
+    textAddStyle: {
+        fontWeight: "bold",
+        fontSize: 16,
+        marginTop: '3%'
+    },
+    buttonStyle: {
+        justifyContent: 'center',
+        alignItems: "center",
+        alignSelf: "center",
+        backgroundColor: "green",
+        width: "30%",
+        height: "21%",
+        alignSelf: "center",
+        marginTop: "5%",
+        marginBottom: "10%",
+        borderRadius: 5,
+        overflow: 'hidden'
+    },
+    textInput: {
+        backgroundColor: "#FFF4E3",
+        borderColor: "green",
+        paddingHorizontal: 2,
+        paddingVertical: 2,
+        flex: 2,
+        borderRadius: 10,
         borderWidth: 2,
         fontSize: 20,
-        marginTop: 10
+        alignSelf: "center",
+        textAlignVertical: 'center',
+
+
     }
 }

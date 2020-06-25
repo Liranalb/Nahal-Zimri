@@ -19,17 +19,19 @@ class HeaderComp extends Component {
                     backgroundColor='#FAE5D3'
 
                     leftComponent={<TouchableOpacity
-                        onPress={this.props.openUserProfile}>
-                        <Icon name="user" size={30} color="black" />
+                        onPress={ this.props.openUserMenu}>
+                        <Icon name="menu" size={30} color="black"/>
                     </TouchableOpacity>}
 
                     centerComponent={<LogoHeaderComponent imageUri={require('../assets/img/logo.png')} />}
                     //centerComponent={<LogoHeaderComponent />}
                     
                     rightComponent={<TouchableOpacity
-                        onPress={ this.props.openUserMenu}>
-                        <Icon name="menu" size={30} color="black"/>
+                        onPress={this.props.openUserProfile}>
+                        <Icon name="user" size={30} color="black" />
                     </TouchableOpacity>}
+                    
+                    
                 />
             </View>
 

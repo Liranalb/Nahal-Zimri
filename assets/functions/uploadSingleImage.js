@@ -38,11 +38,13 @@ uriToBlob = (uri) => {
     });
   }
 
-  uploadImage = (location, DB_Path) => { console.log("start");
+  uploadImage = (location) => { console.log("start");
 
-  ImagePicker.openPicker({
+  return ImagePicker.openPicker({
         multiple: false,
         cropping: true,
+        compressImageQuality: 0.7,
+        mediaType: "photo"
     }).then((result)=>{ 
       
       if (!result.cancelled) {
@@ -60,14 +62,14 @@ uriToBlob = (uri) => {
 
     }).then((snapshot)=>{
 
-      console.log("File uploaded " + snapshot);
-      storage.ref().child(location).getDownloadURL().then( (url) => {
-        db.ref(DB_Path+"/imageLink").set(url)
-  })
+      console.log("File uploaded ");
+      // storage.ref().child(location).getDownloadURL().then( (url) => {
+      //   db.ref(DB_Path+"/imageLink").set(url)
+  // })
    
     }).catch((error)=>{
-      console.log("\n\nCanceled\n\n");
-
+      console.log("\n\nCanceled: "+error+"\n\n");
+      return -1;
 
     }); 
 

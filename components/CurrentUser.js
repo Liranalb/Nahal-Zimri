@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useLayoutEffect } from "react"
+import React, {  useState, useEffect } from "react"
 import { TextInput, Alert, ScrollView, Text, TouchableOpacity, Button } from "react-native"
 import { View } from "native-base"
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
@@ -31,32 +31,49 @@ import EventBoxUser from "./EventBoxUser";
 // var Username = "";
 
 
-function getUser() {
-    //let uid = firebase.auth().currentUser.uid
+// function getUser() {
+//     //let uid = firebase.auth().currentUser.uid
     
-    db.ref('Users/' + global.uid + '/Username').once('value', function (snapshot) {
-        const exist = (snapshot.val() !== null);
-        if (exist) {
-            Username = snapshot.val();
-            //alert(Username);
-            console.log("user data loaded");
-        }
-    });
-}
+//     db.ref('Users/' + global.uid + '/Username').once('value', function (snapshot) {
+//         const exist = (snapshot.val() !== null);
+//         if (exist) {
+//             Username = snapshot.val();
+//             //alert(Username);
+//             console.log("user data loaded");
+//         }
+//     });
+// }
 
 
 
-var Username = getUser();
+// var Username = getUser();
 //var Admin = adminCheck();
-class CurrentUser extends Component {
-    render() {
+    function CurrentUser({ navigation }) {
+        const [loaded, setLoaded] = useState(false);
+
+        console.log("start load with: "+uid);
+        let Username;
+        db.ref('Users/' + global.uid + '/Username').once('value', function (snapshot) {
+            const exist = (snapshot.val() !== null);
+            if (exist) {
+                Username = snapshot.val();
+                //alert(Username);
+                console.log("user data loaded"+Username.email);
+                if (loaded === false) {
+                    setLoaded(true);
+                }
+            }
+        });
+
+
+    
         return (
             
             <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
                 <View>
                     <HeaderComp />
                 </View>
-    
+                
                 <View>
                     <Text style={styles.textTitleStyle}>שם משתמש        
                         </Text>
@@ -83,7 +100,7 @@ class CurrentUser extends Component {
     
             </View>
         );
-    }
+    
 }
 
 

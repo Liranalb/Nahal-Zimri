@@ -7,7 +7,9 @@ import {
     Button,
     TextInput,
     ScrollView,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    TouchableHighlight,
+    Switch
 } from "react-native";
 import { Divider } from 'react-native-paper';
 import { db, storage } from '../../config/Firebase'
@@ -20,69 +22,74 @@ class EditReports extends Component {
             catagoryText: this.props.catagory,
             genre: this.props.type,
             changed: false,
-            approvedState: this.props.approved
-
+            approvedState: this.props.approved,
+            
         };
-    }
-    editText() {
 
     }
-
+    
+    _onHideUnderlay() {
+        this.setState({ pressStatus: false });
+    }
+    _onShowUnderlay() {
+        this.setState({ pressStatus: true });
+    }
+    
     render() {
         return (
 
             <View style={{ height: 390, width: 175, marginLeft: 10, borderWidth: 0.8, borderColor: '#FFAF50', backgroundColor: '#F4D5A7' }}>
-
-                <View style={{height:'40%' }}>
+{console.log("rendered")}
+                <View style={{ height: '40%' }}>
                     <TouchableWithoutFeedback onPress={this.props.onExpand}>
-                       
+
                         <Image source={this.props.imageUri}
                             style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
                         />
-                      
+
                     </TouchableWithoutFeedback>
                 </View>
 
-                <View style={{ height:'50%' }}>
+                <View style={{ height: '50%' }}>
 
-                    <View style={{ height:"19%" }}>
+                    <View style={{ height: "13%" }}>
                         <TextInput
                             defaultValue={this.props.catagory}
                             numberOfLines={1}
                             onChangeText={(catagoryText) => this.setState({ catagoryText: catagoryText, changed: true })}
-                            style = {{fontSize:17}}
+                            style={{ fontSize: 18 ,paddingVertical: 0}}
                         />
-                         
+
                     </View>
-                    <Divider/>
-                    <View style={{ height:"60%"}}>
+                    <Divider />
+                    <View style={{ height: "66%" }}>
                         <ScrollView>
                             <TextInput
-
+                                style={{paddingVertical: 0}}
                                 defaultValue={this.props.body}
                                 multiline
                                 onChangeText={(bodyText) => this.setState({ bodyText: bodyText, changed: true })}
                             />
                         </ScrollView>
                     </View>
-                    <Divider/>
-                    
+                    <Divider />
 
-                    <View style={{ height:"10%" }}>
+
+                    <View style={{ height: "10%" }}>
                         <Text
                             numberOfLines={1}
                         >מדווח: {this.props.reporter}</Text>
-                        
-                    </View>
-                    <Divider/>
-                    <View style={{ height:"10%" ,flexDirection:'row'}}>
 
-                        <Text> {this.props.date}</Text>
-                        <Text> {this.props.approvedText}</Text>
+                    </View>
+                    <Divider />
+                    <View style={{ height: "10%", flexDirection: 'row' }}>
+
+                        <Text>תאריך :  {this.props.date}</Text>
+
                     </View>
                 </View>
 
-                <View style={{ width: "100%", height:"10%", paddingLeft: 3, paddingTop: 3, flexDirection: 'row' }}>
+                <View style={{ width: "100%", height: "10%", paddingLeft: 3, paddingTop: 3, flexDirection: 'row' }}>
                     <View style={styles.editButtons}>
                         <Button
                             title="ערוך "
@@ -110,19 +117,37 @@ class EditReports extends Component {
                         />
                     </View>
 
-                    <View style={styles.editButtons}>
-                        <Button
-                            title="אשר "
-                            color="green"
+                    <View style={styles.editApprove}>
+                        
+                        <TouchableHighlight
                             onPress={() => {
-                                // if()
+                                this.setState({ approvedState: (!this.state.approvedState) })
+                                db.ref('Reports/'+this.props.id).child('Approved').set(!this.state.approvedState);
+                                console.log('Reports/'+this.props.id+'/Approved');
                             }}
-                        />
-
+                            activeOpacity={1}
+                            style={
+                                this.state.approvedState
+                                    ? styles.buttonPress
+                                    : styles.button
+                            }
+                        
+                        >
+                            <Text
+                                style={
+                                    this.state.approvedState
+                                        ? styles.welcomePress
+                                        : styles.welcome
+                                }
+                            >
+                                {this.state.approvedState ? "מאושר" : "לא מאושר"}
+                                {console.log(this.state.approvedState)}
+                            </Text>
+                        </TouchableHighlight>
 
                     </View>
                 </View>
-                
+
             </View>
 
         );
@@ -136,11 +161,44 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-
+    editApprove: {
+         width:"33.3%",
+         height:"98%",
+         marginRight:"2%",
+         
+    },
     editButtons: {
         paddingRight: 1,
         flex: 1
 
+    },
+    button: {
+        borderColor: "#000066",
+        backgroundColor: "gray",
+        borderWidth: 1,
+        borderRadius: 2,
+        height:"100%"
+        
+    },
+    buttonPress: {
+        
+        backgroundColor: "green",
+        borderRadius: 2,
+        height:"100%"
+        
+    },
+    welcome: {
+        fontSize: 14,
+        textAlign: "center",
+        
+        color: "#000066"
+    },
+    welcomePress: {
+        fontSize: 15,
+        textAlign: "center",
+        marginTop:'10%',
+        
+        color: "#ffffff"
     }
 
 });

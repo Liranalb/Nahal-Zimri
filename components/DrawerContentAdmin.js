@@ -13,7 +13,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import firebase from "../config/Firebase"
 
-export function DrawerContent(props) {
+export function DrawerContentAdmin(props) {
 
 
     return (
@@ -39,36 +39,36 @@ export function DrawerContent(props) {
 
                             label="מסך ראשי                "
                             labelStyle={{fontSize: 20}}
-                            onPress={() => { props.navigation.navigate('homeP') }}
+                            onPress={() => { props.navigation.navigate('HomeAdmin') }}
                         />
                         <DrawerItem style={{ flexDirection: 'row-reverse' }}
 
                             label="כתבות                "
                             labelStyle={{fontSize: 20 }}
-                            onPress={() => { props.navigation.navigate('InfUs') }}
+                            onPress={() => { props.navigation.navigate('InfAd') }}
                         />
                         <DrawerItem style={{ flexDirection: 'row-reverse' }}
                             label="אירועים                  "
                             labelStyle={{fontSize: 20 }}
-                            onPress={() => { props.navigation.navigate('EveUs') }}
+                            onPress={() => { props.navigation.navigate('EventsAdmin') }}
                         />
                         <DrawerItem style={{ flexDirection: 'row-reverse' }}
 
                             label="מסלולים                "
                             labelStyle={{fontSize: 20 }}
-                            onPress={() => { props.navigation.navigate('RouUs') }}
+                            onPress={() => { props.navigation.navigate('RouAd') }}
                         />
                         <DrawerItem style={{ flexDirection: 'row-reverse' }}
 
                             label="מידע                "
                             labelStyle={{fontSize: 20 }}
-                            onPress={() => { props.navigation.navigate('InfCaUs') }}
+                            onPress={() => { props.navigation.navigate('InfoCat') }}
                         />
                         <DrawerItem style={{ flexDirection: 'row-reverse' }}
 
                             label="תצפיות                "
                             labelStyle={{fontSize: 20 }}
-                            onPress={() => { props.navigation.navigate('Rep') }}
+                            onPress={() => { props.navigation.navigate('Reports') }}
                         />
                         <DrawerItem style={{ flexDirection: 'row-reverse' }}
 

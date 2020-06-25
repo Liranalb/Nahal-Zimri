@@ -7,13 +7,14 @@ import {
     TextInput,
     Button,
     TouchableWithoutFeedback,
-    ScrollView
+    ScrollView,
+    TouchableOpacity
 
 } from "react-native";
 import Icon from 'react-native-vector-icons/Entypo';
 import { photoUploaded, keyID, dataType } from './InfoAdmin'
 import { db } from '../config/Firebase'
-
+import { Divider } from 'react-native-paper';
 class InfoUnitAdmin extends React.Component {
 
     constructor(props) {
@@ -31,73 +32,80 @@ class InfoUnitAdmin extends React.Component {
     render() {
 
         return (
-            <View style={{
-                flexDirection: 'row',
 
-            }} >
-                <View style={styles.imageStyle}>
-                    <Image
-                        source={this.props.imageUri}
-                        style={{ width: "100%", height: "100%" }}
-                    />
+            <View style={styles.containerStyle}>
+                <View style={{ flex: 1 }}>
+                    <TouchableOpacity
+                        onPress={this.props.onExpandPress}
+                    >
+                        <View style={{ width: '100%', height: '100%' }}>
+                            <Image source={this.props.imageUri}
+                                style={styles.imageStyle}
+
+                            />
+                        </View>
+                    </TouchableOpacity>
+
                 </View>
-                <View style={{
-                    flex: 1
-                }} >
+                <View style={{ flex: 2 }}>
 
-                    <View style={
-                        styles.textStyle
-                    }>
+                    <View style={{ width: '100%', height: '79%' }}>
+                        <View style={{ height: '18%', width: "100%", flexDirection: 'row' }}>
+                            <View style={{ flex: 2 }}>
+                                <TextInput
+                                    style={{ fontWeight: "bold", fontSize: 16, paddingVertical: 0 }}
+                                    defaultValue={this.props.catagory}
 
-                        <TextInput style={{
-                            fontWeight: "bold",
-                            fontSize: 18,
-                        }} multiline
-                            onChangeText={(catagory) => this.setState({ catagory, changed: true })}
-                            maxHeight={40}>
+                                    onChangeText={(catagory) => this.setState({ catagory, changed: true })}
+                                    maxHeight={40} />
+                            </View>
+                            <View style={{ flex: 2, marginRight: '4%' }}>
+                                <Text style={{
+                                    fontWeight: "normal",
+                                    fontSize: 14
+                                }}>{this.props.date}</Text>
+                            </View>
 
-                            {this.props.catagory}</TextInput>
+                        </View>
+                        <Divider />
+                        <View style={{ height: '18%' }}>
+                            <TextInput style={{ fontWeight: "bold", fontSize: 18, paddingHorizontal: 1, paddingVertical: 0 }}
+
+                                defaultValue={this.props.title}
+                                multiline
+                                onChangeText={(title) => this.setState({ title, changed: true })}
+                                maxHeight={90}
+                            />
+                        </View>
+                        <Divider />
+                        <View style={{ height: '64%' }} >
+                            <View style={{ height: "40%" }}>
+                                <TextInput style={{ fontWeight: "normal", fontSize: 16, paddingVertical: 0 }}
+
+                                    defaultValue={this.props.detail}
+                                    numberOfLines={2}
+                                    multiline
+                                    onChangeText={(detail) => this.setState({ detail, changed: true })}
+                                    maxHeight={70}
+                                />
+                            </View>
+                            <Divider />
+                            <View style={{ height: "60%" }}>
+                                <TextInput style={{ fontWeight: "normal", fontSize: 16, paddingVertical: 0 }}
+
+                                    defaultValue={this.props.body}
+                                    multiline
+                                    onChangeText={(detail) => this.setState({ detail, changed: true })}
+
+                                />
+                            </View>
+                        </View>
+
 
                     </View>
-                    <View style={
-                        styles.textStyle
-                    }>
-                        <TextInput style={{
-                            fontWeight: "bold",
-                            fontSize: 18,
-                        }} multiline
-                            onChangeText={(title) => this.setState({ title, changed: true })}
-                            maxHeight={90}
-                        >{this.props.title} </TextInput>
-
-                    </View>
-
-                    <View style={
-                        styles.textStyle} >
-                        <TextInput style={{
-                            fontWeight: "normal",
-                            fontSize: 16,
-                        }} multiline
-                            onChangeText={(detail) => this.setState({ detail, changed: true })}
-                            maxHeight={70}
-                        > {this.props.detail} </TextInput>
-                    </View>
-
-                    <View >
-                        <Text style={{
-                            fontWeight: "normal",
-                            fontSize: 16,
-                        }}> תאריך העלאה | {this.props.date}  </Text>
-                    </View>
-
-
-
-                    <View style={{ width: "40%", flex: 2, paddingLeft: 3, paddingTop: 10, flexDirection: 'row' }}>
-
-                        <View style={{
-                            paddingRight: 1
-                        }}>
-
+                    <Divider />
+                    <View style={styles.buttonsContainer}>
+                        <View style={styles.editButtons}>
                             <Button
                                 title="ערוך"
                                 color="green"
@@ -106,7 +114,8 @@ class InfoUnitAdmin extends React.Component {
                                     if (this.state.changed) {
 
 
-                                        let dataPath = 'Articles1/' + this.props.idFromParent;
+
+                                        let dataPath = 'Articles/' + this.props.idFromParent;
                                         let updates = {};
                                         updates[dataPath + "/Catagory"] = this.state.catagory;
                                         updates[dataPath + '/Title'] = this.state.title;
@@ -120,72 +129,82 @@ class InfoUnitAdmin extends React.Component {
                             />
                         </View>
 
-                        <View style={{
-                            paddingRight: 1
-                        }}>
+                        <View style={styles.editButtons}>
                             <Button
                                 title="מחק"
                                 color="green"
                                 onPress={this.props.removeItem}
 
-
-
                             />
                         </View>
-                        <View style={{
-                            alignSelf: "flex-start",
-                            paddingLeft: 20
-                        }} >
-                            <TouchableWithoutFeedback
-                                onPress={this.props.upLoadPhoto}
-                            >
-                                <View >
-                                    <Icon name="images" size={30} color="white" />
-                                </View>
-                            </TouchableWithoutFeedback>
-                        </View>
 
-                        <View style={{
-                            paddingLeft: 20,
+                        <TouchableOpacity
+                            onPress={this.props.onReplaceImagePress}
+                        >
+                            <View style={{ marginLeft: "3%" }}>
+                                <Icon name="image" size={36} color="green" />
+                            </View>
+                        </TouchableOpacity>
 
 
-                        }}>
-                            <Button
-                                title="הוספת תמונה"
-                                color="green"
-                                onPress={this.props.addPhoto}
-                            />
-                        </View>
+
+
 
                     </View>
-                </View>
 
+                </View>
             </View>
         );
+
     }
 }
 export default InfoUnitAdmin;
 
-const styles = StyleSheet.create({
-    textStyle: {
-        margin: 1,
-        borderRadius: 4,
-        borderColor: "gray",
-        borderWidth: 1,
-        width: "56%",
+
+
+const styles = {
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    containerStyle: {
+        height: 180,
+        width: "100%",
+        alignSelf: 'center',
+
+        borderRadius: 10,
         flexDirection: 'row-reverse',
-        alignSelf: "flex-end",
+        backgroundColor: '#F4D5A7',
+        overflow: 'hidden'
 
 
     },
+    headlineStyle: {
+        alignSelf: 'center',
+        color: 'black',
+        fontSize: 18,
+        fontWeight: 'bold',
+        textDecorationLine: 'underline',
+        textShadowColor: "gray",
+        textShadowRadius: 10
+    },
+
+
     imageStyle: {
-        marginTop: 10,
-        marginLeft: 10,
-        marginRight: 10,
-        borderColor: "#FFAF50",
-        position: 'absolute',
-        borderWidth: 4,
-        height: "50%",
-        width: "40%"
+        flex: 1,
+        width: null,
+        height: null,
+        resizeMode: 'cover',
+        //   borderBottomLeftRadius: 10,   // cause some scrolling problems
+        //   borderTopLeftRadius: 10
     },
-});
+    editButtons: {
+        marginLeft: "2%"
+    },
+    buttonsContainer: {
+        width: "100%",
+        height: "21%",
+        flexDirection: 'row',
+    }
+}

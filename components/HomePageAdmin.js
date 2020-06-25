@@ -1,16 +1,11 @@
-import React, { Component } from "react"
-import { Header, ListItem } from "react-native-elements"
+import React from "react"
 /*import { createStackNavigator } from 'react-navigation-stack';*/
 import { Image, View, TouchableWithoutFeedback, TextInput, Text, Button, ScrollView, TouchableOpacity, Alert, unstable_enableLogBox } from "react-native"
-import { Footer, Container } from "native-base"
-import LogoHeaderComponent from "./explore/LogoHeaderComponent";
-import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from './HeaderComp'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ReportsAdmin from './ReportsAdmin'
 import EventAdmin from './EventAdmin'
-import AdminRoutes from './AdminRoutes'
 import InfoAdmin from './InfoAdmin'
 import { createDrawerNavigator,
     DrawerItem,
@@ -18,7 +13,7 @@ import { createDrawerNavigator,
 import InfoCatagoriesAdmin from './InfoCatagoriesAdmin'
 import PathCatagoriesAdmin from './PathCatagoriesAdmin';
 import CurrentUser from "./CurrentUser"
-import { DrawerContent } from "./DrawerContent";
+import { DrawerContentAdmin } from "./DrawerContentAdmin";
 
 const MyTheme = {
     dark: false,
@@ -192,7 +187,7 @@ function HomePageAdmin(){
     return(
         <NavigationContainer theme={MyTheme}>
         <DrawerR.Navigator initialRouteName="home" drawerPosition="right"
-         drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>         
+         drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContentAdmin {...props} />}>         
         <DrawerR.Screen name="מסך הבית" component={HomePageAdminStack} />
  
       </DrawerR.Navigator>

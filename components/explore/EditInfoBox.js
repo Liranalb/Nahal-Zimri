@@ -12,6 +12,8 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { db, storage } from '../../config/Firebase'
 
+
+
 class EditInfoBox extends Component {
     constructor(props) {
         super(props);
@@ -28,14 +30,24 @@ class EditInfoBox extends Component {
 
 
             <View style={styles.containerStyle}>
+                
                 <View style={{ flex: 1 }}>
-                    <Image source={this.props.imageUri}
-                        style={styles.imageStyle}
-                    />
+                {/* <TouchableOpacity
+                        onPress={this.props.onExpandPress}
+                    > */}
+                        <View style={{ width: '100%', height: '100%' }}>
+                        <Image source={this.props.imageUri}
+                            style={styles.imageStyle}
+
+                        />
+                    </View>
+                    {/* </TouchableOpacity> */}
                 </View>
+               
                 <View style={{ flex: 1 }}>
                     <View >
                         <TextInput
+                            selectTextOnFocus={true}
                             defaultValue={this.props.headline}
                             style={styles.headlineStyle}
                             onChangeText={(headText) => this.setState({ headText: headText, changed: true })}
@@ -45,15 +57,16 @@ class EditInfoBox extends Component {
                     </View>
                     <ScrollView>
                         <TextInput
+                            selectTextOnFocus={true}
                             defaultValue={this.props.body}
                             multiline
                             onChangeText={(bodyText) => this.setState({ bodyText: bodyText, changed: true })}
                         />
                         {/* // this.props.onEditText */}
                     </ScrollView>
-                    
-                    
-                    
+
+
+
                     <View style={styles.buttonsContainer}>
                         <View style={styles.editButtons}>
                             <Button
@@ -66,7 +79,7 @@ class EditInfoBox extends Component {
                                         updates[dataPath + "/Body"] = this.state.bodyText;
                                         updates[dataPath + '/Title'] = this.state.headText;
                                         db.ref().update(updates);
-                                        this.setState({changed : false});
+                                        this.setState({ changed: false });
                                         console.log("Data updated successfully to : " + dataPath);
                                     }
                                 }
@@ -81,23 +94,21 @@ class EditInfoBox extends Component {
                                 onPress={this.props.onDelete}
                             />
                         </View>
-                        <View style={{ marginLeft: "12%", marginTop: "6%" }}>
-                            <Icon name="image" size={30} color="green" />
-                        </View>
+
                         <TouchableOpacity
-                            onPress={this.props.onExpandPress}
+                            onPress={this.props.onReplaceImagePress}
                         >
-                            <View style={{ marginLeft: "10%", marginTop: "8%" }}>
-                                <Icon name="expand" size={30} color="green" />
+                            <View style={{ marginLeft: "12%" }}>
+                                <Icon name="image" size={36} color="green" />
                             </View>
                         </TouchableOpacity>
+
+
 
 
                     </View>
 
                 </View>
-
-
             </View>
         );
     }
@@ -112,10 +123,10 @@ const styles = {
     },
     containerStyle: {
         height: 150,
-        width: 380,
+        width: "100%",
         alignSelf: 'center',
         borderWidth: 1.1,
-        borderColor: '#A3A3A3',
+        borderColor: 'orange',
         borderRadius: 10,
         flexDirection: 'row-reverse',
         backgroundColor: '#F4D5A7',

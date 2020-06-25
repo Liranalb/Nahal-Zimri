@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react"
-import { RefreshControl, TextInput, Alert, ScrollView, Text, TouchableWithoutFeedback } from "react-native"
+import {
+    RefreshControl,
+    TextInput,
+    Alert,
+    ScrollView,
+    Text,
+    TouchableWithoutFeedback,
+    Modal
+} from "react-native"
 import { View } from "native-base"
 import Icon from 'react-native-vector-icons/Entypo';
 import HeaderComp from "./HeaderComp"
@@ -10,12 +18,13 @@ import { db, storage } from '../config/Firebase'
 import uploadImage from '../assets/functions/uploadSingleImage'
 import sayCheese from '../assets/functions/takePhoto'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { DrawerContent } from "./DrawerContent";
-
-//import ImagePicker from 'react-native-image-picker';
+import { DrawerContentAdmin } from "./DrawerContentAdmin";
 
 
-let photoUploaded = false;
+
+
+let photoUploaded = false, replace = false;
+let isLoading = false;
 let keyID, dataType, currItem;
 
 function wait(timeout) {
@@ -31,40 +40,59 @@ function getDate() {
     let dateStr = date + "." + month + "." + year;
     return dateStr;
 }
-async function pressPhoto(source) {
 
+function InformationAdminScreen({ navigation }) {
+
+async function pressPhoto(source,key) {
+    let result;
     // setting the paths
-    let imageID = "rep" + keyID + ".jpg";
-    let dataPath = 'Information/info' + keyID;
+    let imageID = "img" + key + ".jpg";
     let storagePath = "Images/Information/" + imageID;
 
 
     console.log("imageID is : " + imageID + "\n storagePath" + storagePath);
-    let result;
+    console.log("  loading:  ");
+    isLoading = true;
     if (source === "camera")
         result = await sayCheese(storagePath);
     else
         result = await uploadImage(storagePath);
-    console.log(" test \n" + result);
+  
     if (result === -1) {
 
         console.log("\n\n ----------------failed ----------------\n\n");
         return -1;
 
     }
-    photoUploaded = true;
-    console.log("Out : " + photoUploaded);
+    else {
+        photoUploaded = true;
+        console.log("Out : " + photoUploaded);
+    }
 
-    //     storage.ref().child(location).getDownloadURL().then( (url) => {
-    //     db.ref(DB_Path+"/imageLink").set(url)
-    //     return 0;
-    //   })
+    if(replace === true) {
+        console.log("replace in  \n\n "+ 'Information/info'+key+"/ImageLink\n\n"+"Images/Information/info" + key );
+        storage.ref().child( "Images/Information/"+ imageID).getDownloadURL().then((url) => {
+          
+            db.ref('Information/info'+key+"/ImageLink").set(url);
+            setLoaded(false);
+            console.log("uploaded new photo to the DB");
+        }).catch((error) => console.log(error))
+        replace = false;
+        photoUploaded = false;
+    }
+
+    isLoading = false;
+
+
 }
 
 function sendData(body, title, currentType) {
-
+    console.log("dkdkdk:  "+ photoUploaded);
     if (photoUploaded === false) {
-        alert("Upload image first");
+        if (isLoading === true)
+            alert("Still uploading image")
+        else
+            alert("Upload image first");
         return -1;
     }
 
@@ -95,15 +123,27 @@ function sendData(body, title, currentType) {
 
 }
 
-function InformationAdminScreen({ navigation }) {
+let deleteImageFromStorage = (deleteID) => {
+
+    let imageID = "img" + deleteID + ".jpg";
+    var desertRef = storage.ref("Images").child('Information/' + imageID);
+    //Delete the file
+    desertRef.delete().then(function () {
+        console.log("deleted successfully")
+        return 0;
+    }).catch(function (error) {
+        console.log("delete failed:  " + error);
+        return -1;
+    });
+}
+
 
     const [body, onChangeBody] = useState('');
     const [title, onChangeTitle] = useState('');
-    // const [photoAdded, onPhotoAdded] = useState(false); 
     const [loaded, setLoaded] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
     let infoArray = [];
-    let currentType = dataType;
+    let currentType = dataType ;
 
     // refreshing the page after successfully adding data
     function refreshPage() {
@@ -144,22 +184,13 @@ function InformationAdminScreen({ navigation }) {
         console.log("Produced key:  " + keyID);
 
     }, []);
+
+   
     // on unmount
     useEffect(() => {
         return () => {
-            if (photoUploaded === true) {
-                alert("photo should be deleted!");
-                let imageID = "img" + keyID + ".jpg";
-                var desertRef = storage.ref().child('Images/Inforamtion/' + imageID);
-                //Delete the file
-                desertRef.delete().then(function () {
-                    console.log("deleted successfully")
-                }).catch(function (error) {
-                    console.log("delete failed:  " + error.val);
-
-                });
-            }
-
+            if (photoUploaded === true)
+                deleteImageFromStorage(keyID);
         }
     }, []);
 
@@ -204,12 +235,18 @@ function InformationAdminScreen({ navigation }) {
 
                         {infoArray.map((item) => {
                             return (
-                                <View key={item.id} style={{ marginTop: "1.5%" }}>
+                                <View key={item.id} style={{ marginTop: "2%" }}>
 
                                     <View>
                                         <EditInfoBox imageUri={{ uri: item.ImageLink }}
                                             headline={item.Title}
                                             body={item.Body}
+                                            onReplaceImagePress={() => {
+                                                replace=true;
+                                                deleteImageFromStorage(item.id.slice(4));
+                                                
+                                                pressPhoto("upload", item.id.slice(4));
+                                            }}
                                             onDelete={() => {
                                                 Alert.alert(
                                                     //title
@@ -220,6 +257,7 @@ function InformationAdminScreen({ navigation }) {
                                                         {
                                                             text: 'כן', onPress: () => {
                                                                 db.ref('Information/').child(item.id).remove();
+                                                                deleteImageFromStorage(item.id.slice(4));
                                                                 setLoaded({ loaded: false });
                                                             }
                                                         },
@@ -251,14 +289,14 @@ function InformationAdminScreen({ navigation }) {
                     <View style={{ flex: 1 }}>
                         <View style={{ marginLeft: 12, marginTop: 20 }}>
                             <TouchableWithoutFeedback
-                                onPress={() => { console.log("before func: " + keyID); pressPhoto("camera"); }}
+                                onPress={() => { console.log("before func: " + keyID); pressPhoto("camera",keyID); }}
                             >
                                 <View style={{ marginLeft: 12 }}>
                                     <Icon name="camera" size={30} color="white" />
                                 </View>
                             </TouchableWithoutFeedback>
                             <TouchableWithoutFeedback
-                                onPress={() => pressPhoto("upload")}
+                                onPress={() => pressPhoto("upload",keyID)}
                             >
                                 <View style={{ marginTop: 20, marginLeft: 12 }}>
                                     <Icon name="images" size={30} color="white" />
@@ -292,25 +330,12 @@ function InformationAdminScreen({ navigation }) {
                             style={styles.textInputStyle}
                             placeholder="הכנס תוכן"
                             multiline={true}
-                            numberOfLines={4}
+                            numberOfLines={3}
                             onChangeText={text => onChangeBody(text)}
                             value={body}
                         />
-                        {/* <TouchableWithoutFeedback
-                            onPress={() => {
-                                alert("photo should be deleted!");
-                                //Images/Inforamtion/img-MA2ccI8hczWJSg_91_K.jpg
-                                var desertRef = storage.ref().child('gs://nahal-zimri.appspot.com/Images/Information/img-MA2ccI8hczWJSg_91_K.jpg');
-                                //Delete the file
-                                desertRef.delete().then(function () {
-                                    console.log("deleted successfully")
-                                }).catch(function (error) {
-                                    console.log("delete failed:  " + error);
 
-                                });
-                            }}>
-                            <Text>JJJJJ</Text>
-                        </TouchableWithoutFeedback> */}
+
                     </View>
 
                 </View>
@@ -344,9 +369,9 @@ function InfoAdminComponent({ navigation }) {
 }
 
 
-function InformationAdminPageStack(props) {
+function InformationAdminPageStack() {
 
-    dataType = props.dataType;
+
 
 
     return (
@@ -357,10 +382,12 @@ function InformationAdminPageStack(props) {
     );
 }
 
-function InformationAdminPage() {
+function InformationAdminPage(props) {
+    dataType = props.dataType;
+
     return (
         <DrawerInfo.Navigator initialRouteName="reports" drawerPosition="right"
-            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContentAdmin {...props} />}>
             <DrawerInfo.Screen name="reports" component={InformationAdminPageStack} />
 
         </DrawerInfo.Navigator>
@@ -373,10 +400,9 @@ export default InformationAdminPage;
 
 const styles = {
     containerStyle: {
-        width: "100%",
+        width: "96%",
         height: "89%",
-        borderWidth: 1,
-        borderColor: 'gray'
+        alignSelf:'center'
 
     },
     editBoxStyle: {
@@ -397,7 +423,7 @@ const styles = {
         fontSize: 20,
         alignSelf: "center",
         textAlignVertical: 'top',
-        marginTop: 5
+        marginTop: "2%"
     },
     headlineInputStyle: {
         backgroundColor: "#FFF4E3",

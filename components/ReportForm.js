@@ -8,7 +8,7 @@ import {
     TouchableWithoutFeedback, Image
 } from "react-native"
 import { View, Thumbnail, List, ListItem } from "native-base"
-import { CheckBox,Header } from "react-native-elements"
+import { CheckBox, Header } from "react-native-elements"
 
 import Icon from 'react-native-vector-icons/Entypo';
 import IconA from 'react-native-vector-icons/FontAwesome';
@@ -23,7 +23,7 @@ import uploadImage from '../assets/functions/uploadSingleImage'
 import LogoHeaderComponent from "./LogoHeaderComponent"
 
 
-let keyID, photoUploaded = false;
+let keyID, photoUploaded = false,username="";
 
 function getDate() {
     var date = new Date().getDate(); //To get the Current Date
@@ -35,9 +35,7 @@ function getDate() {
 
 async function pressPhoto(source) {
 
-    // setting the paths
     let imageID = "img" + keyID + ".jpg";
-    let dataPath = 'Reports/red' + keyID;
     let storagePath = "Images/Reports/" + imageID;
 
 
@@ -54,7 +52,9 @@ async function pressPhoto(source) {
         return -1;
 
     }
-    photoUploaded = true;
+    else
+        photoUploaded = true;
+
     console.log("Out : " + photoUploaded);
 }
 
@@ -82,22 +82,22 @@ function sendData(body, type, genre) {
         let imageID = "img" + keyID + ".jpg";
         let storagePath = "Images/Reports/" + imageID;
         storage.ref().child(storagePath).getDownloadURL().then((url) => {
-
+            // db.ref('Users/'+uid).once
             let date = getDate();
             let newInfo = {
-                Approved: true,
+                Approved: false,
                 Date: date,
                 Description: body,
                 Catagory: genre,
                 Type: type,
                 ImageLink: url,
                 id: repId,
-                ReporterName: "reportter name"
+                ReporterName: username
             }
             db.ref(dataPath).set(newInfo);
         })
     }
-
+    console.log("after sendData");
     return 0;
 }
 const ITEMS = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight"];
@@ -123,6 +123,25 @@ class ReportForm extends Component {
             genre: ""
 
         }
+        
+    }
+
+
+
+
+
+    componentWillUnmount() {
+        if (photoUploaded === true) {
+            let imageID = "img" + keyID + ".jpg";
+            var desertRef = storage.ref("Images").child('Reports/' + imageID);
+
+            //Delete the file
+            desertRef.delete().then(function () {
+                console.log("deleted successfully: " + imageID + "  from Images/Reports");
+            }).catch(function (error) {
+                console.log("delete failed:  " + error);
+            });
+        }
     }
 
     handlePress = (checkNumber, value, genre) => {
@@ -146,6 +165,19 @@ class ReportForm extends Component {
 
     componentDidMount() {
         keyID = db.ref().child('Reports').push().key;
+
+        let data;
+        db.ref('Users/'+uid).once('value', function (snapshot) {
+            const exist = (snapshot.val() !== null);
+            if (exist) {
+                data = snapshot.val();
+                username= data.Username;
+               
+            }
+        });
+
+        
+        
     }
 
 
@@ -454,7 +486,7 @@ class ReportForm extends Component {
                     </View>
                     <View style={{ width: "100%", height: "14%" }}>
                         <TouchableWithoutFeedback onPress={() => {
-                            let result = sendData(this.state.body, this.state.type, this.state.genre);
+                            let result = sendData(this.state.body, this.state.type, this.state.genre,this.state.data);
                             if (result === 0)
                                 refreshPage();
 

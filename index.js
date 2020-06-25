@@ -10,74 +10,70 @@ import LoginForm from "./components/LoginForm"
 // import * as React from 'react';   not working for me 
 import React, { Component } from "react"
 import MainLogin from "./components/MainLogin";
+import HomePageAdmin from "./components/HomePageAdmin";
 import HomePageUser from "./components/HomePageUser"
-import firebase from "./config/Firebase"
-import {AppRegistry, View} from 'react-native';
-import {name as appName} from './app.json';
+import { db, auth } from "./config/Firebase"
+import { AppRegistry, View,Modal } from 'react-native';
+import { name as appName } from './app.json';
+import NewOpenRouteAdmin from "./components/NewOpenRouteAdmin";
+import { DotIndicator } from "react-native-indicators";
 // End of do not delete
 
 
-//Testing area Rotem
-import InformationAdminPage from './components/InformationAdminPage';
-import ReportForm from './components/ReportForm';
-import Reports from "./components/Reports";
-// End of testing area
-
-
-
-import HomePageAdmin from "./components/HomePageAdmin";
-import InfoUser from "./components/InfoUser";
-import UnitInfoUser from "./components/UnitInfoUser";
-import ReportsAdmin from "./components/ReportsAdmin";
-import EventUser from "./components/EventUser";
-import InfoCatagoriesUser from "./components/InfoCatagoriesUser";
-import InfoAdmin from "./components/InfoAdmin";
-import RoutesUser from "./components/RoutesUser";
-import NewOpenRoute from "./components/NewOpenRoute";
-import NewOpenArt from "./components/NewOpenArt";
-import AdminRoutes from "./components/AdminRoutes";
-import AdminUnitRoutes from "./components/AdminUnitRoutes";
-
-import RegForm from "./components/RegForm";
-
 console.disableYellowBox = true;
-
+let check = false;
 class loginHelper extends Component {
-    state = {loggedIn: false, isAdmin: false}
+    state = { loggedIn: false, isAdmin: false, isDataLoaded: false }
 
-    async adminCheck(user) { 
-        console.log("adminCheck")
-        const eventref = firebase.database().ref('Users/'+user.uid+'/Admin');
-        const snapshot = await eventref.once('value');
-        this.isAdmin = snapshot.val();
-    //     firebase.database().ref('Users/'+user.uid+'/Admin').once('value', (snapshot) => {
-    //         const exist = (snapshot.val() !== null);
-    //         console.log("exist ", exist)
-    //         if (exist) { 
-    //             var Admin = snapshot.val();
-    //             // state.adminStatus = Admin;
-    //             // this.state({adminStatus: Admin})
-    //             // alert(state.adminStatus);
-    //             // console.log("user data loaded");
-    //             this.Admin = Admin;
-    //         }
-    //  });
+     adminCheck(user) {
+        return db.ref('Users/' + user.uid + '/Admin').once('value', function (snapshot) {
+            const exist = (snapshot.val() !== null);
+            if (exist) {
+                data = snapshot.val();
+                console.log("data loaded: " + data);
+                return data;
+            }
+            else 
+                return false;
+        });
+
+
+        //   db.ref('Users/'+user.uid+'/Admin');
+        //     const snapshot = await eventref.once('value');
+        //     this.isAdmin = snapshot.val();
+        //     console.log(this.state.isAdmin)
+
+        //     firebase.database().ref('Users/'+user.uid+'/Admin').once('value', (snapshot) => {
+        //         const exist = (snapshot.val() !== null);
+        //         console.log("exist ", exist)
+        //         if (exist) { 
+        //             var Admin = snapshot.val();
+        //             // state.adminStatus = Admin;
+        //             // this.state({adminStatus: Admin})
+        //             // alert(state.adminStatus);
+        //             // console.log("user data loaded");
+        //             this.Admin = Admin;
+        //         }
+        //  });
     }
 
-    
+
 
     async componentDidMount() {
+        check = true;
         console.log("componentDidMount")
-        firebase.auth().onAuthStateChanged(async (user) => {
-            console.log("user", user)
-            let isAdmin = false;
-            if(user) {
+        auth.onAuthStateChanged(async (user) => {
+            console.log("componentDidMount2")
+            if (user) {
                 global.uid = user.uid;
-                await this.adminCheck(user)
-                this.setState({loggedIn: true, isAdmin: this.isAdmin})
+                
+                let flag = await this.adminCheck(user)
+                console.log("flag is : " + flag.val() + "isAdmin is: " + this.state.isAdmin);
+                this.setState({ loggedIn: true, isAdmin: flag.val(), isDataLoaded: true })
+                
             }
             else {
-                this.setState({loggedIn: false, isAdmin: this.isAdmin})
+                this.setState({ loggedIn: false, isAdmin: false, isDataLoaded: true })
             }
             //this.forceUpdate();
         })
@@ -85,25 +81,35 @@ class loginHelper extends Component {
 
     renderContent() {
         //firebase.auth().signOut();
-        console.log("renderContent ")
-        console.log("isAdmin: " + this.isAdmin + " isLoggedin " +this.loggedIn );
-        if(!this.state.loggedIn) {
-            return (<MainLogin/>)
-        }
-        else if(this.state.isAdmin){
-            return <HomePageAdmin/>
-        }
+        console.log("renderContent :"+this.state.isDataLoaded)
+        if (this.state.isDataLoaded) {
 
-        else return <HomePageUser/>
+            if (!this.state.loggedIn) {
+                console.log("check is: " + check);
+                return (<MainLogin />)
+            }
+            else if (this.state.isAdmin) {
+                return <HomePageAdmin />
+            }
+
+            else return <HomePageUser />
+        }
+        return (
+        <Modal animationType='fade'>
+            <View style={{backgroundColor:'#FAE5D3',flex:1}}>
+        <DotIndicator
+            color='#4B4B4B'/>
+            </View>
+        </Modal> );
     }
 
-    render () {
+    render() {
         return (
             this.renderContent()
         )
     }
 }
 
-AppRegistry.registerComponent(appName, () => HomePageUser);
+AppRegistry.registerComponent(appName, () => loginHelper);
 
 

@@ -34,7 +34,7 @@ function ReportsScreen({ navigation }) {
     const [checkBoxState2, setChangeBox2] = useState(false);
     const [checkBoxState3, setChangeBox3] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
-
+    console.log("UID is :"+ uid);
 
     //load data
     let data = null;
@@ -156,13 +156,10 @@ function ReportsScreen({ navigation }) {
                     <ScrollView
                         scrollEventThrottle={16}
                         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-
-
                     >
                         <View style={{ width: "100%", flex: 1 }}>
 
-
-
+    {/* img-M9zI3T5hnm93cqd6IWa.jpg  images/Information/img-M9zI3T5hnm93cqd6IWa.jpg */}
                             <View style={{ height: "100%", flex: 1 }}>
 
                                 <ScrollView

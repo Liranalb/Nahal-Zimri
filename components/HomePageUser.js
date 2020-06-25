@@ -20,9 +20,6 @@ import Icon from 'react-native-vector-icons/Entypo';
 import CurrentUser from "./CurrentUser"
 import PathCatagories from "./PathCatagories"
 
-
-import LogoHeaderComponent from "./LogoHeaderComponent"
-
 const MyTheme = {
     dark: false,
     colors: {

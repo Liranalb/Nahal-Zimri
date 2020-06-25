@@ -97,7 +97,7 @@ class LoginForm extends Component {
 
     onButtonPress() {
        
-
+        
         this.setState({ loading: true })
 
         firebase

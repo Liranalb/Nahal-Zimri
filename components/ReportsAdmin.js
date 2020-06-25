@@ -10,10 +10,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import HeaderComp from "./HeaderComp"
 import ReportForm from "./ReportForm"
 //import ImagePicker from 'react-native-image-picker';
-import { db } from '../config/Firebase'
+import { db,storage } from '../config/Firebase'
 import ReportsFullComp from './ReportsFullComp'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { DrawerContent } from "./DrawerContent";
+import { DrawerContentAdmin } from "./DrawerContentAdmin";
 
 
 
@@ -46,7 +46,18 @@ export function ReportsAdminScreen({ navigation }) {
         }
     });
 
-
+    let deleteImageFromStorage = (deleteID) => {
+        
+        let imageID = "img" + deleteID + ".jpg";
+        console.log("deleting :  " + imageID);
+        var desertRef = storage.ref("Images").child('Reports/' + imageID);
+        //Delete the file
+        desertRef.delete().then(function () {
+            console.log("deleted successfully")
+        }).catch(function (error) {
+            console.log("delete failed:  " + error);
+        });
+    }
 
 
     let convertDataToArray = (data, reportsArray) => {
@@ -185,6 +196,7 @@ export function ReportsAdminScreen({ navigation }) {
                                                         currItem = item;
                                                         navigation.navigate('repFullComp');
                                                     }}
+                            
                                                     onDelete={() => {
                                                         Alert.alert(
                                                             //title
@@ -195,6 +207,7 @@ export function ReportsAdminScreen({ navigation }) {
                                                                 {
                                                                     text: 'כן', onPress: () => {
                                                                         db.ref('Reports/').child(item.id).remove();
+                                                                        deleteImageFromStorage(item.id.slice(3));
                                                                         setLoaded({ loaded: false });
                                                                         // delete image not working yet
                                                                     }
@@ -275,7 +288,7 @@ function ReportsAdminStack() {
 function ReportsAdmin() {
     return (
         <DrawerRep.Navigator initialRouteName="reports" drawerPosition="right"
-            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContentAdmin {...props} />}>
             <DrawerRep.Screen name="reports" component={ReportsAdminStack} />
 
         </DrawerRep.Navigator>

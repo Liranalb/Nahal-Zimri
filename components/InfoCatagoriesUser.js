@@ -121,8 +121,19 @@ export function InfoCatagoriesScreen({ navigation }) {
                         </View>
                     </TouchableWithoutFeedback>
 
+                    
+
 
                 </View>
+                <TouchableWithoutFeedback
+                    onPress={() => {
+                        navigation.goBack();
+                    }}>
+                    <View style={{ flex: 1 }}>
+
+
+                    </View>
+                </TouchableWithoutFeedback>
 
             </ImageBackground>
         </View>

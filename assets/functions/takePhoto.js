@@ -45,6 +45,8 @@ uriToBlob = (uri) => {
    return ImagePicker.openCamera({
         width: 400,
         height: 500,
+        compressImageQuality: 0.7,
+        mediaType: "photo"
 
     }).then((result)=>{ 
       
@@ -70,7 +72,7 @@ uriToBlob = (uri) => {
       // })
    
     }).catch((error)=>{
-      console.log("\n\nCanceled\n\n");
+      console.log("\n\nCanceled: "+error+"\n\n");
       return -1;
 
 
