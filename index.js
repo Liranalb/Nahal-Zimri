@@ -63,8 +63,9 @@ class loginHelper extends Component {
         check = true;
         console.log("componentDidMount")
         auth.onAuthStateChanged(async (user) => {
-            console.log("componentDidMount2")
+            console.log("?????")
             if (user) {
+                console.log("auto log")
                 global.uid = user.uid;
                 
                 let flag = await this.adminCheck(user)
@@ -73,6 +74,7 @@ class loginHelper extends Component {
                 
             }
             else {
+                console.log("go to login manu")
                 this.setState({ loggedIn: false, isAdmin: false, isDataLoaded: true })
             }
             //this.forceUpdate();
