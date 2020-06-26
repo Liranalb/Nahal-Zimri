@@ -82,12 +82,12 @@ export function DrawerContent(props) {
                             onPress={() => { Linking.openURL('https://www.instagram.com/nahalzimri/') }}
                             labelStyle={{ color: '#fe4164', fontWeight: "bold", fontSize: 20 }}
                         />
-                        {/* <DrawerItem style={{ flexDirection: 'row-reverse' }}
+                        <DrawerItem style={{ flexDirection: 'row-reverse' }}
 
                         label="אודות                "
                         onPress={() => { props.navigation.navigate('Abo') }}
                         labelStyle={{ fontWeight: "bold", fontSize: 20 }}
-                        /> */}
+                        />
 
                     </Drawer.Section>
 

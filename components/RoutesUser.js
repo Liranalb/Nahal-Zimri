@@ -3,7 +3,7 @@ import { Header, CheckBox, ListItem } from "react-native-elements"
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack'
 import { View } from "native-base"
-import { Image, TextInput, Text, StyleSheet, ScrollView, TouchableWithoutFeedback, Button, Alert, unstable_enableLogBox } from "react-native"
+import { Image, RefreshControl, Text, StyleSheet, ScrollView, TouchableWithoutFeedback, Button, Alert, unstable_enableLogBox } from "react-native"
 import { Footer, Container, Right } from "native-base"
 import HeaderComp from "./HeaderComp"
 import NewOpenRoute from "./NewOpenRoute"
@@ -16,12 +16,19 @@ import { DrawerContent } from "./DrawerContent";
 var currItem;
 var currImg;
 var dataType;
-//,{ navigation }
+
+function wait(timeout) {
+    return new Promise(resolve => {
+        setTimeout(resolve, timeout);
+    });
+}
+
 function RoutesUserScreen({ navigation }) {
-  
+
     let currentType = dataType;
     let routesArray = [];
     const [loaded, setLoaded] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
 
     //load data
     let data = null;
@@ -37,7 +44,11 @@ function RoutesUserScreen({ navigation }) {
     });
 
 
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
 
+        wait(1000).then(() => setRefreshing(false));
+    }, [refreshing]);
 
     let convertDataToArray = (data, routesArray) => {
         if (data === null)
@@ -46,7 +57,7 @@ function RoutesUserScreen({ navigation }) {
             if (data.hasOwnProperty(route)) {
                 if (data[route].PathType === currentType) {
                     routesArray.push(data[route]);
- 
+
                 }
             }
         }
@@ -61,63 +72,77 @@ function RoutesUserScreen({ navigation }) {
                 openUserProfile={() => navigation.navigate('Current')}
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
             />
-            <ScrollView>
-                {
-                    console.log("second"),
-                    routesArray.map((item) => {
-                        return (
-                            <View>
-                                <TouchableWithoutFeedback onPress={() => {
-                                    navigation.navigate('newOpRo'); 
-                                    currItem = item;  
-                                    currImg={ uri: item.imageLink }
+            <View style={{width:"96%", height:"89%", alignSelf: 'center'}}>
+                <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+                    {
+
+                        routesArray.map((item) => {
+                            return (
+                                <View key={item.id} style={{ marginTop: "2%" }}>
+                                    <TouchableWithoutFeedback onPress={() => {
+                                        navigation.navigate('newOpRo');
+                                        currItem = item;
+                                        currImg = { uri: item.imageLink }
                                     }}>
-                                    <View>
-                                        <UnitRoutes imageUri={{ uri: item.imageLink }}
-                                            name={item.name}
-                                            level={item.level}
-                                            km={item.km}
-                                            duration={item.duration}
-                                            type={item.type}
-                                            details={item.details}
-                                        />
-                                    </View>
-                                </TouchableWithoutFeedback>
-                            </View>
-                        )
-                    })
-                }
-            </ScrollView>
+                                        <View>
+                                            <UnitRoutes imageUri={{ uri: item.imageLink }}
+                                                name={item.name}
+                                                level={item.level}
+                                                km={item.km}
+                                                duration={item.duration}
+                                                type={item.type}
+                                                details={item.details}
+                                            />
+                                        </View>
+                                    </TouchableWithoutFeedback>
+                                </View>
+                            )
+                        })
+                    }
+                </ScrollView>
+            </View>
         </View>
     )
 }
 
-function NewOpenRouteScreen() {
+function NewOpenRouteScreen({ navigation }) {
     return (
-        <NewOpenRoute item={currItem} img={currImg}/>
+        <NewOpenRoute
+            imageUri={{ uri: currItem.imageLink }}
+            animals={currItem.animals}
+            details={currItem.details}
+            duration={currItem.duration}
+            km={currItem.km}
+            level={currItem.level}
+            mark={currItem.mark}
+            name={currItem.name}
+            type={currItem.type}
+            onCrossPress={() => navigation.goBack()}
+
+        />
     );
 }
 
 const logStack = createStackNavigator();
 const DrawerRoute = createDrawerNavigator();
 
-function RoutesUserStack(  ) { 
-    
-    
-    
+function RoutesUserStack() {
+
+
+
     return (
         <logStack.Navigator initialRouteName="routesU">
             <logStack.Screen options={{ headerShown: false }} name="routesU" component={RoutesUserScreen} />
 
             <logStack.Screen name="newOpRo" options={{ headerShown: false }}
-                component={NewOpenRouteScreen}/>
+                component={NewOpenRouteScreen} />
 
         </logStack.Navigator>
     );
 }
 
 function RoutesUser(props) {
-    dataType= props.dataType;
+    dataType = props.dataType;
     return (
         <DrawerRoute.Navigator initialRouteName="reports" drawerPosition="right"
             drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>

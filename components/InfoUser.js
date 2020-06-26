@@ -9,6 +9,8 @@ import ReportBox from "./explore/ReportBox";
 import NewOpenArt from "./NewOpenArt";
 import UnitInfoUser from "./UnitInfoUser";
 import { db } from '../config/Firebase';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { DrawerContent } from "./DrawerContent";
 
 var currItem;
 var currImg;
@@ -16,12 +18,12 @@ let isCheckOn = false, dataType;
 
 function wait(timeout) {
     return new Promise(resolve => {
-      setTimeout(resolve, timeout);
+        setTimeout(resolve, timeout);
     });
-  }
+}
 
 function InfoUserScreen({ navigation }) {
-    
+
     let articlesArray = [];
     const [loaded, setLoaded] = useState(false);
     const [checkBoxState1, setChangeBox1] = useState(false);
@@ -48,7 +50,7 @@ function InfoUserScreen({ navigation }) {
         for (var article in data) {
             if (data.hasOwnProperty(article)) {
                 if ((!isCheckOn) || data[article].Catagory === dataType)
-                articlesArray.push(data[article]);
+                    articlesArray.push(data[article]);
             }
         }
 
@@ -56,9 +58,9 @@ function InfoUserScreen({ navigation }) {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-    
+
         wait(1000).then(() => setRefreshing(false));
-      }, [refreshing]);
+    }, [refreshing]);
 
     let handlePress = (type) => {
         if (type === dataType) {
@@ -82,7 +84,7 @@ function InfoUserScreen({ navigation }) {
                 setChangeBox1(false)
             }
         }
-        
+
 
     }
 
@@ -90,9 +92,12 @@ function InfoUserScreen({ navigation }) {
 
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
-            <HeaderComp />
-            <View style={{height:"89%", width:"100%"}}>
-                <View style={{height:"8.5%", width:"100%"}}>
+            <HeaderComp
+                openUserProfile={() => navigation.navigate('Current')}
+                openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
+            />
+            <View style={{ height: "89%", width: "100%" }}>
+                <View style={{ height: "8.5%", width: "100%" }}>
 
                     <View style={{ flexDirection: 'row' }}>
                         <View style={styles.CheckBoxStyle}>
@@ -117,30 +122,31 @@ function InfoUserScreen({ navigation }) {
 
                 </View>
 
-                <View style={{height:"91.5%", width:"96%", alignSelf:'center'}}>
-                <ScrollView 
-                     refreshControl={ <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+                <View style={{ height: "91.5%", width: "96%", alignSelf: 'center' }}>
+                    <ScrollView
+                        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
                     >
-                    {
-                        console.log("second"),
-                        articlesArray.map((item) => {
-                            return (
-                                <View>
-                                    <TouchableWithoutFeedback onPress={() => { navigation.navigate('newOpAr'); currItem = item; currImg = { uri: item.imageLink } }}>
-                                        <View>
-                                            <UnitInfoUser imageUri={{ uri: item.imageLink }}
-                                                catagory={item.Catagory}
-                                                title={item.Title}
-                                                subTitle={item.SubTitle}
-                                                date={item.Date}
-                                            />
-                                        </View>
-                                    </TouchableWithoutFeedback>
-                                </View>
-                            )
-                        })
-                    }
-                </ScrollView>
+                        {
+                            console.log("second"),
+                            articlesArray.map((item) => {
+                                return (
+                                    <View key={item.id} style={{ marginTop: '2%' }}>
+                                        <TouchableWithoutFeedback onPress={() => { navigation.navigate('newOpAr'); currItem = item; currImg = { uri: item.imageLink } }}>
+                                            <View>
+                                                <UnitInfoUser imageUri={{ uri: item.imageLink }}
+                                                    catagory={item.Catagory}
+                                                    title={item.Title}
+                                                    subTitle={item.SubTitle}
+
+                                                    date={item.Date}
+                                                />
+                                            </View>
+                                        </TouchableWithoutFeedback>
+                                    </View>
+                                )
+                            })
+                        }
+                    </ScrollView>
 
                 </View>
             </View>
@@ -149,15 +155,22 @@ function InfoUserScreen({ navigation }) {
 }
 
 
-function NewOpenArtScreen() {
+function NewOpenArtScreen( { navigation } ) {
     return (
-        <NewOpenArt item={currItem} img={currImg} />
+        <NewOpenArt
+            onCrossPress={() => navigation.goBack()}
+            imageUri={{ uri: currItem.imageLink }}
+            title={currItem.Title}
+            subtitle={currItem.SubTitle}
+            description={currItem.Description}
+            item={currItem} img={currImg} />
     );
 }
 
 const logStack = createStackNavigator();
+const DrawerArt = createDrawerNavigator();
 
-function InfoUser() { //for navigation. not in use yet
+function InfoUserStack() { //for navigation. not in use yet
     return (
         <logStack.Navigator initialRouteName="infoU">
             <logStack.Screen options={{ headerShown: false }} name="infoU" component={InfoUserScreen} />
@@ -169,47 +182,23 @@ function InfoUser() { //for navigation. not in use yet
     );
 }
 
+function InfoUser() {
+    
+    return (
+        <DrawerArt.Navigator initialRouteName="reports" drawerPosition="right"
+            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            <DrawerArt.Screen name="reports" component={InfoUserStack} />
+
+        </DrawerArt.Navigator>
+
+    );
+}
+
 export default InfoUser;
 
 const styles = {
-    routeStyle: {
-        backgroundColor: "#F6D365",
-        borderColor: "#FFAF50",
-        overflow: 'hidden',
-        borderRadius: 15,
-        borderWidth: 2,
-        fontSize: 20,
-        marginTop: 10
-    },
-    imageStyle: {
-        marginTop: 10,
-        marginLeft: 10,
-        borderColor: "#FFAF50",
-        position: 'absolute',
-        borderWidth: 4,
-        height: "85%",
-        width: "30%"
-    },
-    textStyle: {
-        flexDirection: 'row-reverse'
-    },
-    textTitleStyle: {
-        alignSelf: "center",
-        fontWeight: "bold",
-        fontSize: 20,
-        marginLeft: 10
-    },
-    textDetailStyle: {
-        fontWeight: "normal",
-        fontSize: 16,
-        alignSelf: "center"
-    },
+
     CheckBoxStyle: {
-        // backgroundColor: "#F6D365",
-        // borderWidth: 2,
-        // borderColor: "#FFAF50",
-        // width: "30%",
-        // flex: 1,
         width: "30%",
         flex: 1,
         marginTop: "0.4%",

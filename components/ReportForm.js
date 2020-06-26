@@ -100,7 +100,7 @@ function sendData(body, type, genre) {
     console.log("after sendData");
     return 0;
 }
-const ITEMS = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight"];
+const ITEMS = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight","Nine"];
 
 
 
@@ -262,6 +262,27 @@ class ReportForm extends Component {
                                             </View>
                                             <View style={{ flex: 1 }}>
                                                 <Text style={styles.textStyle}>חנקן גדול</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+
+                                    <View style={styles.container}>
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={require('../assets/img/summerSil.jpg')}
+                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                            />
+                                        </View>
+                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
+                                            <View style={{ flex: 1 }}>
+                                                <CheckBox
+                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
+                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
+                                                    checked={this.state.checkItems['Nine']}
+                                                    onPress={() => this.handlePress('Nine', 'בעלי חיים', 'סלעית הקיץ')}
+                                                />
+                                            </View>
+                                            <View style={{ flex: 1 }}>
+                                                <Text style={styles.textStyle}>סלעית הקיץ</Text>
                                             </View>
                                         </View>
                                     </View>

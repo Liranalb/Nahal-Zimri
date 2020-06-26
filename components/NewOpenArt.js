@@ -1,39 +1,71 @@
 import React, { Component } from "react"
-import { Header, CheckBox, ListItem } from "react-native-elements"
-/*import { createStackNavigator } from 'react-navigation-stack';*/
-import { Image, View, TextInput, Text, StyleSheet, ScrollView, TouchableWithoutFeedback, Button, Alert, unstable_enableLogBox } from "react-native"
-import { Footer, Container, Right } from "native-base"
-import HeaderComp from "./HeaderComp";
-import ReportBox from "./explore/ReportBox";
-
+import { Image, View, Text, ScrollView, TouchableOpacity } from "react-native"
+import Icon from 'react-native-vector-icons/Entypo'
+import { Divider } from 'react-native-paper'
 class NewOpenArt extends Component {
 
     render() {
         return (
-            <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
-                <View>
-                    <HeaderComp />
+
+            <View style={{ width: "100%", height: "100%" }}>
+
+                <View style={styles.imgStyle}>
+
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
+
+                        <Image source={this.props.imageUri}
+                            style={{ flex: 1, width: "100%", height: "100%", resizeMode: 'cover' }}
+                        />
+
+                    </View>
+
                 </View>
-                <View style={styles.imageStyle}>
-                    <Image
-                        source={this.props.img}
-                        style={{ width: "100%", height: "100%" }}
-                    />
+
+                <View style={{ width: "100%", height: "60%", backgroundColor: "#FAE5D3" }}>
+                    <View style={styles.textVStyle}>
+                        <Text
+                            style={styles.textStyle}
+                        >{this.props.title}</Text>
+                    </View>
+
+                    <View style={styles.mainStyle}>
+                        <ScrollView>
+
+                            <View style={{ width: "98%", alignSelf: 'center' }}>
+                                <Text
+                                    style={styles.substitleStyle}
+                                >{this.props.subtitle}
+                                </Text>
+                            </View>
+
+                            <Divider />
+
+                            <View style={{ width: "98%", alignSelf: 'center' }}>
+                                <Text
+                                    style={styles.mainTextStyle}
+                                >{this.props.description}
+
+                                </Text>
+                            </View>
+
+
+                        </ScrollView>
+                    </View>
+
+                    <View style={{ width: "100%", height: "15%", alignSelf: 'center' }}>
+
+                        <TouchableOpacity
+                            onPress={this.props.onCrossPress}
+                        >
+                            <Icon name="cross" size={50} color='gray'
+                                style={{ alignSelf: 'center' }}
+                            />
+
+                        </TouchableOpacity>
+
+                    </View>
                 </View>
-                <View>
-                    <ScrollView>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textTitleHeaderStyle}>{this.props.item.Title}</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textTitleStyle}>{this.props.item.SubTitle}</Text>
-                        </View>
-                        <View style={styles.textStyle}>
-                            <Text style={styles.textDetailStyle}>{this.props.item.Description}</Text>
-                        </View>
-                    </ScrollView>
-                </View>
-            </View>
+            </View >
         )
     }
 }
@@ -41,41 +73,46 @@ class NewOpenArt extends Component {
 export default NewOpenArt;
 
 const styles = {
-    imageStyle: {
-        marginTop: 10,
-        marginLeft: 10,
-        borderColor: "#FFAF50",
-        position: 'relative',
-        borderWidth: 3,
-        height: "30%",
-        width: "95%"
+
+    imgStyle: {
+        width: "100%",
+        height: "40%",
+        // backgroundColor: '#FAE5D3',
+        alignSelf: 'center',
+        // backgroundColor: '#434343'
     },
     textStyle: {
-        flexDirection: 'row-reverse'
+        alignItems: 'center',
+        color: 'black',
+        fontSize: 30,
+        fontWeight: 'bold',
+        textDecorationLine: 'underline',
+        textShadowColor: "gray",
+        textShadowRadius: 15
     },
-    textTitleHeaderStyle:{
-        alignSelf: "center",
-        fontWeight: "bold",
-        fontSize: 24,
-        marginLeft: 10
+    textVStyle: {
+        alignItems: 'center',
+        marginTop: "3%",
+        width: "100%",
+        height: "10%"
     },
-    textTitleStyle: {
-        alignSelf: "center",
-        fontWeight: "bold",
-        fontSize: 20,
-        marginLeft: 10
-    },
-    textDetailStyle: {
-        fontWeight: "normal",
-        fontSize: 16,
-        alignSelf: "center"
-    },
-    CheckBoxStyle: {
-        backgroundColor: "#F6D365",
-        borderColor: "#FFAF50",
+    mainStyle: {
+        width: "92%",
+        height: "75%",
+        alignSelf: 'center',
+        backgroundColor: "#FBF5E5",
+        borderRadius: 10,
         borderWidth: 2,
-        width: "30%",
-        flex: 1,
-        marginTop: 10
+        borderColor: "#CECECE"
+    },
+    mainTextStyle: {
+        fontSize: 17
+
+
+
+    },
+    substitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 17
     }
 }

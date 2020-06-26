@@ -7,41 +7,50 @@ import {
     Image,
 
 } from "react-native";
+import { Divider } from "react-native-elements";
 
 class EventBoxUser extends React.Component {
     render() {
         return (
             <View style={styles.eventStyle}>
-                <View style={styles.imageStyle}>
-                    <Image
-                        source={this.props.imageUri}
-                        style={{ width: "100%", height: "100%" }}
-                    />
+                <View style={{ flex: 1}}>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
+                        <Image
+                            source={this.props.imageUri}
+                            style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                        />
+                    </View>
                 </View >
-                <View >
+
+                <View style={{ flex: 2 }}>
                     <View style={styles.textStyle}>
-                        <Text style={styles.textTitleStyle}>שם האירוע:</Text>
-                        <Text style={styles.textDetailStyle}>{this.props.name} </Text>
+                        <Text style={styles.textTitleStyle}>שם האירוע: </Text>
+                        <Text numberOfLines={1} style={styles.textDetailStyle}>{this.props.name} </Text>
                     </View>
+                    <Divider/>
                     <View style={styles.textStyle}>
-                        <Text style={styles.textTitleStyle}>תאריך:</Text>
-                        <Text style={styles.textDetailStyle}>{this.props.date}</Text>
+                        <Text style={styles.textTitleStyle}>תאריך: </Text>
+                        <Text numberOfLines={1} style={styles.textDetailStyle}>{this.props.date}</Text>
                     </View>
+                    <Divider/>
                     <View style={styles.textStyle}>
-                        <Text style={styles.textTitleStyle}>יום:</Text>
-                        <Text style={styles.textDetailStyle}>{this.props.weekday} </Text>
+                        <Text style={styles.textTitleStyle}>יום: </Text>
+                        <Text numberOfLines={1} style={styles.textDetailStyle}>{this.props.weekday}</Text>
                     </View>
+                    <Divider/>
                     <View style={styles.textStyle}>
-                        <Text style={styles.textTitleStyle}>שעה:</Text>
-                        <Text style={styles.textDetailStyle}>{this.props.hour} </Text>
+                        <Text style={styles.textTitleStyle}>שעה: </Text>
+                        <Text numberOfLines={1} style={styles.textDetailStyle}>{this.props.hour}</Text>
                     </View>
+                    <Divider/>
                     <View style={styles.textStyle}>
-                        <Text style={styles.textTitleStyle}>מיקום:</Text>
-                        <Text style={styles.textDetailStyle}>{this.props.location} </Text>
+                        <Text style={styles.textTitleStyle}>מיקום: </Text>
+                        <Text numberOfLines={1} style={styles.textDetailStyle}>{this.props.location}</Text>
                     </View>
+                    <Divider/>
                     <View style={styles.textStyle}>
-                        <Text style={styles.textTitleStyle}>פרטים:</Text>
-                        <Text style={styles.textDetailStyle}>{this.props.details} </Text>
+                        <Text style={styles.textTitleStyle}>פרטים: </Text>
+                        <Text numberOfLines={1} style={styles.textDetailStyle}>{this.props.details}</Text>
                     </View>
                 </View>
 
@@ -59,21 +68,17 @@ const styles = StyleSheet.create({
         borderColor: "#FFAF50",
         overflow: 'hidden',
         borderRadius: 15,
-        borderWidth: 2,
+        borderWidth: 1.1,
         fontSize: 20,
-        marginTop: 10
-    },
-    imageStyle: {
         marginTop: 10,
-        marginLeft: 10,
-        borderColor: "#FFAF50",
-        position: 'absolute',
-        borderWidth: 4,
-        height: "85%",
-        width: "30%"
+        width:'100%',
+        height:155,
+        flexDirection:'row-reverse'
     },
+
     textStyle: {
-        flexDirection: 'row-reverse',
+        flexDirection: 'row',
+        flex:1
 
     },
     ButtonStyle: {
@@ -97,15 +102,18 @@ const styles = StyleSheet.create({
 
     },
     textTitleStyle: {
-        // alignSelf: "center",
+     
         fontWeight: "bold",
         fontSize: 18,
         marginLeft: 2
+       
+ 
     },
     textDetailStyle: {
         //fontWeight: "normal",
         fontSize: 16,
-
+        flex:1,
+        textAlign:'left'
 
         //alignSelf: "center"
     }

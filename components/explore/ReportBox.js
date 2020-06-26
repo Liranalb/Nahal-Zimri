@@ -46,7 +46,7 @@ const styles = {
         height: 310,
         width: 175,
         marginLeft: 10,
-        borderWidth: 0.8,
+        borderWidth: 1.1,
         borderColor: '#FFAF50',
         backgroundColor: '#F4D5A7'
     }
