@@ -57,29 +57,31 @@ class LoginForm extends Component {
     }
 
     onLoginSuccess() {
-        if (auth.currentUser.emailVerified === false) {
+        // if (auth.currentUser.emailVerified === false) {
+        //     Alert.alert(
+        //         "שים לב",
+        //         "טרם אימתת את האימייל שלך",
+        //         [{ text: "אישור" }],
+        //         { cancelable: false }
+        //     )
+        //     this.setState({
+        //         loading: false
+        //     })
+
+        // }
+      
             Alert.alert(
-                "שים לב",
-                "טרם אימתת את האימייל שלך",
+                "החיבור הושלם",
+                "התחחברת בהצלחה",
                 [{ text: "אישור" }],
                 { cancelable: false }
             )
             this.setState({
+                email: "",
+                password: "",
                 loading: false
             })
-            return;
-        }
-        Alert.alert(
-            "החיבור הושלם",
-            "התחחברת בהצלחה",
-            [{ text: "אישור" }],
-            { cancelable: false }
-        )
-        this.setState({
-            email: "",
-            password: "",
-            loading: false
-        })
+        
     }
 
     renderResetEmail() {
@@ -88,8 +90,8 @@ class LoginForm extends Component {
             // if(!auth.currentUser.emailVerified)
 
             return (
-                <View style={{ alignSelf: 'center', alignItems: 'center', height: '6%'  }}>
-                    <View style={{ flexDirection: 'row', width: '75%'}}>
+                <View style={{ alignSelf: 'center', alignItems: 'center', height: '6%' }}>
+                    <View style={{ flexDirection: 'row', width: '75%' }}>
                         <View style={{ flex: 3 }}>
                             <TextInput
                                 style={styles.TextInputStyle2}
@@ -103,16 +105,16 @@ class LoginForm extends Component {
                             />
                         </View>
 
-                        <View style={{ flex: 1}}>
+                        <View style={{ flex: 1 }}>
                             <TouchableWithoutFeedback
                                 onPress={() => {
-                                    
+
                                     auth.sendPasswordResetEmail(this.state.resetEmail).then(function () {
                                         alert("נשלח מייל לאיפוס סיסמה");
-                                       
+
                                     }).catch(function (error) {
                                         alert("כתובת לא תקינה");
-                                        
+
                                     });
                                     this.setState({ resetEmail: '' });
                                 }}
@@ -162,7 +164,6 @@ class LoginForm extends Component {
 
     onButtonPress() {
 
-
         this.setState({ loading: true })
 
         firebase
@@ -174,6 +175,7 @@ class LoginForm extends Component {
             .catch(
                 this.onLoginFail.bind(this)
             )
+
     }
 
 

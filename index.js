@@ -165,9 +165,8 @@ class loginHelper extends Component {
         check = true;
         console.log("componentDidMount")
         auth.onAuthStateChanged(async (user) => {
-            console.log("?????")
             if (user && auth.currentUser.emailVerified) {
-                console.log("auto log ")
+                console.log("auto log for user: "+user.email)
                 global.uid = user.uid;
                 let flag = await this.adminCheck(user)
                 console.log("flag is : " + flag.val() + "isAdmin is: " + this.state.isAdmin);
@@ -175,7 +174,7 @@ class loginHelper extends Component {
                 
             }
             else {
-                console.log("go to login manu")
+                console.log("go to login manu: " )
                 this.setState({ loggedIn: false, isAdmin: false, isDataLoaded: true })
             }
             //this.forceUpdate();

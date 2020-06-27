@@ -81,7 +81,7 @@ function InformationUserScreen({ navigation }) {
 
                         {infoArray.map((item) => {
                             return (
-                                <View>
+                                <View key={item.id} style={{ marginTop:'2%'}}>
                                     <TouchableWithoutFeedback
                                         onPress={() => {
                                             currItem = item;
