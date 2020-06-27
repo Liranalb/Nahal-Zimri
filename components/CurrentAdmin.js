@@ -5,43 +5,10 @@ import HeaderComp from "./HeaderComp"
 import firebase from "../config/Firebase"
 import { db, auth } from '../config/Firebase'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { DrawerContent } from "./DrawerContent";
-
-// function adminCheck() { 
-//     db.ref('Users/'+uid+'/Admin').once('value', function (snapshot) {
-//          const exist = (snapshot.val() !== null);
-
-//          if (exist) {
-//             Admin = snapshot.val();
-//             alert(Admin);
-//             console.log("user data loaded");
-
-//          }
-//      });
-//     }
+import { DrawerContentAdmin } from "./DrawerContentAdmin";
 
 
-// var Username = "";
-
-
-// function getUser() {
-//     //let uid = firebase.auth().currentUser.uid
-
-//     db.ref('Users/' + global.uid + '/Username').once('value', function (snapshot) {
-//         const exist = (snapshot.val() !== null);
-//         if (exist) {
-//             Username = snapshot.val();
-//             //alert(Username);
-//             console.log("user data loaded");
-//         }
-//     });
-// }
-
-
-
-// var Username = getUser();
-//var Admin = adminCheck();
-function CurrentUserScreen({ navigation }) {
+function CurrentAdminScreen({ navigation }) {
     const [loaded, setLoaded] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -174,19 +141,19 @@ function CurrentUserScreen({ navigation }) {
 //   // ...
 // });
 
-const DrawerUser = createDrawerNavigator();
+const DrawerAdminUser = createDrawerNavigator();
 
-function CurrentUser() {
+function CurrentAdmin() {
     return (
-        <DrawerUser.Navigator initialRouteName="About" drawerPosition="right"
+        <DrawerAdminUser.Navigator initialRouteName="About" drawerPosition="right"
             drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
-            <DrawerUser.Screen name="About" component={CurrentUserScreen} />
+            <DrawerAdminUser.Screen name="About" component={CurrentAdminScreen} />
 
-        </DrawerUser.Navigator>
+        </DrawerAdminUser.Navigator>
     );
 }
 
-export default CurrentUser;
+export default CurrentAdmin;
 
 const styles = {
 

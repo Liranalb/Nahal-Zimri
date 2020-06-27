@@ -14,7 +14,7 @@ import InfoCatagoriesAdmin from './InfoCatagoriesAdmin'
 import PathCatagoriesAdmin from './PathCatagoriesAdmin';
 import CurrentUser from "./CurrentUser"
 import { DrawerContentAdmin } from "./DrawerContentAdmin";
-
+import AboutAdmin from "./AboutAdmin"
 const MyTheme = {
     dark: false,
     colors: {
@@ -175,6 +175,8 @@ function HomePageAdminStack() {
                 <Stack.Screen options={{ headerShown: false }} name="RouAd" component={AdminRoutesScreen} />
                 <Stack.Screen options={{ headerShown: false }} name="Reports" component={ReportsAdminScreen} />
                 <Stack.Screen options={{ headerShown: false }} name="EventsAdmin" component={EventAdminScreen} />
+                <Stack.Screen name="AboutAdmin" options={{ headerShown: false }} component={AboutAdmin} />  
+                    
                 <Stack.Screen options={{ headerShown: false }} name="InfoCat" component={InfoCatagoriesScreen} />
                 <Stack.Screen name="Current" options={{ headerShown: false }}
                     component={CurrentUserScreen} />  

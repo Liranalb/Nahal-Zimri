@@ -7,23 +7,29 @@ import HeaderComp from "./HeaderComp"
 
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { DrawerContent } from "./DrawerContent";
+import { DrawerContentAdmin } from "./DrawerContentAdmin";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler"
 
-function AboutScreen({ navigation }) {
+
+
+function AboutAdminScreen({ navigation }) {
     const [loaded, setLoaded] = useState(false);
+    const [data, setData] = useState({ Title: '', Body: '', SubTitle: '' });
 
-    let data = null;
+    // let data = null;
     db.ref('About').once('value', function (snapshot) {
         const exist = (snapshot.val() !== null);
         if (exist) {
-            data = snapshot.val();
+            let dataA = snapshot.val();
             console.log("data loaded: " + loaded);
             if (loaded === false) {
                 setLoaded(true);
+                setData({ Title: dataA.Title, Body: dataA.Body, SubTitle: dataA.SubTitle })
             }
 
         }
     });
+
 
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
@@ -35,22 +41,48 @@ function AboutScreen({ navigation }) {
 
 
                 <View style={{ width: "90%", height: '20%', alignSelf: 'center' }}>
-                    <Text style={{fontSize:25, fontWeight:'bold', textAlign:'center', marginTop:'10%', color:'#404040'}}>
+
+                    <Text style={{ fontSize: 25, fontWeight: 'bold', textAlign: 'center', marginTop: '10%', color: '#404040' }}>
                         {data.Title}
                     </Text>
-                    <Text style={{fontSize:20, fontWeight:'bold', textAlign:'center', marginTop:'2%', color:'#404040'}}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginTop: '2%', color: '#404040' }}>
                         {data.SubTitle}
                     </Text>
                 </View>
                 <View style={styles.bodyStyle}>
                     <ScrollView>
-                        <Text style={{fontSize:16, fontFamily:''}}>
-                           {data.Body}
-                    </Text>
+                        <TextInput
+                            style={{ fontSize: 16, fontFamily: '', padding: 0, textAlign: 'right' }}
+                            multiline
+                            defaultValue={data.Body}
+                            onChangeText={(text) => setData({Body: text}) }
+                              
+                        />
+
                     </ScrollView>
                 </View>
 
+                <TouchableWithoutFeedback
+                    onPress={() => {
+                     
+                          
+                            let updates = {};
+                            updates["About/Body"] = data.Body;
+                            db.ref().update(updates);
+        
+                            alert("המידע עודכן");
+                        
+                    }
+                    }
+                >
 
+
+                    <View style={{borderRadius:6, width: "30%", height: '38%', backgroundColor: 'green', alignSelf: 'center', marginTop: '2%' }}>
+                        <Text style={{alignSelf:'center',color:'white', fontSize:16,marginTop:"5%"}}>
+ערוך טקסט
+                        </Text>
+                    </View>
+                </TouchableWithoutFeedback>
 
 
 
@@ -63,19 +95,19 @@ function AboutScreen({ navigation }) {
 
 const DrawerAbout = createDrawerNavigator();
 
-function About() {
+function AboutAdmin() {
 
     return (
-        <DrawerAbout.Navigator initialRouteName="reports" drawerPosition="right"
-            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
-            <DrawerAbout.Screen name="reports" component={AboutScreen} />
+        <DrawerAbout.Navigator initialRouteName="About" drawerPosition="right"
+            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContentAdmin {...props} />}>
+            <DrawerAbout.Screen name="About" component={AboutAdminScreen} />
 
         </DrawerAbout.Navigator>
 
     );
 }
 
-export default About;
+export default AboutAdmin;
 
 const styles = {
     eventStyle: {
@@ -112,9 +144,9 @@ const styles = {
     },
     bodyStyle: {
         width: "95%",
-        height: '78%',
+        height: '72%',
         alignSelf: 'center',
- 
+
         // borderRadius: 10,
         // borderWidth: 1,
         // borderColor: '#4A4A4A'

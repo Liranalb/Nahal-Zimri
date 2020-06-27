@@ -1,5 +1,5 @@
 import React, { Component } from "react" //import react library
-import { Text, Image, TouchableOpacity } from "react-native"
+import { Text, Image, TouchableOpacity, TouchableWithoutFeedback } from "react-native"
 import { View } from "native-base"
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
@@ -12,7 +12,7 @@ import { db, auth } from "../config/Firebase"
 function MainLoginScreen({ navigation }) {
     return (
 
-        
+
         <View style={styles.background}>
             <View style={styles.logoView}>
                 <Image source={require('../assets/img/logo.png')}
@@ -20,20 +20,26 @@ function MainLoginScreen({ navigation }) {
 
             </View>
 
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('LoginForm')}>
+                <View style={styles.buttonStyle}>
 
-            <View style={styles.buttonStyle}>
-                <TouchableOpacity onPress={() => navigation.navigate('LoginForm')}>
+
                     <Text style={styles.text}>התחבר</Text>
-                </TouchableOpacity >
-            </View>
 
 
-            <View style={styles.buttonStyle}>
-                <TouchableOpacity color="#FF8C37" onPress={() => navigation.navigate('RegForm')}>
-                    <Text style={styles.text}>הרשמה באמצעות מייל</Text>
+                </View>
+            </TouchableWithoutFeedback >
 
-                </TouchableOpacity>
-            </View>
+            <TouchableWithoutFeedback color="#FF8C37" onPress={() => navigation.navigate('RegForm')}>
+                <View style={styles.buttonStyle}>
+
+                    <View>
+                        <Text style={styles.text}>הרשמה באמצעות מייל</Text>
+                    </View>
+
+
+                </View>
+            </TouchableWithoutFeedback>
             <View style={styles.line} />
         </View>
 
@@ -102,7 +108,7 @@ const styles = {
 
     text: {
         fontSize: 20,
-        color: '#FCDBC3'
+        color: 'white'
 
     },
 
@@ -114,7 +120,6 @@ const styles = {
         borderColor: "#FF8C37",
         borderRadius: 10,
         borderWidth: 2,
-        fontSize: 20,
         width: "80%",
         height: "10%",
         alignSelf: "center",
