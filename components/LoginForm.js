@@ -90,7 +90,8 @@ class LoginForm extends Component {
             // if(!auth.currentUser.emailVerified)
 
             return (
-                <View style={{ alignSelf: 'center', alignItems: 'center', height: '6%' }}>
+                
+                <View style={{ alignSelf: 'center', alignItems: 'center', height: '6%'}}>
                     <View style={{ flexDirection: 'row', width: '75%' }}>
                         <View style={{ flex: 3 }}>
                             <TextInput
@@ -228,15 +229,17 @@ class LoginForm extends Component {
 
 
 
-                <View style={{ alignSelf: 'center', height: "3%" }}>
+                <View style={{ alignSelf: 'center', height: "4%", paddingTop: "0.5%"}}>
+                {this.state.show ? (
                     <TouchableOpacity
-                        onPress={() => {
-                            this.setState({ resetPassword: !this.state.resetPassword })
+                    onPress={() => {
+                        this.setState({ resetPassword: !this.state.resetPassword })
 
-                        }}
-                    >
-                        <Text style={{ fontSize: 16, color: "#404040" }}>שכחתם את הסיסמה? לחצו כאן..</Text>
-                    </TouchableOpacity>
+                    }}
+                >
+                    <Text style={{ fontSize: 16, color: "#404040"}}>שכחתם את הסיסמה? לחצו כאן..</Text>
+                </TouchableOpacity>
+                    ) : null}
                 </View>
 
 
@@ -256,12 +259,9 @@ export default LoginForm;
 
 const styles = {
     inputView: {
-        paddingTop: 20,
-        paddingBottom: 20,
+        paddingTop: "5%",
+        paddingBottom: "10%",
         height: "10%"
-
-
-
     },
 
     TextInputStyle: {
@@ -273,7 +273,6 @@ const styles = {
         alignSelf: "center"
 
 
-
     },
     TextInputStyle2: {
         borderColor: "#FF8C37",
@@ -281,6 +280,7 @@ const styles = {
         borderWidth: 2,
         fontSize: 20,
         width: "92%",
+        
     },
     buttonStyle: {
         backgroundColor: "#FF8C37",
