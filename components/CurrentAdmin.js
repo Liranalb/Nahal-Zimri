@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { TextInput, Alert, ScrollView, Text, TouchableWithoutFeedback, Button } from "react-native"
 import { View } from "native-base"
 import HeaderComp from "./HeaderComp"

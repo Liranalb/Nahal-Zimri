@@ -1,17 +1,16 @@
 import React from "react"
 /*import { createStackNavigator } from 'react-navigation-stack';*/
 import { Image, View, TouchableWithoutFeedback, TextInput, Text, Button, ScrollView, TouchableOpacity, Alert, unstable_enableLogBox } from "react-native"
-import HeaderComp from './HeaderComp'
+import HeaderComp from './explore/HeaderComp'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import ReportsAdmin from './ReportsAdmin'
-import EventAdmin from './EventAdmin'
-import InfoAdmin from './InfoAdmin'
+import ReportsAdmin from './Reports/ReportsAdmin'
+import EventAdmin from './Events/EventAdmin'
+import InfoAdmin from './Articles/InfoAdmin'
 import { createDrawerNavigator,
-    DrawerItem,
-    DefaultTheme} from '@react-navigation/drawer';
-import InfoCatagoriesAdmin from './InfoCatagoriesAdmin'
-import PathCatagoriesAdmin from './PathCatagoriesAdmin';
+    DrawerItem } from '@react-navigation/drawer';
+import InfoCatagoriesAdmin from './Information/InfoCatagoriesAdmin'
+import PathCatagoriesAdmin from './Routes/PathCatagoriesAdmin';
 import CurrentUser from "./CurrentUser"
 import { DrawerContentAdmin } from "./DrawerContentAdmin";
 import AboutAdmin from "./AboutAdmin"

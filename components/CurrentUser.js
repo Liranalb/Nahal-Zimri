@@ -1,46 +1,13 @@
-import React, { useState, useEffect } from "react"
-import { TextInput, Alert, ScrollView, Text, TouchableWithoutFeedback, Button } from "react-native"
+import React, { useState } from "react"
+import { TextInput, Alert, Text, TouchableWithoutFeedback, Button } from "react-native"
 import { View } from "native-base"
-import HeaderComp from "./HeaderComp"
+import HeaderComp from "./explore/HeaderComp"
 import firebase from "../config/Firebase"
 import { db, auth } from '../config/Firebase'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContent } from "./DrawerContent";
 
-// function adminCheck() { 
-//     db.ref('Users/'+uid+'/Admin').once('value', function (snapshot) {
-//          const exist = (snapshot.val() !== null);
 
-//          if (exist) {
-//             Admin = snapshot.val();
-//             alert(Admin);
-//             console.log("user data loaded");
-
-//          }
-//      });
-//     }
-
-
-// var Username = "";
-
-
-// function getUser() {
-//     //let uid = firebase.auth().currentUser.uid
-
-//     db.ref('Users/' + global.uid + '/Username').once('value', function (snapshot) {
-//         const exist = (snapshot.val() !== null);
-//         if (exist) {
-//             Username = snapshot.val();
-//             //alert(Username);
-//             console.log("user data loaded");
-//         }
-//     });
-// }
-
-
-
-// var Username = getUser();
-//var Admin = adminCheck();
 function CurrentUserScreen({ navigation }) {
     const [loaded, setLoaded] = useState(false);
     const [name, setName] = useState("");
@@ -89,20 +56,6 @@ function CurrentUserScreen({ navigation }) {
 
 
             </View>
-            {/* <View>
-                <Text style={styles.textDetailStyle}>שנה סיסמה</Text>
-                <TextInput
-                        style={styles.TextInputStyle}
-                        textAlign="center"
-                        placeholder={"סיסמה"}
-                        placeholderTextColor="#FF8C37"
-                        secureTextEntry={true}
-                        height={45}
-                        autoCorrect={false}
-                        onChangeText = { password => setPassword(password)}
-                        value={password}
-                    />
-            </View> */}
 
 
             <View style={{ alignSelf: 'center', alignItems: 'center', height: '6%' }}>

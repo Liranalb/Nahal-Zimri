@@ -1,24 +1,21 @@
-import React, { Component } from "react"
-import { Button, Header, ListItem } from "react-native-elements"
-import { Image, SafeAreaView, Dimensions, View, TouchableWithoutFeedback, TextInput, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, unstable_enableLogBox } from "react-native"
-import { Footer, Container } from "native-base";
+import React from "react"
+import { Image, SafeAreaView, Dimensions, View, TouchableWithoutFeedback, Text, ScrollView } from "react-native"
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
-import InfoUser from "./InfoUser";
-import EventUser from "./EventUser";
-import RoutesUser from "./RoutesUser";
-import InfoCatagoriesUser from "./InfoCatagoriesUser";
-import Reports from "./Reports";
+import InfoUser from "./Articles/InfoUser";
+import EventUser from "./Events/EventUser";
+import RoutesUser from "./Routes/RoutesUser";
+import InfoCatagoriesUser from "./Information/InfoCatagoriesUser";
+import Reports from "./Reports/Reports";
 import { DrawerContent } from "./DrawerContent";
 import About from "./About";
-import HeaderComp from "./HeaderComp";
+import HeaderComp from "./explore/HeaderComp";
 import { createDrawerNavigator,
     DrawerItem,
     DefaultTheme} 
     from '@react-navigation/drawer';
-import Icon from 'react-native-vector-icons/Entypo';
 import CurrentUser from "./CurrentUser"
-import PathCatagories from "./PathCatagories"
+import PathCatagories from "./Routes/PathCatagories"
 
 const MyTheme = {
     dark: false,
@@ -47,27 +44,6 @@ function HomePageUserScreen({ navigation }) {
                         openUserProfile = {() => navigation.navigate('Current')}
                         openUserMenu = {() => navigation.dangerouslyGetParent().openDrawer()}
                         />
-             <View>
-                 <View>
-                    
-                     {/* <Header
-                 backgroundColor='#FAE5D3'
-
-                         leftComponent={<TouchableOpacity
-                            onPress={() => navigation.navigate('Current')}>
-                            <Icon name="user" size={30} color="black" />
-                        </TouchableOpacity>}
-
-                        centerComponent={<LogoHeaderComponent imageUri={require('../assets/img/logo.png')} />}
-
-
-                        rightComponent={<TouchableOpacity
-                            onPress={() => navigation.dangerouslyGetParent().openDrawer()}>
-                            <Icon name="menu" size={30} color="black" />
-                        </TouchableOpacity>}
-                    /> */}
-                </View>
-            </View>
 
             <TouchableWithoutFeedback onPress={() => navigation.navigate('InfUs')}>
                 <View style={styles.infoStyle}>

@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect, useLayoutEffect } from "react"
 import { TextInput, Alert, ScrollView, Text, TouchableOpacity } from "react-native"
 import { View } from "native-base"
 import { db } from '../config/Firebase'
-import HeaderComp from "./HeaderComp"
+import HeaderComp from "./explore/HeaderComp"
 //import firebase from "../config/Firebase"
 
 
@@ -11,15 +11,17 @@ import { DrawerContent } from "./DrawerContent";
 
 function AboutScreen({ navigation }) {
     const [loaded, setLoaded] = useState(false);
+    const [data, setData] = useState({ Title: '', Body: '', SubTitle: '', ExtraBody: '' });
 
-    let data = null;
+
     db.ref('About').once('value', function (snapshot) {
         const exist = (snapshot.val() !== null);
         if (exist) {
-            data = snapshot.val();
+            let dataA = snapshot.val();
             console.log("data loaded: " + loaded);
             if (loaded === false) {
                 setLoaded(true);
+                setData({ Title: dataA.Title, Body: dataA.Body, SubTitle: dataA.SubTitle, ExtraBody: dataA.ExtraBody})
             }
 
         }
@@ -35,18 +37,25 @@ function AboutScreen({ navigation }) {
 
 
                 <View style={{ width: "90%", height: '20%', alignSelf: 'center' }}>
-                    <Text style={{fontSize:25, fontWeight:'bold', textAlign:'center', marginTop:'10%', color:'#404040'}}>
+                    <Text style={{ fontSize: 25, fontWeight: 'bold', textAlign: 'center', marginTop: '10%', color: '#404040' }}>
                         {data.Title}
                     </Text>
-                    <Text style={{fontSize:20, fontWeight:'bold', textAlign:'center', marginTop:'2%', color:'#404040'}}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginTop: '2%', color: '#404040' }}>
                         {data.SubTitle}
                     </Text>
                 </View>
                 <View style={styles.bodyStyle}>
                     <ScrollView>
-                        <Text style={{fontSize:16, fontFamily:''}}>
-                           {data.Body}
-                    </Text>
+                        <Text style={{ fontSize: 16, fontFamily: '' }}>
+                            {data.Body}
+                        </Text>
+
+                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>קצת על האפליקציה : </Text>
+
+                        <Text style={{ fontSize: 16, padding: 0, textAlign: 'left' }}>
+
+                            {data.ExtraBody}
+                        </Text>
                     </ScrollView>
                 </View>
 
@@ -114,7 +123,7 @@ const styles = {
         width: "95%",
         height: '78%',
         alignSelf: 'center',
- 
+
         // borderRadius: 10,
         // borderWidth: 1,
         // borderColor: '#4A4A4A'
