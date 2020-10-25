@@ -98,7 +98,17 @@ function sendData(body, type, genre) {
     console.log("after sendData");
     return 0;
 }
-const ITEMS = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight","Nine","Ten","Eleven","Twelve", "Thirteen","Fourteen","Fifteen", "Seventeen", "Eightteen","Nineteen"];
+const ITEMS = ["One", "Two", "Three", "Four", "Five", "Six", "Seven",
+ "Eight","Nine","Ten","Eleven","Twelve", "Thirteen","Fourteen","Fifteen", 
+ "Seventeen", "Eightteen","Nineteen","Twenty","Twenty one","Twenty two","Twenty three","Twenty four","Twenty five","Twenty six",
+ "Twenty seven","Twenty eight","Twenty nine","Thirty","Thirty one","Thirty two","Thirty three","Thirty four","Thirty five","Thirty six",
+ "Thirty seven","Thirty eight","Thirty nine","Fourty","Fourty one","Fourty two","Fourty three","Fourty four","Fourty five","Fourty six",
+ "Fourty seven","Fourty eight","Fourty nine","Fifty","Fifty one","Fifty two","Fifty three","Fifty four","Fifty five","Fifty six",
+ "Fifty seven","Fifty eight","Fifty nine","Sixty","Sixty one","Sixty two","Sixty three","Sixty four","Sixty five","Sixty six",
+ "Sixty seven","Sixty eight","Sixty nine","Seventy","Seventy one","Seventy two","Seventy three","Seventy four","Seventy five",
+ "Seventy six","Seventy seven","Seventy eight","Seventy nine","Eighty","Eighty one","Eighty two","Eighty three","Eighty four",
+ "Eighty five","Eighty six","Eighty seven","Eighty eight","Eighty nine","Ninety","Ninety one","Ninety two","Ninety three",
+ "Ninety four","Ninety five","Ninety six","Ninety seven","Ninety eight",];
 
 
 
@@ -1233,7 +1243,6 @@ class ReportForm extends Component {
                                 <CollapseHeader style={styles.typeStyle}>
 
                                     <View style={styles.innerViewStyle}>
-                                        {/* <Text style={styles.textStyleHeaders}>מפגעים</Text> */}
                                         <Text style={styles.textStyleHeaders}>זוחלים</Text>
                                     </View>
 
@@ -1252,8 +1261,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'זיקית')}
+                                                    checked={this.state.checkItems['Fourty eight']}
+                                                    onPress={() => this.handlePress('Fourty eight', 'בעלי חיים', 'זיקית')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1274,8 +1283,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'זעמן שחור')}
+                                                    checked={this.state.checkItems['Fourty nine']}
+                                                    onPress={() => this.handlePress('Fourty nine', 'בעלי חיים', 'זעמן שחור')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1298,8 +1307,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'חומט גמד')}
+                                                    checked={this.state.checkItems['Fifty']}
+                                                    onPress={() => this.handlePress('Fifty', 'בעלי חיים', 'חומט גמד')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1321,8 +1330,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'חומט מנומר')}
+                                                    checked={this.state.checkItems['Fifty one']}
+                                                    onPress={() => this.handlePress('Fifty one', 'בעלי חיים', 'חומט מנומר')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1342,8 +1351,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'חרדון מצוי')}
+                                                    checked={this.state.checkItems['Fifty two']}
+                                                    onPress={() => this.handlePress('Fifty two', 'בעלי חיים', 'חרדון מצוי')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1363,8 +1372,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'לטאה זריזה')}
+                                                    checked={this.state.checkItems['Fifty three']}
+                                                    onPress={() => this.handlePress('Fifty three', 'בעלי חיים', 'לטאה זריזה')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1385,8 +1394,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'מניפנית מצויה')}
+                                                    checked={this.state.checkItems['Fifty four']}
+                                                    onPress={() => this.handlePress('Fifty four', 'בעלי חיים', 'מניפנית מצויה')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1407,8 +1416,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'נחש')}
+                                                    checked={this.state.checkItems['Fifty five']}
+                                                    onPress={() => this.handlePress('Fifty five', 'בעלי חיים', 'נחש')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1428,8 +1437,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'צב יבשה (מצוי)')}
+                                                    checked={this.state.checkItems['Fifty six']}
+                                                    onPress={() => this.handlePress('Fifty six', 'בעלי חיים', 'צב יבשה (מצוי)')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1449,8 +1458,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'צפע מצוי')}
+                                                    checked={this.state.checkItems['Fifty seven']}
+                                                    onPress={() => this.handlePress('Fifty seven', 'בעלי חיים', 'צפע מצוי')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1470,8 +1479,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'שממית בתים')}
+                                                    checked={this.state.checkItems['Fifty eight']}
+                                                    onPress={() => this.handlePress('Fifty eight', 'בעלי חיים', 'שממית בתים')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1506,8 +1515,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'הספרית השעורה')}
+                                                    checked={this.state.checkItems['Fifty nine']}
+                                                    onPress={() => this.handlePress('Fifty nine', 'בעלי חיים', 'הספרית השעורה')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1528,8 +1537,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'הספרנית הנשרן')}
+                                                    checked={this.state.checkItems['Sixty']}
+                                                    onPress={() => this.handlePress('Sixty', 'בעלי חיים', 'הספרנית הנשרן')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1550,8 +1559,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'זנב סנונית נאה')}
+                                                    checked={this.state.checkItems['Sixty one']}
+                                                    onPress={() => this.handlePress('Sixty one', 'בעלי חיים', 'זנב סנונית נאה')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1571,8 +1580,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'כחליל האפון')}
+                                                    checked={this.state.checkItems['Sixty two']}
+                                                    onPress={() => this.handlePress('Sixty two', 'בעלי חיים', 'כחליל האפון')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1592,8 +1601,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'כחליל האספסת')}
+                                                    checked={this.state.checkItems['Sixty three']}
+                                                    onPress={() => this.handlePress('Sixty three', 'בעלי חיים', 'כחליל האספסת')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1613,8 +1622,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'כחליל השברק')}
+                                                    checked={this.state.checkItems['Sixty four']}
+                                                    onPress={() => this.handlePress('Sixty four', 'בעלי חיים', 'כחליל השברק')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1635,8 +1644,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'כחליל החומעה')}
+                                                    checked={this.state.checkItems['Sixty five']}
+                                                    onPress={() => this.handlePress('Sixty five', 'בעלי חיים', 'כחליל החומעה')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1656,8 +1665,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'כתום כנף המצילתיים')}
+                                                    checked={this.state.checkItems['Sixty six']}
+                                                    onPress={() => this.handlePress('Sixty six', 'בעלי חיים', 'כתום כנף המצילתיים')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1677,8 +1686,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'לבנין הכאסיה')}
+                                                    checked={this.state.checkItems['Sixty seven']}
+                                                    onPress={() => this.handlePress('Sixty seven', 'בעלי חיים', 'לבנין הכאסיה')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1698,8 +1707,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'לבנין התלתן')}
+                                                    checked={this.state.checkItems['Sixty eight']}
+                                                    onPress={() => this.handlePress('Sixty eight', 'בעלי חיים', 'לבנין התלתן')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1719,8 +1728,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'לבנין מזרחי')}
+                                                    checked={this.state.checkItems['Sixty nine']}
+                                                    onPress={() => this.handlePress('Sixty nine', 'בעלי חיים', 'לבנין מזרחי')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1741,8 +1750,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'נימפית הדרדר')}
+                                                    checked={this.state.checkItems['Seventy']}
+                                                    onPress={() => this.handlePress('Seventy', 'בעלי חיים', 'נימפית הדרדר')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1762,8 +1771,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'נימפית החורשף')}
+                                                    checked={this.state.checkItems['Seventy one']}
+                                                    onPress={() => this.handlePress('Seventy one', 'בעלי חיים', 'נימפית החורשף')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1783,8 +1792,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'סטירית משויישת')}
+                                                    checked={this.state.checkItems['Seventy two']}
+                                                    onPress={() => this.handlePress('Seventy two', 'בעלי חיים', 'סטירית משויישת')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1804,8 +1813,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Three']}
-                                                    onPress={() => this.handlePress('Three', 'בעלי חיים', 'תנשמית המורכבים')}
+                                                    checked={this.state.checkItems['Seventy three']}
+                                                    onPress={() => this.handlePress('Seventy three', 'בעלי חיים', 'תנשמית המורכבים')}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1819,42 +1828,9 @@ class ReportForm extends Component {
 
                             </Collapse>
 
-                            <Collapse>
-                                <CollapseHeader style={styles.typeStyle}>
+                            
 
-                                    <View style={styles.innerViewStyle}>
-                                        <Text style={styles.textStyleHeaders}>מפגעים</Text>
-                                    </View>
-
-
-                                </CollapseHeader>
-                                <CollapseBody>
-
-                                    <View style={styles.container}>
-                                        <View style={{ flex: 1 }}>
-                                            <Image source={require('../../assets/img/garbage.jpg')}
-                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                                            />
-                                        </View>
-                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
-                                            <View style={{ flex: 1 }}>
-                                                <CheckBox
-                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
-                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Five']}
-                                                    onPress={() => this.handlePress('Five', 'אחר', "פסולת")}
-                                                />
-                                            </View>
-                                            <View style={{ flex: 1 }}>
-                                                <Text style={styles.textStyle}>פסולת</Text>
-                                            </View>
-                                        </View>
-                                    </View>
-
-
-
-                                </CollapseBody>
-
+                                <Collapse>
                                 <CollapseHeader style={styles.typeStyle}>
 
                                     <View style={styles.innerViewStyle}>
@@ -1877,8 +1853,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "אירוס הסרגל")}
+                                                    checked={this.state.checkItems['Seventy four']}
+                                                    onPress={() => this.handlePress('Seventy four', 'פריחה', "אירוס הסרגל")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1901,8 +1877,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "דבורנית דינסמור")}
+                                                    checked={this.state.checkItems['Seventy five']}
+                                                    onPress={() => this.handlePress('Seventy five', 'פריחה', "דבורנית דינסמור")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1925,8 +1901,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "דם המכבים")}
+                                                    checked={this.state.checkItems['Seventy six']}
+                                                    onPress={() => this.handlePress('Seventy six', 'פריחה', "דם המכבים")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1949,8 +1925,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "זמזומית מצויה")}
+                                                    checked={this.state.checkItems['Seventy seven']}
+                                                    onPress={() => this.handlePress('Seventy seven', 'פריחה', "זמזומית מצויה")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1973,8 +1949,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "כלנית מצויה")}
+                                                    checked={this.state.checkItems['Seventy eight']}
+                                                    onPress={() => this.handlePress('Seventy eight', 'פריחה', "כלנית מצויה")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -1997,8 +1973,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "כרכום חורפי")}
+                                                    checked={this.state.checkItems['Seventy nine']}
+                                                    onPress={() => this.handlePress('Seventy nine', 'פריחה', "כרכום חורפי")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -2021,8 +1997,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "מציץ סורי")}
+                                                    checked={this.state.checkItems['Eighty']}
+                                                    onPress={() => this.handlePress('Eighty', 'פריחה', "מציץ סורי")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -2045,8 +2021,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "מרגנית השדה")}
+                                                    checked={this.state.checkItems['Eighty one']}
+                                                    onPress={() => this.handlePress('Eighty one', 'פריחה', "מרגנית השדה")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -2069,8 +2045,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "מרווה")}
+                                                    checked={this.state.checkItems['Eighty two']}
+                                                    onPress={() => this.handlePress('Eighty two', 'פריחה', "מרווה")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -2093,8 +2069,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "נורית אסיה")}
+                                                    checked={this.state.checkItems['Eighty three']}
+                                                    onPress={() => this.handlePress('Eighty three', 'פריחה', "נורית אסיה")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -2117,8 +2093,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "נץ חלב")}
+                                                    checked={this.state.checkItems['Eighty four']}
+                                                    onPress={() => this.handlePress('Eighty four', 'פריחה', "נץ חלב")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -2141,8 +2117,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "סחלב פרפרני")}
+                                                    checked={this.state.checkItems['Eighty five']}
+                                                    onPress={() => this.handlePress('Eighty five', 'פריחה', "סחלב פרפרני")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -2167,8 +2143,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "סתוונית היורה")}
+                                                    checked={this.state.checkItems['Eighty six']}
+                                                    onPress={() => this.handlePress('Eighty six', 'פריחה', "סתוונית היורה")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -2191,8 +2167,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "עירית גדולה")}
+                                                    checked={this.state.checkItems['Eighty seven']}
+                                                    onPress={() => this.handlePress('Eighty seven', 'פריחה', "עירית גדולה")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -2215,8 +2191,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "עכובית הגלגל")}
+                                                    checked={this.state.checkItems['Eighty eight']}
+                                                    onPress={() => this.handlePress('Eighty eight', 'פריחה', "עכובית הגלגל")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -2239,8 +2215,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "פרג")}
+                                                    checked={this.state.checkItems['Eighty nine']}
+                                                    onPress={() => this.handlePress('Eighty nine', 'פריחה', "פרג")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -2263,8 +2239,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "קוציץ סורי")}
+                                                    checked={this.state.checkItems['Ninety']}
+                                                    onPress={() => this.handlePress('Ninety', 'פריחה', "קוציץ סורי")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -2287,8 +2263,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "רקפת")}
+                                                    checked={this.state.checkItems['Ninety one']}
+                                                    onPress={() => this.handlePress('Ninety one', 'פריחה', "רקפת")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -2311,8 +2287,8 @@ class ReportForm extends Component {
                                                 <CheckBox
                                                     checkedIcon={<IconA name="check" size={40} color="#48D347" />}
                                                     uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Eight']}
-                                                    onPress={() => this.handlePress('Eight', 'פריחה', "שום משולש")}
+                                                    checked={this.state.checkItems['Ninety two']}
+                                                    onPress={() => this.handlePress('Ninety two', 'פריחה', "שום משולש")}
                                                 />
                                             </View>
                                             <View style={{ flex: 1 }}>
@@ -2330,6 +2306,149 @@ class ReportForm extends Component {
 
                                 </CollapseBody>
                             </Collapse>
+
+                            <Collapse>
+                                <CollapseHeader style={styles.typeStyle}>
+
+                                    <View style={styles.innerViewStyle}>
+                                        <Text style={styles.textStyleHeaders}>מפגעים</Text>
+                                    </View>
+
+
+                                </CollapseHeader>
+                                <CollapseBody>
+
+                                    <View style={styles.container}>
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={require('../../assets/img/garbage.jpg')}
+                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                            />
+                                        </View>
+                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
+                                            <View style={{ flex: 1 }}>
+                                                <CheckBox
+                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
+                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
+                                                    checked={this.state.checkItems['Ninety three']}
+                                                    onPress={() => this.handlePress('Ninety three', 'אחר', "אשפה")}
+                                                />
+                                            </View>
+                                            <View style={{ flex: 1 }}>
+                                                <Text style={styles.textStyle}>אשפה</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+
+                                    <View style={styles.container}>
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={require('../../assets/img/grave.jpg')}
+                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                            />
+                                        </View>
+                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
+                                            <View style={{ flex: 1 }}>
+                                                <CheckBox
+                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
+                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
+                                                    checked={this.state.checkItems['Ninety four']}
+                                                    onPress={() => this.handlePress('Ninety four', 'אחר', "פגר")}
+                                                />
+                                            </View>
+                                            <View style={{ flex: 1 }}>
+                                                <Text style={styles.textStyle}>פגר</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+
+                                    <View style={styles.container}>
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={require('../../assets/img/biyuv.jpg')}
+                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                            />
+                                        </View>
+                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
+                                            <View style={{ flex: 1 }}>
+                                                <CheckBox
+                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
+                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
+                                                    checked={this.state.checkItems['Ninety five']}
+                                                    onPress={() => this.handlePress('Ninety five', 'אחר', "ביוב")}
+                                                />
+                                            </View>
+                                            <View style={{ flex: 1 }}>
+                                                <Text style={styles.textStyle}>ביוב</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+
+                                    <View style={styles.container}>
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={require('../../assets/img/safety.jpg')}
+                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                            />
+                                        </View>
+                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
+                                            <View style={{ flex: 1 }}>
+                                                <CheckBox
+                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
+                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
+                                                    checked={this.state.checkItems['Ninety six']}
+                                                    onPress={() => this.handlePress('Ninety six', 'אחר', "מפגע בטיחות")}
+                                                />
+                                            </View>
+                                            <View style={{ flex: 1 }}>
+                                                <Text style={styles.textStyle}>מפגע בטיחות</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+
+                                    <View style={styles.container}>
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={require('../../assets/img/fire.jpg')}
+                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                            />
+                                        </View>
+                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
+                                            <View style={{ flex: 1 }}>
+                                                <CheckBox
+                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
+                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
+                                                    checked={this.state.checkItems['Ninety seven']}
+                                                    onPress={() => this.handlePress('Ninety seven', 'אחר', "מדורות")}
+                                                />
+                                            </View>
+                                            <View style={{ flex: 1 }}>
+                                                <Text style={styles.textStyle}>מדורות</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+
+                                    
+
+
+
+                                </CollapseBody>
+                                </Collapse>
+                                <View style={styles.container}>
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={require('../../assets/img/Q.png')}
+                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                            />
+                                        </View>
+                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
+                                            <View style={{ flex: 1 }}>
+                                                <CheckBox
+                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
+                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
+                                                    checked={this.state.checkItems['Ninety eight']}
+                                                    onPress={() => this.handlePress('Ninety eight', 'אחר', "אחר")}
+                                                />
+                                            </View>
+                                            <View style={{ flex: 1 }}>
+                                                <Text style={styles.textStyle}>אחר</Text>
+                                            </View>
+                                        </View>
+                                    </View>
 
 
                         </ScrollView>
@@ -2464,8 +2583,4 @@ const styles = {
         marginTop: 17
 
     }
-
-
-
-
 }
