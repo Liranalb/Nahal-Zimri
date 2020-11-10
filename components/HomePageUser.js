@@ -52,7 +52,7 @@ function HomePageUserScreen({ navigation }) {
                         style={{ width: "100%", height: "100%" }}
                     />
                     <View style={styles.textStyle}>
-                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>כתבות</Text>
+                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>עדכונים</Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -82,7 +82,7 @@ function HomePageUserScreen({ navigation }) {
                 </TouchableWithoutFeedback>
             </View>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('EveUs')}>
-                <View style={styles.infoStyle}>
+                <View style={styles.evenStyle}>
                     <Image
                         source={require('../assets/img/fox.jpg')}
                         style={{ width: "100%", height: "100%" }}
@@ -95,11 +95,11 @@ function HomePageUserScreen({ navigation }) {
             <TouchableWithoutFeedback onPress={() => navigation.navigate('Rep')}>
                 <View style={styles.observationsStyle}>
                     <Image
-                        source={require('../assets/img/obs.jpeg')}
+                        source={require('../assets/img/tatzpit.jpg')}
                         style={{ width: "100%", height: "100%" }}
                     />
                     <View style={styles.textStyle}>
-                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>תצפיות</Text>
+                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>דיווח תצפיות</Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -238,6 +238,20 @@ const styles = {
         alignSelf: "center",
         marginTop: 10
     },
+
+    evenStyle: {
+        backgroundColor: "#F0B27A",
+        borderColor: "#FF8C37",
+        overflow: 'hidden',
+        borderRadius: 25,
+        borderWidth: 2,
+        fontSize: 20,
+        width: "90%",
+        height: "15%",
+        alignSelf: "center",
+        marginTop: 10
+    },
+
     routesStyle: {
         flexDirection: 'row',
         overflow: 'hidden',
@@ -277,7 +291,7 @@ const styles = {
         borderWidth: 2,
         fontSize: 20,
         width: "90%",
-        height: "10%",
+        height: "23%",
         alignSelf: "center",
         marginTop: 10
     },
