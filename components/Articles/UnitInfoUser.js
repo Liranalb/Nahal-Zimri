@@ -38,21 +38,13 @@ class UnitInfoUser extends React.Component {
                         </View>
                        
                         <View style={{ height: "10%"}}>
-                            <Text style={styles.textDetailStyle}>להמשך הכתבה...</Text>
+                            <Text style={styles.textDetailButton}>לחץ להמשך הכתבה...</Text>
                         </View>
 
                         <Divider />
                         <View style={{ height: "14%"}}>
-                            <Text style={styles.textDetailStyle}> תאריך העלאה | {this.props.date}</Text>
+                            <Text style={styles.textDetailButton}> תאריך העלאה | {this.props.date}</Text>
                         </View>
-
-
-
-                  
-
-
-
-
 
                 </View>
 
@@ -66,7 +58,7 @@ export default UnitInfoUser;
 const styles = {
 
     containerStyle: {
-        height: 180,
+        height: 250,
         width: "100%",
         alignSelf: 'center',
         borderWidth:1.1,
@@ -113,8 +105,16 @@ const styles = {
     },
     textDetailStyle: {
         fontWeight: "normal",
-        fontSize: 16
-      
+        fontSize: 16,
+        marginRight: '3%'
+    },
+
+    textDetailButton: {
+        color: 'gray',
+        fontWeight: "normal",
+        fontSize: 16,
+        marginRight: '3%',
+        marginTop: '3%'
     }
 }
 
