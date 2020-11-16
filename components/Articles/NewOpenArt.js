@@ -81,13 +81,13 @@ const styles = {
         alignSelf: 'center',
         // backgroundColor: '#434343'
     },
-    textStyle: {
+    textStyle: { //text header
         alignItems: 'center',
         color: 'black',
         fontSize: 30,
         fontWeight: 'bold',
-        textDecorationLine: 'underline',
-        textShadowColor: "gray",
+        //textDecorationLine: 'underline',
+        //textShadowColor: "gray",
         textShadowRadius: 15
     },
     textVStyle: {
@@ -96,23 +96,27 @@ const styles = {
         width: "100%",
         height: "10%"
     },
-    mainStyle: {
+    mainStyle: { //textbox
         width: "92%",
-        height: "75%",
+        height: "72%",
         alignSelf: 'center',
         backgroundColor: "#FBF5E5",
         borderRadius: 10,
         borderWidth: 2,
-        borderColor: "#CECECE"
+        borderColor: "#CECECE",
+        marginTop: '2%'
     },
-    mainTextStyle: {
-        fontSize: 17
-
-
-
+    mainTextStyle: { //single article text
+        fontSize: 17,
+        marginRight: '3%',
+        marginLeft: '3%',
+        marginTop: '3%'
     },
-    substitleStyle: {
+    substitleStyle: { //single article subtitle
         fontWeight: 'bold',
-        fontSize: 17
+        fontSize: 17,
+        marginRight: '3%',
+        marginLeft: '3%',
+        marginTop: '3%'
     }
 }

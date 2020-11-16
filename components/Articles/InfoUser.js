@@ -134,7 +134,6 @@ function InfoUserScreen({ navigation }) {
                                                     catagory={item.Catagory}
                                                     title={item.Title}
                                                     subTitle={item.SubTitle}
-
                                                     date={item.Date}
                                                 />
                                             </View>
@@ -183,7 +182,7 @@ function InfoUser() {
     
     return (
         <DrawerArt.Navigator initialRouteName="reports" drawerPosition="right"
-            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            drawerStyle={{ width: '55%' }} drawerContent={props => <DrawerContent {...props} />}>
             <DrawerArt.Screen name="reports" component={InfoUserStack} />
 
         </DrawerArt.Navigator>
