@@ -31,7 +31,7 @@ class UnitInfoUser extends React.Component {
                             <Text style={styles.textTitleStyle}>{this.props.title}</Text>
                         </View>
 
-                        <Divider />
+                        
 
                         <View style={{ height: "60%"}}>
                             <Text style={styles.textDetailStyle}>{this.props.subTitle}</Text>
@@ -40,10 +40,10 @@ class UnitInfoUser extends React.Component {
                         <View style={{ height: "10%"}}>
                             <Text style={styles.textDetailButton}>לחץ להמשך הכתבה...</Text>
                         </View>
-
-                        <Divider />
+                        
+                        
                         <View style={{ height: "14%"}}>
-                            <Text style={styles.textDetailButton}> תאריך העלאה | {this.props.date}</Text>
+                            <Text style={styles.textDetailButton}>תאריך העלאה | {this.props.date}</Text>
                         </View>
 
                 </View>
@@ -57,7 +57,7 @@ export default UnitInfoUser;
 
 const styles = {
 
-    containerStyle: {
+    containerStyle: { //article component box
         height: 250,
         width: "100%",
         alignSelf: 'center',
@@ -97,16 +97,20 @@ const styles = {
         height: "21%",
         flexDirection: 'row',
     },
-    textTitleStyle: {
-        alignSelf: "center",
+    textTitleStyle: { //box header
+        alignSelf: "auto",
         fontWeight: "bold",
-        fontSize: 18,
+        fontSize: 20,
+        marginRight: '3%',
+        marginLeft: '3%',
+        marginTop: '3%'
 
     },
     textDetailStyle: {
         fontWeight: "normal",
         fontSize: 16,
-        marginRight: '3%'
+        marginRight: '3%',
+        marginLeft: '3%'
     },
 
     textDetailButton: {
@@ -114,6 +118,7 @@ const styles = {
         fontWeight: "normal",
         fontSize: 16,
         marginRight: '3%',
+        marginLeft: '3%',
         marginTop: '3%'
     }
 }
