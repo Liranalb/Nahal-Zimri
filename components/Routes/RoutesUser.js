@@ -67,13 +67,13 @@ function RoutesUserScreen({ navigation }) {
                 openUserProfile={() => navigation.navigate('Current')}
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
             />
-            <View style={{width:"96%", height:"89%", alignSelf: 'center'}}>
+            <View style={{width:"96%", height:"100%", alignSelf: 'center'}}>
                 <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
                     {
 
                         routesArray.map((item) => {
                             return (
-                                <View key={item.id} style={{ marginTop: "2%" }}>
+                                <View key={item.id} style={{ marginTop: "2%"}}>
                                     <TouchableWithoutFeedback onPress={() => {
                                         navigation.navigate('newOpRo');
                                         currItem = item;
@@ -86,6 +86,7 @@ function RoutesUserScreen({ navigation }) {
                                                 duration={item.duration}
                                                 type={item.type}
                                                 details={item.details}
+                                                
                                             />
                                         </View>
                                     </TouchableWithoutFeedback>

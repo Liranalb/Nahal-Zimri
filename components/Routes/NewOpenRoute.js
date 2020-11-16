@@ -29,7 +29,7 @@ class NewOpenRoute extends Component {
                         <View style={{ height: '90%' }}>
                             <ScrollView>
 
-                                <View style={{ width: "96%",alignSelf:'center'}}>
+                                <View style={{ width: "98%",alignSelf:'center', marginTop: "3%"}}>
 
                                 <View style={styles.textViewStyle}>
                                     <Text style={styles.textExplainStyle}>רמת קושי: </Text>
@@ -132,25 +132,28 @@ const styles = {
         color: 'black',
         fontSize: 30,
         fontWeight: 'bold',
-        textDecorationLine: 'underline',
-        textShadowColor: "gray",
+        //textDecorationLine: 'underline',
+        //textShadowColor: "gray",
         textShadowRadius: 15,
         paddingVertical: 0
+
     },
-    textVStyle: {
+    textVStyle: { 
         alignItems: 'center',
-        marginTop: "3%",
+        marginTop: "2%",
         width: "100%",
-        height: "10%"
+        height: "10%",
+        marginBottom: "2%",
     },
-    mainStyle: {
+    mainStyle: { 
         width: "92%",
-        height: "75%",
+        height: "72%",
         alignSelf: 'center',
         backgroundColor: "#FBF5E5",
         borderRadius: 10,
         borderWidth: 2,
         borderColor: "#CECECE"
+        
     },
     mainTextStyle: {
         fontSize: 16,
@@ -169,17 +172,20 @@ const styles = {
     },
     textViewStyle: {
         flexDirection: 'row',
-        marginTop: "0.3%",
+        marginTop: "0.3%"
         
     },
     textExplainStyle: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginLeft: "3%",
+        
+        
     },
     boxTextStyle: {
         fontSize:19,
         flex:1,
-        textAlign:'left'
+        textAlign:'left',
     }
 
 
