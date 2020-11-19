@@ -13,7 +13,6 @@ class UnitInfoUser extends React.Component {
         return (
             <View style={styles.containerStyle}>
                 <View style={{ flex: 2 }}>
-
                     <View style={{ width: '100%', height: '100%' }}>
                         <Image source={this.props.imageUri}
                             style={styles.imageStyle}
@@ -122,53 +121,3 @@ const styles = {
         marginTop: '3%'
     }
 }
-
-// const styles = StyleSheet.create({
-//     routeStyle: {
-//         backgroundColor: "#F4D5A7",
-//         borderColor: "#FFAF50",
-//         overflow: 'hidden',
-//         borderRadius: 15,
-//         borderWidth: 1,
-//         fontSize: 20,
-//         marginTop: "2%"
-//     },
-//     imageStyle: {
-//         marginTop: 10,
-//         marginLeft: 10,
-//         borderColor: "#FFAF50",
-//         position: 'absolute',
-//         borderWidth: 2,
-//         height: "85%",
-//         width: "30%"
-//     },
-//     textStyle: {
-//         flexDirection: 'row-reverse'
-//     },
-//     detailStyle: {
-//         height: 50,
-//         width: "69%",
-//         marginLeft: "31%",
-
-//     },
-//     dateStyle: {
-//         height: 30,
-//         width: "50%",
-//         marginLeft: "51%",
-//         marginTop: 10
-
-//     },
-//     textTitleStyle: {
-//         alignSelf: "center",
-//         fontWeight: "bold",
-//         fontSize: 20,
-//         marginLeft: 10
-//     },
-//     textDetailStyle: {
-//         fontWeight: "normal",
-//         fontSize: 16,
-//         //alignSelf: "center"
-//     }
-
-
-// });

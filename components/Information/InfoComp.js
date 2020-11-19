@@ -66,7 +66,7 @@ class InfoComp extends Component {
                    
                 </View>
 
-                <View style={{ width: "100%", height: "100%", backgroundColor: "#FAE5D3" }}>
+                <View style={{ width: "100%", height: "60%", backgroundColor: "#FAE5D3" }}>
                     <View style={styles.textVStyle}>
                         <Text
                             style={styles.textStyle}
@@ -86,7 +86,7 @@ class InfoComp extends Component {
                     </ScrollView>
                     </View>
 
-                    <View style={{ width: "100%", height: "8%", alignSelf: 'center' }}>
+                    <View style={{ width: "100%", height: "15%", alignSelf: 'center' }}>
                         
                         <TouchableOpacity
                             onPress = {this.props.onCrossPress}
@@ -114,13 +114,13 @@ const styles = {
         alignSelf: 'center',
        // backgroundColor: '#434343'
     },
-    textStyle: {
+    textStyle: { //text header
         alignItems: 'center',
         color: 'black',
         fontSize: 30,
         fontWeight: 'bold',
-        textDecorationLine: 'underline',
-        textShadowColor: "gray",
+        //textDecorationLine: 'underline',
+        //textShadowColor: "gray",
         textShadowRadius: 15
     },
     textVStyle: {
@@ -129,19 +129,21 @@ const styles = {
         width: "100%",
         height: "10%"
     },
-    mainStyle: {
+    mainStyle: { //text box
         width: "92%",
-        height: "40%",
+        height: "70%",
         alignSelf: 'center',
         backgroundColor: "#FBF5E5",
         borderRadius: 10,
         borderWidth: 2,
-        borderColor: "#CECECE"
+        borderColor: "#CECECE",
+        marginTop: '2%'
     },
     mainTextStyle: {
-        fontSize:16,
-        marginRight:"4%",
-        marginLeft:"4%"
+        fontSize: 17,
+        marginRight: '3%',
+        marginLeft: '3%',
+        marginTop: '3%'
     },
     carouselStyle: {
         borderRadius: 5,

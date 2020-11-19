@@ -102,18 +102,17 @@ const styles = StyleSheet.create({
 
     },
     textTitleStyle: {
-     
+        
         fontWeight: "bold",
         fontSize: 18,
         marginLeft: 2
-       
  
     },
     textDetailStyle: {
         //fontWeight: "normal",
         fontSize: 16,
         flex:1,
-        textAlign:'left'
+        textAlign:'right'
 
         //alignSelf: "center"
     }
