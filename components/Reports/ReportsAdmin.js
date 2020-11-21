@@ -155,7 +155,7 @@ export function ReportsAdminScreen({ navigation }) {
 
                 </View>
 
-                <View style={{ width: "98%", height: "77%", marginTop: "2%"}}>
+                <View style={{ width: "98%", height: "68%", marginTop: "2%"}}>
                     <ScrollView
                         scrollEventThrottle={16}
                         refreshControl={
@@ -306,7 +306,7 @@ const styles = {
     
     singleReport: { //single report block
         width: "100%",
-        height: "89%",
+        height: "93%",
         marginTop: "2%"
     },
 
@@ -343,7 +343,9 @@ const styles = {
         borderColor: "black",
         borderWidth: 1,
         alignSelf: "center",
-        backgroundColor: "#424242"
+        backgroundColor: "#424242",
+        
+        
 
 
     },
