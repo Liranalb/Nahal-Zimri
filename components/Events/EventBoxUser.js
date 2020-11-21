@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         borderWidth: 1.1,
         fontSize: 20,
-        marginTop: 10,
+        marginTop: "2%",
         width:'100%',
         height:155,
         flexDirection:'row-reverse'
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
 
     textStyle: {
         flexDirection: 'row',
-        flex:1
+        //flex:1
 
     },
     ButtonStyle: {
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
         //fontWeight: "normal",
         fontSize: 16,
         flex:1,
-        textAlign:'right'
+        textAlign:'left'
 
         //alignSelf: "center"
     }
