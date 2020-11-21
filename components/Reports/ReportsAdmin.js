@@ -113,7 +113,7 @@ export function ReportsAdminScreen({ navigation }) {
 
 
     return (
-        <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
+        <View style={styles.mainView}>
 
             <HeaderComp
                 openUserProfile={() => navigation.navigate('Current')}
@@ -121,7 +121,7 @@ export function ReportsAdminScreen({ navigation }) {
             />
 
 
-            <View style={{ width: "100%", height: "89%" }}>
+            <View style={styles.singleReport}>
                 <View style={{ flexDirection: 'row', width: "100%", height: "9%" }}>
                     <View style={styles.CheckBoxStyle}>
                         <CheckBox
@@ -155,7 +155,7 @@ export function ReportsAdminScreen({ navigation }) {
 
                 </View>
 
-                <View style={{ width: "98%", height: "77%" }}>
+                <View style={{ width: "98%", height: "77%", marginTop: "2%"}}>
                     <ScrollView
                         scrollEventThrottle={16}
                         refreshControl={
@@ -297,6 +297,19 @@ function ReportsAdmin() {
 export default ReportsAdmin;
 
 const styles = {
+    
+    mainView: {
+        width: "100%",
+        height: "100%",
+        backgroundColor: '#FAE5D3'
+    },
+    
+    singleReport: { //single report block
+        width: "100%",
+        height: "89%",
+        marginTop: "2%"
+    },
+
 
     textInputStyle: {
         backgroundColor: "#D7D8D7",
@@ -307,18 +320,21 @@ const styles = {
         width: "90%",
         alignSelf: "center",
         textAlignVertical: 'top',
-        marginTop: 10
+        
+        
     },
     CheckBoxStyle: {
         width: "30%",
         flex: 1,
-        marginTop: "0.4%"
+        //marginTop: "2%",
+        
+        
     },
-    textStyleHeaders: {
+    textStyleHeaders: { //submit button text
         color: 'white',
         fontSize: 30,
         alignSelf: 'center',
-        marginTop: "6%"
+        marginTop: "7%"
     },
 
     buttonStyle: {
