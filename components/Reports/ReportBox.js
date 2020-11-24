@@ -43,7 +43,7 @@ const styles = {
         justifyContent: 'center'
     },
     containerStyle: {
-        height: 310,
+        height: 400,
         width: 175,
         marginLeft: 10,
         borderWidth: 1.1,

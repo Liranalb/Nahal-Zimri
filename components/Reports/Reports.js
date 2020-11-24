@@ -104,12 +104,12 @@ function ReportsScreen({ navigation }) {
 
 
     return (
-        <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
+        <View style={styles.mainView}>
             <HeaderComp
                 openUserProfile={() => navigation.navigate('Current')}
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
             />
-            <View style={{ width: "100%", height: "89%" }}>
+             <View style={styles.singleReport}>
                 <View style={{ flexDirection: 'row', width: "100%", height: "9%" }}>
                     <View style={styles.CheckBoxStyle}>
                         <CheckBox
@@ -144,19 +144,19 @@ function ReportsScreen({ navigation }) {
 
                 </View>
 
-                <View style={{ width: "98%", height: "55%" }}>
+                <View style={{ width: "98%", height: "70%", marginTop: "2%"}}>
                     <ScrollView
                         scrollEventThrottle={16}
                         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
                     >
-                        <View style={{ width: "100%", flex: 1 }}>
+                        <View style={{ width: "100%" }}>
 
                             <View style={{ height: "100%", flex: 1 }}>
 
                                 <ScrollView
                                     horizontal={true}
                                     showsHorizontalScrollIndicator={false}
-                                    style={{ flex: 1 }}
+                                    //style={{ flex: 1 }}
                                 >
                                     {
                                         console.log("second"),
@@ -190,17 +190,9 @@ function ReportsScreen({ navigation }) {
                     </ScrollView>
                 </View>
 
-                <View style={{ width: "100%", height: "23%" }}>
 
 
-                    {/* optional map */}
-
-
-
-
-                </View>
-
-                <View style={{ width: "100%", height: "13%" }}>
+                <View style={{ width: "100%", height: "14%" }}>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('repFo')}
                     >
@@ -211,13 +203,10 @@ function ReportsScreen({ navigation }) {
 
                 </View>
 
+
             </View>
 
         </View>
-
-
-
-
     )
 }
 
@@ -275,6 +264,19 @@ function Reports() {
 export default Reports;
 
 const styles = {
+    
+    mainView: {
+        width: "100%",
+        height: "100%",
+        backgroundColor: '#FAE5D3'
+    },
+    
+    singleReport: { //single report block
+        width: "100%",
+        height: "93%",
+        //marginTop: "2%"
+    },
+
 
     textInputStyle: {
         backgroundColor: "#D7D8D7",
@@ -285,29 +287,32 @@ const styles = {
         width: "90%",
         alignSelf: "center",
         textAlignVertical: 'top',
-        marginTop: 10
+        
+        
     },
     CheckBoxStyle: {
         width: "30%",
         flex: 1,
-        marginTop: "0.4%",
-        backgroundColor: "#FAE5D3"
-
+        //marginTop: "2%",
+        
+        
     },
-    textStyleHeaders: {
+    textStyleHeaders: { //submit button text
         color: 'white',
         fontSize: 30,
         alignSelf: 'center',
-        marginTop: "8%"
+        marginTop: "7%"
     },
 
     buttonStyle: {
-        width: "70%",
+        width: "90%",
         height: "100%",
         borderColor: "black",
         borderWidth: 1,
         alignSelf: "center",
-        backgroundColor: "#424242"
+        backgroundColor: "#424242",
+        
+        
 
 
     },
@@ -315,9 +320,8 @@ const styles = {
         borderColor: "#FFAF50",
         borderWidth: 1,
         backgroundColor: '#F4D5A7'
-    },
-    drawerContent: {
-        flex: 1,
     }
+
+
 
 }
