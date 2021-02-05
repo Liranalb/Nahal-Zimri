@@ -9,6 +9,7 @@ import InfoCatagoriesUser from "./Information/InfoCatagoriesUser";
 import Reports from "./Reports/Reports";
 import { DrawerContent } from "./DrawerContent";
 import About from "./About";
+import AboutPZ from "./AboutPZ";
 import HeaderComp from "./explore/HeaderComp";
 import { createDrawerNavigator,
     DrawerItem,
@@ -156,6 +157,12 @@ function AboutScreen() {
     );
 }
 
+function AboutScreenPZ() {
+    return (
+        <AboutPZ />
+    );
+}
+
 const linking = {
     prefixes: ['https://mychat.com', 'mychat://'],
   };
@@ -188,7 +195,9 @@ function HomePageUserStack() {
                 <logStack.Screen name="Rep" options={{ headerShown: false }}
                     component={ReportsScreen} />
                 <logStack.Screen name="Abo" options={{ headerShown: false }}
-                    component={AboutScreen} />  
+                    component={AboutScreen} />
+                <logStack.Screen name="AboPZ" options={{ headerShown: false }}
+                    component={AboutScreenPZ} />        
                 <logStack.Screen name="Current" options={{ headerShown: false }}
                     component={CurrentUserScreen} />  
             </logStack.Navigator> 

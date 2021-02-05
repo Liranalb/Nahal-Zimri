@@ -120,7 +120,7 @@ const styles = {
         alignSelf: "center"
     },
     bodyStyle: {
-        width: "95%",
+        width: "85%",
         height: '78%',
         alignSelf: 'center',
 

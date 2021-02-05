@@ -61,7 +61,7 @@ export function DrawerContent(props) {
                         />
                         <DrawerItem style={styles.drawerItem}
                         label="טבע ומורשת בפסגת זאב"
-                        onPress={() => { props.navigation.navigate('Abo') }}
+                        onPress={() => { props.navigation.navigate('AboPZ') }}
                         labelStyle={styles.drawerLable}
                     />
 
