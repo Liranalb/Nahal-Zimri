@@ -166,7 +166,7 @@ const DrawerR = createDrawerNavigator();
 
 
 
-function HomePageUserStack() { //for navigation. not in use yet
+function HomePageUserStack() {
     return (
         
         
@@ -200,7 +200,7 @@ export default function HomePageUser(){
     return(
         <NavigationContainer theme={MyTheme}>
         <DrawerR.Navigator initialRouteName="home" drawerPosition="right"
-         drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>         
+         drawerStyle={{ width: '71%' ,alignItems: 'center'}} drawerContent={props => <DrawerContent {...props} />}>         
         <DrawerR.Screen name="מסך הבית" component={HomePageUserStack} />
  
       </DrawerR.Navigator>

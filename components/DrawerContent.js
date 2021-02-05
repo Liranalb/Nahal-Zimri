@@ -22,7 +22,7 @@ export function DrawerContent(props) {
             <DrawerContentScrollView {...props}>
                 <View style={styles.drawerContent}>
                     <View style={styles.titleSection}>
-                        <View style={{ marginRight: 10, flexDirection: 'column' }}>
+                        <View style={{ marginRight: '25%', flexDirection: 'column' }}>
                             <View style={{ flexDirection: 'row', marginTop: 15 }}>
                                 <Title style={styles.title}>נחל זמרי</Title>
 
@@ -35,67 +35,55 @@ export function DrawerContent(props) {
                     </View>
 
                     <Drawer.Section style={styles.drawerSection}>
-                        <DrawerItem style={{ flexDirection: 'row-reverse' }}
+                        <DrawerItem style={styles.drawerItem}
 
-                            label="מסך ראשי                "
-                            labelStyle={{fontSize: 20}}
+                            label="מסך ראשי"
+                            labelStyle={styles.drawerLable}
                             onPress={() => { props.navigation.navigate('homeP') }}
                         />
-                        <DrawerItem style={{ flexDirection: 'row-reverse' }}
+                        <DrawerItem style={styles.drawerItem}
 
-                            label="כתבות                "
-                            labelStyle={{fontSize: 20 }}
+                            label="עדכונים"
+                            labelStyle={styles.drawerLable}
                             onPress={() => { props.navigation.navigate('InfUs') }}
                         />
-                        <DrawerItem style={{ flexDirection: 'row-reverse' }}
-                            label="אירועים                  "
-                            labelStyle={{fontSize: 20 }}
-                            onPress={() => { props.navigation.navigate('EveUs') }}
+                        <DrawerItem style={styles.drawerItem}
+                        label="דיווח תצפית"
+                        labelStyle={styles.drawerLable}
+                        onPress={() => { props.navigation.navigate('Rep') }}
                         />
-                        <DrawerItem style={{ flexDirection: 'row-reverse' }}
 
-                            label="מסלולים                "
-                            labelStyle={{fontSize: 20 }}
-                            onPress={() => { props.navigation.navigate('RouUs') }}
-                        />
-                        <DrawerItem style={{ flexDirection: 'row-reverse' }}
+                        <DrawerItem style={styles.drawerItem}
 
-                            label="מידע                "
-                            labelStyle={{fontSize: 20 }}
-                            onPress={() => { props.navigation.navigate('InfCaUs') }}
-                        />
-                        <DrawerItem style={{ flexDirection: 'row-reverse' }}
-
-                            label="תצפיות                "
-                            labelStyle={{fontSize: 20 }}
-                            onPress={() => { props.navigation.navigate('Rep') }}
-                        />
-                        <DrawerItem style={{ flexDirection: 'row-reverse' }}
-
-                            label="פייסבוק                "
-                            labelStyle={{ color: '#3b5998', fontWeight: "bold", fontSize: 20 }}
-                            onPress={() => { Linking.openURL('https://www.facebook.com/NahalZimri') }}
-                        />
-                        <DrawerItem style={{ flexDirection: 'row-reverse' }}
-
-                            label="אינסטגרם                "
-                            onPress={() => { Linking.openURL('https://www.instagram.com/nahalzimri/') }}
-                            labelStyle={{ color: '#fe4164', fontWeight: "bold", fontSize: 20 }}
-                        />
-                        <DrawerItem style={{ flexDirection: 'row-reverse' }}
-
-                        label="אודות                "
+                        label="אודות נחל זמרי"
                         onPress={() => { props.navigation.navigate('Abo') }}
-                        labelStyle={{ fontWeight: "bold", fontSize: 20 }}
+                        labelStyle={styles.drawerLable}
                         />
+                        <DrawerItem style={styles.drawerItem}
+                        label="טבע ומורשת בפסגת זאב"
+                        onPress={() => { props.navigation.navigate('Abo') }}
+                        labelStyle={styles.drawerLable}
+                    />
 
+                        <DrawerItem style={styles.drawerItem}
+
+                        label="פייסבוק"
+                        labelStyle={{ color: '#3b5998', fontWeight: "bold", fontSize: 18 }}
+                        onPress={() => { Linking.openURL('https://www.facebook.com/NahalZimri') }}
+                        />
+                        <DrawerItem style={styles.drawerItem}
+
+                        label="אינסטגרם"
+                        onPress={() => { Linking.openURL('https://www.instagram.com/nahalzimri/') }}
+                        labelStyle={{ color: '#fe4164', fontWeight: "bold", fontSize: 18 }}
+                        />
                     </Drawer.Section>
 
                 </View>
             </DrawerContentScrollView>
             <Drawer.Section style={styles.bottomDrawerSection}>
 
-                <DrawerItem style={{ flexDirection: 'row-reverse' }}
+                <DrawerItem style={{ flexDirection: 'row' }}
                     icon={({ color, size }) => (
                         <Icon
                             name="exit-to-app"
@@ -115,28 +103,37 @@ export function DrawerContent(props) {
 
 const styles = StyleSheet.create({
     drawerContent: {
-        flex: 1,
+        flex: 1
+
 
     },
     titleSection: {
         paddingLeft: 20,
-        flexDirection: 'row-reverse'
+        flexDirection: 'row-reverse',
+        marginBottom: 5
     },
     title: {
         fontSize: 25,
         //color: '#FF8C37',
         fontWeight: 'bold',
-        paddingBottom: 5
+        paddingBottom: 3
 
     },
-
-    drawerSection: {
-        //marginTop: 15,
+    drawerItem: {
+        flexDirection: 'row',
+        backgroundColor: '#FAD3B2'
     },
+
+
     bottomDrawerSection: {
         marginBottom: 15,
         borderTopColor: '#f4f4f4',
-        borderTopWidth: 1
+        borderTopWidth: 1,
+        
     },
+    drawerLable: {
+        fontWeight: "bold",
+        fontSize: 18
+    }
 
 });
