@@ -25,6 +25,7 @@ function InfoUserScreen({ navigation }) {
     const [loaded, setLoaded] = useState(false);
     const [checkBoxState1, setChangeBox1] = useState(false);
     const [checkBoxState2, setChangeBox2] = useState(false);
+    const [checkBoxState3, setChangeBox3] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
 
     //load data
@@ -70,15 +71,25 @@ function InfoUserScreen({ navigation }) {
         }
         if (type === 'כתבות') {
             setChangeBox1(!checkBoxState1)
-            if (checkBoxState2) {
-                setChangeBox2(false)
+            if (checkBoxState2 || checkBoxState3) {
+                setChangeBox2(false);
+                setChangeBox3(false)
 
             }
         }
         if (type == 'עדכונים') {
             setChangeBox2(!checkBoxState2)
-            if (checkBoxState1) {
-                setChangeBox1(false)
+            if (checkBoxState1 || checkBoxState3) {
+                setChangeBox1(false);
+                setChangeBox3(false);
+            }
+        }
+
+        if (type == 'מהעיתונות') {
+            setChangeBox3(!checkBoxState3)
+            if (checkBoxState1 || checkBoxState2) {
+                setChangeBox1(false);
+                setChangeBox2(false);
             }
         }
 
@@ -113,6 +124,16 @@ function InfoUserScreen({ navigation }) {
                                 containerStyle={styles.CheckBoxContainerStyle}
                                 checked={checkBoxState2}
                                 onPress={() => handlePress('עדכונים')}
+                            />
+                        </View>
+
+                        <View style={styles.CheckBoxStyle}>
+                            <CheckBox
+                                center
+                                title='מהעיתונות'
+                                containerStyle={styles.CheckBoxContainerStyle}
+                                checked={checkBoxState3}
+                                onPress={() => handlePress('מהעיתונות')}
                             />
                         </View>
                     </View>
