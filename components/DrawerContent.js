@@ -43,7 +43,7 @@ export function DrawerContent(props) {
                         />
                         <DrawerItem style={styles.drawerItem}
 
-                            label="עדכונים"
+                            label="עדכונים וכתבות"
                             labelStyle={styles.drawerLable}
                             onPress={() => { props.navigation.navigate('InfUs') }}
                         />

@@ -52,7 +52,7 @@ function HomeAdminScreen({ navigation }) {
                         style={{ width: "100%", height: "100%" }}
                     />
                     <View style={styles.textStyle}>
-                        <Text style={{fontWeight: "bold",fontSize: 20}}>עדכונים</Text>
+                        <Text style={{fontWeight: "bold",fontSize: 20}}>עדכונים וכתבות</Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
