@@ -9,12 +9,12 @@ import HeaderComp from "./explore/HeaderComp"
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContent } from "./DrawerContent";
 
-function AboutScreen({ navigation }) {
+function AboutScreenPZ({ navigation }) {
     const [loaded, setLoaded] = useState(false);
     const [data, setData] = useState({ Title: '', Body: '', SubTitle: '', ExtraBody: '' });
 
 
-    db.ref('About').once('value', function (snapshot) {
+    db.ref('AboutPZ').once('value', function (snapshot) {
         const exist = (snapshot.val() !== null);
         if (exist) {
             let dataA = snapshot.val();
@@ -36,21 +36,19 @@ function AboutScreen({ navigation }) {
             <View style={{ width: "96%", height: '89%', alignSelf: 'center' }}>
 
 
-                <View style={{ width: "90%", height: '20%', alignSelf: 'center' }}>
-                    <Text style={{ fontSize: 25, fontWeight: 'bold', textAlign: 'center', marginTop: '10%', color: '#404040' }}>
+                <View style={{ width: "90%", height: '10%', alignSelf: 'center' }}>
+                    <Text style={{ fontSize: 25, fontWeight: 'bold', textAlign: 'center', marginTop: '5%', color: '#404040' }}>
                         {data.Title}
                     </Text>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginTop: '2%', color: '#404040' }}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center', color: '#404040' }}>
                         {data.SubTitle}
                     </Text>
                 </View>
                 <View style={styles.bodyStyle}>
-                    <ScrollView showsVerticalScrollIndicator={false}>
+                    <ScrollView >
                         <Text style={{ fontSize: 16, fontFamily: '' }}>
                             {data.Body}
                         </Text>
-
-                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>קצת על האפליקציה : </Text>
 
                         <Text style={{ fontSize: 16, padding: 0, textAlign: 'left' }}>
 
@@ -70,21 +68,21 @@ function AboutScreen({ navigation }) {
     )
 }
 
-const DrawerAbout = createDrawerNavigator();
+const DrawerAboutPZ = createDrawerNavigator();
 
-function About() {
+function AboutPZ() {
 
     return (
-        <DrawerAbout.Navigator initialRouteName="reports" drawerPosition="right"
+        <DrawerAboutPZ.Navigator initialRouteName="aboutpz" drawerPosition="right"
             drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
-            <DrawerAbout.Screen name="reports" component={AboutScreen} />
+            <DrawerAboutPZ.Screen name="aboutpz" component={AboutScreenPZ} />
 
-        </DrawerAbout.Navigator>
+        </DrawerAboutPZ.Navigator>
 
     );
 }
 
-export default About;
+export default AboutPZ;
 
 const styles = {
     eventStyle: {
@@ -112,7 +110,7 @@ const styles = {
         alignSelf: "center",
         fontWeight: "bold",
         fontSize: 20,
-        marginLeft: 10
+        marginLeft: 5
     },
     textDetailStyle: {
         fontWeight: "normal",
@@ -120,6 +118,7 @@ const styles = {
         alignSelf: "center"
     },
     bodyStyle: {
+        //backgroundColor: '#FF8C37',
         width: "85%",
         height: '78%',
         alignSelf: 'center',
