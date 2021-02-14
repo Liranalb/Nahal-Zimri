@@ -45,7 +45,7 @@ function AboutScreenPZ({ navigation }) {
                     </Text>
                 </View>
                 <View style={styles.bodyStyle}>
-                    <ScrollView >
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         <Text style={{ fontSize: 16, fontFamily: '' }}>
                             {data.Body}
                         </Text>
