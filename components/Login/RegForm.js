@@ -1,6 +1,6 @@
 import React, { Component } from "react" //import react library
 import { Keyboard, Image, TextInput, Button, Alert } from "react-native"
-import { View } from "native-base"
+import { CheckBox, View } from "native-base"
 import firebase, { auth } from "../../config/Firebase"
 import { DotIndicator } from "react-native-indicators"
 
@@ -11,8 +11,11 @@ class RegForm extends Component {
     super();
     this.state = {
       displayName: '',
+      surname: '',
       email: '',
       password: '',
+      phone: '',
+      regToUpdates: false,
       loading: false,
       show: true,
       verificationState: false,
@@ -22,7 +25,7 @@ class RegForm extends Component {
 
 
   addUserToFire() {
-    if (this.state.email === '' || this.state.password === '' || this.state.displayName === '')
+    if (this.state.email === '' || this.state.password === '' || this.state.displayName === '' || this.state.displayName === '')
       Alert.alert('יש למלא את כל הפרטים')
 
     else if (reg.test(this.state.email) === false)
@@ -47,7 +50,8 @@ class RegForm extends Component {
             Uid: firebase.auth().currentUser.uid,
             email: this.state.email,
             Username: this.state.displayName,
-            Admin: false
+            Surname: this.state.surname,
+            Admin: false,
           }).then(() => {
             Alert.alert('נרשמת בהצלחה, נותר לאמת את האימייל שלך');
 
@@ -77,29 +81,6 @@ class RegForm extends Component {
     })
 
   }
-
-  // onButtonPress() {
-  //   firebase.auth().onAuthStateChanged((user) => {
-  //     if (user != null) {
-  //       this.addUserToFire()
-  //     }
-  //   })
-
-  //   const { email, password } = this.state
-  //   this.setState({ loading: true })
-
- 
-  //   firebase
-  //     .auth()
-  //     .signInWithEmailAndPassword(email, password)
-  //     .then(
-  //       this.onLoginSuccess.bind(this)
-  //     )
-  //     .catch(
-  //       this.onLoginFail.bind(this)
-  //     )
-  // }
-
 
   onLoginSuccess() {
     this.setState({
@@ -194,18 +175,46 @@ class RegForm extends Component {
           <TextInput
             style={styles.TextInputStyle}
             textAlign="center"
-            placeholder={"שם מלא"}
+            placeholder={"שם פרטי"}
             placeholderTextColor="#FF8C37"
             height={45}
             autoCorrect={false}
             onPress={this.ShowHideComponent}
             onChangeText={(val) => this.updateInputVal(val, 'displayName')}
             value={this.state.displayName}
-
           />
         </View>
 
+        <View style={styles.inputView}>
 
+          <TextInput
+            style={styles.TextInputStyle}
+            textAlign="center"
+            placeholder={"שם משפחה"}
+            placeholderTextColor="#FF8C37"
+            height={45}
+            autoCorrect={false}
+            onPress={this.ShowHideComponent}
+            onChangeText={(val) => this.updateInputVal(val, 'surname')}
+            value={this.state.surname}
+          />
+        </View>
+
+        <View style={styles.inputView}>
+
+          <TextInput
+            keyboardType={'phone-pad'}
+            style={styles.TextInputStyle}
+            textAlign="center"
+            placeholder={"מס' טלפון"}
+            placeholderTextColor="#FF8C37"
+            height={45}
+            autoCorrect={false}
+            onPress={this.ShowHideComponent}
+            onChangeText={(val) => this.updateInputVal(val, 'phone')}
+            value={this.state.phone}
+          />
+        </View>
 
         <View style={styles.inputView}>
 
@@ -240,8 +249,19 @@ class RegForm extends Component {
 
           />
         </View>
+        
+        <View style={styles.container}>
+            <View style={styles.checkboxContainer}>
+              <CheckBox
+                value={this.state.regToUpdates}
+                textAlign="center"
+ 
+                style={styles.CheckBox}
+                />
+            </View>
 
-        {/* <View>{this.renderVerification()}</View> */}
+
+        </View>
 
         <View>{this.renderButton()}</View>
 
@@ -258,8 +278,8 @@ export default RegForm;
 
 const styles = {
   inputView: {
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingTop: 7,
+    paddingBottom: 7,
 
   },
 
@@ -281,7 +301,7 @@ const styles = {
     fontSize: 20,
     width: "60%",
     alignSelf: "center",
-    marginTop: 20,
+    marginTop: 10,
     overflow: 'hidden',
   },
 
@@ -299,7 +319,22 @@ const styles = {
 
   logoView: {
     alignItems: 'center'
-  }
+  },
+
+  container: {
+    marginTop: 50,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  checkboxContainer: {
+    flexDirection: "row",
+    marginBottom: 20,
+  },
+  checkbox: {
+
+  },
+  label: {
+  },
 
 
 
