@@ -59,6 +59,7 @@ class RegForm extends Component {
             Surname: this.state.surname,
             Phone: this.state.phone,
             Admin: false,
+            RegToUpdates: this.state.regToUpdates
           }).then(() => {
             Alert.alert('נרשמת בהצלחה, נותר לאמת את האימייל שלך');
 
