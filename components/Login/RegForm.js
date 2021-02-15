@@ -4,7 +4,8 @@ import { CheckBox, View } from "native-base"
 import firebase, { auth } from "../../config/Firebase"
 import { DotIndicator } from "react-native-indicators"
 
-let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; //regular expression for mail validation
+let mailValidationExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+let phoneValidationExp = /^0?([5]{1}\d{8})$/; // check if landline is needed /^0?(([23489]{1}\d{7})|[5]{1}\d{8})$/
 
 class RegForm extends Component {
   constructor() {
@@ -25,10 +26,15 @@ class RegForm extends Component {
 
 
   addUserToFire() {
-    if (this.state.email === '' || this.state.password === '' || this.state.displayName === '' || this.state.displayName === '')
-      Alert.alert('יש למלא את כל הפרטים')
+    if (this.state.email === '' ||
+         this.state.password === '' ||
+         this.state.displayName === '' ||
+         this.state.surname === '')       Alert.alert('יש למלא את כל הפרטים')
 
-    else if (reg.test(this.state.email) === false)
+    else if (phoneValidationExp.test(this.state.phone) === false) 
+        alert('מספר הטלפון שהוכנס אינו תקין')
+
+    else if (mailValidationExp.test(this.state.email) === false)
       Alert.alert('כתובת המייל שהוזנה אינה תקינה')
 
     else if (this.state.password.length < 6)
@@ -255,7 +261,7 @@ class RegForm extends Component {
               <CheckBox
                 value={this.state.regToUpdates}
                 textAlign="center"
- 
+                //connect checkbox here...
                 style={styles.CheckBox}
                 />
             </View>
