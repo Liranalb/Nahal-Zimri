@@ -60,7 +60,6 @@ export function InfoCatagoriesScreen({ navigation }) {
                         </View>
                     </TouchableWithoutFeedback>
 
-
                 </View>
 
 
@@ -119,10 +118,12 @@ export function InfoCatagoriesScreen({ navigation }) {
                         </View>
                     </TouchableWithoutFeedback>
 
-                    
+
 
 
                 </View>
+
+
                 <TouchableWithoutFeedback
                     onPress={() => {
                         navigation.goBack();
@@ -139,7 +140,7 @@ export function InfoCatagoriesScreen({ navigation }) {
 
 }
 
-function InfoUser() { 
+function InfoUser() {
     return (
         <InformationPage dataType={typeName.type} />
     );
@@ -147,14 +148,14 @@ function InfoUser() {
 
 const InfoStack = createStackNavigator();
 
-function InfoCatagories() { 
-    return(
+function InfoCatagories() {
+    return (
         <InfoStack.Navigator initialRouteName="InfoCatScreen">
             <InfoStack.Screen options={{ headerShown: false }} name="InfoCatScreen" component={InfoCatagoriesScreen} />
-             <InfoStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoUser} />
+            <InfoStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoUser} />
 
         </InfoStack.Navigator>
-        );
+    );
 }
 
 export default InfoCatagories;
