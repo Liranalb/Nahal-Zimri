@@ -1,8 +1,10 @@
 import React, { Component } from "react" //import react library
-import { Keyboard, Image, TextInput, Button, Alert } from "react-native"
-import { CheckBox, View } from "native-base"
+import { Keyboard, Image, TextInput, Button, Alert, Switch, Text } from "react-native"
+import {View } from "native-base"
 import firebase, { auth } from "../../config/Firebase"
 import { DotIndicator } from "react-native-indicators"
+import { color } from "react-native-reanimated"
+
 
 let mailValidationExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 let phoneValidationExp = /^0?([5]{1}\d{8})$/; // check if landline is needed /^0?(([23489]{1}\d{7})|[5]{1}\d{8})$/
@@ -23,7 +25,7 @@ class RegForm extends Component {
       currentUserState: {}
     }
   }
-
+  
 
   addUserToFire() {
     if (this.state.email === '' ||
@@ -169,6 +171,10 @@ class RegForm extends Component {
     this.setState(state);
   }
 
+  onChangeFunction(newState) {
+    this.setState(newState, () => Alert.alert("Changed", "==> " + this.state.regToUpdates));
+}
+
   render() {
     return (
 
@@ -185,10 +191,8 @@ class RegForm extends Component {
 
           <TextInput
             style={styles.TextInputStyle}
-            textAlign="center"
             placeholder={"שם פרטי"}
-            placeholderTextColor="#FF8C37"
-            height={45}
+            placeholderTextColor="#FF8C37"        
             autoCorrect={false}
             onPress={this.ShowHideComponent}
             onChangeText={(val) => this.updateInputVal(val, 'displayName')}
@@ -199,11 +203,9 @@ class RegForm extends Component {
         <View style={styles.inputView}>
 
           <TextInput
-            style={styles.TextInputStyle}
-            textAlign="center"
+            style={styles.TextInputStyle}  
             placeholder={"שם משפחה"}
             placeholderTextColor="#FF8C37"
-            height={45}
             autoCorrect={false}
             onPress={this.ShowHideComponent}
             onChangeText={(val) => this.updateInputVal(val, 'surname')}
@@ -216,10 +218,8 @@ class RegForm extends Component {
           <TextInput
             keyboardType={'phone-pad'}
             style={styles.TextInputStyle}
-            textAlign="center"
             placeholder={"מס' טלפון"}
             placeholderTextColor="#FF8C37"
-            height={45}
             autoCorrect={false}
             onPress={this.ShowHideComponent}
             onChangeText={(val) => this.updateInputVal(val, 'phone')}
@@ -232,10 +232,8 @@ class RegForm extends Component {
 
           <TextInput
             style={styles.TextInputStyle}
-            textAlign="center"
             placeholder={"כתובת מייל"}
             placeholderTextColor="#FF8C37"
-            height={45}
             autoCorrect={false}
             onPress={this.ShowHideComponent}
             onChangeText={(val) => this.updateInputVal(val, 'email')}
@@ -248,11 +246,9 @@ class RegForm extends Component {
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInputStyle}
-            textAlign="center"
             placeholder={"סיסמה"}
             placeholderTextColor="#FF8C37"
             secureTextEntry={true}
-            height={45}
             autoCorrect={false}
             onPress={this.ShowHideComponent}
             onChangeText={(val) => this.updateInputVal(val, 'password')}
@@ -262,13 +258,19 @@ class RegForm extends Component {
         </View>
         
         <View style={styles.container}>
-            <View style={styles.checkboxContainer}>
-              <CheckBox
-                value={this.state.regToUpdates}
-                textAlign="center"
-                //connect checkbox here...
-                style={styles.CheckBox}
-                />
+
+        
+            <View style={{flexDirection:"row"}}>
+              <Switch
+              style={{ transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }] }}
+                trackColor={{ false: "#dark-gray", true: "#FF8C37" }}
+                thumbColor={this.state.regToUpdates ? 'white' : "#f4f3f4"}
+               
+                onValueChange={(value) => this.onChangeFunction({regToUpdates: value})}
+                    value={this.state.regToUpdates}
+              />
+            <Text style={{color:'#FF8C37', fontSize: 15, fontWeight: 'bold'}}>      הרשמה לעדכונים(לא ישלח ספאם)
+            </Text>
             </View>
 
 
@@ -298,12 +300,14 @@ const styles = {
     borderColor: "#FF8C37",
     borderRadius: 25,
     borderWidth: 2,
-    fontSize: 20,
-    width: "80%",
+    fontSize: 18,
+    width: "70%",
+    height: 40,
     alignSelf: "center",
-
+    textAlign: "center"
 
   },
+  
   buttonStyle: {
     backgroundColor: "#FF8C37",
     borderColor: "#FF8C37",
@@ -312,7 +316,7 @@ const styles = {
     fontSize: 20,
     width: "60%",
     alignSelf: "center",
-    marginTop: 10,
+    marginTop: "5%",
     overflow: 'hidden',
   },
 
@@ -322,7 +326,6 @@ const styles = {
   },
 
   logo: {
-
     width: 180,
     height: 240
 
@@ -333,21 +336,10 @@ const styles = {
   },
 
   container: {
-    marginTop: 50,
+    
+    marginTop: "5%",
     alignItems: "center",
     justifyContent: "center",
-  },
-  checkboxContainer: {
-    flexDirection: "row",
-    marginBottom: 20,
-  },
-  checkbox: {
-
-  },
-  label: {
-  },
-
-
-
+  }
 
 }
