@@ -67,6 +67,7 @@ async function pressPhoto(source, key) {
             db.ref('Articles/art' + key + "/imageLink").set(url);
             setLoaded(false);
             console.log("uploaded new photo to the DB");
+            
         }).catch((error) => console.log(error))
         replace = false;
         photoUploaded=false;
@@ -100,6 +101,7 @@ let deleteImageFromStorage = (deleteID) => {
     const [detail3, onChange3] = useState('');
     const [checkBoxState1, setChangeBox1] = useState(false);
     const [checkBoxState2, setChangeBox2] = useState(false);
+    const [checkBoxState3, setChangeBox3] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
 
     const [loaded, setLoaded] = useState(false);
@@ -246,17 +248,28 @@ let deleteImageFromStorage = (deleteID) => {
             dataType = type
             isCheckOn = true
         }
-        if (type == 'כתבות') {
+        if (type === 'כתבות') {
             setChangeBox1(!checkBoxState1)
-            if (checkBoxState2)
-                setChangeBox2(false)
+            if (checkBoxState2 || checkBoxState3) {
+                setChangeBox2(false);
+                setChangeBox3(false)
 
+            }
         }
         if (type == 'עדכונים') {
             setChangeBox2(!checkBoxState2)
-            if (checkBoxState1)
-                setChangeBox1(false)
+            if (checkBoxState1 || checkBoxState3) {
+                setChangeBox1(false);
+                setChangeBox3(false);
+            }
+        }
 
+        if (type == 'מהעיתונות') {
+            setChangeBox3(!checkBoxState3)
+            if (checkBoxState1 || checkBoxState2) {
+                setChangeBox1(false);
+                setChangeBox2(false);
+            }
         }
 
 
@@ -295,6 +308,17 @@ let deleteImageFromStorage = (deleteID) => {
 
                         />
                     </View>
+
+                    
+                    <View style={styles.CheckBoxStyle}>
+                            <CheckBox
+                                center
+                                title='מהעיתונות'
+                                containerStyle={styles.CheckBoxContainerStyle}
+                                checked={checkBoxState3}
+                                onPress={() => filter('מהעיתונות')}
+                            />
+                        </View>
 
 
 
@@ -351,7 +375,7 @@ let deleteImageFromStorage = (deleteID) => {
                                                                         console.log("id is : "+item.Id)
                                                                         db.ref('Articles/').child(item.Id).remove()
                                                                         deleteImageFromStorage(item.Id.slice(3));
-                                                                        setLoaded({ loaded: false });
+                                                                        setLoaded(false);
                                                                     }
                                                                 },
                                                                 { text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel' },
