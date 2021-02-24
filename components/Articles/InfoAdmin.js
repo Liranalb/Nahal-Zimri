@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from "react"
 import { Header, ListItem, CheckBox } from "react-native-elements"
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer} from '@react-navigation/native';
+
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 /*import { createStackNavigator } from 'react-navigation-stack';*/
 import { View, TextInput, Text, RefreshControl, ScrollView, TouchableWithoutFeedback, Alert, TouchableOpacity } from "react-native"
@@ -99,9 +100,9 @@ let deleteImageFromStorage = (deleteID) => {
     const [detail1, onChange1] = useState('');
     const [detail2, onChange2] = useState('');
     const [detail3, onChange3] = useState('');
-    const [checkBoxState1, setChangeBox1] = useState(false);
-    const [checkBoxState2, setChangeBox2] = useState(false);
-    const [checkBoxState3, setChangeBox3] = useState(false);
+    const [articleCheckBoxState, setArticleChangeBox] = useState(false);
+    const [updatesCheckBoxState, setUpdatesChangeBox] = useState(false);
+    const [pressCheckBoxState, setPressChangeBox] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
 
     const [loaded, setLoaded] = useState(false);
@@ -238,7 +239,7 @@ let deleteImageFromStorage = (deleteID) => {
     }
     let infoArray = [];
     convertDataToArray(data, infoArray);
-    function filter(type) {
+    function Topfilter(type) {
 
         if (type == dataType) {
             dataType = ""
@@ -249,32 +250,30 @@ let deleteImageFromStorage = (deleteID) => {
             isCheckOn = true
         }
         if (type === 'כתבות') {
-            setChangeBox1(!checkBoxState1)
-            if (checkBoxState2 || checkBoxState3) {
-                setChangeBox2(false);
-                setChangeBox3(false)
+            setArticleChangeBox(!articleCheckBoxState)
+            if (updatesCheckBoxState || pressCheckBoxState) {
+                setUpdatesChangeBox(false);
+                setPressChangeBox(false)
 
             }
         }
         if (type == 'עדכונים') {
-            setChangeBox2(!checkBoxState2)
-            if (checkBoxState1 || checkBoxState3) {
-                setChangeBox1(false);
-                setChangeBox3(false);
+            setUpdatesChangeBox(!updatesCheckBoxState)
+            if (articleCheckBoxState || pressCheckBoxState) {
+                setArticleChangeBox(false);
+                setPressChangeBox(false);
             }
         }
 
         if (type == 'מהעיתונות') {
-            setChangeBox3(!checkBoxState3)
-            if (checkBoxState1 || checkBoxState2) {
-                setChangeBox1(false);
-                setChangeBox2(false);
+            setPressChangeBox(!pressCheckBoxState)
+            if (articleCheckBoxState || updatesCheckBoxState) {
+                setArticleChangeBox(false);
+                setUpdatesChangeBox(false);
             }
         }
-
-
-
     }
+    
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
             <HeaderComp
@@ -282,16 +281,15 @@ let deleteImageFromStorage = (deleteID) => {
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
             />
             <View style={{ width: "98%", height: "89%", alignSelf: 'center' }}>
-
-                <View style={{ flexDirection: 'row', width: "100%", height: "9%" }}>
+                <View style={{ flexDirection: 'row', width: "100%", height: "8.5%" }}>
 
                     <View style={styles.CheckBoxStyle}>
                         <CheckBox
 
                             center
                             title='כתבות'
-                            checked={checkBoxState1}
-                            onPress={() => filter('כתבות')}
+                            checked={articleCheckBoxState}
+                            onPress={() => Topfilter('כתבות')}
                             containerStyle={styles.CheckBoxContainerStyle}
 
                         />
@@ -302,8 +300,8 @@ let deleteImageFromStorage = (deleteID) => {
 
                             center
                             title='עדכונים'
-                            checked={checkBoxState2}
-                            onPress={() => filter('עדכונים')}
+                            checked={updatesCheckBoxState}
+                            onPress={() => Topfilter('עדכונים')}
                             containerStyle={styles.CheckBoxContainerStyle}
 
                         />
@@ -315,8 +313,8 @@ let deleteImageFromStorage = (deleteID) => {
                                 center
                                 title='מהעיתונות'
                                 containerStyle={styles.CheckBoxContainerStyle}
-                                checked={checkBoxState3}
-                                onPress={() => filter('מהעיתונות')}
+                                checked={pressCheckBoxState}
+                                onPress={() => Topfilter('מהעיתונות')}
                             />
                         </View>
 
@@ -409,11 +407,17 @@ let deleteImageFromStorage = (deleteID) => {
 
 
                     <View style={{ width: "95%", alignSelf: 'center' }}>
+
+
                         <Text style={{ fontSize: 18, fontWeight: "bold", alignSelf: "center", alignItems: "center" }} >הוספת כתבה:</Text>
 
                         <View style={{ flexDirection: 'row' }}>
+                            
                             <Text style={styles.textAddStyle}>סוג מידע: </Text>
-                            <  TextInput
+                            
+                            
+                            
+                            <TextInput
                                 style={styles.textInput}
                                 onChangeText={text => onChange(text)}
                                 value={detail}
@@ -463,7 +467,7 @@ let deleteImageFromStorage = (deleteID) => {
 
                             </TouchableWithoutFeedback>
                         </View>
-
+                       
                     </View>
 
                     <TouchableOpacity
@@ -480,8 +484,7 @@ let deleteImageFromStorage = (deleteID) => {
                         </View>
                     </TouchableOpacity>
 
-
-
+                            
                 </ScrollView>
 
             </View>
@@ -537,13 +540,10 @@ const styles = {
         height: 15,
     },
     CheckBoxStyle: {
-        flexDirection: 'row',
-        backgroundColor: "#F4D5A7",
-        borderWidth: 2,
-        borderColor: "#FFAF50",
         width: "30%",
         flex: 1,
-        marginTop: 10
+        marginTop: "0.4%",
+        backgroundColor: "#FAE5D3",
     },
     routeStyle: {
         backgroundColor: "#F4D5A7",
@@ -593,7 +593,5 @@ const styles = {
         fontSize: 20,
         alignSelf: "center",
         textAlignVertical: 'center',
-
-
     }
 }
