@@ -253,7 +253,7 @@ function ReportsStack() {
 function Reports() {
     return (
         <DrawerRep.Navigator initialRouteName="reports" drawerPosition="right"
-            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            drawerStyle={{ width: '71%' }} drawerContent={props => <DrawerContent {...props} />}>
             <DrawerRep.Screen name="reports" component={ReportsStack} />
 
         </DrawerRep.Navigator>

@@ -203,7 +203,7 @@ function InfoUser() {
     
     return (
         <DrawerArt.Navigator initialRouteName="reports" drawerPosition="right"
-            drawerStyle={{ width: '55%' }} drawerContent={props => <DrawerContent {...props} />}>
+            drawerStyle={{ width: '71%' }} drawerContent={props => <DrawerContent {...props} />}>
             <DrawerArt.Screen name="reports" component={InfoUserStack} />
 
         </DrawerArt.Navigator>

@@ -495,7 +495,7 @@ function InfoAdminStack(props) { //for navigation. not in use yet
 function InfoAdmin() {
     return (
         <DrawerRep.Navigator initialRouteName="home" drawerPosition="right"
-            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContentAdmin {...props} />}>
+            drawerStyle={{ width: '71%' }} drawerContent={props => <DrawerContentAdmin {...props} />}>
             <DrawerRep.Screen name="artic" component={InfoAdminStack} />
 
         </DrawerRep.Navigator>

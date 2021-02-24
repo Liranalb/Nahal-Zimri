@@ -140,7 +140,7 @@ function RoutesUser(props) {
     dataType = props.dataType;
     return (
         <DrawerRoute.Navigator initialRouteName="reports" drawerPosition="right"
-            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            drawerStyle={{ width: '71%' }} drawerContent={props => <DrawerContent {...props} />}>
             <DrawerRoute.Screen name="reports" component={RoutesUserStack} />
 
         </DrawerRoute.Navigator>

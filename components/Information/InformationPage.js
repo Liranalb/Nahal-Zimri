@@ -141,7 +141,7 @@ function InformationPage(props) {
     return (
 
         <DrawerInfo.Navigator initialRouteName="home" drawerPosition="right"
-            drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
+            drawerStyle={{ width: '71%' }} drawerContent={props => <DrawerContent {...props} />}>
             <DrawerInfo.Screen name="מסך הבית" component={InformationPageStack} />
 
         </DrawerInfo.Navigator>
