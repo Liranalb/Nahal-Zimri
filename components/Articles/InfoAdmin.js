@@ -1,11 +1,9 @@
-import React, { Component, useState, useEffect } from "react"
-import { Header, ListItem, CheckBox } from "react-native-elements"
-import { NavigationContainer } from '@react-navigation/native';
+import React, { useState, useEffect } from "react"
+import { CheckBox } from "react-native-elements"
 
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 /*import { createStackNavigator } from 'react-navigation-stack';*/
 import { View, TextInput, Text, RefreshControl, ScrollView, TouchableWithoutFeedback, Alert, TouchableOpacity } from "react-native"
-import { Footer, Container, Right } from "native-base"
 import HeaderComp from "../explore/HeaderComp";
 /*import ReportBox from "./ReportBox"*/
 import InfoUnitAdmin from "./InfoUnitAdmin"
@@ -444,7 +442,7 @@ function InfoAdminScreen({ navigation }) {
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
                             <Text style={styles.textAddStyle}>תיאור:  </Text>
                             <  TextInput
-
+                                multiline={true}
                                 style={styles.textInput}
                                 onChangeText={text2 => onChange2(text2)}
                                 value={detail2}
@@ -454,7 +452,7 @@ function InfoAdminScreen({ navigation }) {
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
                             <Text style={styles.textAddStyle}>תוכן:    </Text>
                             <  TextInput
-
+                                multiline={true}
                                 style={styles.textInput}
                                 onChangeText={text3 => onChange3(text3)}
                                 value={detail3}
