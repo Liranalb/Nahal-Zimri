@@ -172,7 +172,7 @@ class RegForm extends Component {
   }
 
   onChangeFunction(newState) {
-    this.setState(newState, () => Alert.alert("Changed", "==> " + this.state.regToUpdates));
+    this.setState(newState);
 }
 
   render() {
@@ -256,6 +256,8 @@ class RegForm extends Component {
 
           />
         </View>
+
+        
         
         <View style={styles.container}>
 
