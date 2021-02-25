@@ -281,7 +281,7 @@ let deleteImageFromStorage = (deleteID) => {
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
             />
             <View style={{ width: "98%", height: "89%", alignSelf: 'center' }}>
-                <View style={{ flexDirection: 'row', width: "100%", height: "8.5%" }}>
+                <View style={{ flexDirection: 'row', width: "100%", height: "10.5%" }}>
 
                     <View style={styles.CheckBoxStyle}>
                         <CheckBox
