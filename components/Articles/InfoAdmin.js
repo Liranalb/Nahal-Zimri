@@ -56,6 +56,7 @@ function InfoAdminScreen({ navigation }) {
         }
 
         photoUploaded = true;
+        Alert.alert("", "התמונה הועלתה בהצלחה!");
         if (replace === true) {
             console.log("replace in  \n\n " + 'Articles/art' + key + "/imageLink\n\n" + "Images/Articles/img" + key);
             storage.ref().child("Images/Articles/" + imageID).getDownloadURL().then((url) => {
@@ -114,7 +115,7 @@ function InfoAdminScreen({ navigation }) {
     useEffect(() => {
         return () => {
             if (photoUploaded === true) {
-                alert("photo should be deleted!");
+                //alert("photo should be deleted!");
                 let imageID = "img" + keyID + ".jpg";
                 var desertRef = storage.ref().child('Images/Articles/' + imageID);
                 //Delete the file
@@ -357,9 +358,9 @@ function InfoAdminScreen({ navigation }) {
                                                 removeItem={() => {
                                                     Alert.alert(
                                                         //title
-                                                        'Hello',
+                                                        "",
                                                         //body
-                                                        'האם למחוק את פריט המידע הזה?',
+                                                        "האם למחוק את פריט המידע הזה?",
                                                         [
                                                             {
                                                                 text: 'כן', onPress: () => {
@@ -462,7 +463,7 @@ function InfoAdminScreen({ navigation }) {
 
 
 
-                        <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
+                        <View style={{ flexDirection: 'row', marginTop: '2.5%', alignSelf: 'center'}}>
                             <Text style={styles.textAddStyle}>הוספת תמונה:  </Text>
                             <TouchableWithoutFeedback
                                 onPress={() => pressPhoto("upload", keyID)}
@@ -574,7 +575,7 @@ const styles = {
     textAddStyle: {
         fontWeight: "bold",
         fontSize: 16,
-        marginTop: '3%'
+        marginTop: '3%',
     },
     buttonStyle: {
         justifyContent: 'center',
