@@ -34,7 +34,7 @@ class InfoUnitAdmin extends React.Component {
                     <TouchableOpacity
                         onPress={this.props.onExpandPress}
                     >
-                        <View style={{ width: '100%', height: '100%' }}>
+                        <View style={styles.imageView}>
                             <Image source={this.props.imageUri}
                                 style={styles.imageStyle}
 
@@ -43,17 +43,16 @@ class InfoUnitAdmin extends React.Component {
                     </TouchableOpacity>
 
                 </View>
-                <View style={{ flex: 2 }}>
-
-                    <View style={{ width: '100%', height: '79%' }}>
-                        <View style={{ height: '18%', width: "100%", flexDirection: 'row' }}>
+                <View style={{ flex: 2  }}>
+                    <View style={{ width: '100%'}}>
+                        <View>
                             <View style={{ flex: 2 }}>
                                 <TextInput
-                                    style={{ fontWeight: "bold", fontSize: 16, paddingVertical: 0 }}
+                                    style={styles.contentsType}
                                     defaultValue={this.props.catagory}
 
                                     onChangeText={(catagory) => this.setState({ catagory, changed: true })}
-                                    maxHeight={40} />
+                                     />
                             </View>
                             <View style={{ flex: 2, marginRight: '4%' }}>
                                 <Text style={{
@@ -64,30 +63,29 @@ class InfoUnitAdmin extends React.Component {
 
                         </View>
                         <Divider />
-                        <View style={{ height: '18%' }}>
-                            <TextInput style={{ fontWeight: "bold", fontSize: 18, paddingHorizontal: 1, paddingVertical: 0 }}
+                        <View>
+                            <TextInput style={styles.title}
 
                                 defaultValue={this.props.title}
                                 multiline
                                 onChangeText={(title) => this.setState({ title, changed: true })}
-                                maxHeight={90}
                             />
                         </View>
                         <Divider />
-                        <View style={{ height: '64%' }} >
-                            <View style={{ height: "40%" }}>
-                                <TextInput style={{ fontWeight: "normal", fontSize: 16, paddingVertical: 0 }}
+                        <View>
+                            <View style={{ paddingBottom: "2%" }}>
+                                <TextInput style={styles.textInputBox}
 
                                     defaultValue={this.props.detail}
                                     numberOfLines={2}
                                     multiline
                                     onChangeText={(detail) => this.setState({ detail, changed: true })}
-                                    maxHeight={70}
+                                    
                                 />
                             </View>
                             <Divider />
-                            <View style={{ height: "60%" }}>
-                                <TextInput style={{ fontWeight: "normal", fontSize: 16, paddingVertical: 0 }}
+                            <View>
+                                <TextInput style={styles.textInputBox}
 
                                     defaultValue={this.props.body}
                                     multiline
@@ -108,9 +106,6 @@ class InfoUnitAdmin extends React.Component {
                                 onPress={() => {
 
                                     if (this.state.changed) {
-
-
-
                                         let dataPath = 'Articles/' + this.props.idFromParent;
                                         let updates = {};
                                         updates[dataPath + "/Catagory"] = this.state.catagory;
@@ -159,26 +154,57 @@ export default InfoUnitAdmin;
 
 
 const styles = {
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        
+    title: { 
+        fontWeight: "bold",
+        fontSize: 18, 
+        paddingHorizontal: 1, 
+        paddingVertical: 0,
+        marginTop: "2%",
+        marginBottom: "2%",
+        marginLeft: "1%",
+        marginRight: "1%"
     },
+
+    contentsType: {
+        fontWeight: "bold",
+        fontSize: 16,
+        paddingVertical: 0,
+        marginLeft: "1%", 
+        marginRight: "1%"
+    },
+
+    
+    textInputBox: { 
+        fontWeight: "normal", 
+        fontSize: 16, 
+        paddingVertical: 0,
+        marginTop: "2%",
+        marginBottom: "2%",
+        marginLeft: "1%",
+        marginRight: "1%"
+    },
+
+    imageView: {
+        width: '100%',
+        height: undefined,
+        aspectRatio: 1,
+        marginTop: "3%",
+        marginRight: "5%",
+        borderColor: "#FFAF50",
+        overflow: 'hidden',
+        borderRadius: 15,
+        borderWidth: 2,
+    },
+
     containerStyle: {
-        height: 180,
-        width: "100%",
-        alignSelf: 'center',
-        
+        alignSelf: 'flex-start',
         marginBottom: "1%",
         marginTop: "1%",
         borderRadius: 10,
         flexDirection: 'row-reverse',
         backgroundColor: '#F4D5A7',
         overflow: 'hidden',
-        
-
-
+        paddingBottom: "1%"
     },
     headlineStyle: {
         alignSelf: 'center',
@@ -190,26 +216,22 @@ const styles = {
         textShadowRadius: 10
     },
 
-
     imageStyle: {
         flex: 1,
         width: null,
         height: null,
-        resizeMode: 'cover',
-        //   borderBottomLeftRadius: 10,   // cause some scrolling problems
-        //   borderTopLeftRadius: 10
+        resizeMode: 'cover'
     },
     editButtons: {
         marginLeft: "2%",
         borderRadius: 5,
         borderWidth: 1,
-        borderColor: "green"
-       
+        borderColor: "green"   
 
     },
     buttonsContainer: {
+        marginTop: "2%",
         width: "100%",
-        height: "21%",
         flexDirection: 'row',
         
         
