@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from "react"
 import { Header, ListItem, CheckBox } from "react-native-elements"
-import { NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 /*import { createStackNavigator } from 'react-navigation-stack';*/
@@ -18,7 +18,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContentAdmin } from "../DrawerContentAdmin";
 
 
-let keyID, currItem, dataType = "", photoUploaded = false, isCheckOn = false,isLoading=false;
+let keyID, currItem, dataType = "", photoUploaded = false, isCheckOn = false, isLoading = false;
 let replace = false
 
 
@@ -38,62 +38,62 @@ function getDate() {
 
 function InfoAdminScreen({ navigation }) {
 
-async function pressPhoto(source, key) {
+    async function pressPhoto(source, key) {
 
-    // setting the paths
-    let imageID = "img" + key + ".jpg";
-    let dataPath = 'Articles/art' + key;
-    let storagePath = "Images/Articles/" + imageID;
+        // setting the paths
+        let imageID = "img" + key + ".jpg";
+        let dataPath = 'Articles/art' + key;
+        let storagePath = "Images/Articles/" + imageID;
 
 
-    console.log("imageID is : " + imageID + "\n storagePath" + storagePath);
-    let result;
-    isLoading = true;
-    if (source === "camera")
-        result = await sayCheese(storagePath);
-    else
-        result = await uploadImage(storagePath);
+        console.log("imageID is : " + imageID + "\n storagePath" + storagePath);
+        let result;
+        isLoading = true;
+        if (source === "camera")
+            result = await sayCheese(storagePath);
+        else
+            result = await uploadImage(storagePath);
 
-    if (result === -1) {
+        if (result === -1) {
 
-        console.log("\n\n ----------------failed ----------------\n\n");
-        return -1;
+            console.log("\n\n ----------------failed ----------------\n\n");
+            return -1;
+
+        }
+        photoUploaded = true;
+        if (replace === true) {
+            console.log("replace in  \n\n " + 'Articles/art' + key + "/imageLink\n\n" + "Images/Articles/img" + key);
+            storage.ref().child("Images/Articles/" + imageID).getDownloadURL().then((url) => {
+
+                db.ref('Articles/art' + key + "/imageLink").set(url);
+                setLoaded(false);
+                console.log("uploaded new photo to the DB");
+
+            }).catch((error) => console.log(error))
+            replace = false;
+            photoUploaded = false;
+        }
+        isLoading = false;
+
+        console.log("Out : " + photoUploaded);
+
 
     }
-    photoUploaded = true;
-    if (replace === true) {
-        console.log("replace in  \n\n " + 'Articles/art' + key + "/imageLink\n\n" + "Images/Articles/img" + key);
-        storage.ref().child("Images/Articles/" + imageID).getDownloadURL().then((url) => {
 
-            db.ref('Articles/art' + key + "/imageLink").set(url);
-            setLoaded(false);
-            console.log("uploaded new photo to the DB");
-            
-        }).catch((error) => console.log(error))
-        replace = false;
-        photoUploaded=false;
+    let deleteImageFromStorage = (deleteID) => {
+
+        let imageID = "img" + deleteID + ".jpg";
+        console.log("deleting :  " + imageID);
+        var desertRef = storage.ref("Images").child('Articles/' + imageID);
+        //Delete the file
+        desertRef.delete().then(function () {
+            console.log("deleted successfully")
+            return 0;
+        }).catch(function (error) {
+            console.log("delete failed:  " + error);
+            return -1;
+        });
     }
-    isLoading = false;
-    
-    console.log("Out : " + photoUploaded);
-
-
-}
-
-let deleteImageFromStorage = (deleteID) => {
-
-    let imageID = "img" + deleteID + ".jpg";
-    console.log("deleting :  " + imageID);
-    var desertRef = storage.ref("Images").child('Articles/' + imageID);
-    //Delete the file
-    desertRef.delete().then(function () {
-        console.log("deleted successfully")
-        return 0;
-    }).catch(function (error) {
-        console.log("delete failed:  " + error);
-        return -1;
-    });
-}
 
 
     const [detail, onChange] = useState('');
@@ -178,8 +178,8 @@ let deleteImageFromStorage = (deleteID) => {
         }
 
 
-        if ((type != "כתבות" && type != "עדכונים")) {
-            alert('סוג המידע יכול להיות כתבות או עדכונים')
+        if ((type != "כתבות" && type != "עדכונים" && type != "מהעיתונות")) {
+            alert('אנא סמן את סוג התוכן')
             return -1
         }
         if (title == "" || content == "" || description == "") {
@@ -190,7 +190,7 @@ let deleteImageFromStorage = (deleteID) => {
         let imageID = "img" + keyID + ".jpg";
         let storagePath = "Images/Articles/" + imageID;
         let date = getDate()
-        console.log("key is: "+keyID);
+        console.log("key is: " + keyID);
         storage.ref().child(storagePath).getDownloadURL().then((url) => {
             var newData = {
                 Id: infoId,
@@ -202,7 +202,7 @@ let deleteImageFromStorage = (deleteID) => {
                 imageLink: url
             }
             console.log("before dbbdbdb");
-            db.ref('Articles/'+ infoId).set(newData, function (error) {
+            db.ref('Articles/' + infoId).set(newData, function (error) {
 
                 if (error) {
                     console.log('The write failed...')
@@ -250,15 +250,18 @@ let deleteImageFromStorage = (deleteID) => {
             isCheckOn = true
         }
         if (type === 'כתבות') {
-            setArticleChangeBox(!articleCheckBoxState)
+            setArticleChangeBox(!articleCheckBoxState);
+            
             if (updatesCheckBoxState || pressCheckBoxState) {
                 setUpdatesChangeBox(false);
-                setPressChangeBox(false)
+                setPressChangeBox(false);
+                console.log('articles has been pressed');
 
             }
         }
         if (type == 'עדכונים') {
-            setUpdatesChangeBox(!updatesCheckBoxState)
+            type = 'עדכונים';
+            setUpdatesChangeBox(!updatesCheckBoxState);
             if (articleCheckBoxState || pressCheckBoxState) {
                 setArticleChangeBox(false);
                 setPressChangeBox(false);
@@ -266,14 +269,15 @@ let deleteImageFromStorage = (deleteID) => {
         }
 
         if (type == 'מהעיתונות') {
-            setPressChangeBox(!pressCheckBoxState)
+            type = 'מהעיתונות';
+            setPressChangeBox(!pressCheckBoxState);
             if (articleCheckBoxState || updatesCheckBoxState) {
                 setArticleChangeBox(false);
                 setUpdatesChangeBox(false);
             }
         }
     }
-    
+
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
             <HeaderComp
@@ -307,16 +311,16 @@ let deleteImageFromStorage = (deleteID) => {
                         />
                     </View>
 
-                    
+
                     <View style={styles.CheckBoxStyle}>
-                            <CheckBox
-                                center
-                                title='מהעיתונות'
-                                containerStyle={styles.CheckBoxContainerStyle}
-                                checked={pressCheckBoxState}
-                                onPress={() => Topfilter('מהעיתונות')}
-                            />
-                        </View>
+                        <CheckBox
+                            center
+                            title='מהעיתונות'
+                            containerStyle={styles.CheckBoxContainerStyle}
+                            checked={pressCheckBoxState}
+                            onPress={() => Topfilter('מהעיתונות')}
+                        />
+                    </View>
 
 
 
@@ -347,51 +351,51 @@ let deleteImageFromStorage = (deleteID) => {
 
 
 
-                                            <View key={item.id} style={styles.routeStyle}>
-                                                <InfoUnitAdmin imageUri={{ uri: item.imageLink }}
-                                                    title={item.Title}
-                                                    date={item.Date}
-                                                    catagory={item.Catagory}
-                                                    detail={item.SubTitle}
-                                                    idFromParent={item.Id}
-                                                    body={item.Description}
-                                                    onReplaceImagePress={() => {
-                                                        replace = true;
-                                                        deleteImageFromStorage(item.Id.slice(3));//??
-                                                        pressPhoto('upload', item.Id.slice(3)); //???
-                                                    }}
-                                                    upLoadPhoto={() => pressPhoto("upload", keyID)}
-                                                    removeItem={() => {
-                                                        Alert.alert(
-                                                            //title
-                                                            'Hello',
-                                                            //body
-                                                            'האם למחוק את פריט המידע הזה?',
-                                                            [
-                                                                {
-                                                                    text: 'כן', onPress: () => {
-                                                                        console.log("id is : "+item.Id)
-                                                                        db.ref('Articles/').child(item.Id).remove()
-                                                                        deleteImageFromStorage(item.Id.slice(3));
-                                                                        setLoaded(false);
-                                                                    }
-                                                                },
-                                                                { text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel' },
-                                                            ],
-                                                            { cancelable: false }
-                                                            //clicking out side of alert will not cancel
-                                                        );
+                                        <View key={item.id} style={styles.routeStyle}>
+                                            <InfoUnitAdmin imageUri={{ uri: item.imageLink }}
+                                                title={item.Title}
+                                                date={item.Date}
+                                                catagory={item.Catagory}
+                                                detail={item.SubTitle}
+                                                idFromParent={item.Id}
+                                                body={item.Description}
+                                                onReplaceImagePress={() => {
+                                                    replace = true;
+                                                    deleteImageFromStorage(item.Id.slice(3));//??
+                                                    pressPhoto('upload', item.Id.slice(3)); //???
+                                                }}
+                                                upLoadPhoto={() => pressPhoto("upload", keyID)}
+                                                removeItem={() => {
+                                                    Alert.alert(
+                                                        //title
+                                                        'Hello',
+                                                        //body
+                                                        'האם למחוק את פריט המידע הזה?',
+                                                        [
+                                                            {
+                                                                text: 'כן', onPress: () => {
+                                                                    console.log("id is : " + item.Id)
+                                                                    db.ref('Articles/').child(item.Id).remove()
+                                                                    deleteImageFromStorage(item.Id.slice(3));
+                                                                    setLoaded(false);
+                                                                }
+                                                            },
+                                                            { text: 'לא', onPress: () => console.log('No Pressed'), style: 'cancel' },
+                                                        ],
+                                                        { cancelable: false }
+                                                        //clicking out side of alert will not cancel
+                                                    );
 
-                                                    }}
-                                                    onExpandPress={() => {
-                                                        currItem = item;
-                                                        navigation.navigate('newOpAr');
-                                                    }}
+                                                }}
+                                                onExpandPress={() => {
+                                                    currItem = item;
+                                                    navigation.navigate('newOpAr');
+                                                }}
 
-                                                />
-                                            </View>
+                                            />
+                                        </View>
 
-                                       
+
                                     )
 
                                 })}
@@ -409,20 +413,42 @@ let deleteImageFromStorage = (deleteID) => {
                     <View style={{ width: "95%", alignSelf: 'center' }}>
 
 
-                        <Text style={{ fontSize: 18, fontWeight: "bold", alignSelf: "center", alignItems: "center" }} >הוספת כתבה:</Text>
+                        <Text style={{marginTop: "3%",fontSize: 18, fontWeight: "bold"}} >הוספת תוכן:</Text>
 
-                        <View style={{ flexDirection: 'row' }}>
-                            
-                            <Text style={styles.textAddStyle}>סוג מידע: </Text>
-                            
-                            
-                            
-                            <TextInput
+                        <View style={{ flexDirection: 'row', alignSelf: "center" }}>
+
+
+
+                            <CheckBox
+                                center
+                                title='כתבות'
+                                checked={articleCheckBoxState}
+                                onPress={() => Topfilter('כתבות')}
+                                containerStyle={styles.CheckBoxInfo}
+                            />
+
+                            <CheckBox
+                                center
+                                title='עדכונים'
+                                checked={updatesCheckBoxState}
+                                onPress={() => Topfilter('עדכונים')}
+                                containerStyle={styles.CheckBoxInfo}
+                            />
+
+                            <CheckBox
+                                center
+                                title='מהעיתונות'
+                                checked={pressCheckBoxState}
+                                onPress={() => Topfilter('מהעיתונות')}
+                                containerStyle={styles.CheckBoxInfo}
+                            />
+
+                            {/* <TextInput
                                 style={styles.textInput}
                                 onChangeText={text => onChange(text)}
                                 value={detail}
 
-                            />
+                            /> */}
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
@@ -460,14 +486,14 @@ let deleteImageFromStorage = (deleteID) => {
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
                             <Text style={styles.textAddStyle}>הוספת תמונה:  </Text>
                             <TouchableWithoutFeedback
-                                onPress={() => pressPhoto("upload",keyID)}
+                                onPress={() => pressPhoto("upload", keyID)}
 
                             >
                                 <Icon name="images" size={40} color="green" />
 
                             </TouchableWithoutFeedback>
                         </View>
-                       
+
                     </View>
 
                     <TouchableOpacity
@@ -484,7 +510,7 @@ let deleteImageFromStorage = (deleteID) => {
                         </View>
                     </TouchableOpacity>
 
-                            
+
                 </ScrollView>
 
             </View>
@@ -492,14 +518,14 @@ let deleteImageFromStorage = (deleteID) => {
     )
 }
 
-function AdminNewOpenArtScreen( { navigation }) {
+function AdminNewOpenArtScreen({ navigation }) {
     return (
         <AdminNewOpenArt
             title={currItem.Title}
             detail={currItem.SubTitle}
             content={currItem.Description}
             imageUri={{ uri: currItem.imageLink }}
-            onCrossPress = { () => navigation.goBack()}
+            onCrossPress={() => navigation.goBack()}
 
         />
     );
@@ -564,6 +590,13 @@ const styles = {
         borderWidth: 1,
         backgroundColor: '#F4D5A7'
     },
+
+
+    CheckBoxInfo: {
+        backgroundColor: '#FAE5D3',
+        borderColor: '#FAE5D3'
+    },
+
     textAddStyle: {
         fontWeight: "bold",
         fontSize: 16,
