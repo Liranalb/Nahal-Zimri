@@ -17,10 +17,8 @@ import Icon from 'react-native-vector-icons/Entypo';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContentAdmin } from "../DrawerContentAdmin";
 
-
 let keyID, currItem, dataType = "", photoUploaded = false, isCheckOn = false, isLoading = false;
 let replace = false
-
 
 function wait(timeout) {
     return new Promise(resolve => {
@@ -37,14 +35,12 @@ function getDate() {
 }
 
 function InfoAdminScreen({ navigation }) {
-
     async function pressPhoto(source, key) {
-
+        
         // setting the paths
         let imageID = "img" + key + ".jpg";
         let dataPath = 'Articles/art' + key;
         let storagePath = "Images/Articles/" + imageID;
-
 
         console.log("imageID is : " + imageID + "\n storagePath" + storagePath);
         let result;
@@ -55,11 +51,10 @@ function InfoAdminScreen({ navigation }) {
             result = await uploadImage(storagePath);
 
         if (result === -1) {
-
             console.log("\n\n ----------------failed ----------------\n\n");
             return -1;
-
         }
+
         photoUploaded = true;
         if (replace === true) {
             console.log("replace in  \n\n " + 'Articles/art' + key + "/imageLink\n\n" + "Images/Articles/img" + key);
@@ -68,20 +63,15 @@ function InfoAdminScreen({ navigation }) {
                 db.ref('Articles/art' + key + "/imageLink").set(url);
                 setLoaded(false);
                 console.log("uploaded new photo to the DB");
-
             }).catch((error) => console.log(error))
             replace = false;
             photoUploaded = false;
         }
         isLoading = false;
-
         console.log("Out : " + photoUploaded);
-
-
     }
 
     let deleteImageFromStorage = (deleteID) => {
-
         let imageID = "img" + deleteID + ".jpg";
         console.log("deleting :  " + imageID);
         var desertRef = storage.ref("Images").child('Articles/' + imageID);
@@ -94,7 +84,6 @@ function InfoAdminScreen({ navigation }) {
             return -1;
         });
     }
-
 
     const [detail, onChange] = useState('');
     const [detail1, onChange1] = useState('');
@@ -166,8 +155,8 @@ function InfoAdminScreen({ navigation }) {
     });
     function removeItem(id) {
         db.ref('Articles/').child(id).remove()
-
     }
+
     function onSubmit(type, title, content, description) {
         if (photoUploaded === false) {
             if (isLoading === true)
@@ -212,9 +201,7 @@ function InfoAdminScreen({ navigation }) {
             });
         })
         return 0;
-
     }
-
 
     let convertDataToArray = (data, infoArray) => {
         if (data === null)
@@ -239,8 +226,8 @@ function InfoAdminScreen({ navigation }) {
     }
     let infoArray = [];
     convertDataToArray(data, infoArray);
+    
     function Topfilter(type) {
-
         if (type == dataType) {
             dataType = ""
             isCheckOn = false
@@ -251,7 +238,7 @@ function InfoAdminScreen({ navigation }) {
         }
         if (type === 'כתבות') {
             setArticleChangeBox(!articleCheckBoxState);
-            
+            onChange(type);
             if (updatesCheckBoxState || pressCheckBoxState) {
                 setUpdatesChangeBox(false);
                 setPressChangeBox(false);
@@ -260,6 +247,7 @@ function InfoAdminScreen({ navigation }) {
             }
         }
         if (type == 'עדכונים') {
+            onChange(type);
             type = 'עדכונים';
             setUpdatesChangeBox(!updatesCheckBoxState);
             if (articleCheckBoxState || pressCheckBoxState) {
@@ -269,6 +257,7 @@ function InfoAdminScreen({ navigation }) {
         }
 
         if (type == 'מהעיתונות') {
+            onChange(type);
             type = 'מהעיתונות';
             setPressChangeBox(!pressCheckBoxState);
             if (articleCheckBoxState || updatesCheckBoxState) {
@@ -391,29 +380,19 @@ function InfoAdminScreen({ navigation }) {
                                                     currItem = item;
                                                     navigation.navigate('newOpAr');
                                                 }}
-
                                             />
                                         </View>
-
-
                                     )
-
                                 })}
-
-
-
                             </ScrollView>
-
                         </View>
-
-
                     </View>
 
 
                     <View style={{ width: "95%", alignSelf: 'center' }}>
 
 
-                        <Text style={{marginTop: "3%",fontSize: 18, fontWeight: "bold"}} >הוספת תוכן:</Text>
+                        <Text style={{marginTop: "3%",fontSize: 25, fontWeight: "bold", alignSelf: "center"}} >הוספת תוכן</Text>
 
                         <View style={{ flexDirection: 'row', alignSelf: "center" }}>
 
@@ -453,7 +432,7 @@ function InfoAdminScreen({ navigation }) {
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
                             <Text style={styles.textAddStyle}>כותרת: </Text>
-                            <  TextInput
+                            <TextInput
                                 style={styles.textInput}
                                 onChangeText={text1 => onChange1(text1)}
                                 value={detail1}
@@ -462,7 +441,7 @@ function InfoAdminScreen({ navigation }) {
 
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
-                            <Text style={styles.textAddStyle}>תיאור: </Text>
+                            <Text style={styles.textAddStyle}>תיאור:  </Text>
                             <  TextInput
 
                                 style={styles.textInput}
@@ -472,7 +451,7 @@ function InfoAdminScreen({ navigation }) {
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
-                            <Text style={styles.textAddStyle}>תוכן: </Text>
+                            <Text style={styles.textAddStyle}>תוכן:    </Text>
                             <  TextInput
 
                                 style={styles.textInput}
@@ -560,11 +539,6 @@ function InfoAdmin() {
 export default InfoAdmin;
 
 const styles = {
-    textInput: {
-        backgroundColor: 'white',
-        borderRadius: 5,
-        height: 15,
-    },
     CheckBoxStyle: {
         width: "30%",
         flex: 1,
@@ -618,13 +592,16 @@ const styles = {
     textInput: {
         backgroundColor: "#FFF4E3",
         borderColor: "green",
-        paddingHorizontal: 2,
+        paddingHorizontal: 10,
         paddingVertical: 2,
-        flex: 2,
+        flex: 1,
+        
         borderRadius: 10,
         borderWidth: 2,
         fontSize: 20,
         alignSelf: "center",
         textAlignVertical: 'center',
+        
+
     }
 }
