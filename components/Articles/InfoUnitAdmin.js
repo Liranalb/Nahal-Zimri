@@ -162,17 +162,21 @@ const styles = {
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        
     },
     containerStyle: {
         height: 180,
         width: "100%",
         alignSelf: 'center',
-
+        
+        marginBottom: "1%",
+        marginTop: "1%",
         borderRadius: 10,
         flexDirection: 'row-reverse',
         backgroundColor: '#F4D5A7',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        
 
 
     },
@@ -196,11 +200,18 @@ const styles = {
         //   borderTopLeftRadius: 10
     },
     editButtons: {
-        marginLeft: "2%"
+        marginLeft: "2%",
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: "green"
+       
+
     },
     buttonsContainer: {
         width: "100%",
         height: "21%",
         flexDirection: 'row',
+        
+        
     }
 }
