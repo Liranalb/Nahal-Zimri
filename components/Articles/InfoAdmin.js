@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { Component, useState, useEffect } from "react"
 import { CheckBox } from "react-native-elements"
 
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';

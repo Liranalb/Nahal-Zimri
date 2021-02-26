@@ -1,4 +1,4 @@
-import React, {  useState, useEffect } from "react";
+import React, { Component, useState, useEffect } from "react";
 import {  View, TextInput, Text, ScrollView, TouchableOpacity, Alert, RefreshControl, TouchableWithoutFeedback } from "react-native"
 import HeaderComp from "../explore/HeaderComp";
 import { db, storage } from '../../config/Firebase'
