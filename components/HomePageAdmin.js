@@ -1,6 +1,5 @@
 import React from "react"
-/*import { createStackNavigator } from 'react-navigation-stack';*/
-import { Image, View, TouchableWithoutFeedback, TextInput, Text, Button, ScrollView, TouchableOpacity, Alert, unstable_enableLogBox } from "react-native"
+import { Image, View, TouchableWithoutFeedback, Text, ScrollView } from "react-native"
 import HeaderComp from './explore/HeaderComp'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
