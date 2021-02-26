@@ -34,7 +34,7 @@ function getDate() {
 
 function InfoAdminScreen({ navigation }) {
     async function pressPhoto(source, key) {
-        
+
         // setting the paths
         let imageID = "img" + key + ".jpg";
         let dataPath = 'Articles/art' + key;
@@ -225,7 +225,7 @@ function InfoAdminScreen({ navigation }) {
     }
     let infoArray = [];
     convertDataToArray(data, infoArray);
-    
+
     function Topfilter(type) {
         if (type == dataType) {
             dataType = ""
@@ -310,11 +310,6 @@ function InfoAdminScreen({ navigation }) {
                         />
                     </View>
 
-
-
-
-
-
                 </View>
 
                 <ScrollView
@@ -391,7 +386,7 @@ function InfoAdminScreen({ navigation }) {
                     <View style={{ width: "95%", alignSelf: 'center' }}>
 
 
-                        <Text style={{marginTop: "3%",fontSize: 25, fontWeight: "bold", alignSelf: "center"}} >הוספת תוכן</Text>
+                        <Text style={{ marginTop: "3%", fontSize: 25, fontWeight: "bold", alignSelf: "center" }} >הוספת תוכן</Text>
 
                         <View style={{ flexDirection: 'row', alignSelf: "center" }}>
 
@@ -421,12 +416,6 @@ function InfoAdminScreen({ navigation }) {
                                 containerStyle={styles.CheckBoxInfo}
                             />
 
-                            {/* <TextInput
-                                style={styles.textInput}
-                                onChangeText={text => onChange(text)}
-                                value={detail}
-
-                            /> */}
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
@@ -446,6 +435,7 @@ function InfoAdminScreen({ navigation }) {
                                 style={styles.textInput}
                                 onChangeText={text2 => onChange2(text2)}
                                 value={detail2}
+
                             />
                         </View>
 
@@ -461,7 +451,7 @@ function InfoAdminScreen({ navigation }) {
 
 
 
-                        <View style={{ flexDirection: 'row', marginTop: '2.5%', alignSelf: 'center'}}>
+                        <View style={{ flexDirection: 'row', marginTop: '2.5%', alignSelf: 'center' }}>
                             <Text style={styles.textAddStyle}>הוספת תמונה:  </Text>
                             <TouchableWithoutFeedback
                                 onPress={() => pressPhoto("upload", keyID)}
@@ -580,12 +570,12 @@ const styles = {
         alignItems: "center",
         alignSelf: "center",
         backgroundColor: "green",
-        width: "30%",
-        height: "21%",
+        width: "75%",
+        height: "15%",
         alignSelf: "center",
         marginTop: "5%",
         marginBottom: "10%",
-        borderRadius: 5,
+        borderRadius: 20,
         overflow: 'hidden'
     },
     textInput: {
@@ -594,13 +584,13 @@ const styles = {
         paddingHorizontal: 10,
         paddingVertical: 2,
         flex: 1,
-        
+
         borderRadius: 10,
         borderWidth: 2,
         fontSize: 20,
         alignSelf: "center",
         textAlignVertical: 'center',
-        
+
 
     }
 }

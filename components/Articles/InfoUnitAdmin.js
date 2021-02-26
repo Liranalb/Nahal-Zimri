@@ -1,4 +1,3 @@
-import React, { Component } from "react";
 import {
     View,
     Text,
@@ -43,8 +42,8 @@ class InfoUnitAdmin extends React.Component {
                     </TouchableOpacity>
 
                 </View>
-                <View style={{ flex: 2  }}>
-                    <View style={{ width: '100%'}}>
+                <View style={{ flex: 2 }}>
+                    <View style={{ width: '100%' }}>
                         <View>
                             <View style={{ flex: 2 }}>
                                 <TextInput
@@ -52,7 +51,7 @@ class InfoUnitAdmin extends React.Component {
                                     defaultValue={this.props.catagory}
 
                                     onChangeText={(catagory) => this.setState({ catagory, changed: true })}
-                                     />
+                                />
                             </View>
                             <View style={{ flex: 2, marginRight: '4%' }}>
                                 <Text style={{
@@ -80,7 +79,7 @@ class InfoUnitAdmin extends React.Component {
                                     numberOfLines={2}
                                     multiline
                                     onChangeText={(detail) => this.setState({ detail, changed: true })}
-                                    
+
                                 />
                             </View>
                             <Divider />
@@ -124,8 +123,10 @@ class InfoUnitAdmin extends React.Component {
                             <Button
                                 title="מחק"
                                 color="green"
+                                titleStyle={{
+                                    fontSize: 44,
+                                }}
                                 onPress={this.props.removeItem}
-
                             />
                         </View>
 
@@ -154,10 +155,10 @@ export default InfoUnitAdmin;
 
 
 const styles = {
-    title: { 
+    title: {
         fontWeight: "bold",
-        fontSize: 18, 
-        paddingHorizontal: 1, 
+        fontSize: 18,
+        paddingHorizontal: 1,
         paddingVertical: 0,
         marginTop: "2%",
         marginBottom: "2%",
@@ -169,14 +170,14 @@ const styles = {
         fontWeight: "bold",
         fontSize: 16,
         paddingVertical: 0,
-        marginLeft: "1%", 
+        marginLeft: "1%",
         marginRight: "1%"
     },
 
-    
-    textInputBox: { 
-        fontWeight: "normal", 
-        fontSize: 16, 
+
+    textInputBox: {
+        fontWeight: "normal",
+        fontSize: 16,
         paddingVertical: 0,
         marginTop: "2%",
         marginBottom: "2%",
@@ -226,14 +227,14 @@ const styles = {
         marginLeft: "2%",
         borderRadius: 5,
         borderWidth: 1,
-        borderColor: "green"   
+        borderColor: "green"
 
     },
     buttonsContainer: {
         marginTop: "2%",
-        width: "100%",
+        width: "80%",
         flexDirection: 'row',
-        
-        
+
+
     }
 }
