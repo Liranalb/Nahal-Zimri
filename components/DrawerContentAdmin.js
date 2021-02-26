@@ -39,29 +39,29 @@ export function DrawerContentAdmin(props) {
 
                             label="מסך ראשי"
                             labelStyle={styles.drawerLable}
-                            onPress={() => { props.navigation.navigate('homeP') }}
+                            onPress={() => { props.navigation.navigate('HomeAdmin') }}
                         />
                         <DrawerItem style={styles.drawerItem}
 
                             label="עדכונים וכתבות"
                             labelStyle={styles.drawerLable}
-                            onPress={() => { props.navigation.navigate('InfUs') }}
+                            onPress={() => { props.navigation.navigate('InfAd') }}
                         />
                         <DrawerItem style={styles.drawerItem}
                         label="דיווח תצפית"
                         labelStyle={styles.drawerLable}
-                        onPress={() => { props.navigation.navigate('Rep') }}
+                        onPress={() => { props.navigation.navigate('Reports') }}
                         />
 
                         <DrawerItem style={styles.drawerItem}
 
                         label="אודות נחל זמרי"
-                        onPress={() => { props.navigation.navigate('Abo') }}
+                        onPress={() => { props.navigation.navigate('AboutAdmin') }}
                         labelStyle={styles.drawerLable}
                         />
                         <DrawerItem style={styles.drawerItem}
                         label="טבע ומורשת בפסגת זאב"
-                        onPress={() => { props.navigation.navigate('Abo') }}
+                        onPress={() => { props.navigation.navigate('AboutPZAdmin') }}
                         labelStyle={styles.drawerLable}
                     />
 
@@ -103,20 +103,10 @@ export function DrawerContentAdmin(props) {
 
 const styles = StyleSheet.create({
     drawerContent: {
-        flex: 1,
-
-    },
-    
-    drawerSection: {
-        //marginTop: 15,
-    },
-    bottomDrawerSection: {
-        marginBottom: 15,
-        borderTopColor: '#f4f4f4',
-        borderTopWidth: 1
-    },
+        flex: 1
 
 
+    },
     titleSection: {
         paddingLeft: 20,
         flexDirection: 'row-reverse',
