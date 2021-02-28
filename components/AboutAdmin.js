@@ -36,41 +36,37 @@ function AboutAdminScreen({ navigation }) {
                 openUserProfile={() => navigation.navigate('Current')}
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
             />
-            <View style={{ width: "96%", height: '89%', alignSelf: 'center' }}>
+            <View style={{ width: "96%", height: '95%', alignSelf: 'center' }}>
 
 
-                <View style={{ width: "90%", height: '20%', alignSelf: 'center' }}>
+                <View style={{ width: "90%", alignSelf: 'center' }}>
 
-                    <Text style={{ fontSize: 25, fontWeight: 'bold', textAlign: 'center', marginTop: '10%', color: '#404040' }}>
+                    <Text style={{ fontSize: 25, fontWeight: 'bold', textAlign: 'center', marginTop: '8%', color: '#404040' }}>
                         {data.Title}
                     </Text>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginTop: '2%', color: '#404040' }}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center', color: '#404040' }}>
                         {data.SubTitle}
                     </Text>
                 </View>
                 <View style={styles.bodyStyle}>
-                    <ScrollView>
-                        <TextInput
-                            style={{ fontSize: 16, fontFamily: '', padding: 0, textAlign: 'right' }}
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        {/* <TextInput
+                            style={{ fontSize: 16, fontFamily: '', padding: 0, textAlign: 'right',  marginLeft: 5, marginTop: 5, marginRight: 5, marginBottom: 5  }}
                             multiline
                             defaultValue={data.Body}
                             onChangeText={(text) => setData({ Body: text })}
 
-                        />
+                        /> */}
 
                         <Text style={{ fontSize: 20, fontWeight: 'bold' }}>קצת על האפליקציה : </Text>
 
-                        <Text style={{ fontSize: 16, padding: 0, textAlign: 'left' }}>
-
-                            {data.ExtraBody}
-                        </Text>
-                        {/* <TextInput
-                            style={{ fontSize: 16, padding: 0, textAlign: 'right' }}
+                        <TextInput
+                            style={{ fontSize: 20, padding: 0, textAlign: 'right' }}
                             multiline
                             defaultValue={data.ExtraBody}
                             onChangeText={(text) => setData({ ExtraBody: text })}
 
-                        /> */}
+                        />
 
 
                     </ScrollView>
@@ -93,16 +89,12 @@ function AboutAdminScreen({ navigation }) {
                 >
 
 
-                    <View style={{ borderRadius: 6, width: "30%", height: '38%', backgroundColor: 'green', alignSelf: 'center', marginTop: '2%' }}>
-                        <Text style={{ alignSelf: 'center', color: 'white', fontSize: 16, marginTop: "5%" }}>
+                    <View style={{ borderRadius: 6, width: "80%", height: '38%', backgroundColor: 'green', alignSelf: 'center', marginTop: '2%' }}>
+                        <Text style={{ alignSelf: 'center', color: 'white', fontSize: 16, marginTop: "3%" }}>
                             ערוך טקסט
                         </Text>
                     </View>
                 </TouchableWithoutFeedback>
-
-
-
-
             </View>
 
         </View>
@@ -150,8 +142,7 @@ const styles = {
     textTitleStyle: {
         alignSelf: "center",
         fontWeight: "bold",
-        fontSize: 20,
-        marginLeft: 10
+        fontSize: 20
     },
     textDetailStyle: {
         fontWeight: "normal",
