@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect, useLayoutEffect } from "react"
-import { TextInput, Alert, ScrollView, Text, TouchableOpacity } from "react-native"
+import { TextInput, ScrollView, Text, TouchableOpacity } from "react-native"
 import { View } from "native-base"
 import { db } from '../config/Firebase'
 import HeaderComp from "./explore/HeaderComp"
@@ -13,17 +13,17 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler"
 
 function AboutAdminScreen({ navigation }) {
     const [loaded, setLoaded] = useState(false);
-    const [data, setData] = useState({ Title: '', Body: '', SubTitle: '', ExtraBody: '' });
+    const [dataPZ, setData] = useState({ Title: '', Body: '', SubTitle: '', ExtraBody: '' });
 
     // let data = null;
     db.ref('AboutPZ').on('value', function (snapshot) {
         const exist = (snapshot.val() !== null);
         if (exist) {
-            let dataA = snapshot.val();
+            let dataAPZ = snapshot.val();
             console.log("data loaded: " + loaded);
             if (loaded === false) {
                 setLoaded(true);
-                setData({ Title: dataA.Title, Body: dataA.Body, SubTitle: dataA.SubTitle, ExtraBody: dataA.ExtraBody })
+                setData({ Title: dataAPZ.Title, Body: dataAPZ.Body, SubTitle: dataAPZ.SubTitle, ExtraBody: dataAPZ.ExtraBody })
             }
 
         }
@@ -36,41 +36,27 @@ function AboutAdminScreen({ navigation }) {
                 openUserProfile={() => navigation.navigate('Current')}
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
             />
-            <View style={{ width: "96%", height: '89%', alignSelf: 'center' }}>
+            <View style={{ width: "96%", height: '95%', alignSelf: 'center' }}>
+                <View style={{ width: "90%", alignSelf: 'center' }}>
 
-
-                <View style={{ width: "90%", height: '20%', alignSelf: 'center' }}>
-
-                    <Text style={{ fontSize: 25, fontWeight: 'bold', textAlign: 'center', marginTop: '10%', color: '#404040' }}>
-                        {data.Title}
+                    <Text style={{ fontSize: 25, fontWeight: 'bold', textAlign: 'center', marginTop: '8%', color: '#404040' }}>
+                        {dataPZ.Title}
                     </Text>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginTop: '2%', color: '#404040' }}>
-                        {data.SubTitle}
+                    
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center', color: '#404040' }}>
+                        {dataPZ.SubTitle}
                     </Text>
+                
                 </View>
                 <View style={styles.bodyStyle}>
-                    <ScrollView>
-                        <TextInput
-                            style={{ fontSize: 16, fontFamily: '', padding: 0, textAlign: 'right' }}
-                            multiline
-                            defaultValue={data.Body}
-                            onChangeText={(text) => setData({ Body: text })}
-
-                        />
-
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         
-
-                        <Text style={{ fontSize: 16, padding: 0, textAlign: 'left' }}>
-
-                            {data.ExtraBody}
-                        </Text>
-                        {/* <TextInput
-                            style={{ fontSize: 16, padding: 0, textAlign: 'right' }}
+                       <TextInput
+                            style={{ fontSize: 20, padding: 0, textAlign: 'right', marginLeft: 5, marginTop: 5, marginRight: 5, marginBottom: 5 }}
                             multiline
-                            defaultValue={data.ExtraBody}
+                            defaultValue={dataPZ.ExtraBody}
                             onChangeText={(text) => setData({ ExtraBody: text })}
-
-                        /> */}
+                        />
 
 
                     </ScrollView>
@@ -78,23 +64,19 @@ function AboutAdminScreen({ navigation }) {
 
                 <TouchableWithoutFeedback
                     onPress={() => {
+                        let updatesPZ = {};
 
-
-                        let updates = {};
-
-                        updates["AboutPZ/BodyPZ"] = data.Body;
-                        // updates["About/ExtraBody"] = data.ExtraBody;
-                        db.ref().update(updates);
-
+                        //updatesPZ["AboutPZ/BodyPZ"] = dataPZ.Body;
+                        updatesPZ["AboutPZ/ExtraBodyPZ"] = dataPZ.ExtraBody;
+                        db.ref().update(updatesPZ);
                         alert("המידע עודכן");
-
                     }
                     }
                 >
 
 
-                    <View style={{ borderRadius: 6, width: "30%", height: '38%', backgroundColor: 'green', alignSelf: 'center', marginTop: '2%' }}>
-                        <Text style={{ alignSelf: 'center', color: 'white', fontSize: 16, marginTop: "5%" }}>
+                    <View style={{ borderRadius: 6, width: "80%", height: '38%', backgroundColor: 'green', alignSelf: 'center', marginTop: '2%' }}>
+                        <Text style={{ alignSelf: 'center', color: 'white', fontSize: 16, marginTop: "3%" }}>
                             ערוך טקסט
                         </Text>
                     </View>
@@ -133,16 +115,16 @@ const styles = {
         borderRadius: 15,
         borderWidth: 2,
         fontSize: 20,
-        marginTop: 10
+        marginTop: 10,
+        
     },
     imageStyle: {
-        marginTop: 10,
-        marginLeft: 10,
         borderColor: "#FFAF50",
         position: 'absolute',
         borderWidth: 4,
         height: "85%",
-        width: "30%"
+        width: "30%",
+        
     },
     textStyle: {
         flexDirection: 'row-reverse'
@@ -151,21 +133,21 @@ const styles = {
         alignSelf: "center",
         fontWeight: "bold",
         fontSize: 20,
-        marginLeft: 10
+        
     },
     textDetailStyle: {
         fontWeight: "normal",
         fontSize: 16,
-        alignSelf: "center"
+        alignSelf: "center",
+        
     },
     bodyStyle: {
-        width: "95%",
-        height: '72%',
-        alignSelf: 'center',
-
+        // borderColor: "white",
+        // borderWidth: 2,
         // borderRadius: 10,
-        // borderWidth: 1,
-        // borderColor: '#4A4A4A'
+        width: "95%",
+        height: '70%',
+        alignSelf: 'center',
     }
 }
 
