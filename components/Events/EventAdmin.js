@@ -238,7 +238,7 @@ function EventAdminScreen( { navigation }) {
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
-                            <Text style={styles.textAddStyle}>תאריך: </Text>
+                            <Text style={styles.textAddStyle}>תאריך:         </Text>
                             <  TextInput
                                 style={styles.textInput}
                                 onChangeText={text => onChangeDate(text)}
@@ -248,7 +248,7 @@ function EventAdminScreen( { navigation }) {
 
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
-                            <Text style={styles.textAddStyle}>יום: </Text>
+                            <Text style={styles.textAddStyle}>יום:               </Text>
                             <  TextInput
 
                                 style={styles.textInput}
@@ -258,7 +258,7 @@ function EventAdminScreen( { navigation }) {
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
-                            <Text style={styles.textAddStyle}>שעה: </Text>
+                            <Text style={styles.textAddStyle}>שעה:            </Text>
                             <  TextInput
 
                                 style={styles.textInput}
@@ -268,9 +268,8 @@ function EventAdminScreen( { navigation }) {
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
-                            <Text style={styles.textAddStyle}>מיקום: </Text>
+                            <Text style={styles.textAddStyle}>מיקום:         </Text>
                             <  TextInput
-
                                 style={styles.textInput}
                                 onChangeText={text => onChangeLocation(text)}
                                 value={location}
@@ -278,9 +277,9 @@ function EventAdminScreen( { navigation }) {
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
-                            <Text style={styles.textAddStyle}>פרטים: </Text>
+                            <Text style={styles.textAddStyle}>פרטים:        </Text>
                             <  TextInput
-
+                                multiline={true}
                                 style={styles.textInput}
                                 onChangeText={text => onChangeDetails(text)}
                                 value={details}
