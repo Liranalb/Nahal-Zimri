@@ -46,6 +46,7 @@ class loginHelper extends Component {
             if (user && auth.currentUser.emailVerified) { 
                 console.log("auto log for user: "+user.email)
                 global.uid = user.uid;
+                global.mail = user.email;
                 let flag = await this.adminCheck(user)
                 console.log("flag is : " + flag.val() + "isAdmin is: " + this.state.isAdmin);
                 this.setState({ loggedIn: true, isAdmin: flag.val(), isDataLoaded: true })
