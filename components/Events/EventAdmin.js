@@ -225,11 +225,11 @@ function EventAdminScreen( { navigation }) {
                         })
                     }
                     <View style={{ width: "95%", alignSelf: 'center' }}>
-                        <Text style={{ fontSize: 18, fontWeight: "bold", alignSelf: "center", alignItems: "center" }} >הוספת אירוע:</Text>
+                        <Text style={{ marginTop: "3%" ,fontSize: 25, fontWeight: "bold", alignSelf: "center", alignItems: "center" }} >הוספת אירוע:</Text>
 
                         <View style={{ flexDirection: 'row' }}>
-                            <Text style={styles.textAddStyle}>שם האירוע: </Text>
                             <  TextInput
+                                placeholder={"שם האירוע"}
                                 style={styles.textInput}
                                 onChangeText={text => onChangeName(text)}
                                 value={name}
@@ -238,8 +238,8 @@ function EventAdminScreen( { navigation }) {
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
-                            <Text style={styles.textAddStyle}>תאריך:         </Text>
                             <  TextInput
+                                placeholder={"תאריך"}
                                 style={styles.textInput}
                                 onChangeText={text => onChangeDate(text)}
                                 value={date}
@@ -248,9 +248,9 @@ function EventAdminScreen( { navigation }) {
 
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
-                            <Text style={styles.textAddStyle}>יום:               </Text>
-                            <  TextInput
 
+                            <  TextInput
+                                placeholder={"יום"}
                                 style={styles.textInput}
                                 onChangeText={text => onChangeDay(text)}
                                 value={day}
@@ -258,9 +258,8 @@ function EventAdminScreen( { navigation }) {
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
-                            <Text style={styles.textAddStyle}>שעה:            </Text>
                             <  TextInput
-
+                                placeholder={"שעה"}
                                 style={styles.textInput}
                                 onChangeText={text => onChangeHour(text)}
                                 value={hour}
@@ -268,8 +267,9 @@ function EventAdminScreen( { navigation }) {
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
-                            <Text style={styles.textAddStyle}>מיקום:         </Text>
+
                             <  TextInput
+                                placeholder={"מיקום"}
                                 style={styles.textInput}
                                 onChangeText={text => onChangeLocation(text)}
                                 value={location}
@@ -277,9 +277,9 @@ function EventAdminScreen( { navigation }) {
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
-                            <Text style={styles.textAddStyle}>פרטים:        </Text>
+
                             <  TextInput
-                                multiline={true}
+                                placeholder={"קישור להרשמה"}
                                 style={styles.textInput}
                                 onChangeText={text => onChangeDetails(text)}
                                 value={details}
@@ -287,6 +287,19 @@ function EventAdminScreen( { navigation }) {
                         </View>
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
+
+                            <  TextInput
+                                placeholder={"פרטי האירוע"}
+                                multiline={true}
+                                style={styles.textInput}
+                                onChangeText={text => onChangeDetails(text)}
+                                value={details}
+                            />
+                        </View>
+
+
+
+                        <View style={{ flexDirection: 'row', marginTop: '2.5%', alignSelf: 'center' }}>
                             <Text style={styles.textAddStyle}>הוספת תמונה:  </Text>
                             <TouchableWithoutFeedback
 
@@ -343,16 +356,14 @@ const styles = {
     textInput: {
         backgroundColor: "#FFF4E3",
         borderColor: "green",
-        paddingHorizontal: 2,
+        paddingHorizontal: 10,
         paddingVertical: 2,
-        flex: 2,
+        flex: 1,
         borderRadius: 10,
         borderWidth: 2,
         fontSize: 20,
         alignSelf: "center",
         textAlignVertical: 'center',
-
-
     },
 
     buttonStyle: {
@@ -360,12 +371,12 @@ const styles = {
         alignItems: "center",
         alignSelf: "center",
         backgroundColor: "green",
-        width: "30%",
-        height: "21%",
+        width: "75%",
+        height: "15%",
         alignSelf: "center",
         marginTop: "5%",
         marginBottom: "10%",
-        borderRadius: 5,
+        borderRadius: 20,
         overflow: 'hidden'
     },
 

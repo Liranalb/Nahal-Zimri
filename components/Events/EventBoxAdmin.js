@@ -171,9 +171,8 @@ class EventBoxAdmin extends React.Component {
 
 
 
-
-
                     </View>
+
 
                 </View>
             </View>
