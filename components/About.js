@@ -23,6 +23,8 @@ function AboutScreen({ navigation }) {
                 setLoaded(true);
                 setData({ Title: dataA.Title, Body: dataA.Body, SubTitle: dataA.SubTitle, ExtraBody: dataA.ExtraBody})
             }
+            //dataA.Body = dataA.Body.replace(/\\n/g,'\n');
+           
 
         }
     });
