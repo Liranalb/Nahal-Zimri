@@ -71,6 +71,7 @@ function EventAdminScreen( { navigation }) {
                     hour: hour,
                     location: location,
                     details: details,
+                    link: link,
                     id: eveId,
                     imageLink: url
                 }
@@ -103,6 +104,7 @@ function EventAdminScreen( { navigation }) {
     const [imageLink, onChangeImageLink] = useState('');
     const [location, onChangeLocation] = useState('');
     const [details, onChangeDetails] = useState('');
+    const [link, onChangeLink] = useState('');
     const [loaded, setLoaded] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
     let eventsArray = [];
@@ -115,6 +117,7 @@ function EventAdminScreen( { navigation }) {
         onChangeLocation("");
         onChangeImageLink("");
         onChangeDetails("");
+        onChangeLink("");
         setLoaded({ loaded: false });
         keyID = newPostKey();
         photoUploaded = false;
@@ -193,6 +196,7 @@ function EventAdminScreen( { navigation }) {
                                         location={item.location}
                                         details={item.details}
                                         id={item.id}
+                                        link={item.link}
                                         onReplaceImagePress={() => {
                                             replace = true;
                                             deleteImageFromStorage(item.id.slice(3));//??
@@ -281,8 +285,8 @@ function EventAdminScreen( { navigation }) {
                             <  TextInput
                                 placeholder={"קישור להרשמה"}
                                 style={styles.textInput}
-                                onChangeText={text => onChangeDetails(text)}
-                                value={details}
+                                onChangeText={text => onChangeLink(text)}
+                                value={link}
                             />
                         </View>
 
@@ -314,7 +318,7 @@ function EventAdminScreen( { navigation }) {
 
                     <TouchableOpacity
                         onPress={() => {
-                            let result = sendData(name, date, day, hour, location, details);
+                            let result = sendData(name, date, day, hour, location, details, link);
                             console.log("result is: " + result);
                             if (result === 0)
                                 refreshPage();
