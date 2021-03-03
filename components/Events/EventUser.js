@@ -55,7 +55,7 @@ function EventUserScreen({ navigation }) {
     convertDataToArray(data, eventsArray);
 
     return (
-        <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
+        <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3'}}>
             <HeaderComp
                 openUserProfile={() => navigation.navigate('Current')}
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
@@ -67,7 +67,7 @@ function EventUserScreen({ navigation }) {
                     console.log("second"),
                     eventsArray.map((item) => {
                         return (
-                            <View key={item.id} style={{ width: "96%", alignSelf: 'center' }}>
+                            <View key={item.id} style={{ width: "96%", alignSelf: 'center', marginTop: "1%" }}>
                                 <EventBoxUser imageUri={{ uri: item.imageLink }}
                                     name={item.name}
                                     date={item.date}
@@ -75,6 +75,7 @@ function EventUserScreen({ navigation }) {
                                     hour={item.hour}
                                     location={item.location}
                                     details={item.details}
+                                    link={item.link}
                                 />
                             </View>
                         )

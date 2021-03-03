@@ -5,6 +5,9 @@ import {
     Text,
     StyleSheet,
     Image,
+    TouchableOpacity,
+    Linking,
+    Alert
 
 } from "react-native";
 import { Divider } from "react-native-elements";
@@ -52,6 +55,20 @@ class EventBoxUser extends React.Component {
                         <Text style={styles.textTitleStyle}>פרטים: </Text>
                         <Text numberOfLines={1} style={styles.textDetailStyle}>{this.props.details}</Text>
                     </View>
+                    <TouchableOpacity onPress={() => { 
+                        if(this.props.link === undefined)
+                            Alert.alert("", "אין פרטים נוספים לאירוע זה");
+                        else
+                            Linking.openURL(this.props.link); 
+                        }}>
+
+                    <View style={styles.buttonStyle}>
+                            <Text
+                                style={styles.buttonText}>פרטים נוספים והרשמה</Text>
+                            
+                    </View>      
+
+                    </TouchableOpacity>          
                 </View>
 
             </View>
@@ -72,7 +89,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginTop: "2%",
         width:'100%',
-        height:155,
+        //height:155,
         flexDirection:'row-reverse'
     },
 
@@ -115,6 +132,28 @@ const styles = StyleSheet.create({
         textAlign:'left'
 
         //alignSelf: "center"
+    },
+
+    buttonText: {
+        alignSelf: 'center',
+        fontSize: 20, 
+        color: 'white', 
+        marginRight: "3%", 
+        marginLeft: "3%"
+    },
+
+    buttonStyle: {
+        justifyContent: 'center',
+        alignItems: "center",
+        alignSelf: "center",
+        backgroundColor: "#FF8C37",
+        borderColor: "#FF8C37",
+        borderRadius: 10,
+        borderWidth: 2,
+        alignSelf: "center",
+        marginTop: "2%",
+        marginBottom: "3%",
+        
     }
 
 });
