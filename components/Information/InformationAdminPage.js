@@ -283,7 +283,7 @@ let deleteImageFromStorage = (deleteID) => {
 
                 <View style={styles.editBoxStyle}>
                     <View style={{ flex: 1 }}>
-                        <View style={{ marginLeft: 12, marginTop: 20 }}>
+                        <View style={{ alignSelf: "center", marginTop: "25%" }}>
                             <TouchableWithoutFeedback
                                 onPress={() => { console.log("before func: " + keyID); pressPhoto("camera",keyID); }}
                             >
@@ -291,13 +291,15 @@ let deleteImageFromStorage = (deleteID) => {
                                     <Icon name="camera" size={30} color="white" />
                                 </View>
                             </TouchableWithoutFeedback>
+                            
                             <TouchableWithoutFeedback
                                 onPress={() => pressPhoto("upload",keyID)}
                             >
-                                <View style={{ marginTop: 20, marginLeft: 12 }}>
+                                <View style={{ marginTop: "20%", marginLeft: 12 }}>
                                     <Icon name="images" size={30} color="white" />
                                 </View>
                             </TouchableWithoutFeedback>
+                            
                             <TouchableWithoutFeedback
                                 onPress={() => {
                                     let result = sendData(body, title, currentType);
@@ -306,10 +308,8 @@ let deleteImageFromStorage = (deleteID) => {
                                         refreshPage();
                                 }}
                             >
-                                <View style={styles.buttonStyle}>
-                                    <Text
-                                        style={{ alignSelf: 'center', marginTop: 20, fontSize: 18 }}
-                                    >הוסף</Text>
+                                <View style={{ marginTop: "40%", marginLeft: 12 }}>
+                                    <Icon name="paper-plane" size={30} color="white" />
                                 </View>
                             </TouchableWithoutFeedback>
                         </View>
@@ -397,12 +397,12 @@ const styles = {
     containerStyle: {
         width: "96%",
         height: "89%",
-        alignSelf:'center'
+        alignSelf:'center',
 
     },
     editBoxStyle: {
+        marginTop: "1%",
         width: "100%",
-        height: "29%",
         flexDirection: 'row',
         borderWidth: 2,
         borderColor: '#545454',
@@ -413,6 +413,7 @@ const styles = {
         backgroundColor: "#FFF4E3",
         borderColor: "#004577",
         width: "90%",
+        height: "33%",
         borderRadius: 10,
         borderWidth: 2,
         fontSize: 20,
