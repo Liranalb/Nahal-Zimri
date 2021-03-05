@@ -30,19 +30,16 @@ class EditInfoBox extends Component {
             <View style={styles.containerStyle}>
                 
                 <View style={{ flex: 1 }}>
-                {/* <TouchableOpacity
-                        onPress={this.props.onExpandPress}
-                    > */}
                         <View style={{ width: '100%', height: '100%' }}>
                         <Image source={this.props.imageUri}
                             style={styles.imageStyle}
 
                         />
                     </View>
-                    {/* </TouchableOpacity> */}
+
                 </View>
                
-                <View style={{ flex: 1 }}>
+                <View style={styles.textDetailStyle}>
                     <View >
                         <TextInput
                             selectTextOnFocus={true}
@@ -53,7 +50,7 @@ class EditInfoBox extends Component {
                         />
 
                     </View>
-                    <ScrollView>
+                    <ScrollView keyboardShouldPersistTaps="handled">
                         <TextInput
                             selectTextOnFocus={true}
                             defaultValue={this.props.body}
@@ -120,7 +117,7 @@ const styles = {
         justifyContent: 'center'
     },
     containerStyle: {
-        height: 150,
+        height: 200,
         width: "100%",
         alignSelf: 'center',
         borderWidth: 1.1,
@@ -133,15 +130,22 @@ const styles = {
 
     },
     headlineStyle: {
-        alignSelf: 'center',
-        color: 'black',
+        fontWeight: "bold",
         fontSize: 18,
-        fontWeight: 'bold',
-        textDecorationLine: 'underline',
-        textShadowColor: "gray",
-        textShadowRadius: 10
+        paddingHorizontal: 1,
+        paddingVertical: 0,
+        marginTop: "2%",
+        marginBottom: "2%",
+        marginLeft: "1%",
+        marginRight: "1%"
     },
 
+    textDetailStyle: {
+        flex: 1,
+        fontWeight: "normal",
+        fontSize: 16,
+        marginLeft: '3%'
+    },
 
     imageStyle: {
         flex: 1,
@@ -152,13 +156,23 @@ const styles = {
         //   borderTopLeftRadius: 10
     },
     editButtons: {
-        marginLeft: "2%"
+        marginLeft: "2%",
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: "green"
     },
     buttonsContainer: {
         width: "40%",
         height: "20%",
         flexDirection: 'row',
+        marginTop: "3%",
         marginBottom: "5%",
         marginLeft: "5%"
+    },
+
+    buttonsContainer: {
+        marginTop: "2%",
+        width: "80%",
+        flexDirection: 'row',
     }
 }
