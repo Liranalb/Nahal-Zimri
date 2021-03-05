@@ -28,7 +28,7 @@ export function InfoCatagoriesScreen({ navigation }) {
                     <TouchableWithoutFeedback
 
                         onPress={() => {
-                            typeName.type = "Mammals";
+                            typeName.type = "Wildlife";
                             navigation.navigate('InfoAdminScreen')
                         }
                         }
@@ -39,31 +39,11 @@ export function InfoCatagoriesScreen({ navigation }) {
                                 style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
                             />
                             <View style={styles.textStyle}>
-                                <Text>יונקים</Text>
+                                <Text>חיות בר</Text>
                             </View>
                         </View>
                     </TouchableWithoutFeedback>
 
-                    <TouchableWithoutFeedback onPress={() => {
-                        typeName.type = "Birds";
-                        navigation.navigate('InfoAdminScreen')
-                    }
-                    }>
-                        <View style={styles.infoStyle}>
-                            <Image
-                                source={require('../../assets/img/bird.jpg')}
-                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                            />
-                            <View style={styles.textStyle}>
-                                <Text>ציפורים</Text>
-                            </View>
-                        </View>
-                    </TouchableWithoutFeedback>
-
-                </View>
-
-
-                <View style={styles.rowStyle2}>
                     <TouchableWithoutFeedback onPress={() => {
                         typeName.type = "Blossom";
                         navigation.navigate('InfoAdminScreen')
@@ -80,10 +60,33 @@ export function InfoCatagoriesScreen({ navigation }) {
                         </View>
                     </TouchableWithoutFeedback>
 
+                </View>
+
+
+                <View style={styles.rowStyle2}>
+
+
+                    <TouchableWithoutFeedback onPress={() => {
+                        typeName.type = "Arch";
+                        navigation.navigate('InfoAdminScreen')
+                    }
+                    }>
+                        <View style={styles.infoStyle}>
+                            <Image
+                                source={require('../../assets/img/arch.jpg')}
+                                //   style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                style={{ width: "100%", height: "100%" }}
+                            />
+                            <View style={styles.textStyle}>
+                                <Text>ארכיאולוגיה</Text>
+                            </View>
+                        </View>
+                    </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => {
                         typeName.type = "Pisga";
                         navigation.navigate('InfoAdminScreen')
                     }
+
                     }>
                         <View style={styles.infoStyle}>
                             <Image
@@ -97,28 +100,41 @@ export function InfoCatagoriesScreen({ navigation }) {
                         </View>
                     </TouchableWithoutFeedback>
 
-
                 </View>
+
                 <View style={styles.rowStyle2}>
 
                     <TouchableWithoutFeedback onPress={() => {
-                        typeName.type = "Arch";
+                        typeName.type = "DIY";
                         navigation.navigate('InfoAdminScreen')
                     }
                     }>
-                        <View style={styles.infoStyle2}>
+                        <View style={styles.infoStyle}>
                             <Image
-                                source={require('../../assets/img/arch.jpg')}
-                                //   style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                                style={{ width: "100%", height: "100%" }}
+                                source={require('../../assets/img/diy.jpg')}
+                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
                             />
                             <View style={styles.textStyle}>
-                                <Text>ארכיאולוגיה</Text>
+                                <Text>עשה זאת בעצמך</Text>
                             </View>
                         </View>
                     </TouchableWithoutFeedback>
 
-
+                    <TouchableWithoutFeedback onPress={() => {
+                        typeName.type = "Maps";
+                        navigation.navigate('InfoAdminScreen')
+                    }
+                    }>
+                        <View style={styles.infoStyle}>
+                            <Image
+                                source={require('../../assets/img/map2.jpg')}
+                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                            />
+                            <View style={styles.textStyle}>
+                                <Text>מפה</Text>
+                            </View>
+                        </View>
+                    </TouchableWithoutFeedback>
 
 
                 </View>

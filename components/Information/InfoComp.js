@@ -20,7 +20,7 @@ class InfoComp extends Component {
         this.state = {
             activeIndex: 0,
             carouselItems: [
-                { path: require('../../assets/img/bird.jpg') },
+                { path: require('../../assets/img/diy.jpg') },
                 { path: require('../../assets/img/mammal.jpg') },
                 { path: require('../../assets/img/fox.jpg') },
                 { path: require('../../assets/img/blossom.jpg') },
