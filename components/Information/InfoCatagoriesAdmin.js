@@ -9,6 +9,7 @@ import {
 
 import {createStackNavigator} from '@react-navigation/stack';
 import InformationAdminPage from './InformationAdminPage';
+import MapAdminPage from './MapsAdmin';
 
 let typeName = {
   type: 'none',
@@ -119,7 +120,7 @@ export function InfoCatagoriesScreen({navigation}) {
           <TouchableWithoutFeedback
             onPress={() => {
               typeName.type = 'Maps';
-              navigation.navigate('InfoAdminScreen');
+              navigation.navigate('MapAdminScreen');
             }}>
             <View style={styles.infoStyle}>
               <Image
@@ -151,6 +152,12 @@ function InfoAdmin() {
   return <InformationAdminPage dataType={typeName.type} />;
 }
 
+function MapAdmin() {
+  return <MapAdminPage/>;
+}
+
+
+
 const InfoStack = createStackNavigator();
 
 function InfoCatagoriesAdmin() {
@@ -165,6 +172,12 @@ function InfoCatagoriesAdmin() {
         options={{headerShown: false}}
         name="InfoAdminScreen"
         component={InfoAdmin}
+      />
+
+      <InfoStack.Screen
+        options={{headerShown: false}}
+        name="MapAdminScreen"
+        component={MapAdmin}
       />
     </InfoStack.Navigator>
   );
