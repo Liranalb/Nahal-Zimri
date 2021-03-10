@@ -217,11 +217,11 @@ function MapAdminScreen( { navigation }) {
                         })
                     }
                     <View style={{ width: "95%", alignSelf: 'center' }}>
-                        <Text style={{ marginTop: "3%" ,fontSize: 25, fontWeight: "bold", alignSelf: "center", alignItems: "center" }} >הוספת אירוע:</Text>
+                        <Text style={{ marginTop: "3%" ,fontSize: 25, fontWeight: "bold", alignSelf: "center", alignItems: "center" }} >הוספת מפה:</Text>
 
                         <View style={{ flexDirection: 'row' }}>
                             <  TextInput
-                                placeholder={"שם האירוע"}
+                                placeholder={"שם המפה"}
                                 style={styles.textInput}
                                 onChangeText={text => onChangeName(text)}
                                 value={name}
@@ -242,7 +242,7 @@ function MapAdminScreen( { navigation }) {
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
 
                             <  TextInput
-                                placeholder={"קישור להרשמה"}
+                                placeholder={"קישור למפה"}
                                 style={styles.textInput}
                                 onChangeText={text => onChangeLink(text)}
                                 value={link}
@@ -252,7 +252,7 @@ function MapAdminScreen( { navigation }) {
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
 
                             <  TextInput
-                                placeholder={"פרטי האירוע"}
+                                placeholder={"פרטי המפה"}
                                 multiline={true}
                                 style={styles.textInput}
                                 onChangeText={text => onChangeDetails(text)}
