@@ -24,17 +24,17 @@ function MapAdminScreen( { navigation }) {
 
         // setting the paths
         let imageID = "img" + key + ".jpg";
-        let dataPath = 'Events/eve' + key;
-        let storagePath = "Images/Events/" + imageID;
+        let dataPath = 'Maps/mapa' + key;
+        let storagePath = "Images/Maps/" + imageID;
 
         isLoading = true;
         let result = await uploadImage(storagePath);
 
         if (replace === true) {
 
-            storage.ref().child("Images/Events/" + imageID).getDownloadURL().then((url) => {
+            storage.ref().child("Images/Maps/" + imageID).getDownloadURL().then((url) => {
 
-                db.ref('Events/eve' + key + "/imageLink").set(url);
+                db.ref('Maps/mapa' + key + "/imageLink").set(url);
                 setLoaded(false);
 
             }).catch((error) => console.log(error))
@@ -59,10 +59,10 @@ function MapAdminScreen( { navigation }) {
             return -1;
         }
         else {
-            let eveId = 'eve' + keyID;
-            let dataPath = 'Events/eve' + keyID;
+            let eveId = 'mapa' + keyID;
+            let dataPath = 'Maps/mapa' + keyID;
             let imageID = "img" + keyID + ".jpg";
-            let storagePath = "Images/Events/" + imageID;
+            let storagePath = "Images/Maps/" + imageID;
             storage.ref().child(storagePath).getDownloadURL().then((url) => {
                 let newEve = {
                     name: name,
@@ -84,7 +84,7 @@ function MapAdminScreen( { navigation }) {
 
         let imageID = "img" + deleteID + ".jpg";
         console.log(deleteID);
-        var desertRef = storage.ref("Images").child('Events/' + imageID);
+        var desertRef = storage.ref("Images").child('Maps/' + imageID);
         //Delete the file
         desertRef.delete().then(function () {
             return 0;
@@ -101,7 +101,7 @@ function MapAdminScreen( { navigation }) {
     const [link, onChangeLink] = useState('');
     const [loaded, setLoaded] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
-    let eventsArray = [];
+    let mapsArray = [];
 
     function refreshPage() {
         onChangeName("");
@@ -122,7 +122,7 @@ function MapAdminScreen( { navigation }) {
 
     //load data
     let data = null;
-    db.ref('Events').on('value', function (snapshot) {
+    db.ref('Maps').on('value', function (snapshot) {
         const exist = (snapshot.val() !== null);
         if (exist) {
             data = snapshot.val();
@@ -134,7 +134,7 @@ function MapAdminScreen( { navigation }) {
     });
 
     let newPostKey = () => {
-        return db.ref().child('Events').push().key;
+        return db.ref().child('Maps').push().key;
     }
 
 
@@ -152,18 +152,18 @@ function MapAdminScreen( { navigation }) {
         }
     }, []);
 
-    let convertDataToArray = (data, eventsArray) => {
+    let convertDataToArray = (data, mapsArray) => {
         if (data === null)
             return null;
-        for (var event in data) {
-            if (data.hasOwnProperty(event)) {
-                eventsArray.push(data[event]);
+        for (var map in data) {
+            if (data.hasOwnProperty(map)) {
+                mapsArray.push(data[map]);
             }
         }
 
     }
 
-    convertDataToArray(data, eventsArray);
+    convertDataToArray(data, mapsArray);
 
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
@@ -176,7 +176,7 @@ function MapAdminScreen( { navigation }) {
                     refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
                     {
                         console.log("second"),
-                        eventsArray.map((item) => {
+                        mapsArray.map((item) => {
                             return (
                                 <View key={item.id} style={{marginTop:'2%'}}>
                                     <MapBoxAdmin imageUri={{ uri: item.imageLink }}
@@ -199,7 +199,7 @@ function MapAdminScreen( { navigation }) {
                                                 [
                                                     {
                                                         text: 'כן', onPress: () => {
-                                                            db.ref('Events/').child(item.id).remove();
+                                                            db.ref('Maps/').child(item.id).remove();
                                                             deleteImageFromStorage(item.id.slice(3)); //??
                                                             setLoaded({ loaded: false });
                                                         }
@@ -335,7 +335,7 @@ const styles = {
         alignSelf: "center",
         backgroundColor: "green",
         width: "75%",
-        height: "15%",
+        height: "25%",
         alignSelf: "center",
         marginTop: "5%",
         marginBottom: "10%",
