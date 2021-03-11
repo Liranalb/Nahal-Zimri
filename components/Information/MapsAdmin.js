@@ -59,20 +59,20 @@ function MapAdminScreen( { navigation }) {
             return -1;
         }
         else {
-            let eveId = 'mapa' + keyID;
+            let mapId = 'mapa' + keyID;
             let dataPath = 'Maps/mapa' + keyID;
             let imageID = "img" + keyID + ".jpg";
             let storagePath = "Images/Maps/" + imageID;
             storage.ref().child(storagePath).getDownloadURL().then((url) => {
-                let newEve = {
+                let newMap = {
                     name: name,
                     location: location,
                     details: details,
                     link: link,
-                    id: eveId,
+                    id: mapId,
                     imageLink: url
                 }
-                db.ref(dataPath).set(newEve);
+                db.ref(dataPath).set(newMap);
             }).catch((error) => console.log(error))
         }
 

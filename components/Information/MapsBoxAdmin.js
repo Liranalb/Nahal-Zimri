@@ -22,7 +22,6 @@ class MapBoxAdmin extends React.Component {
             nameText: this.props.name,
             locationText: this.props.location,
             detailsText: this.props.details,
-
             changed: false
         };
     }
@@ -31,7 +30,7 @@ class MapBoxAdmin extends React.Component {
         return (
 
             <View style={styles.containerStyle}>
-                <View style={{ flex: 1 }}>{console.log("nameee is :" + this.state.name )}
+                <View style={{ flex: 1 }}>{console.log("name is :" + this.state.name )}
                     <TouchableOpacity
                         onPress={this.props.onExpandPress}
                     >
@@ -96,7 +95,7 @@ class MapBoxAdmin extends React.Component {
                                 onPress={() => {
                                     if (this.state.changed) {
 
-                                        let dataPath = 'Events/' + this.props.id;
+                                        let dataPath = 'Maps/' + this.props.id;
                                         let updates = {};
                                         updates[dataPath + '/details'] = this.state.detailsText;
                                         updates[dataPath + '/location'] = this.state.locationText;
