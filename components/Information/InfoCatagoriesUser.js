@@ -9,7 +9,7 @@ import {
 } from "react-native"
 import InformationPage from "./InformationPage"
 import { createStackNavigator } from '@react-navigation/stack';
-
+import MapUserPage from './MapsUser';
 
 
 let typeName = {
@@ -122,7 +122,7 @@ export function InfoCatagoriesScreen({ navigation }) {
 
                     <TouchableWithoutFeedback onPress={() => {
                         typeName.type = "Maps";
-                        navigation.navigate('InfoAdminScreen')
+                        navigation.navigate('MapUserScreen')
                     }
                     }>
                         <View style={styles.infoStyle}>
@@ -162,6 +162,10 @@ function InfoUser() {
     );
 }
 
+function MapUser() {
+    return <MapUserPage/>;
+  }
+
 const InfoStack = createStackNavigator();
 
 function InfoCatagories() {
@@ -169,7 +173,8 @@ function InfoCatagories() {
         <InfoStack.Navigator initialRouteName="InfoCatScreen">
             <InfoStack.Screen options={{ headerShown: false }} name="InfoCatScreen" component={InfoCatagoriesScreen} />
             <InfoStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoUser} />
-
+            <InfoStack.Screen options={{headerShown: false}} name="MapUserScreen" component={MapUser}
+      />
         </InfoStack.Navigator>
     );
 }
