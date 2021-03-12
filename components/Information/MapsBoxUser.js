@@ -42,7 +42,7 @@ class MapBoxUser extends React.Component {
                     </View>
                     <TouchableOpacity onPress={() => { 
                         if(this.props.link === undefined)
-                            Alert.alert("", "אין פרטים נוספים לאירוע זה");
+                            Alert.alert("", "המפה אינה קיימת");
                         else
                             Linking.openURL(this.props.link); 
                         }}>
