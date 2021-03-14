@@ -192,7 +192,7 @@ function ReportsScreen({ navigation }) {
 
 
 
-                <View style={{ width: "100%", height: "14%" }}>
+                <View style={{ width: "100%"}}>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('repFo')}
                     >
@@ -301,20 +301,18 @@ const styles = {
         color: 'white',
         fontSize: 30,
         alignSelf: 'center',
-        marginTop: "7%"
+        marginTop: "7%",
+        textAlign: "center"
     },
 
     buttonStyle: {
-        width: "90%",
+        width: "95%",
         height: "100%",
-        borderColor: "black",
+        borderColor: "#FF8C37",
         borderWidth: 1,
         alignSelf: "center",
-        backgroundColor: "#424242",
-        
-        
-
-
+        backgroundColor: "#FF8C37",
+        borderRadius: 25,
     },
     CheckBoxContainerStyle: {
         borderColor: "#FFAF50",

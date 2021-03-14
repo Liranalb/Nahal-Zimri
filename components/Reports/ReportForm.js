@@ -194,8 +194,8 @@ class ReportForm extends Component {
 
 
         return (
-            <View style={{ height: "100%", width: "100%", backgroundColor: '#FAE5D3' }}>
-                <View style={{ width: "100%", height: "11%" }}>
+            <View style={{ height: "100%", width: "100%", backgroundColor: '#FAE5D3'}}>
+                <View style={{ width: "100%", height: "13%"}}>
 
                     <Header
                         backgroundColor='#FAE5D3'
@@ -205,7 +205,7 @@ class ReportForm extends Component {
                 <View style={{ backgroundColor: '#FAE5D3', height: "89%", width: "90%", alignSelf: 'center', marginTop: "2%"}}>
 
 
-                    <View style={{ width: "100%", height: "65%" }}>
+                    <View style={{ width: "100%", height: "64%" }}>
                         <ScrollView>
                             <Collapse>
                                 <CollapseHeader style={styles.typeStyle}>
@@ -956,43 +956,8 @@ class ReportForm extends Component {
                             </Collapse>
 
                             <Collapse>
-                                <CollapseHeader style={styles.typeStyle}>
-
-                                    <View style={styles.innerViewStyle}>
-                                        <Text style={styles.textStyleHeaders}>מפגעים</Text>
-                                    </View>
-
-
-                                </CollapseHeader>
-                                <CollapseBody>
-
-                                    <View style={styles.container}>
-                                        <View style={{ flex: 1 }}>
-                                            <Image source={require('../../assets/img/garbage.jpg')}
-                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                                            />
-                                        </View>
-                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
-                                            <View style={{ flex: 1 }}>
-                                                <CheckBox
-                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
-                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
-                                                    checked={this.state.checkItems['Five']}
-                                                    onPress={() => this.handlePress('Five', 'אחר', "פסולת")}
-                                                />
-                                            </View>
-                                            <View style={{ flex: 1 }}>
-                                                <Text style={styles.textStyle}>פסולת</Text>
-                                            </View>
-                                        </View>
-                                    </View>
-
-
-
-                                </CollapseBody>
 
                                 <CollapseHeader style={styles.typeStyle}>
-
                                     <View style={styles.innerViewStyle}>
                                         <Text style={styles.textStyleHeaders}>פריחה</Text>
                                     </View>
@@ -1467,6 +1432,45 @@ class ReportForm extends Component {
                                 </CollapseBody>
                             </Collapse>
 
+                            <Collapse>
+                                
+                                <CollapseHeader style={styles.typeStyle}>
+
+                                    <View style={styles.innerViewStyle}>
+                                        <Text style={styles.textStyleHeaders}>מפגעים</Text>
+                                    </View>
+
+
+                                </CollapseHeader>
+                                <CollapseBody>
+
+
+                                <View style={styles.container}>
+                                        <View style={{ flex: 1 }}>
+                                            <Image source={require('../../assets/img/garbage.jpg')}
+                                                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+                                            />
+                                        </View>
+                                        <View style={{ flex: 2, paddingRight: 10, flexDirection: 'row' }}>
+                                            <View style={{ flex: 1 }}>
+                                                <CheckBox
+                                                    checkedIcon={<IconA name="check" size={40} color="#48D347" />}
+                                                    uncheckedIcon={<IconA name="plus" size={40} color="#505050" />}
+                                                    checked={this.state.checkItems['Eight']}
+                                                    onPress={() => this.handlePress('Eight', 'אחר', "פסולת")}
+                                                />
+                                            </View>
+                                            <View style={{ flex: 1 }}>
+                                                <Text style={styles.textStyle}>פסולת</Text>
+                                            </View>
+                                        </View>
+
+                                        
+                                    </View>
+
+                                </CollapseBody>
+                            </Collapse>
+
 
                         </ScrollView>
                     </View>
@@ -1507,14 +1511,14 @@ class ReportForm extends Component {
 
 
                     </View>
-                    <View style={{ width: "100%", height: "14%", marginTop: "2%" }}>
+                    <View style={{ width: "100%", marginTop: "2%" }}>
                         <TouchableWithoutFeedback onPress={() => {
                             let result = sendData(this.state.body, this.state.type, this.state.genre,this.state.data);
                             if (result === 0)
                                 refreshPage();
 
                         }}>
-                            <View style={styles.buttonStyle}>
+                            <View style={styles.submitButtonStyle}>
                                 <Text style={styles.textStyleSendReport}>שלח דיווח</Text>
 
                             </View>
@@ -1537,21 +1541,23 @@ export default ReportForm;
 
 const styles = {
     typeStyle: {
+        marginTop: "0.5%",
         width: "100%",
-        height: 65,
-        borderWidth: 0.4,
-        borderColor: 'black'
+        height: 55,
+        borderColor: 'green'
     },
     innerViewStyle: {
         width: "100%",
         height: "100%",
-        backgroundColor: "green"
+        backgroundColor: "green",
+        justifyContent: 'center'
     },
     textStyleHeaders: {
         color: 'white',
         fontSize: 30,
         alignSelf: 'center',
-        marginTop: "5%"
+        alignItems: "center",
+        justifyContent: 'center'
     },
     textStyleSendReport: {
         color: 'white',
@@ -1563,15 +1569,14 @@ const styles = {
     checkBoxStyle: {
 
     },
-    buttonStyle: {
-        flex: 1,
-        borderColor: "#004577",
+    submitButtonStyle: {
+        width: "105%",
+        height: "100%",
+        borderColor: "#FF8C37",
         borderWidth: 1,
-        fontSize: 20,
-        width: "100%",
         alignSelf: "center",
-        overflow: 'hidden',
-        backgroundColor: "#424242"
+        backgroundColor: "#FF8C37",
+        borderRadius: 25,
 
     },
     textInputStyle: {
@@ -1586,13 +1591,13 @@ const styles = {
         marginTop: 10
     },
     container: {
-        height: 110,
+        height: 90,
         width: "100%",
         borderWidth: 0.8,
         borderColor: '#dddddd',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     textStyle: {
 
