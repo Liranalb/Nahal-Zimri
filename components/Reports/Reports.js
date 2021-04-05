@@ -179,8 +179,6 @@ function ReportsScreen({ navigation }) {
                                             )
                                         })
                                     }
-
-
                                 </ScrollView>
                             </View>
 
@@ -197,7 +195,7 @@ function ReportsScreen({ navigation }) {
                         onPress={() => navigation.navigate('repFo')}
                     >
                         <View style={styles.buttonStyle}>
-                            <Text style={styles.textStyleHeaders}>שלח דיווח</Text>
+                            <Text style={styles.textStyleHeaders}>שליחת דיווח</Text>
                         </View>
                     </TouchableOpacity>
 
