@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Linking } from 'react-native';
+import { View, StyleSheet, Linking, Image} from 'react-native';
 import {
     Avatar,
     Title,
@@ -20,16 +20,12 @@ export function DrawerContent(props) {
         <View style={{ flex: 1 }}>
             
             <DrawerContentScrollView {...props}>
-                <View style={styles.drawerContent}>
+            <View style={styles.drawerContent}>
                     <View style={styles.titleSection}>
-                        <View style={{ marginRight: '25%', flexDirection: 'column' }}>
-                            <View style={{ flexDirection: 'row', marginTop: 15 }}>
-                                <Title style={styles.title}>נחל זמרי</Title>
-
-                            </View>
+                        <View style={{ marginRight: '25%', marginTop: '8%', marginBottom: '6%', flexDirection: 'column' }}>
                             <Avatar.Image
-                                source={require('../assets/img/mammal.jpg')}
-                                size={110}
+                                source={require('../assets/img/logo3.png')}
+                                size={120}
                             />
                         </View>
                     </View>
@@ -83,7 +79,7 @@ export function DrawerContent(props) {
             </DrawerContentScrollView>
             <Drawer.Section style={styles.bottomDrawerSection}>
 
-                <DrawerItem style={{ flexDirection: 'row' }}
+                <DrawerItem style={{ }}
                     icon={({ color, size }) => (
                         <Icon
                             name="exit-to-app"
@@ -120,7 +116,7 @@ const styles = StyleSheet.create({
 
     },
     drawerItem: {
-        flexDirection: 'row',
+        //flexDirection: 'row',
         backgroundColor: '#FAD3B2'
     },
 
