@@ -197,7 +197,8 @@ function HomePageAdmin(){
     return(
         <NavigationContainer theme={MyTheme}>
         <DrawerR.Navigator initialRouteName="home" drawerPosition="right"
-         drawerStyle={{ width: '71%', alignItems: 'center' }} drawerContent={props => <DrawerContentAdmin {...props} />}>         
+        //  drawerStyle={{ width: '71%', alignItems: 'center' }} drawerContent={props => <DrawerContentAdmin {...props} />}>   
+        drawerStyle={{ width: '70%' }} drawerContent={props => <DrawerContentAdmin {...props} />}>      
         <DrawerR.Screen name="מסך הבית" component={HomePageAdminStack} />
  
       </DrawerR.Navigator>
