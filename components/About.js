@@ -1,5 +1,5 @@
-import React, { Component, useState, useEffect, useLayoutEffect } from "react"
-import { TextInput, Alert, ScrollView, Text, TouchableOpacity } from "react-native"
+import React, { useState } from "react"
+import { ScrollView, Text } from "react-native"
 import { View } from "native-base"
 import { db } from '../config/Firebase'
 import HeaderComp from "./explore/HeaderComp"
@@ -23,9 +23,6 @@ function AboutScreen({ navigation }) {
                 setLoaded(true);
                 setData({ Title: dataA.Title, Body: dataA.Body, SubTitle: dataA.SubTitle, ExtraBody: dataA.ExtraBody})
             }
-            //dataA.Body = dataA.Body.replace(/\\n/g,'\n');
-           
-
         }
     });
 
@@ -35,37 +32,28 @@ function AboutScreen({ navigation }) {
                 openUserProfile={() => navigation.navigate('Current')}
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
             />
-            <View style={{ width: "96%", height: '89%', alignSelf: 'center' }}>
+            <View style={{ width: "96%", height: '80%', alignSelf: 'center' }}>
+                
 
 
-                <View style={{ width: "90%", height: '20%', alignSelf: 'center' }}>
+                <View style={{ width: "90%", height: '15%', alignSelf: 'center' }}>
                     <Text style={{ fontSize: 25, fontWeight: 'bold', textAlign: 'center', marginTop: '10%', color: '#404040' }}>
                         {data.Title}
                     </Text>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginTop: '2%', color: '#404040' }}>
-                        {data.SubTitle}
-                    </Text>
+
                 </View>
                 <View style={styles.bodyStyle}>
                     <ScrollView showsVerticalScrollIndicator={false}>
-                        <Text style={{ fontSize: 16, fontFamily: '' }}>
+                        <Text style={{ fontSize: 16}}>
                             {data.Body}
-                        </Text>
-
-                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>קצת על האפליקציה : </Text>
-
-                        <Text style={{ fontSize: 16, padding: 0, textAlign: 'left' }}>
-
+                            {"\n\n"}
+                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>קצת על האפליקציה: </Text>
+                            {"\n"}
                             {data.ExtraBody}
                         </Text>
+
                     </ScrollView>
                 </View>
-
-
-
-
-
-
             </View>
 
         </View>
@@ -89,32 +77,14 @@ function About() {
 export default About;
 
 const styles = {
-    eventStyle: {
-        backgroundColor: "#F6D365",
-        borderColor: "#FFAF50",
-        overflow: 'hidden',
-        borderRadius: 15,
-        borderWidth: 2,
-        fontSize: 20,
-        marginTop: 10
-    },
-    imageStyle: {
-        marginTop: 10,
-        marginLeft: 10,
-        borderColor: "#FFAF50",
-        position: 'absolute',
-        borderWidth: 4,
-        height: "85%",
-        width: "30%"
-    },
+
     textStyle: {
         flexDirection: 'row-reverse'
     },
     textTitleStyle: {
         alignSelf: "center",
         fontWeight: "bold",
-        fontSize: 20,
-        marginLeft: 10
+        fontSize: 20
     },
     textDetailStyle: {
         fontWeight: "normal",
@@ -122,13 +92,9 @@ const styles = {
         alignSelf: "center"
     },
     bodyStyle: {
-        width: "85%",
-        height: '78%',
+        width: "95%",
+        height: '90%',
         alignSelf: 'center',
-
-        // borderRadius: 10,
-        // borderWidth: 1,
-        // borderColor: '#4A4A4A'
     }
 }
 
