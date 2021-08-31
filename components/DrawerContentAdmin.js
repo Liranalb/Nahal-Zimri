@@ -23,10 +23,6 @@ export function DrawerContentAdmin(props) {
                 <View style={styles.drawerContent}>
                     <View style={styles.titleSection}>
                         <View style={{ marginRight: '25%', marginTop: '8%', marginBottom: '6%', flexDirection: 'column' }}>
-                            {/* <View style={{ flexDirection: 'row', marginTop: 15 }}>
-                                <Title style={styles.title}>נחל זמרי</Title>
-
-                            </View> */}
                             <Avatar.Image
                                 source={require('../assets/img/logo3.png')}
                                 size={120}
