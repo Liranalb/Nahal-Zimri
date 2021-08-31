@@ -22,14 +22,14 @@ export function DrawerContentAdmin(props) {
             <DrawerContentScrollView {...props}>
                 <View style={styles.drawerContent}>
                     <View style={styles.titleSection}>
-                        <View style={{ marginRight: '25%', flexDirection: 'column' }}>
-                            <View style={{ flexDirection: 'row', marginTop: 15 }}>
+                        <View style={{ marginRight: '25%', marginTop: '8%', marginBottom: '6%', flexDirection: 'column' }}>
+                            {/* <View style={{ flexDirection: 'row', marginTop: 15 }}>
                                 <Title style={styles.title}>נחל זמרי</Title>
 
-                            </View>
+                            </View> */}
                             <Avatar.Image
-                                source={require('../assets/img/mammal.jpg')}
-                                size={110}
+                                source={require('../assets/img/logo3.png')}
+                                size={120}
                             />
                         </View>
                     </View>
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
 
     },
     drawerItem: {
-        flexDirection: 'row',
+        //flexDirection: 'row',
         backgroundColor: '#FAD3B2'
     },
 

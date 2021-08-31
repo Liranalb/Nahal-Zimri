@@ -272,7 +272,7 @@ function InfoAdminScreen({ navigation }) {
                 openUserProfile={() => navigation.navigate('Current')}
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
             />
-            <View style={{ width: "98%", height: "89%", alignSelf: 'center' }}>
+            <View style={{ width: "100%", height: "89%", alignSelf: 'center' }}>
                 <View style={{ flexDirection: 'row', width: "100%", height: "10.5%" }}>
 
                     <View style={styles.CheckBoxStyle}>
