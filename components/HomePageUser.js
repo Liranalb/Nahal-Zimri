@@ -209,7 +209,7 @@ export default function HomePageUser(){
     return(
         <NavigationContainer theme={MyTheme}>
         <DrawerR.Navigator initialRouteName="home" drawerPosition="right"
-         drawerStyle={{ width: '71%' ,alignItems: 'center'}} drawerContent={props => <DrawerContent {...props} />}>         
+         drawerStyle={{ width: '70%'}} drawerContent={props => <DrawerContent {...props} />}>         
         <DrawerR.Screen name="מסך הבית" component={HomePageUserStack} />
  
       </DrawerR.Navigator>

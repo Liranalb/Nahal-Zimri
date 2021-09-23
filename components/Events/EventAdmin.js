@@ -345,6 +345,7 @@ function EventAdmin() {
     return (
         <DrawerRep.Navigator initialRouteName="reports" drawerPosition="right"
             drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContentAdmin {...props} />}>
+            {/* //drawerStyle={{ width: '71%', alignItems: 'center' }} drawerContent={props => <DrawerContentAdmin {...props} />}>   */}
             <DrawerRep.Screen name="eventPage" component={EventAdminScreen} />
 
         </DrawerRep.Navigator>
