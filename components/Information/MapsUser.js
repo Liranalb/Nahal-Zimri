@@ -19,7 +19,6 @@ function MapUserScreen({ navigation }) {
     let mapsArray = [];
     const [loaded, setLoaded] = useState(false);
 
-
     //load data
     let data = null;
     db.ref('Maps').on('value', function (snapshot) {
@@ -33,13 +32,11 @@ function MapUserScreen({ navigation }) {
         }
     });
 
-
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
 
         wait(1000).then(() => setRefreshing(false));
     }, [refreshing]);
-
 
     let convertDataToArray = (data, mapsArray) => {
         if (data === null)
@@ -55,7 +52,7 @@ function MapUserScreen({ navigation }) {
     convertDataToArray(data, mapsArray);
 
     return (
-        <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3'}}>
+        <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
             <HeaderComp
                 openUserProfile={() => navigation.navigate('Current')}
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
@@ -96,7 +93,6 @@ function MapUserPage() {
     );
 }
 
-
 export default MapUserPage;
 
 const styles = {
@@ -133,5 +129,4 @@ const styles = {
         alignSelf: "center"
     }
 }
-
 

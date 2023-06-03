@@ -9,9 +9,6 @@
 
 <CollapseBody>
 
-
-
-
     <View style={styles.container}>
         <View style={{ flex: 1 }}>
             <Image source={require('../../assets/img/bird.jpg')}
@@ -32,7 +29,6 @@
             </View>
         </View>
     </View>
-
 
     <View style={styles.container}>
         <View style={{ flex: 1 }}>
@@ -85,7 +81,6 @@
     <View style={styles.innerViewStyle}>
         <Text style={styles.textStyleHeaders}>יונקים</Text>
     </View>
-
 
 </CollapseHeader>
 <CollapseBody>
@@ -153,7 +148,6 @@
         </View>
     </View>
 
-
 </CollapseBody>
 
 </Collapse>
@@ -163,7 +157,6 @@
     <View style={styles.innerViewStyle}>
         <Text style={styles.textStyleHeaders}>זוחלים</Text>
     </View>
-
 
 </CollapseHeader>
 <CollapseBody>
@@ -188,7 +181,6 @@
             </View>
         </View>
     </View>
-
 
 <View style={styles.container}>
         <View style={{ flex: 1 }}>
@@ -411,13 +403,11 @@
 
 </Collapse>
 
-
 <Collapse>
 <CollapseHeader style={styles.typeStyle}>
     <View style={styles.innerViewStyle}>
         <Text style={styles.textStyleHeaders}>פרפרים</Text>
     </View>
-
 
 </CollapseHeader>
 <CollapseBody>
@@ -443,7 +433,6 @@
         </View>
     </View>
 
-
             <View style={styles.container}>
         <View style={{ flex: 1 }}>
             <Image source={require('../../assets/img/hasparit_hanashran.jpg')}
@@ -464,7 +453,6 @@
             </View>
         </View>
     </View>
-
 
     <View style={styles.container}>
         <View style={{ flex: 1 }}>
@@ -549,7 +537,6 @@
             </View>
         </View>
     </View>
-
 
     <View style={styles.container}>
         <View style={{ flex: 1 }}>
@@ -656,7 +643,6 @@
         </View>
     </View>
 
-
     <View style={styles.container}>
         <View style={{ flex: 1 }}>
             <Image source={require('../../assets/img/nimpit_hadardar.jpg')}
@@ -741,7 +727,6 @@
         </View>
     </View>
 
-
 </CollapseBody>
 
 </Collapse>
@@ -753,10 +738,8 @@
         <Text style={styles.textStyleHeaders}>פריחה</Text>
     </View>
 
-
 </CollapseHeader>
 <CollapseBody>
-
 
 <View style={styles.container}>
         <View style={{ flex: 1 }}>
@@ -1218,8 +1201,6 @@
     
         
 
-
-
 </CollapseBody>
 </Collapse>
 
@@ -1231,10 +1212,8 @@
         <Text style={styles.textStyleHeaders}>מפגעים</Text>
     </View>
 
-
 </CollapseHeader>
 <CollapseBody>
-
 
 <View style={styles.container}>
         <View style={{ flex: 1 }}>

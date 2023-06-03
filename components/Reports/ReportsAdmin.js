@@ -11,9 +11,6 @@ import ReportsFullComp from './ReportsFullComp'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContentAdmin } from "../DrawerContentAdmin";
 
-
-
-
 let dataType, currItem, isCheckOn = false;
 
 function wait(timeout) {
@@ -54,7 +51,6 @@ export function ReportsAdminScreen({ navigation }) {
             console.log("delete failed:  " + error);
         });
     }
-
 
     let convertDataToArray = (data, reportsArray) => {
 
@@ -111,7 +107,6 @@ export function ReportsAdminScreen({ navigation }) {
 
     convertDataToArray(data, reportsArray);
 
-
     return (
         <View style={styles.mainView}>
 
@@ -119,7 +114,6 @@ export function ReportsAdminScreen({ navigation }) {
                 openUserProfile={() => navigation.navigate('Current')}
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
             />
-
 
             <View style={styles.singleReport}>
                 <View style={{ flexDirection: 'row', width: "100%", height: "9%" }}>
@@ -170,7 +164,6 @@ export function ReportsAdminScreen({ navigation }) {
                                     showsHorizontalScrollIndicator={false}
                                 >
                                     {reportsArray.map((item) => {
-
 
                                         if (item.Approved)
                                             approvedText = "מאושר"
@@ -226,8 +219,6 @@ export function ReportsAdminScreen({ navigation }) {
                     </ScrollView>
                 </View>
 
-
-
                 <View style={{ width: "100%", height: "14%" }}>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('repFo')}
@@ -238,7 +229,6 @@ export function ReportsAdminScreen({ navigation }) {
                     </TouchableOpacity>
 
                 </View>
-
 
             </View>
 
@@ -262,7 +252,6 @@ function ReportsFullCompFunc({ navigation }) {
         />
     );
 }
-
 
 const repAdminStack = createStackNavigator();
 const DrawerRep = createDrawerNavigator();
@@ -292,8 +281,6 @@ function ReportsAdmin() {
     );
 }
 
-
-
 export default ReportsAdmin;
 
 const styles = {
@@ -309,7 +296,6 @@ const styles = {
         height: "93%",
         marginTop: "2%"
     },
-
 
     textInputStyle: {
         backgroundColor: "#D7D8D7",
@@ -347,13 +333,11 @@ const styles = {
         
         
 
-
     },
     CheckBoxContainerStyle: {
         borderColor: "#FFAF50",
         borderWidth: 1,
         backgroundColor: '#F4D5A7'
     }
-
 
 }

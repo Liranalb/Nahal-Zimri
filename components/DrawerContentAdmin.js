@@ -14,11 +14,9 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import firebase from "../config/Firebase"
 
 export function DrawerContentAdmin(props) {
-
-
     return (
         <View style={{ flex: 1 }}>
-            
+
             <DrawerContentScrollView {...props}>
                 <View style={styles.drawerContent}>
                     <View style={styles.titleSection}>
@@ -44,34 +42,31 @@ export function DrawerContentAdmin(props) {
                             onPress={() => { props.navigation.navigate('InfAd') }}
                         />
                         <DrawerItem style={styles.drawerItem}
-                        label="דיווח תצפית"
-                        labelStyle={styles.drawerLable}
-                        onPress={() => { props.navigation.navigate('Reports') }}
-                        />
-
-                        <DrawerItem style={styles.drawerItem}
-
-                        label="אודות נחל זמרי"
-                        onPress={() => { props.navigation.navigate('AboutAdmin') }}
-                        labelStyle={styles.drawerLable}
+                            label="דיווח תצפית"
+                            labelStyle={styles.drawerLable}
+                            onPress={() => { props.navigation.navigate('Reports') }}
                         />
                         <DrawerItem style={styles.drawerItem}
-                        label="טבע ומורשת בפסגת זאב"
-                        onPress={() => { props.navigation.navigate('AboutPZAdmin') }}
-                        labelStyle={styles.drawerLable}
-                    />
-
+                            label="אודות נחל זמרי"
+                            onPress={() => { props.navigation.navigate('AboutAdmin') }}
+                            labelStyle={styles.drawerLable}
+                        />
                         <DrawerItem style={styles.drawerItem}
-
-                        label="פייסבוק"
-                        labelStyle={{ color: '#3b5998', fontWeight: "bold", fontSize: 18 }}
-                        onPress={() => { Linking.openURL('https://www.facebook.com/NahalZimri') }}
+                            label="טבע ומורשת בפסגת זאב"
+                            onPress={() => { props.navigation.navigate('AboutPZAdmin') }}
+                            labelStyle={styles.drawerLable}
                         />
                         <DrawerItem style={styles.drawerItem}
 
-                        label="אינסטגרם"
-                        onPress={() => { Linking.openURL('https://www.instagram.com/nahalzimri/') }}
-                        labelStyle={{ color: '#fe4164', fontWeight: "bold", fontSize: 18 }}
+                            label="פייסבוק"
+                            labelStyle={{ color: '#3b5998', fontWeight: "bold", fontSize: 18 }}
+                            onPress={() => { Linking.openURL('https://www.facebook.com/NahalZimri') }}
+                        />
+                        <DrawerItem style={styles.drawerItem}
+
+                            label="אינסטגרם"
+                            onPress={() => { Linking.openURL('https://www.instagram.com/nahalzimri/') }}
+                            labelStyle={{ color: '#fe4164', fontWeight: "bold", fontSize: 18 }}
                         />
                     </Drawer.Section>
 
@@ -89,9 +84,7 @@ export function DrawerContentAdmin(props) {
                     )}
                     label="התנתק"
                     onPress={() => firebase.auth().signOut()}
-
                 />
-
             </Drawer.Section>
         </View>
     );
@@ -100,8 +93,6 @@ export function DrawerContentAdmin(props) {
 const styles = StyleSheet.create({
     drawerContent: {
         flex: 1
-
-
     },
     titleSection: {
         paddingLeft: 20,
@@ -110,26 +101,21 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 25,
-        //color: '#FF8C37',
         fontWeight: 'bold',
         paddingBottom: 3
 
     },
     drawerItem: {
-        //flexDirection: 'row',
         backgroundColor: '#FAD3B2'
     },
-
 
     bottomDrawerSection: {
         marginBottom: 15,
         borderTopColor: '#f4f4f4',
-        borderTopWidth: 1,
-        
+        borderTopWidth: 1
     },
     drawerLable: {
         fontWeight: "bold",
         fontSize: 18
     }
-
 });

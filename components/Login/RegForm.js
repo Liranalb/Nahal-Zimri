@@ -1,10 +1,9 @@
 import React, { Component } from "react" //import react library
 import { Keyboard, Image, TextInput, Button, Alert, Switch, Text } from "react-native"
-import {View } from "native-base"
+import { View } from "native-base"
 import firebase, { auth } from "../../config/Firebase"
 import { DotIndicator } from "react-native-indicators"
 import { color } from "react-native-reanimated"
-
 
 let mailValidationExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 let phoneValidationExp = /^0?([5]{1}\d{8})$/; // check if landline is needed /^0?(([23489]{1}\d{7})|[5]{1}\d{8})$/
@@ -25,16 +24,16 @@ class RegForm extends Component {
       currentUserState: {}
     }
   }
-  
+
 
   addUserToFire() {
     if (this.state.email === '' ||
-         this.state.password === '' ||
-         this.state.displayName === '' ||
-         this.state.surname === '')       Alert.alert('יש למלא את כל הפרטים')
+      this.state.password === '' ||
+      this.state.displayName === '' ||
+      this.state.surname === '') Alert.alert('יש למלא את כל הפרטים')
 
-    else if (phoneValidationExp.test(this.state.phone) === false) 
-        alert('מספר הטלפון שהוכנס אינו תקין')
+    else if (phoneValidationExp.test(this.state.phone) === false)
+      alert('מספר הטלפון שהוכנס אינו תקין')
 
     else if (mailValidationExp.test(this.state.email) === false)
       Alert.alert('כתובת המייל שהוזנה אינה תקינה')
@@ -76,17 +75,17 @@ class RegForm extends Component {
             password: '',
             surname: '',
             phone: '',
-            
+
             verificationState: true,
             currentUserState: auth.currentUser
           })
 
         })
-        .catch ( (error) => {
+        .catch((error) => {
           var errorCode = error.code;
-          console.log("The error is: "+ errorCode);
+          console.log("The error is: " + errorCode);
           if (errorCode == "auth/email-already-in-use")
-              Alert.alert("האימייל שהזנת בשימוש, נא בחר אימייל אחר");
+            Alert.alert("האימייל שהזנת בשימוש, נא בחר אימייל אחר");
         })
     }
     this.setState({
@@ -108,7 +107,6 @@ class RegForm extends Component {
       { cancelable: false }
     )
 
-
   }
 
   onLoginFail() {
@@ -120,8 +118,6 @@ class RegForm extends Component {
       { cancelable: false }
     )
   }
-
-
 
   renderButton() {
     if (this.state.loading) {
@@ -144,7 +140,7 @@ class RegForm extends Component {
     )
   }
 
-  
+
   ShowComponent = () => this.setState({ show: false });
   HideComponent = () => this.setState({ show: true });
 
@@ -163,8 +159,6 @@ class RegForm extends Component {
     this.keyboardDidShowListener.remove();
   }
 
-
-
   updateInputVal = (val, prop) => {
     const state = this.state;
     state[prop] = val;
@@ -173,7 +167,7 @@ class RegForm extends Component {
 
   onChangeFunction(newState) {
     this.setState(newState);
-}
+  }
 
   render() {
     return (
@@ -192,7 +186,7 @@ class RegForm extends Component {
           <TextInput
             style={styles.TextInputStyle}
             placeholder={"שם פרטי"}
-            placeholderTextColor="#FF8C37"        
+            placeholderTextColor="#FF8C37"
             autoCorrect={false}
             onPress={this.ShowHideComponent}
             onChangeText={(val) => this.updateInputVal(val, 'displayName')}
@@ -203,7 +197,7 @@ class RegForm extends Component {
         <View style={styles.inputView}>
 
           <TextInput
-            style={styles.TextInputStyle}  
+            style={styles.TextInputStyle}
             placeholder={"שם משפחה"}
             placeholderTextColor="#FF8C37"
             autoCorrect={false}
@@ -228,7 +222,6 @@ class RegForm extends Component {
         </View>
 
         <View style={styles.inputView}>
-
 
           <TextInput
             style={styles.TextInputStyle}
@@ -257,30 +250,27 @@ class RegForm extends Component {
           />
         </View>
 
-        
-        
+
+
         <View style={styles.container}>
 
-        
-            <View style={{flexDirection:"row"}}>
-              <Switch
-              style={{ transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }] }}
-                trackColor={{ false: "#dark-gray", true: "#FF8C37" }}
-                thumbColor={this.state.regToUpdates ? 'white' : "#f4f3f4"}
-               
-                onValueChange={(value) => this.onChangeFunction({regToUpdates: value})}
-                    value={this.state.regToUpdates}
-              />
-            <Text style={{color:'#FF8C37', fontSize: 15, fontWeight: 'bold'}}>      הרשמה לעדכונים(לא ישלח ספאם)
-            </Text>
-            </View>
 
+          <View style={{ flexDirection: "row" }}>
+            <Switch
+              style={{ transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }] }}
+              trackColor={{ false: "#dark-gray", true: "#FF8C37" }}
+              thumbColor={this.state.regToUpdates ? 'white' : "#f4f3f4"}
+
+              onValueChange={(value) => this.onChangeFunction({ regToUpdates: value })}
+              value={this.state.regToUpdates}
+            />
+            <Text style={{ color: '#FF8C37', fontSize: 15, fontWeight: 'bold' }}>      הרשמה לעדכונים(לא ישלח ספאם)
+            </Text>
+          </View>
 
         </View>
 
         <View>{this.renderButton()}</View>
-
-
 
       </View>
     )
@@ -309,7 +299,7 @@ const styles = {
     textAlign: "center"
 
   },
-  
+
   buttonStyle: {
     backgroundColor: "#FF8C37",
     borderColor: "#FF8C37",
@@ -338,7 +328,7 @@ const styles = {
   },
 
   container: {
-    
+
     marginTop: "5%",
     alignItems: "center",
     justifyContent: "center",

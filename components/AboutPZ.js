@@ -3,8 +3,6 @@ import { TextInput, Alert, ScrollView, Text, TouchableOpacity } from "react-nati
 import { View } from "native-base"
 import { db } from '../config/Firebase'
 import HeaderComp from "./explore/HeaderComp"
-//import firebase from "../config/Firebase"
-
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContent } from "./DrawerContent";
@@ -13,7 +11,6 @@ function AboutScreenPZ({ navigation }) {
     const [loaded, setLoaded] = useState(false);
     const [data, setData] = useState({ Title: '', Body: '', SubTitle: '', ExtraBody: '' });
 
-
     db.ref('AboutPZ').once('value', function (snapshot) {
         const exist = (snapshot.val() !== null);
         if (exist) {
@@ -21,9 +18,8 @@ function AboutScreenPZ({ navigation }) {
             console.log("data loaded: " + loaded);
             if (loaded === false) {
                 setLoaded(true);
-                setData({ Title: dataA.Title, Body: dataA.Body, SubTitle: dataA.SubTitle, ExtraBody: dataA.ExtraBody})
+                setData({ Title: dataA.Title, Body: dataA.Body, SubTitle: dataA.SubTitle, ExtraBody: dataA.ExtraBody })
             }
-
         }
     });
 
@@ -56,14 +52,7 @@ function AboutScreenPZ({ navigation }) {
                         </Text>
                     </ScrollView>
                 </View>
-
-
-
-
-
-
             </View>
-
         </View>
     )
 }
@@ -71,7 +60,6 @@ function AboutScreenPZ({ navigation }) {
 const DrawerAboutPZ = createDrawerNavigator();
 
 function AboutPZ() {
-
     return (
         <DrawerAboutPZ.Navigator initialRouteName="aboutpz" drawerPosition="right"
             drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
@@ -121,11 +109,7 @@ const styles = {
         //backgroundColor: '#FF8C37',
         width: "85%",
         height: '78%',
-        alignSelf: 'center',
-
-        // borderRadius: 10,
-        // borderWidth: 1,
-        // borderColor: '#4A4A4A'
+        alignSelf: 'center'
     }
 }
 

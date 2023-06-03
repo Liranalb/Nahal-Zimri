@@ -1,7 +1,7 @@
-import React, {  useState } from "react"
+import React, { useState } from "react"
 import { createStackNavigator } from '@react-navigation/stack'
 import { View } from "native-base"
-import {RefreshControl, ScrollView, TouchableWithoutFeedback } from "react-native"
+import { RefreshControl, ScrollView, TouchableWithoutFeedback } from "react-native"
 import HeaderComp from "../explore/HeaderComp"
 import NewOpenRoute from "./NewOpenRoute"
 import { db } from '../../config/Firebase'
@@ -19,7 +19,6 @@ function wait(timeout) {
 }
 
 function RoutesUserScreen({ navigation }) {
-
     let currentType = dataType;
     let routesArray = [];
     const [loaded, setLoaded] = useState(false);
@@ -34,10 +33,8 @@ function RoutesUserScreen({ navigation }) {
             console.log("data loaded: " + loaded);
             if (loaded === false)
                 setLoaded(true);
-
         }
     });
-
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
@@ -56,24 +53,21 @@ function RoutesUserScreen({ navigation }) {
                 }
             }
         }
-
     }
 
     convertDataToArray(data, routesArray);
-
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
             <HeaderComp
                 openUserProfile={() => navigation.navigate('Current')}
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
             />
-            <View style={{width:"96%", height:"100%", alignSelf: 'center'}}>
+            <View style={{ width: "96%", height: "100%", alignSelf: 'center' }}>
                 <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
                     {
-
                         routesArray.map((item) => {
                             return (
-                                <View key={item.id} style={{ marginTop: "2%"}}>
+                                <View key={item.id} style={{ marginTop: "2%" }}>
                                     <TouchableWithoutFeedback onPress={() => {
                                         navigation.navigate('newOpRo');
                                         currItem = item;
@@ -86,7 +80,6 @@ function RoutesUserScreen({ navigation }) {
                                                 duration={item.duration}
                                                 type={item.type}
                                                 details={item.details}
-                                                
                                             />
                                         </View>
                                     </TouchableWithoutFeedback>
@@ -113,7 +106,6 @@ function NewOpenRouteScreen({ navigation }) {
             name={currItem.name}
             type={currItem.type}
             onCrossPress={() => navigation.goBack()}
-
         />
     );
 }
@@ -122,16 +114,11 @@ const logStack = createStackNavigator();
 const DrawerRoute = createDrawerNavigator();
 
 function RoutesUserStack() {
-
-
-
     return (
         <logStack.Navigator initialRouteName="routesU">
             <logStack.Screen options={{ headerShown: false }} name="routesU" component={RoutesUserScreen} />
-
             <logStack.Screen name="newOpRo" options={{ headerShown: false }}
                 component={NewOpenRouteScreen} />
-
         </logStack.Navigator>
     );
 }
@@ -142,15 +129,12 @@ function RoutesUser(props) {
         <DrawerRoute.Navigator initialRouteName="reports" drawerPosition="right"
             drawerStyle={{ width: '71%' }} drawerContent={props => <DrawerContent {...props} />}>
             <DrawerRoute.Screen name="reports" component={RoutesUserStack} />
-
         </DrawerRoute.Navigator>
 
     );
 }
 
-
 export default RoutesUser;
-
 const styles = {
     routeStyle: {
         backgroundColor: "#F6D365",

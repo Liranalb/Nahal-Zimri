@@ -11,18 +11,15 @@ import InformationPage from "./InformationPage"
 import { createStackNavigator } from '@react-navigation/stack';
 import MapUserPage from './MapsUser';
 
-
 let typeName = {
     type: "none"
 };
-
 
 export function InfoCatagoriesScreen({ navigation }) {
     return (
         <View style={{ width: "100%", height: "100%" }}>
             <ImageBackground source={require('../../assets/img/homePageAdmin_background.jpg')}
                 style={{ flex: 1, resizeMode: 'cover' }}>
-
 
                 <View style={styles.rowStyle1}>
                     <TouchableWithoutFeedback
@@ -62,9 +59,7 @@ export function InfoCatagoriesScreen({ navigation }) {
 
                 </View>
 
-
                 <View style={styles.rowStyle2}>
-
 
                     <TouchableWithoutFeedback onPress={() => {
                         typeName.type = "Arch";
@@ -136,16 +131,13 @@ export function InfoCatagoriesScreen({ navigation }) {
                         </View>
                     </TouchableWithoutFeedback>
 
-
                 </View>
-
 
                 <TouchableWithoutFeedback
                     onPress={() => {
                         navigation.goBack();
                     }}>
                     <View style={{ flex: 1 }}>
-
 
                     </View>
                 </TouchableWithoutFeedback>
@@ -163,8 +155,8 @@ function InfoUser() {
 }
 
 function MapUser() {
-    return <MapUserPage/>;
-  }
+    return <MapUserPage />;
+}
 
 const InfoStack = createStackNavigator();
 
@@ -173,14 +165,13 @@ function InfoCatagories() {
         <InfoStack.Navigator initialRouteName="InfoCatScreen">
             <InfoStack.Screen options={{ headerShown: false }} name="InfoCatScreen" component={InfoCatagoriesScreen} />
             <InfoStack.Screen options={{ headerShown: false }} name="InfoAdminScreen" component={InfoUser} />
-            <InfoStack.Screen options={{headerShown: false}} name="MapUserScreen" component={MapUser}
-      />
+            <InfoStack.Screen options={{ headerShown: false }} name="MapUserScreen" component={MapUser}
+            />
         </InfoStack.Navigator>
     );
 }
 
 export default InfoCatagories;
-
 
 const styles = {
     rowStyle1: {
@@ -215,7 +206,6 @@ const styles = {
         marginRight: 14,
         marginLeft: 8
 
-
     },
     infoStyle2: {
         backgroundColor: "#F0B27A",
@@ -228,7 +218,6 @@ const styles = {
         height: "100%",
         marginRight: 14,
         marginLeft: "28%"
-
 
     },
     textStyle: {

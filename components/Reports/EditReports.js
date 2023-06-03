@@ -22,23 +22,23 @@ class EditReports extends Component {
             genre: this.props.type,
             changed: false,
             approvedState: this.props.approved,
-            
+
         };
 
     }
-    
+
     _onHideUnderlay() {
         this.setState({ pressStatus: false });
     }
     _onShowUnderlay() {
         this.setState({ pressStatus: true });
     }
-    
+
     render() {
         return (
 
             <View style={{ height: 390, width: 175, marginLeft: 10, borderWidth: 0.8, borderColor: '#FFAF50', backgroundColor: '#F4D5A7' }}>
-{console.log("rendered")}
+                {console.log("rendered")}
                 <View style={{ height: '40%' }}>
                     <TouchableWithoutFeedback onPress={this.props.onExpand}>
 
@@ -56,7 +56,7 @@ class EditReports extends Component {
                             defaultValue={this.props.catagory}
                             numberOfLines={1}
                             onChangeText={(catagoryText) => this.setState({ catagoryText: catagoryText, changed: true })}
-                            style={{ fontSize: 18 ,paddingVertical: 0}}
+                            style={{ fontSize: 18, paddingVertical: 0 }}
                         />
 
                     </View>
@@ -64,7 +64,7 @@ class EditReports extends Component {
                     <View style={{ height: "66%" }}>
                         <ScrollView>
                             <TextInput
-                                style={{paddingVertical: 0}}
+                                style={{ paddingVertical: 0 }}
                                 defaultValue={this.props.body}
                                 multiline
                                 onChangeText={(bodyText) => this.setState({ bodyText: bodyText, changed: true })}
@@ -72,7 +72,6 @@ class EditReports extends Component {
                         </ScrollView>
                     </View>
                     <Divider />
-
 
                     <View style={{ height: "10%" }}>
                         <Text
@@ -117,12 +116,12 @@ class EditReports extends Component {
                     </View>
 
                     <View style={styles.editApprove}>
-                        
+
                         <TouchableHighlight
                             onPress={() => {
                                 this.setState({ approvedState: (!this.state.approvedState) })
-                                db.ref('Reports/'+this.props.id).child('Approved').set(!this.state.approvedState);
-                                console.log('Reports/'+this.props.id+'/Approved');
+                                db.ref('Reports/' + this.props.id).child('Approved').set(!this.state.approvedState);
+                                console.log('Reports/' + this.props.id + '/Approved');
                             }}
                             activeOpacity={1}
                             style={
@@ -130,7 +129,7 @@ class EditReports extends Component {
                                     ? styles.buttonPress
                                     : styles.button
                             }
-                        
+
                         >
                             <Text
                                 style={
@@ -161,10 +160,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     editApprove: {
-         width:"33.3%",
-         height:"98%",
-         marginRight:"2%",
-         
+        width: "33.3%",
+        height: "98%",
+        marginRight: "2%",
+
     },
     editButtons: {
         paddingRight: 1,
@@ -176,27 +175,27 @@ const styles = StyleSheet.create({
         backgroundColor: "gray",
         borderWidth: 1,
         borderRadius: 2,
-        height:"100%"
-        
+        height: "100%"
+
     },
     buttonPress: {
-        
+
         backgroundColor: "green",
         borderRadius: 2,
-        height:"100%"
-        
+        height: "100%"
+
     },
     welcome: {
         fontSize: 14,
         textAlign: "center",
-        
+
         color: "#000066"
     },
     welcomePress: {
         fontSize: 15,
         textAlign: "center",
-        marginTop:'10%',
-        
+        marginTop: '10%',
+
         color: "#ffffff"
     }
 

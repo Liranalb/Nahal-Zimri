@@ -12,55 +12,40 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContentAdmin } from "../DrawerContentAdmin";
 import Icon from 'react-native-vector-icons/Entypo';
 import NewOpenRouteAdmin from "./NewOpenRouteAdmin";
-
 let currItem;
 let currImg;
 let dataType;
-
 let photoUploaded = false, replace = false;
 let isLoading = false;
 let keyID;
-
 function wait(timeout) {
     return new Promise(resolve => {
         setTimeout(resolve, timeout);
     });
 }
-
 function AdminRoutesScreen({ navigation }) {
-
     async function pressPhoto(key) {
-
         // setting the paths
         let imageID = "img" + key + ".jpg";
         let storagePath = "Images/Routes/" + imageID;
         isLoading = true;
         let result = await uploadImage(storagePath);
 
-       
-
         isLoading = false;
-
         if (result === -1) {
             return -1;
-
         }
         else {
             photoUploaded = true;
         }
         if (replace === true) {
-
             storage.ref().child("Images/Routes/" + imageID).getDownloadURL().then((url) => {
-
                 db.ref('Routes/rou' + key + "/imageLink").set(url);
                 setLoaded(false);
-
             }).catch((error) => console.log(error))
             replace = false;
             photoUploaded = false;
         }
-
-
     }
     function sendData(name, mark, level, type, details, animals, duration, km) {
         if (photoUploaded === false) {
@@ -92,13 +77,9 @@ function AdminRoutesScreen({ navigation }) {
                 db.ref(dataPath).set(newRou);
             }).catch((error) => console.log(error))
         }
-
         return 0;
     }
-
-
     let deleteImageFromStorage = (deleteID) => {
-
         let imageID = "img" + deleteID + ".jpg";
         var desertRef = storage.ref("Images").child('Routes/' + imageID);
         //Delete the file
@@ -109,8 +90,6 @@ function AdminRoutesScreen({ navigation }) {
             return -1;
         });
     }
-
-
     const [name, onChangeName] = useState('');
     const [mark, onChangeMark] = useState('');
     const [level, onChangeLevel] = useState('');
@@ -124,7 +103,6 @@ function AdminRoutesScreen({ navigation }) {
     const [refreshing, setRefreshing] = useState(false);
     let routesArray = [];
     let currentType = dataType;
-
     function refreshPage() {
         onChangeName("");
         onChangeMark("");
@@ -139,13 +117,10 @@ function AdminRoutesScreen({ navigation }) {
         keyID = newPostKey();
         photoUploaded = false;
     }
-
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-
         wait(1000).then(() => setRefreshing(false));
     }, [refreshing]);
-
     let data = null;
     db.ref('Routes').on('value', function (snapshot) {
         const exist = (snapshot.val() !== null);
@@ -154,22 +129,15 @@ function AdminRoutesScreen({ navigation }) {
             console.log("data loaded: " + loaded);
             if (loaded === false)
                 setLoaded(true);
-
         }
     });
-
-
     let newPostKey = () => {
         return db.ref().child('Routes').push().key;
     }
-
-
-
     // on mount
     useEffect(() => {
         keyID = newPostKey();
         console.log("Produced key:  " + keyID);
-
     }, []);
     // on unmount
     useEffect(() => {
@@ -178,7 +146,6 @@ function AdminRoutesScreen({ navigation }) {
                 deleteImageFromStorage(keyID);
         }
     }, []);
-
     let convertDataToArray = (data, routesArray) => {
         if (data === null)
             return null;
@@ -186,15 +153,11 @@ function AdminRoutesScreen({ navigation }) {
             if (data.hasOwnProperty(route)) {
                 if (data[route].PathType === currentType) {
                     routesArray.push(data[route]);
-
                 }
             }
         }
-
     }
-
     convertDataToArray(data, routesArray);
-
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
             <HeaderComp
@@ -220,7 +183,6 @@ function AdminRoutesScreen({ navigation }) {
                                             onReplaceImagePress={() => {
                                                 replace = true;
                                                 deleteImageFromStorage(item.id.slice(3)); //??
-
                                                 pressPhoto(item.id.slice(3)); //??
                                             }}
                                             onDelete={() => {
@@ -244,7 +206,7 @@ function AdminRoutesScreen({ navigation }) {
                                                 );
                                             }
                                             }
-                                            onExpandPress = {() => {
+                                            onExpandPress={() => {
                                                 currItem = item;
                                                 navigation.navigate("newOpRo");
                                             }}
@@ -256,21 +218,16 @@ function AdminRoutesScreen({ navigation }) {
                         )
                     })
                 }
-
-
                 <View style={{ width: "95%", alignSelf: 'center' }}>
                     <Text style={{ fontSize: 18, fontWeight: "bold", alignSelf: "center", alignItems: "center" }} >הוספת מסלול:</Text>
-
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={styles.textAddStyle}>שם המסלול: </Text>
                         <  TextInput
                             style={styles.textInput}
                             onChangeText={text => onChangeName(text)}
                             value={name}
-
                         />
                     </View>
-
                     <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
                         <Text style={styles.textAddStyle}>רמת הקושי: </Text>
                         <  TextInput
@@ -279,80 +236,65 @@ function AdminRoutesScreen({ navigation }) {
                             value={level}
                         />
                     </View>
-
-
                     <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
                         <Text style={styles.textAddStyle}>ק"מ: </Text>
                         <  TextInput
-
                             style={styles.textInput}
                             onChangeText={text => onChangeKm(text)}
                             value={km}
                         />
                     </View>
-
                     <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
                         <Text style={styles.textAddStyle}>משך הזמן: </Text>
                         <  TextInput
-
                             style={styles.textInput}
                             onChangeText={text => onChangeDuration(text)}
-                        value={duration}
+                            value={duration}
                         />
                     </View>
-
                     <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
                         <Text style={styles.textAddStyle}>סוג המסלול: </Text>
                         <  TextInput
-
                             style={styles.textInput}
                             onChangeText={text => onChangeType(text)}
-                        value={type}
+                            value={type}
                         />
                     </View>
-
                     <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
                         <Text style={styles.textAddStyle}>בע"ח במסלול: </Text>
                         <  TextInput
-
                             style={styles.textInput}
                             onChangeText={text => onChangeAnimals(text)}
-                        value={animals}
+                            value={animals}
                         />
                     </View>
-
                     <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
                         <Text style={styles.textAddStyle}>סימון: </Text>
                         <  TextInput
-
                             style={styles.textInput}
                             onChangeText={text => onChangeMark(text)}
                             value={mark}
                         />
                     </View>
-
                     <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
                         <Text style={styles.textAddStyle}>פרטים: </Text>
                         <  TextInput
-                            
+
                             style={styles.textInput}
                             onChangeText={text => onChangeDetails(text)}
                             value={details}
                         />
                     </View>
-                    
+
                     <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
                         <Text style={styles.textAddStyle}>הוספת תמונה:  </Text>
                         <TouchableWithoutFeedback
                             onPress={() => pressPhoto(keyID)}
                         >
                             <Icon name="images" size={40} color="green" />
-
                         </TouchableWithoutFeedback>
                     </View>
-
                 </View>
-
                 <TouchableOpacity
                     onPress={() => {
                         let result = sendData(name, mark, level, type, details, animals, duration, km);
@@ -368,69 +310,50 @@ function AdminRoutesScreen({ navigation }) {
                     </View>
                 </TouchableOpacity>
 
-                
-
             </ScrollView>
         </View>
     )
 }
-
-
-function NewOpenRouteScreen({navigation}) {
+function NewOpenRouteScreen({ navigation }) {
     return (
-        <NewOpenRouteAdmin 
-            imageUri={{ uri: currItem.imageLink }} 
-            animals={currItem.animals} 
-            details={currItem.details} 
-            duration={currItem.duration} 
-            id={currItem.id} 
-            km={currItem.km} 
+        <NewOpenRouteAdmin
+            imageUri={{ uri: currItem.imageLink }}
+            animals={currItem.animals}
+            details={currItem.details}
+            duration={currItem.duration}
+            id={currItem.id}
+            km={currItem.km}
             level={currItem.level}
-            mark={currItem.mark}  
-            name={currItem.name} 
-            type={currItem.type} 
-            onCrossPress= { () => navigation.goBack()}
-        
-            />
+            mark={currItem.mark}
+            name={currItem.name}
+            type={currItem.type}
+            onCrossPress={() => navigation.goBack()}
+
+        />
     );
 }
-
 const logStack = createStackNavigator();
 const DrawerRoute = createDrawerNavigator();
-
 function AdminRoutesStack() { //for navigation. not in use yet
-
-
     return (
-
         <logStack.Navigator initialRouteName="routesA">
             <logStack.Screen options={{ headerShown: false }} name="routesA" component={AdminRoutesScreen} />
-
             <logStack.Screen name="newOpRo" options={{ headerShown: false }}
                 component={NewOpenRouteScreen} />
-
         </logStack.Navigator>
-
     );
 }
-
 function AdminRoutes(props) {
     dataType = props.dataType;
     return (
         <DrawerRoute.Navigator initialRouteName="reports" drawerPosition="right"
             drawerStyle={{ width: '71%' }} drawerContent={props => <DrawerContentAdmin {...props} />}>
             <DrawerRoute.Screen name="reports" component={AdminRoutesStack} />
-
         </DrawerRoute.Navigator>
-
     );
 }
-
-
 export default AdminRoutes;
-
 const styles = {
-
     /*textInput: {
         backgroundColor: 'white',
         borderRadius: 5,
@@ -451,7 +374,7 @@ const styles = {
         borderWidth: 1,
         backgroundColor: 'white'*/
     },
-    
+
     buttonStyle: {
         justifyContent: 'center',
         alignItems: "center",
@@ -489,7 +412,5 @@ const styles = {
         fontSize: 20,
         alignSelf: "center",
         textAlignVertical: 'center',
-
-
     }
 }

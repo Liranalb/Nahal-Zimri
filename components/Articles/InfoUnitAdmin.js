@@ -24,7 +24,6 @@ class InfoUnitAdmin extends React.Component {
 
     }
 
-
     render() {
 
         return (
@@ -95,7 +94,6 @@ class InfoUnitAdmin extends React.Component {
                             </View>
                         </View>
 
-
                     </View>
                     <Divider />
                     <View style={styles.buttonsContainer}>
@@ -139,10 +137,6 @@ class InfoUnitAdmin extends React.Component {
                             </View>
                         </TouchableOpacity>
 
-
-
-
-
                     </View>
 
                 </View>
@@ -152,8 +146,6 @@ class InfoUnitAdmin extends React.Component {
     }
 }
 export default InfoUnitAdmin;
-
-
 
 const styles = {
     title: {
@@ -174,7 +166,6 @@ const styles = {
         marginLeft: "1%",
         marginRight: "1%"
     },
-
 
     textInputBox: {
         fontWeight: "normal",
@@ -235,7 +226,6 @@ const styles = {
         marginTop: "2%",
         width: "80%",
         flexDirection: 'row',
-
 
     }
 }

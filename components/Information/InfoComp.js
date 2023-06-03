@@ -9,10 +9,6 @@ import {
 import Icon from 'react-native-vector-icons/Entypo'
 import Carousel from 'react-native-snap-carousel'
 
-
-
-
-
 class InfoComp extends Component {
 
     constructor() {
@@ -38,8 +34,6 @@ class InfoComp extends Component {
             </View>
         );
     }
-
-
 
     render() {
         return (
@@ -80,8 +74,6 @@ class InfoComp extends Component {
                             >{this.props.body}
 
                             </Text>
-
-
 
                         </ScrollView>
                     </View>
@@ -152,6 +144,5 @@ const styles = {
         width: "100%"
 
     }
-
 
 }

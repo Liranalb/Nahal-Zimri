@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import {  View, TextInput, Text, ScrollView, TouchableOpacity, Alert, RefreshControl, TouchableWithoutFeedback } from "react-native"
+import { View, TextInput, Text, ScrollView, TouchableOpacity, Alert, RefreshControl, TouchableWithoutFeedback } from "react-native"
 import HeaderComp from "../explore/HeaderComp";
 import { db, storage } from '../../config/Firebase'
 import MapBoxAdmin from './MapsBoxAdmin';
@@ -18,7 +18,7 @@ function wait(timeout) {
     });
 }
 
-function MapAdminScreen( { navigation }) {
+function MapAdminScreen({ navigation }) {
 
     async function pressPhoto(key) {
 
@@ -79,7 +79,6 @@ function MapAdminScreen( { navigation }) {
         return 0;
     }
 
-
     let deleteImageFromStorage = (deleteID) => {
 
         let imageID = "img" + deleteID + ".jpg";
@@ -92,7 +91,6 @@ function MapAdminScreen( { navigation }) {
             return -1;
         });
     }
-
 
     const [name, onChangeName] = useState('');
     const [imageLink, onChangeImageLink] = useState('');
@@ -137,7 +135,6 @@ function MapAdminScreen( { navigation }) {
         return db.ref().child('Maps').push().key;
     }
 
-
     // on mount
     useEffect(() => {
         keyID = newPostKey();
@@ -178,7 +175,7 @@ function MapAdminScreen( { navigation }) {
                         console.log("second"),
                         mapsArray.map((item) => {
                             return (
-                                <View key={item.id} style={{marginTop:'2%'}}>
+                                <View key={item.id} style={{ marginTop: '2%' }}>
                                     <MapBoxAdmin imageUri={{ uri: item.imageLink }}
                                         name={item.name}
                                         location={item.location}
@@ -217,7 +214,7 @@ function MapAdminScreen( { navigation }) {
                         })
                     }
                     <View style={{ width: "95%", alignSelf: 'center' }}>
-                        <Text style={{ marginTop: "3%" ,fontSize: 25, fontWeight: "bold", alignSelf: "center", alignItems: "center" }} >הוספת מפה:</Text>
+                        <Text style={{ marginTop: "3%", fontSize: 25, fontWeight: "bold", alignSelf: "center", alignItems: "center" }} >הוספת מפה:</Text>
 
                         <View style={{ flexDirection: 'row' }}>
                             <  TextInput
@@ -260,8 +257,6 @@ function MapAdminScreen( { navigation }) {
                             />
                         </View>
 
-
-
                         <View style={{ flexDirection: 'row', marginTop: '2.5%', alignSelf: 'center' }}>
                             <Text style={styles.textAddStyle}>הוספת תמונה:  </Text>
                             <TouchableWithoutFeedback
@@ -293,7 +288,6 @@ function MapAdminScreen( { navigation }) {
             </View>
         </View >
 
-
     )
 
 }
@@ -314,7 +308,6 @@ function MapAdminPage() {
 export default MapAdminPage;
 
 const styles = {
-
 
     textInput: {
         backgroundColor: "#FFF4E3",
@@ -354,7 +347,6 @@ const styles = {
         alignSelf: "center",
         width: '54%',
         marginTop: 2,
-
 
     },
 
@@ -397,5 +389,4 @@ const styles = {
         marginTop: '3%'
     }
 }
-
 

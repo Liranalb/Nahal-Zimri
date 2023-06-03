@@ -1,5 +1,5 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import {
   Image,
   View,
@@ -8,17 +8,15 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import RoutesUser from './RoutesUser';
-
 let typeName = {
   type: 'none',
 };
-
-export function PathCatagoriesScreen({navigation}) {
+export function PathCatagoriesScreen({ navigation }) {
   return (
-    <View style={{width: '100%', height: '100%'}}>
+    <View style={{ width: '100%', height: '100%' }}>
       <ImageBackground
         source={require('../../assets/img/homePageAdmin_background.jpg')}
-        style={{flex: 1, resizeMode: 'cover'}}>
+        style={{ flex: 1, resizeMode: 'cover' }}>
         <View style={styles.rowStyle1}>
           <TouchableWithoutFeedback
             onPress={() => {
@@ -61,8 +59,6 @@ export function PathCatagoriesScreen({navigation}) {
             </View>
           </TouchableWithoutFeedback>
         </View>
-
-
         <View style={styles.rowStyle2}>
           <TouchableWithoutFeedback
             onPress={() => {
@@ -105,62 +101,39 @@ export function PathCatagoriesScreen({navigation}) {
             </View>
           </TouchableWithoutFeedback>
         </View>
-
         <View style={styles.rowStyle2}>
-          {/* <TouchableWithoutFeedback
-            onPress={() => {
-              typeName.type = 'ArchPath';
-              navigation.navigate('PathUserScreen');
-            }}>
-            <View style={styles.infoStyle2}>
-              <Image
-                source={require('../../assets/img/arch.jpg')}
-                //   style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                style={{width: '100%', height: '100%'}}
-              />
-
-              <View style={styles.textStyle}>
-                <Text>מסלולי ארכיאולוגיה</Text>
-              </View>
-            </View>
-          </TouchableWithoutFeedback> */}
         </View>
         <TouchableWithoutFeedback
           onPress={() => {
             navigation.goBack();
           }}>
-          <View style={{flex: 1}} />
+          <View style={{ flex: 1 }} />
         </TouchableWithoutFeedback>
       </ImageBackground>
     </View>
   );
 }
-
 const PathStack = createStackNavigator();
-
 function PathUser() {
   return <RoutesUser dataType={typeName.type} />;
 }
-
 function PathCatagoriesUser() {
   return (
     <PathStack.Navigator initialRouteName="UserPathScreen">
       <PathStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="UserPathScreen"
         component={PathCatagoriesScreen}
       />
       <PathStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="PathUserScreen"
         component={PathUser}
       />
     </PathStack.Navigator>
   );
 }
-
 export default PathCatagoriesUser;
-
 const styles = {
   rowStyle1: {
     flexDirection: 'row',

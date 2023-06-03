@@ -19,13 +19,13 @@ class ReportBox extends Component {
                 <View style={{ flex: 1, paddingRight: 10 }}>
                     <Text numberOfLines={1}>קטגוריה:     {this.props.catagory}</Text>
                 </View>
-                <Divider/>
+                <Divider />
                 <View style={{ flex: 4, paddingLeft: 10, paddingTop: 10 }}>
                     <ScrollView>
                         <Text>תיאור:    {this.props.name}</Text>
                     </ScrollView>
                 </View>
-                <Divider/>
+                <Divider />
                 <View style={{ flex: 1, paddingLeft: 10, paddingTop: 10 }}>
                     <Text>{this.props.date}</Text>
                 </View>

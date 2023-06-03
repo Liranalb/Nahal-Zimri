@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
         width: "69%",
         // marginLeft:100,
 
-
     },
     detailStyle: {
         height: 50,

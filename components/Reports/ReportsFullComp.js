@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { Button, Header, ListItem } from "react-native-elements"
-/*import { createStackNavigator } from 'react-navigation-stack';*/
 import {
     Image,
     View,
@@ -16,21 +15,12 @@ import Icon from 'react-native-vector-icons/Entypo'
 import Carousel from 'react-native-snap-carousel'
 import { Divider } from 'react-native-paper';
 
-
-
-
 class ReportsFullComp extends Component {
 
     constructor() {
         super()
         this.state = {
             activeIndex: 0,
-            //   carouselItems: [
-            //   {path: require('../assets/img/bird.jpg')},
-            //   {path: require('../assets/img/mammal.jpg')},
-            //   {path: require('../assets/img/fox.jpg')},
-            //   {path: require('../assets/img/blossom.jpg')},    
-            // ]
         }
     }
 
@@ -44,8 +34,6 @@ class ReportsFullComp extends Component {
         );
     }
 
-
-
     render() {
         return (
 
@@ -54,15 +42,6 @@ class ReportsFullComp extends Component {
                 <View style={styles.imgStyle}>
 
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
-                        {/* <Carousel
-                        layout={"default"}
-                        ref={ref => this.carousel = ref}
-                        data={this.state.carouselItems} //change to database 
-                        sliderWidth={412}
-                        itemWidth={412}
-                        enableSnap= {true}
-                        renderItem={this._renderItem}
-                        onSnapToItem = { index => this.setState({activeIndex:index}) } /> */}
                         <Image source={this.props.imageUri}
                             style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
                         />
@@ -84,7 +63,7 @@ class ReportsFullComp extends Component {
                     </View>
 
                     <View style={styles.mainStyle}>
-                        <View style={{width:"100%",height:"90%"}}>
+                        <View style={{ width: "100%", height: "90%" }}>
                             <ScrollView>
                                 <Text
                                     style={styles.mainTextStyle}
@@ -93,10 +72,7 @@ class ReportsFullComp extends Component {
                                 </Text>
                             </ScrollView>
                         </View>
-                        <Divider/>
-                        {/* <View style={{width:"100%",height:"10%"}}>
-                            <Text style={{fontSize:20}}> מגיש הדיווח: {this.props.reporter}</Text>
-                        </View> */}
+                        <Divider />
                     </View>
 
                     <View style={{ width: "100%", height: "8%", alignSelf: 'center' }}>
@@ -161,6 +137,5 @@ const styles = {
         width: "100%"
 
     }
-
 
 }

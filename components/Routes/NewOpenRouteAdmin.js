@@ -11,12 +11,7 @@ import Icon from 'react-native-vector-icons/Entypo'
 //import Carousel from 'react-native-snap-carousel'
 import { Divider } from "react-native-elements"
 import { db } from '../../config/Firebase'
-
-
-
-
 class NewOpenRouteAdmin extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
@@ -28,33 +23,21 @@ class NewOpenRouteAdmin extends Component {
             typeText: this.props.type,
             markText: this.props.mark,
             nameText: this.props.name,
-
             changed: false,
         }
     }
-
-
-
-
     render() {
         return (
-
             <View style={{ width: "100%", height: "100%" }}>
-
                 <View style={styles.imgStyle}>
-
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
                         <Image source={this.props.imageUri}
                             style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
                         />
-
                     </View>
-
                 </View>
-
                 <View style={{ width: "100%", height: "60%", backgroundColor: "#FAE5D3" }}>
                     <View style={styles.textVStyle}>
-
                         <TextInput
                             style={styles.textStyle}
                             defaultValue={this.props.name}
@@ -65,7 +48,6 @@ class NewOpenRouteAdmin extends Component {
                     <View style={styles.mainStyle}>
                         <View style={{ height: '90%' }}>
                             <ScrollView>
-
                                 <View style={styles.textViewStyle}>
                                     <Text style={styles.textExplainStyle}>רמת קושי: </Text>
                                     <TextInput
@@ -135,23 +117,11 @@ class NewOpenRouteAdmin extends Component {
                                         onChangeText={(detailsText) => this.setState({ detailsText, changed: true })}
                                     />
                                 </View>
-
-
-
-
-
-
-
-
-
-
                             </ScrollView>
                         </View>
-
                         <View style={{ height: '10%' }}>
                             <TouchableOpacity
                                 onPress={() => {
-
                                     if (this.state.changed) {
                                         let dataPath = 'Routes/' + this.props.id;
                                         let updates = {};
@@ -163,7 +133,6 @@ class NewOpenRouteAdmin extends Component {
                                         updates[dataPath + "/mark"] = this.state.markText;
                                         updates[dataPath + '/name'] = this.state.nameText;
                                         updates[dataPath + "/type"] = this.state.typeText;
-
                                         db.ref().update(updates);
                                         this.setState({ changed: false });
                                         console.log("Data updated successfully to : " + dataPath);
@@ -175,33 +144,25 @@ class NewOpenRouteAdmin extends Component {
                                     <Text
                                         style={{ textAlign: 'center', color: 'white', fontSize: 24 }}
                                     >ערוך</Text>
-
                                 </View>
                             </TouchableOpacity>
                         </View>
                     </View>
-
                     <View style={{ width: "100%", height: "15%", alignSelf: 'center' }}>
-
                         <TouchableOpacity
                             onPress={this.props.onCrossPress}
                         >
                             <Icon name="cross" size={50} color='gray'
                                 style={{ alignSelf: 'center' }}
                             />
-
                         </TouchableOpacity>
-
-
                     </View>
                 </View>
             </View>
         )
     }
 }
-
 export default NewOpenRouteAdmin;
-
 const styles = {
     imgStyle: {
         width: "100%",
@@ -245,7 +206,6 @@ const styles = {
         backgroundColor: "white",
         height: "100%",
         width: "100%"
-
     },
     buttonStyle: {
         fontSize: 20
@@ -258,6 +218,4 @@ const styles = {
         fontSize: 20,
         fontWeight: 'bold'
     }
-
-
 }

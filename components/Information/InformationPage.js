@@ -10,13 +10,12 @@ import CurrentUser from "../CurrentUser"
 import { DrawerContent } from "../DrawerContent";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-
 function wait(timeout) {
     return new Promise(resolve => {
         setTimeout(resolve, timeout);
     });
 }
-let  dataType, currItem;
+let dataType, currItem;
 
 function InformationUserScreen({ navigation }) {
 
@@ -24,7 +23,6 @@ function InformationUserScreen({ navigation }) {
     const [refreshing, setRefreshing] = useState(false);
     let infoArray = [];
     let currentType = dataType;
-
 
     let data = null;
     db.ref('Information').on('value', function (snapshot) {
@@ -44,7 +42,6 @@ function InformationUserScreen({ navigation }) {
         wait(1000).then(() => setRefreshing(false));
     }, [refreshing]);
 
-
     let convertDataToArray = (data, infoArray) => {
         console.log("in convert");
         if (data === null)
@@ -61,7 +58,6 @@ function InformationUserScreen({ navigation }) {
 
     convertDataToArray(data, infoArray);
 
-
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
             <HeaderComp
@@ -71,8 +67,6 @@ function InformationUserScreen({ navigation }) {
 
             <View style={{ width: "100%", height: "87%", marginTop: "2%" }}>
 
-
-
                 <View style={{ height: "100%", width: "100%" }}>
                     <ScrollView
                         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
@@ -80,7 +74,7 @@ function InformationUserScreen({ navigation }) {
 
                         {infoArray.map((item) => {
                             return (
-                                <View key={item.id} style={{ marginTop:'2%'}}>
+                                <View key={item.id} style={{ marginTop: '2%' }}>
                                     <TouchableWithoutFeedback
                                         onPress={() => {
                                             currItem = item;
@@ -102,13 +96,9 @@ function InformationUserScreen({ navigation }) {
 
             </View>
 
-
-
-
         </View>
     )
 }
-
 
 const InfoCompStack = createStackNavigator();
 const DrawerInfo = createDrawerNavigator();
@@ -124,9 +114,7 @@ function InfoUserComponent({ navigation }) {
 
 }
 
-
 function InformationPageStack() {
-
 
     return (
         <InfoCompStack.Navigator initialRouteName="infoAdminScreen">
@@ -146,9 +134,6 @@ function InformationPage(props) {
 
         </DrawerInfo.Navigator>
 
-
-
-
     );
 }
 
@@ -158,7 +143,6 @@ const styles = {
     containerStyle: {
         width: "100%",
         height: "89%"
-
 
     }
 }

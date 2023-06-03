@@ -7,7 +7,7 @@ import {
   ImageBackground,
 } from 'react-native';
 
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import InformationAdminPage from './InformationAdminPage';
 import MapAdminPage from './MapsAdmin';
 
@@ -15,12 +15,12 @@ let typeName = {
   type: 'none',
 };
 
-export function InfoCatagoriesScreen({navigation}) {
+export function InfoCatagoriesScreen({ navigation }) {
   return (
-    <View style={{width: '100%', height: '100%'}}>
+    <View style={{ width: '100%', height: '100%' }}>
       <ImageBackground
         source={require('../../assets/img/homePageAdmin_background.jpg')}
-        style={{flex: 1, resizeMode: 'cover'}}>
+        style={{ flex: 1, resizeMode: 'cover' }}>
         <View style={styles.rowStyle1}>
           <TouchableWithoutFeedback
             onPress={() => {
@@ -51,7 +51,7 @@ export function InfoCatagoriesScreen({navigation}) {
             <View style={styles.infoStyle}>
               <Image
                 source={require('../../assets/img/blossom.jpg')}
-                style={{width: '100%', height: '100%'}}
+                style={{ width: '100%', height: '100%' }}
               />
               <View style={styles.textStyle}>
                 <Text>פריחה</Text>
@@ -70,7 +70,7 @@ export function InfoCatagoriesScreen({navigation}) {
               <Image
                 source={require('../../assets/img/arch.jpg')}
                 //   style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                style={{width: '100%', height: '100%'}}
+                style={{ width: '100%', height: '100%' }}
               />
               <View style={styles.textStyle}>
                 <Text>ארכיאולוגיה</Text>
@@ -87,7 +87,7 @@ export function InfoCatagoriesScreen({navigation}) {
               <Image
                 source={require('../../assets/img/Pisga.jpg')}
                 //   style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
-                style={{width: '100%', height: '100%'}}
+                style={{ width: '100%', height: '100%' }}
               />
               <View style={styles.textStyle}>
                 <Text>פסגת זאב</Text>
@@ -142,7 +142,7 @@ export function InfoCatagoriesScreen({navigation}) {
           onPress={() => {
             navigation.goBack();
           }}>
-          <View style={{flex: 1}} />
+          <View style={{ flex: 1 }} />
         </TouchableWithoutFeedback>
       </ImageBackground>
     </View>
@@ -153,10 +153,8 @@ function InfoAdmin() {
 }
 
 function MapAdmin() {
-  return <MapAdminPage/>;
+  return <MapAdminPage />;
 }
-
-
 
 const InfoStack = createStackNavigator();
 
@@ -164,18 +162,18 @@ function InfoCatagoriesAdmin() {
   return (
     <InfoStack.Navigator initialRouteName="InfoCatScreen">
       <InfoStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="InfoCatScreen"
         component={InfoCatagoriesScreen}
       />
       <InfoStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="InfoAdminScreen"
         component={InfoAdmin}
       />
 
       <InfoStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="MapAdminScreen"
         component={MapAdmin}
       />

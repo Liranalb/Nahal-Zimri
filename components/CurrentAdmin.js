@@ -7,7 +7,6 @@ import { db, auth } from '../config/Firebase'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContentAdmin } from "./DrawerContentAdmin";
 
-
 function CurrentAdminScreen({ navigation }) {
     const [loaded, setLoaded] = useState(false);
     const [name, setName] = useState("");
@@ -20,9 +19,7 @@ function CurrentAdminScreen({ navigation }) {
         const exist = (snapshot.val() !== null);
         if (exist) {
             let userData = snapshot.val();
-
             //alert(Username);
-
             if (loaded === false) {
                 setLoaded(true);
                 setName(userData.Username);
@@ -31,22 +28,15 @@ function CurrentAdminScreen({ navigation }) {
         }
     });
 
-
-
     return (
-
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
-
             <HeaderComp
                 openUserProfile={() => console.log("doing nothing")}
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
             />
-
-
             <View>
                 <Text style={styles.textTitleStyle}>{name}
                 </Text>
-
                 <Text style={styles.textDetailStyle}>{email}
                     {"\n"}
                     {"\n"}
@@ -70,7 +60,6 @@ function CurrentAdminScreen({ navigation }) {
                         value={password}
                     />
             </View> */}
-
 
             <View style={{ alignSelf: 'center', alignItems: 'center', height: '6%' }}>
                 <View style={{ flexDirection: 'row', width: '75%' }}>
@@ -125,21 +114,11 @@ function CurrentAdminScreen({ navigation }) {
                 >
                 </Button>
             </View>
-
         </View>
     );
 
 }
 
-
-
-
-
-// var userId = firebase.auth().currentUser.uid;
-// return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-//   var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-//   // ...
-// });
 
 const DrawerAdminUser = createDrawerNavigator();
 
@@ -156,7 +135,6 @@ function CurrentAdmin() {
 export default CurrentAdmin;
 
 const styles = {
-
     buttonStyle: {
         backgroundColor: '#FF8C37',
         borderColor: "#FF8C37",
@@ -179,8 +157,6 @@ const styles = {
         fontSize: 40,
         marginTop: "10%",
         textDecorationLine: 'underline'
-
-
     },
     textDetailStyle: {
         textAlign: 'center',
@@ -195,9 +171,6 @@ const styles = {
         fontSize: 20,
         width: "80%",
         alignSelf: "center"
-
-
-
     }
 }
 

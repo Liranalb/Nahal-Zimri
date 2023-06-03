@@ -3,109 +3,84 @@ import { Image, View, Text, ScrollView, TouchableOpacity } from "react-native"
 import { Divider } from "react-native-paper"
 import Icon from 'react-native-vector-icons/Entypo'
 class NewOpenRoute extends Component {
-   
+
     render() {
         return (
-
             <View style={{ width: "100%", height: "100%" }}>
-
                 <View style={styles.imgStyle}>
-
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
                         <Image source={this.props.imageUri}
                             style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
                         />
-
                     </View>
-
                 </View>
-
                 <View style={{ width: "100%", height: "60%", backgroundColor: "#FAE5D3" }}>
                     <View style={styles.textVStyle}>
-                        
+
                         <Text style={styles.textStyle}>{this.props.name}</Text>
                     </View>
                     <View style={styles.mainStyle}>
                         <View style={{ height: '90%' }}>
                             <ScrollView>
+                                <View style={{ width: "98%", alignSelf: 'center', marginTop: "3%" }}>
+                                    <View style={styles.textViewStyle}>
+                                        <Text style={styles.textExplainStyle}>רמת קושי: </Text>
 
-                                <View style={{ width: "98%",alignSelf:'center', marginTop: "3%"}}>
+                                        <Text style={styles.boxTextStyle}>{this.props.name}</Text>
+                                    </View>
+                                    <Divider />
+                                    <View style={styles.textViewStyle}>
+                                        <Text style={styles.textExplainStyle}>ק"מ: </Text>
+                                        <Text style={styles.boxTextStyle}>{this.props.km}</Text>
+                                    </View>
+                                    <Divider />
+                                    <View style={styles.textViewStyle}>
+                                        <Text style={styles.textExplainStyle}>משך זמן ההליכה: </Text>
 
-                                <View style={styles.textViewStyle}>
-                                    <Text style={styles.textExplainStyle}>רמת קושי: </Text>
-                                    
-                                    <Text style={styles.boxTextStyle}>{this.props.name}</Text>
+                                        <Text style={styles.boxTextStyle}>{this.props.duration}</Text>
+                                    </View>
+                                    <Divider />
+                                    <View style={styles.textViewStyle}>
+                                        <Text style={styles.textExplainStyle}>סוג המסלול: </Text>
+
+                                        <Text style={styles.boxTextStyle}>{this.props.type}</Text>
+                                    </View>
+                                    <Divider />
+                                    <View style={styles.textViewStyle}>
+                                        <Text style={styles.textExplainStyle}>סימון: </Text>
+
+                                        <Text style={styles.boxTextStyle}>{this.props.mark}</Text>
+                                    </View>
+                                    <Divider />
+                                    <View style={styles.textViewStyle}>
+                                        <Text style={styles.textExplainStyle}>בע"ח במסלול: </Text>
+
+                                        <Text style={styles.boxTextStyle}>{this.props.animals}</Text>
+                                    </View>
+                                    <Divider />
+                                    <View style={styles.textViewStyle}>
+                                        <Text style={styles.textExplainStyle}>פרטים: </Text>
+
+                                        <Text style={styles.boxTextStyle}>{this.props.details}</Text>
+                                    </View>
                                 </View>
-                                <Divider />
-                                <View style={styles.textViewStyle}>
-                                    <Text style={styles.textExplainStyle}>ק"מ: </Text>
-                                    <Text style={styles.boxTextStyle}>{this.props.km}</Text>
-                                </View>
-                                <Divider />
-                                <View style={styles.textViewStyle}>
-                                    <Text style={styles.textExplainStyle}>משך זמן ההליכה: </Text>
-                                    
-                                    <Text style={styles.boxTextStyle}>{this.props.duration}</Text>
-                                </View>
-                                <Divider />
-                                <View style={styles.textViewStyle}>
-                                    <Text style={styles.textExplainStyle}>סוג המסלול: </Text>
-                                    
-                                    <Text style={styles.boxTextStyle}>{this.props.type}</Text>
-                                </View>
-                                <Divider />
-                                <View style={styles.textViewStyle}>
-                                    <Text style={styles.textExplainStyle}>סימון: </Text>
-                                   
-                                    <Text style={styles.boxTextStyle}>{this.props.mark}</Text>
-                                </View>
-                                <Divider />
-                                <View style={styles.textViewStyle}>
-                                    <Text style={styles.textExplainStyle}>בע"ח במסלול: </Text>
-                                   
-                                    <Text style={styles.boxTextStyle}>{this.props.animals}</Text>
-                                </View>
-                                <Divider />
-                                <View style={styles.textViewStyle}>
-                                    <Text style={styles.textExplainStyle}>פרטים: </Text>
-                                    
-                                    <Text style={styles.boxTextStyle}>{this.props.details}</Text>
-                                </View>
-
-                                </View>
-
-
-
-
-
-
-
-
                             </ScrollView>
                         </View>
-
-                       
                     </View>
-
                     <View style={{ width: "100%", height: "15%", alignSelf: 'center' }}>
-
                         <TouchableOpacity
                             onPress={this.props.onCrossPress}
                         >
                             <Icon name="cross" size={50} color='gray'
                                 style={{ alignSelf: 'center' }}
                             />
-
                         </TouchableOpacity>
-
-
                     </View>
                 </View>
             </View>
         )
     }
 }
-
 /*
 <UnitRoutes imageUri={{ uri: item.imageLink }}
                                             name={item.name}
@@ -116,9 +91,6 @@ class NewOpenRoute extends Component {
                                             details={item.details}
 */
 export default NewOpenRoute;
-
-
-
 const styles = {
     imgStyle: {
         width: "100%",
@@ -136,16 +108,15 @@ const styles = {
         //textShadowColor: "gray",
         textShadowRadius: 15,
         paddingVertical: 0
-
     },
-    textVStyle: { 
+    textVStyle: {
         alignItems: 'center',
         marginTop: "2%",
         width: "100%",
         height: "10%",
         marginBottom: "2%",
     },
-    mainStyle: { 
+    mainStyle: {
         width: "92%",
         height: "72%",
         alignSelf: 'center',
@@ -153,7 +124,7 @@ const styles = {
         borderRadius: 10,
         borderWidth: 2,
         borderColor: "#CECECE"
-        
+
     },
     mainTextStyle: {
         fontSize: 16,
@@ -165,7 +136,6 @@ const styles = {
         backgroundColor: "white",
         height: "100%",
         width: "100%"
-
     },
     buttonStyle: {
         fontSize: 20
@@ -173,20 +143,18 @@ const styles = {
     textViewStyle: {
         flexDirection: 'row',
         marginTop: "0.3%"
-        
+
     },
     textExplainStyle: {
         fontSize: 20,
         fontWeight: 'bold',
         marginLeft: "3%",
-        
-        
+
+
     },
     boxTextStyle: {
-        fontSize:19,
-        flex:1,
-        textAlign:'left',
+        fontSize: 19,
+        flex: 1,
+        textAlign: 'left',
     }
-
-
 }

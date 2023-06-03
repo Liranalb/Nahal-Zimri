@@ -7,7 +7,6 @@ import { db, auth } from '../config/Firebase'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerContent } from "./DrawerContent";
 
-
 function CurrentUserScreen({ navigation }) {
     const [loaded, setLoaded] = useState(false);
     const [name, setName] = useState("");
@@ -31,18 +30,13 @@ function CurrentUserScreen({ navigation }) {
         }
     });
 
-
-
     return (
-
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
 
             <HeaderComp
                 openUserProfile={() => console.log("doing nothing")}
                 openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
             />
-
-
             <View>
                 <Text style={styles.textTitleStyle}>{name}
                 </Text>
@@ -53,10 +47,7 @@ function CurrentUserScreen({ navigation }) {
                     {"\n"}
                     {"\n"}
                 </Text>
-
-
             </View>
-
 
             <View style={{ alignSelf: 'center', alignItems: 'center', height: '6%' }}>
                 <View style={{ flexDirection: 'row', width: '75%' }}>
@@ -88,8 +79,6 @@ function CurrentUserScreen({ navigation }) {
                                     })
                                     setPassword('');
                                 }
-
-
                             }}
                         >
                             <View style={{ width: "90%", height: '100%', backgroundColor: '#FF8C37', borderRadius: 10 }}>
@@ -98,9 +87,7 @@ function CurrentUserScreen({ navigation }) {
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
-
                 </View>
-
             </View>
 
             <View style={styles.buttonStyle}>
@@ -111,21 +98,9 @@ function CurrentUserScreen({ navigation }) {
                 >
                 </Button>
             </View>
-
         </View>
     );
-
 }
-
-
-
-
-
-// var userId = firebase.auth().currentUser.uid;
-// return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-//   var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-//   // ...
-// });
 
 const DrawerUser = createDrawerNavigator();
 
@@ -134,15 +109,12 @@ function CurrentUser() {
         <DrawerUser.Navigator initialRouteName="About" drawerPosition="right"
             drawerStyle={{ width: '45%' }} drawerContent={props => <DrawerContent {...props} />}>
             <DrawerUser.Screen name="About" component={CurrentUserScreen} />
-
         </DrawerUser.Navigator>
     );
 }
 
 export default CurrentUser;
-
 const styles = {
-
     buttonStyle: {
         backgroundColor: '#FF8C37',
         borderColor: "#FF8C37",
@@ -181,9 +153,6 @@ const styles = {
         fontSize: 20,
         width: "80%",
         alignSelf: "center"
-
-
-
     }
 }
 

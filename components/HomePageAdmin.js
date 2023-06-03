@@ -7,8 +7,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ReportsAdmin from './Reports/ReportsAdmin'
 import EventAdmin from './Events/EventAdmin'
 import InfoAdmin from './Articles/InfoAdmin'
-import { createDrawerNavigator,
-    DrawerItem } from '@react-navigation/drawer';
+import {
+    createDrawerNavigator,
+    DrawerItem
+} from '@react-navigation/drawer';
 import InfoCatagoriesAdmin from './Information/InfoCatagoriesAdmin'
 import PathCatagoriesAdmin from './Routes/PathCatagoriesAdmin';
 import CurrentUser from "./CurrentUser"
@@ -19,33 +21,31 @@ import AboutPZAdmin from "./AboutPZAdmin";
 const MyTheme = {
     dark: false,
     colors: {
-      primary: '#FF8C37',
-      background: '#FF8C37',
-      card: '#FAE5D3',
-      text: 'black',
-      border: '#FF8C37',
+        primary: '#FF8C37',
+        background: '#FF8C37',
+        card: '#FAE5D3',
+        text: 'black',
+        border: '#FF8C37',
     },
-    
-  };
+};
 
 const CustomDrawer = (props) => (
-    <SafeAreaView style={{ flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
         <ScrollView>
-            <DrawerItem {...props}/>
+            <DrawerItem {...props} />
         </ScrollView>
     </SafeAreaView>
 )
 
 function HomeAdminScreen({ navigation }) {
-
     return (
         <View style={{ width: "100%", height: "100%", backgroundColor: '#FAE5D3' }}>
-            <HeaderComp 
-                        openUserProfile = {() => navigation.navigate('Current')}
-                        openUserMenu = {() => navigation.dangerouslyGetParent().openDrawer()}
-                        />
+            <HeaderComp
+                openUserProfile={() => navigation.navigate('Current')}
+                openUserMenu={() => navigation.dangerouslyGetParent().openDrawer()}
+            />
             <View>
-               
+
             </View>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('InfAd')}>
                 <View style={styles.infoStyle}>
@@ -54,13 +54,13 @@ function HomeAdminScreen({ navigation }) {
                         style={{ width: "100%", height: "100%" }}
                     />
                     <View style={styles.textStyle}>
-                        <Text style={{fontWeight: "bold",fontSize: 20}}>עדכונים</Text>
+                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>עדכונים</Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
 
             <View style={styles.routesStyle}>
-                 <TouchableWithoutFeedback
+                <TouchableWithoutFeedback
                     onPress={() => navigation.navigate('InfoCat')}>
 
                     <View style={styles.routesStyleLeft}>
@@ -69,7 +69,7 @@ function HomeAdminScreen({ navigation }) {
                             style={{ width: "100%", height: "100%" }}
                         />
                         <View style={styles.textStyle}>
-                            <Text style={{fontWeight: "bold",fontSize: 20}}>מידע</Text>
+                            <Text style={{ fontWeight: "bold", fontSize: 20 }}>מידע</Text>
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
@@ -81,12 +81,12 @@ function HomeAdminScreen({ navigation }) {
                             style={{ width: "100%", height: "100%" }}
                         />
                         <View style={styles.textStyle}>
-                            <Text style={{fontWeight: "bold",fontSize: 20}}>מסלולים</Text>
+                            <Text style={{ fontWeight: "bold", fontSize: 20 }}>מסלולים</Text>
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
 
-                
+
             </View>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('EventsAdmin')}>
                 <View style={styles.evenStyle}>
@@ -95,7 +95,7 @@ function HomeAdminScreen({ navigation }) {
                         style={{ width: "100%", height: "100%" }}
                     />
                     <View style={styles.textStyle}>
-                        <Text style={{fontWeight: "bold",fontSize: 20}}>אירועים</Text>
+                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>אירועים</Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -106,13 +106,12 @@ function HomeAdminScreen({ navigation }) {
                         style={{ width: "100%", height: "100%" }}
                     />
                     <View style={styles.textStyle}>
-                        <Text style={{fontWeight: "bold",fontSize: 20}}>דיווח תצפיות</Text>
+                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>דיווח תצפיות</Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
         </View>
     )
-
 }
 
 function ReportsAdminScreen() {
@@ -145,9 +144,9 @@ function EventAdminScreen() {
     );
 }
 
-function CurrentUserScreen(){
-    return(
-        <CurrentUser/>
+function CurrentUserScreen() {
+    return (
+        <CurrentUser />
     );
 }
 
@@ -166,7 +165,7 @@ function AboutScreenPZAdmin() {
 
 const linking = {
     prefixes: ['https://mychat.com', 'mychat://'],
-  };
+};
 
 
 const Stack = createStackNavigator();
@@ -174,41 +173,34 @@ const DrawerR = createDrawerNavigator();
 
 function HomePageAdminStack() {
     return (
-      
-            <Stack.Navigator initialRouteName="HomeAdmin"  >
+        <Stack.Navigator initialRouteName="HomeAdmin"  >
 
-                <Stack.Screen options={{ headerShown: false }} name="HomeAdmin" component={HomeAdminScreen} />
-                <Stack.Screen name="InfAd" options={{ headerShown: false }}
-                    component={InfoAdminScreen} />
-                <Stack.Screen options={{ headerShown: false }} name="RouAd" component={AdminRoutesScreen} />
-                <Stack.Screen options={{ headerShown: false }} name="Reports" component={ReportsAdminScreen} />
-                <Stack.Screen options={{ headerShown: false }} name="EventsAdmin" component={EventAdminScreen} />
-                <Stack.Screen name="AboutAdmin" options={{ headerShown: false }} component={AboutAdmin} />  
-                <Stack.Screen options={{ headerShown: false }} name="InfoCat" component={InfoCatagoriesScreen} />  
-                <Stack.Screen name="AboutPZAdmin" options={{ headerShown: false }} component={AboutPZAdmin} />  
-                <Stack.Screen name="Current" options={{ headerShown: false }}
-                    component={CurrentUserScreen} />  
-            </Stack.Navigator>
-    
+            <Stack.Screen options={{ headerShown: false }} name="HomeAdmin" component={HomeAdminScreen} />
+            <Stack.Screen name="InfAd" options={{ headerShown: false }}
+                component={InfoAdminScreen} />
+            <Stack.Screen options={{ headerShown: false }} name="RouAd" component={AdminRoutesScreen} />
+            <Stack.Screen options={{ headerShown: false }} name="Reports" component={ReportsAdminScreen} />
+            <Stack.Screen options={{ headerShown: false }} name="EventsAdmin" component={EventAdminScreen} />
+            <Stack.Screen name="AboutAdmin" options={{ headerShown: false }} component={AboutAdmin} />
+            <Stack.Screen options={{ headerShown: false }} name="InfoCat" component={InfoCatagoriesScreen} />
+            <Stack.Screen name="AboutPZAdmin" options={{ headerShown: false }} component={AboutPZAdmin} />
+            <Stack.Screen name="Current" options={{ headerShown: false }}
+                component={CurrentUserScreen} />
+        </Stack.Navigator>
     );
 }
 
-function HomePageAdmin(){
-    return(
+function HomePageAdmin() {
+    return (
         <NavigationContainer theme={MyTheme}>
-        <DrawerR.Navigator initialRouteName="home" drawerPosition="right"
-        //  drawerStyle={{ width: '71%', alignItems: 'center' }} drawerContent={props => <DrawerContentAdmin {...props} />}>   
-        drawerStyle={{ width: '70%' }} drawerContent={props => <DrawerContentAdmin {...props} />}>      
-        <DrawerR.Screen name="מסך הבית" component={HomePageAdminStack} />
- 
-      </DrawerR.Navigator>
-
-   
-      </NavigationContainer>
-
+            <DrawerR.Navigator initialRouteName="home" drawerPosition="right"
+                //  drawerStyle={{ width: '71%', alignItems: 'center' }} drawerContent={props => <DrawerContentAdmin {...props} />}>   
+                drawerStyle={{ width: '70%' }} drawerContent={props => <DrawerContentAdmin {...props} />}>
+                <DrawerR.Screen name="מסך הבית" component={HomePageAdminStack} />
+            </DrawerR.Navigator>
+        </NavigationContainer>
     );
 }
-
 
 export default HomePageAdmin;
 
@@ -297,8 +289,8 @@ const styles = {
     },
     drawerSection: {
         marginTop: 15,
-      },
-      drawerContent: {
+    },
+    drawerContent: {
         flex: 1,
-      }
+    }
 }

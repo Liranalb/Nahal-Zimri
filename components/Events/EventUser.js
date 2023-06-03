@@ -19,7 +19,6 @@ function EventUserScreen({ navigation }) {
     let eventsArray = [];
     const [loaded, setLoaded] = useState(false);
 
-
     //load data
     let data = null;
     db.ref('Events').on('value', function (snapshot) {
@@ -33,13 +32,11 @@ function EventUserScreen({ navigation }) {
         }
     });
 
-
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
 
         wait(1000).then(() => setRefreshing(false));
     }, [refreshing]);
-
 
     let convertDataToArray = (data, eventsArray) => {
         if (data === null)
@@ -99,7 +96,6 @@ function EventUser() {
     );
 }
 
-
 export default EventUser;
 
 const styles = {
@@ -136,5 +132,4 @@ const styles = {
         alignSelf: "center"
     }
 }
-
 

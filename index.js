@@ -3,27 +3,20 @@
  */
 
 import LoginForm from "./components/Login/LoginForm"
-
-
-
-//Do not delete
 import React, { Component } from "react"
 import MainLogin from "./components/Login/MainLogin";
 import HomePageAdmin from "./components/HomePageAdmin";
 import HomePageUser from "./components/HomePageUser"
 import { db, auth } from "./config/Firebase"
-import { AppRegistry, View,Modal } from 'react-native';
+import { AppRegistry, View, Modal } from 'react-native';
 import { name as appName } from './app.json';
 import { DotIndicator } from "react-native-indicators";
-// End of do not delete
-
 
 console.disableYellowBox = true;
 let check = false;
 class loginHelper extends Component {
-    state = { loggedIn: false, isAdmin: false, isDataLoaded: false, isVer:false }
-
-     adminCheck(user) {
+    state = { loggedIn: false, isAdmin: false, isDataLoaded: false, isVer: false }
+    adminCheck(user) {
         return db.ref('Users/' + user.uid + '/Admin').once('value', function (snapshot) {
             const exist = (snapshot.val() !== null);
             if (exist) {
@@ -31,29 +24,25 @@ class loginHelper extends Component {
                 console.log("data loaded: " + data);
                 return data;
             }
-            else 
+            else
                 return false;
         });
-
     }
-
-
 
     async componentDidMount() {
         check = true;
         console.log("componentDidMount")
         auth.onAuthStateChanged(async (user) => {
-            if (user && auth.currentUser.emailVerified) { 
-                console.log("auto log for user: "+user.email)
+            if (user && auth.currentUser.emailVerified) {
+                console.log("auto log for user: " + user.email)
                 global.uid = user.uid;
                 global.mail = user.email;
                 let flag = await this.adminCheck(user)
                 console.log("flag is : " + flag.val() + "isAdmin is: " + this.state.isAdmin);
                 this.setState({ loggedIn: true, isAdmin: flag.val(), isDataLoaded: true })
-                
             }
             else {
-                console.log("go to login manu: " )
+                console.log("go to login manu: ")
                 this.setState({ loggedIn: false, isAdmin: false, isDataLoaded: true })
             }
             //this.forceUpdate();
@@ -62,7 +51,7 @@ class loginHelper extends Component {
 
     renderContent() {
         //firebase.auth().signOut();
-        console.log("renderContent :"+this.state.isDataLoaded)
+        console.log("renderContent :" + this.state.isDataLoaded)
         if (this.state.isDataLoaded) {
 
             if (!this.state.loggedIn) {
@@ -72,16 +61,15 @@ class loginHelper extends Component {
             else if (this.state.isAdmin) {
                 return <HomePageAdmin />
             }
-
-            else if(auth.currentUser.emailVerified) return <HomePageUser />
+            else if (auth.currentUser.emailVerified) return <HomePageUser />
         }
         return (
-        <Modal animationType='fade'>
-            <View style={{backgroundColor:'#FAE5D3',flex:1}}>
-        <DotIndicator
-            color='#4B4B4B'/>
-            </View>
-        </Modal> );
+            <Modal animationType='fade'>
+                <View style={{ backgroundColor: '#FAE5D3', flex: 1 }}>
+                    <DotIndicator
+                        color='#4B4B4B' />
+                </View>
+            </Modal>);
     }
 
     render() {
