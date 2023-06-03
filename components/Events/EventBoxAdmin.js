@@ -62,7 +62,6 @@ class EventBoxAdmin extends React.Component {
                                 maxHeight={40} />
                         </View>
 
-
                         <Divider />
                         <View style={{ height: '16%', flexDirection: 'row' }}>
                             <Text style={{ fontSize: 17, fontWeight: "bold" }}>תאריך: </Text>
@@ -123,7 +122,6 @@ class EventBoxAdmin extends React.Component {
 
                         </View>
 
-
                     </View>
                     <Divider />
 
@@ -169,22 +167,15 @@ class EventBoxAdmin extends React.Component {
                             </View>
                         </TouchableOpacity>
 
-
-
                     </View>
-
 
                 </View>
             </View>
-
-
 
         );
     }
 }
 export default EventBoxAdmin;
-
-
 
 const styles = {
     container: {
@@ -213,7 +204,6 @@ const styles = {
         textShadowColor: "gray",
         textShadowRadius: 10
     },
-
 
     imageStyle: {
         flex: 1,

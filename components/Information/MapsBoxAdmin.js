@@ -30,7 +30,7 @@ class MapBoxAdmin extends React.Component {
         return (
 
             <View style={styles.containerStyle}>
-                <View style={{ flex: 1 }}>{console.log("name is :" + this.state.name )}
+                <View style={{ flex: 1 }}>{console.log("name is :" + this.state.name)}
                     <TouchableOpacity
                         onPress={this.props.onExpandPress}
                     >
@@ -47,10 +47,10 @@ class MapBoxAdmin extends React.Component {
 
                     <View style={{ width: '100%', height: '79%' }}>
 
-                        <View style={{ height: '16%',flexDirection:'row' }}>
-                        <Text style={{ fontSize: 17, fontWeight: "bold" }}>שם המפה: </Text>
+                        <View style={{ height: '16%', flexDirection: 'row' }}>
+                            <Text style={{ fontSize: 17, fontWeight: "bold" }}>שם המפה: </Text>
                             <TextInput
-                            defaultValue={this.props.name}
+                                defaultValue={this.props.name}
                                 style={styles.textInputRowStyle}
                                 onChangeText={(name) => this.setState({ nameText: name, changed: true })}
                                 selectTextOnFocus={true}
@@ -82,7 +82,6 @@ class MapBoxAdmin extends React.Component {
                             />
 
                         </View>
-
 
                     </View>
                     <Divider />
@@ -124,22 +123,15 @@ class MapBoxAdmin extends React.Component {
                             </View>
                         </TouchableOpacity>
 
-
-
                     </View>
-
 
                 </View>
             </View>
-
-
 
         );
     }
 }
 export default MapBoxAdmin;
-
-
 
 const styles = {
     container: {
@@ -169,7 +161,6 @@ const styles = {
         textShadowRadius: 10
     },
 
-
     imageStyle: {
         flex: 1,
         width: null,
@@ -187,11 +178,11 @@ const styles = {
         flexDirection: 'row',
     },
     textInputRowStyle: {
-        fontWeight: "bold", 
-        fontSize: 17, 
-        paddingHorizontal: 1, 
+        fontWeight: "bold",
+        fontSize: 17,
+        paddingHorizontal: 1,
         paddingVertical: 0,
-        flex:1,
-        textAlign:'right'
+        flex: 1,
+        textAlign: 'right'
     }
 }

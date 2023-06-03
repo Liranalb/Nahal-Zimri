@@ -82,7 +82,6 @@ function EventAdminScreen( { navigation }) {
         return 0;
     }
 
-
     let deleteImageFromStorage = (deleteID) => {
 
         let imageID = "img" + deleteID + ".jpg";
@@ -95,7 +94,6 @@ function EventAdminScreen( { navigation }) {
             return -1;
         });
     }
-
 
     const [name, onChangeName] = useState('');
     const [date, onChangeDate] = useState('');
@@ -145,7 +143,6 @@ function EventAdminScreen( { navigation }) {
     let newPostKey = () => {
         return db.ref().child('Events').push().key;
     }
-
 
     // on mount
     useEffect(() => {
@@ -250,7 +247,6 @@ function EventAdminScreen( { navigation }) {
                             />
                         </View>
 
-
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
 
                             <  TextInput
@@ -301,8 +297,6 @@ function EventAdminScreen( { navigation }) {
                             />
                         </View>
 
-
-
                         <View style={{ flexDirection: 'row', marginTop: '2.5%', alignSelf: 'center' }}>
                             <Text style={styles.textAddStyle}>הוספת תמונה:  </Text>
                             <TouchableWithoutFeedback
@@ -334,7 +328,6 @@ function EventAdminScreen( { navigation }) {
             </View>
         </View >
 
-
     )
 
 }
@@ -356,7 +349,6 @@ function EventAdmin() {
 export default EventAdmin;
 
 const styles = {
-
 
     textInput: {
         backgroundColor: "#FFF4E3",
@@ -396,7 +388,6 @@ const styles = {
         alignSelf: "center",
         width: '54%',
         marginTop: 2,
-
 
     },
 
@@ -439,5 +430,4 @@ const styles = {
         marginTop: '3%'
     }
 }
-
 

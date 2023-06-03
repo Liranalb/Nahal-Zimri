@@ -11,7 +11,6 @@ import {
 import Icon from 'react-native-vector-icons/Entypo';
 import { Divider } from 'react-native-paper';
 
-
 class AdminUnitRoutes extends React.Component {
     render() {
         return (
@@ -23,7 +22,6 @@ class AdminUnitRoutes extends React.Component {
                         <View style={{ width: '100%', height: '100%' }}>
                             <Image source={this.props.imageUri}
                                 style={styles.imageStyle}
-
                             />
                         </View>
                     </TouchableOpacity>
@@ -37,7 +35,6 @@ class AdminUnitRoutes extends React.Component {
                             <Text style={styles.textTitleStyle}
                                 numberOfLines={1}
                             >שם המסלול:  {this.props.name}</Text>
-
                         </View>
                         <Divider />
                         <View style={styles.rowStyle}>
@@ -67,8 +64,6 @@ class AdminUnitRoutes extends React.Component {
                                 numberOfLines={1}
                             >פרטים:  {this.props.details}</Text>
                         </View>
-
-
                     </View>
                     <Divider />
 
@@ -90,25 +85,14 @@ class AdminUnitRoutes extends React.Component {
                                 <Icon name="image" size={36} color="green" />
                             </View>
                         </TouchableOpacity>
-
-
-
-
-
                     </View>
 
                 </View>
             </View>
-
-
-
         );
     }
 }
 export default AdminUnitRoutes;
-
-
-
 
 const styles = {
     container: {
@@ -120,13 +104,11 @@ const styles = {
         height: 180,
         width: "100%",
         alignSelf: 'center',
-        marginTop:'2%',
+        marginTop: '2%',
         borderRadius: 10,
         flexDirection: 'row-reverse',
         backgroundColor: '#F4D5A7',
         overflow: 'hidden'
-
-
     },
     headlineStyle: {
         alignSelf: 'center',
@@ -138,14 +120,11 @@ const styles = {
         textShadowRadius: 10
     },
 
-
     imageStyle: {
         flex: 1,
         width: null,
         height: null,
         resizeMode: 'cover',
-        //   borderBottomLeftRadius: 10,   // cause some scrolling problems
-        //   borderTopLeftRadius: 10
     },
     editButtons: {
         marginLeft: "2%"
@@ -156,11 +135,9 @@ const styles = {
         flexDirection: 'row',
     },
     textTitleStyle: {
-        // alignSelf: "center",
         fontWeight: "bold",
         fontSize: 17,
         marginLeft: 2,
-
     },
     rowStyle: {
         flex: 1

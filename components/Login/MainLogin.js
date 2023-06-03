@@ -6,11 +6,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginForm from "./LoginForm";
 import RegForm from "./RegForm";
 
-
-
 function MainLoginScreen({ navigation }) {
     return (
-
 
         <View style={styles.background}>
             <View style={styles.logoView}>
@@ -22,9 +19,7 @@ function MainLoginScreen({ navigation }) {
             <TouchableWithoutFeedback onPress={() => navigation.navigate('LoginForm')}>
                 <View style={styles.buttonStyle}>
 
-
                     <Text style={styles.text}>התחבר</Text>
-
 
                 </View>
             </TouchableWithoutFeedback >
@@ -36,18 +31,14 @@ function MainLoginScreen({ navigation }) {
                         <Text style={styles.text}>הרשמה באמצעות מייל</Text>
                     </View>
 
-
                 </View>
             </TouchableWithoutFeedback>
             <View style={styles.line} />
         </View>
 
-
     )
 
 }
-
-
 
 function LoginFormScreen() {
     return (
@@ -75,16 +66,12 @@ function MainLogin() { //for navigation. not in use yet
                     component={LoginFormScreen} />
 
                 <logStack.Screen name="RegForm" options={{ headerShown: false }}
-                    //options={{title: "", headerStyle:{backgroundColor:"#FAE5D3"}}}
-                    //options={{title: "", headerStyle:{backgroundColor:"#FAE5D3"}}}
                     component={RegFormScreen} />
 
             </logStack.Navigator>
         </NavigationContainer>
     );
 }
-
-
 
 export default MainLogin;
 
@@ -127,9 +114,7 @@ const styles = {
         marginTop: 20,
         overflow: 'hidden'
 
-
     },
-
 
     background: {
         backgroundColor: '#FCDBC3',
@@ -150,6 +135,5 @@ const styles = {
         alignItems: 'center'
 
     }
-
 
 }

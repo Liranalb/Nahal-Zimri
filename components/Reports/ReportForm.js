@@ -20,7 +20,6 @@ import sayCheese from '../../assets/functions/takePhoto'
 import uploadImage from "../../assets/functions/uploadSingleImage"
 import LogoHeaderComponent from "../explore/LogoHeaderComponent"
 
-
 let keyID, photoUploaded = false, username = "";
 
 function getDate() {
@@ -35,7 +34,6 @@ async function pressPhoto(source) {
 
     let imageID = "img" + keyID + ".jpg";
     let storagePath = "Images/Reports/" + imageID;
-
 
     console.log("imageID is : " + imageID + "\n storagePath" + storagePath);
     let result;
@@ -100,9 +98,6 @@ function sendData(body, type, genre) {
 }
 const ITEMS = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
 
-
-
-
 class ReportForm extends Component {
 
     constructor() {
@@ -123,10 +118,6 @@ class ReportForm extends Component {
         }
 
     }
-
-
-
-
 
     componentWillUnmount() {
         if (photoUploaded === true) {
@@ -159,8 +150,6 @@ class ReportForm extends Component {
         this.setState({ checkItems, type: val, genre: genre })
     };
 
-
-
     componentDidMount() {
         keyID = db.ref().child('Reports').push().key;
 
@@ -174,14 +163,9 @@ class ReportForm extends Component {
             }
         });
 
-
-
     }
 
-
-
     render() {
-
 
         let refreshPage = () => {
             this.setState({ body: "", type: "", genre: "" });
@@ -189,9 +173,6 @@ class ReportForm extends Component {
             photoUploaded = false;
             this.handlePress("None", "", "");
         }
-
-
-
 
         return (
             <View style={{ height: "100%", width: "100%", backgroundColor: '#FAE5D3' }}>
@@ -203,7 +184,6 @@ class ReportForm extends Component {
                     />
                 </View>
                 <View style={{ backgroundColor: '#FAE5D3', height: "89%", width: "90%", alignSelf: 'center', marginTop: "2%" }}>
-
 
                     <View style={{ width: "100%", height: "64%" }}>
                         <ScrollView>
@@ -217,9 +197,6 @@ class ReportForm extends Component {
                                 </CollapseHeader>
 
                                 <CollapseBody>
-
-
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -241,7 +218,6 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -294,7 +270,6 @@ class ReportForm extends Component {
                                     <View style={styles.innerViewStyle}>
                                         <Text style={styles.textStyleHeaders}>יונקים</Text>
                                     </View>
-
 
                                 </CollapseHeader>
                                 <CollapseBody>
@@ -362,7 +337,6 @@ class ReportForm extends Component {
                                         </View>
                                     </View>
 
-
                                 </CollapseBody>
 
                             </Collapse>
@@ -372,7 +346,6 @@ class ReportForm extends Component {
                                     <View style={styles.innerViewStyle}>
                                         <Text style={styles.textStyleHeaders}>זוחלים</Text>
                                     </View>
-
 
                                 </CollapseHeader>
                                 <CollapseBody>
@@ -398,7 +371,6 @@ class ReportForm extends Component {
                                         </View>
                                     </View>
 
-
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
                                             <Image source={require('../../assets/img/zehaman_shahor.jpg')}
@@ -420,9 +392,6 @@ class ReportForm extends Component {
                                         </View>
                                     </View>
 
-
-
-
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
                                             <Image source={require('../../assets/img/homet_gamad.jpg')}
@@ -443,8 +412,6 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
                                     </View>
-
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -509,7 +476,6 @@ class ReportForm extends Component {
                                         </View>
                                     </View>
 
-
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
                                             <Image source={require('../../assets/img/menifanit_mtzuya.jpg')}
@@ -530,7 +496,6 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -620,13 +585,11 @@ class ReportForm extends Component {
 
                             </Collapse>
 
-
                             <Collapse>
                                 <CollapseHeader style={styles.typeStyle}>
                                     <View style={styles.innerViewStyle}>
                                         <Text style={styles.textStyleHeaders}>פרפרים</Text>
                                     </View>
-
 
                                 </CollapseHeader>
                                 <CollapseBody>
@@ -652,7 +615,6 @@ class ReportForm extends Component {
                                         </View>
                                     </View>
 
-
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
                                             <Image source={require('../../assets/img/hasparit_hanashran.jpg')}
@@ -673,7 +635,6 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -758,7 +719,6 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -865,7 +825,6 @@ class ReportForm extends Component {
                                         </View>
                                     </View>
 
-
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
                                             <Image source={require('../../assets/img/nimpit_hadardar.jpg')}
@@ -950,7 +909,6 @@ class ReportForm extends Component {
                                         </View>
                                     </View>
 
-
                                 </CollapseBody>
 
                             </Collapse>
@@ -962,10 +920,8 @@ class ReportForm extends Component {
                                         <Text style={styles.textStyleHeaders}>פריחה</Text>
                                     </View>
 
-
                                 </CollapseHeader>
                                 <CollapseBody>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -987,9 +943,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1011,9 +965,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1035,9 +987,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1059,9 +1009,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1083,9 +1031,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1107,9 +1053,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1131,9 +1075,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1155,9 +1097,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1179,9 +1119,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1203,9 +1141,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1227,9 +1163,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1251,11 +1185,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
-
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1277,9 +1207,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1301,9 +1229,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1325,9 +1251,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1349,9 +1273,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1373,9 +1295,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1397,9 +1317,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1421,13 +1339,7 @@ class ReportForm extends Component {
                                             </View>
                                         </View>
 
-
                                     </View>
-
-
-
-
-
 
                                 </CollapseBody>
                             </Collapse>
@@ -1440,10 +1352,8 @@ class ReportForm extends Component {
                                         <Text style={styles.textStyleHeaders}>מפגעים</Text>
                                     </View>
 
-
                                 </CollapseHeader>
                                 <CollapseBody>
-
 
                                     <View style={styles.container}>
                                         <View style={{ flex: 1 }}>
@@ -1494,7 +1404,6 @@ class ReportForm extends Component {
                     </View>
                         </ScrollView>
 
-
                     
                     
                     </View>
@@ -1518,10 +1427,6 @@ class ReportForm extends Component {
 
                         </View>
 
-
-
-
-
                         <View style={{ width: "90%" }}>
                             <TextInput
                                 style={styles.textInputStyle}
@@ -1532,7 +1437,6 @@ class ReportForm extends Component {
                                 value={this.state.body}
                             />
                         </View>
-
 
                     </View>
                     <View style={{ width: "100%", marginTop: "2%" }}>
@@ -1549,17 +1453,12 @@ class ReportForm extends Component {
                         </TouchableWithoutFeedback>
                     </View>
 
-
                 </View>
             </View>
         )
     }
 
-
-
 }
-
-
 
 export default ReportForm;
 
@@ -1637,8 +1536,5 @@ const styles = {
         marginTop: 17
 
     }
-
-
-
 
 }

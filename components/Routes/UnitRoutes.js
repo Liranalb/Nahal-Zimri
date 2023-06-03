@@ -18,8 +18,8 @@ class UnitRoutes extends Component {
                         style={{ width: "100%", height: "100%" }}
                     />
                 </View>
-                <View style={{ flex: 3}}>
-                    <View style={{height:'85%', marginTop:"3%"}}>
+                <View style={{ flex: 3 }}>
+                    <View style={{ height: '85%', marginTop: "3%" }}>
                         <View style={styles.textStyle}>
                             <Text style={styles.textTitleStyle}>שם המסלול: </Text>
                             <Text numberOfLines={1} style={styles.textDetailStyle}>{this.props.name}</Text>
@@ -36,13 +36,10 @@ class UnitRoutes extends Component {
                             <Text style={styles.textTitleStyle}>זמן ההליכה: </Text>
                             <Text numberOfLines={1} style={styles.textDetailStyle}>{this.props.duration}</Text>
                         </View>
-                        
-                        <View style={{alignSelf:'center', marginTop: "15%"}}>
+                        <View style={{ alignSelf: 'center', marginTop: "15%" }}>
                             <Text>פרטים נוספים...</Text>
                         </View>
                     </View>
-
-
                 </View>
             </View>
         );
@@ -60,9 +57,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row-reverse',
         height: 180,
         width: "100%",
-        
-        
-
     },
     imageStyle: {
         marginTop: 10,
@@ -75,15 +69,11 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         flexDirection: 'row',
-        
-        
     },
     detailStyle: {
         height: 50,
         width: "69%",
-        marginLeft: 111,
-        
-
+        marginLeft: 111
     },
     dateStyle: {
         height: 30,
@@ -105,8 +95,5 @@ const styles = StyleSheet.create({
         flex: 1,
         textAlign: 'left',
         marginTop: "1%"
-        //alignSelf: "center"
     }
-
-
 });

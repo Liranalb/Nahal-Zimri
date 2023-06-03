@@ -16,7 +16,7 @@ class MapBoxUser extends React.Component {
     render() {
         return (
             <View style={styles.mapStyle}>
-                <View style={{ flex: 1}}>
+                <View style={{ flex: 1 }}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
                         <Image
                             source={this.props.imageUri}
@@ -30,30 +30,30 @@ class MapBoxUser extends React.Component {
                         <Text style={styles.textTitleStyle}>שם המפה: </Text>
                         <Text numberOfLines={1} style={styles.textDetailStyle}>{this.props.name} </Text>
                     </View>
-                    <Divider/>
+                    <Divider />
                     <View style={styles.textStyle}>
                         <Text style={styles.textTitleStyle}>מיקום: </Text>
                         <Text numberOfLines={1} style={styles.textDetailStyle}>{this.props.location}</Text>
                     </View>
-                    <Divider/>
+                    <Divider />
                     <View style={styles.textStyle}>
                         <Text style={styles.textTitleStyle}>פרטים: </Text>
                         <Text numberOfLines={1} style={styles.textDetailStyle}>{this.props.details}</Text>
                     </View>
-                    <TouchableOpacity onPress={() => { 
-                        if(this.props.link === undefined)
+                    <TouchableOpacity onPress={() => {
+                        if (this.props.link === undefined)
                             Alert.alert("", "המפה אינה קיימת");
                         else
-                            Linking.openURL(this.props.link); 
-                        }}>
+                            Linking.openURL(this.props.link);
+                    }}>
 
-                    <View style={styles.buttonStyle}>
+                        <View style={styles.buttonStyle}>
                             <Text
                                 style={styles.buttonText}>פתיחת המפה</Text>
-                            
-                    </View>      
 
-                    </TouchableOpacity>          
+                        </View>
+
+                    </TouchableOpacity>
                 </View>
 
             </View>
@@ -73,9 +73,9 @@ const styles = StyleSheet.create({
         borderWidth: 1.1,
         fontSize: 20,
         marginTop: "2%",
-        width:'100%',
+        width: '100%',
         //height:155,
-        flexDirection:'row-reverse'
+        flexDirection: 'row-reverse'
     },
 
     textStyle: {
@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
     ButtonStyle: {
         width: "69%",
         // marginLeft:100,
-
 
     },
     detailStyle: {
@@ -104,26 +103,26 @@ const styles = StyleSheet.create({
 
     },
     textTitleStyle: {
-        
+
         fontWeight: "bold",
         fontSize: 18,
         marginLeft: 2
- 
+
     },
     textDetailStyle: {
         //fontWeight: "normal",
         fontSize: 16,
-        flex:1,
-        textAlign:'left'
+        flex: 1,
+        textAlign: 'left'
 
         //alignSelf: "center"
     },
 
     buttonText: {
         alignSelf: 'center',
-        fontSize: 20, 
-        color: 'white', 
-        marginRight: "3%", 
+        fontSize: 20,
+        color: 'white',
+        marginRight: "3%",
         marginLeft: "3%"
     },
 
@@ -138,7 +137,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         marginTop: "2%",
         marginBottom: "3%",
-        
+
     }
 
 });

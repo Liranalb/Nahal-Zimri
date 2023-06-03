@@ -39,7 +39,6 @@ function ReportsScreen({ navigation }) {
                 setLoaded(true);
             }
 
-
         }
     });
 
@@ -48,7 +47,6 @@ function ReportsScreen({ navigation }) {
 
         wait(1000).then(() => setRefreshing(false));
     }, [refreshing]);
-
 
     let convertDataToArray = (data, reportsArray) => {
         if (data === null)
@@ -62,8 +60,6 @@ function ReportsScreen({ navigation }) {
                 }
             }
         }
-
-
 
     }
 
@@ -102,7 +98,6 @@ function ReportsScreen({ navigation }) {
 
     }
 
-
     return (
         <View style={styles.mainView}>
             <HeaderComp
@@ -140,7 +135,6 @@ function ReportsScreen({ navigation }) {
                             containerStyle={styles.CheckBoxContainerStyle}
                         />
                     </View>
-
 
                 </View>
 
@@ -182,13 +176,9 @@ function ReportsScreen({ navigation }) {
                                 </ScrollView>
                             </View>
 
-
-
                         </View>
                     </ScrollView>
                 </View>
-
-
 
                 <View style={{ width: "100%"}}>
                     <TouchableOpacity
@@ -201,14 +191,11 @@ function ReportsScreen({ navigation }) {
 
                 </View>
 
-
             </View>
 
         </View>
     )
 }
-
-
 
 function ReportFormScreen() {
     return (
@@ -229,7 +216,6 @@ function ReportsFullCompFunc({ navigation }) {
     );
 }
 
-
 const logStack = createStackNavigator();
 const DrawerRep = createDrawerNavigator();
 
@@ -243,7 +229,6 @@ function ReportsStack() {
             <logStack.Screen name="repFullComp" options={{ headerShown: false }} component={ReportsFullCompFunc} />
 
         </logStack.Navigator>
-
 
     );
 }
@@ -274,7 +259,6 @@ const styles = {
         height: "93%",
         //marginTop: "2%"
     },
-
 
     textInputStyle: {
         backgroundColor: "#D7D8D7",
@@ -317,7 +301,5 @@ const styles = {
         borderWidth: 1,
         backgroundColor: '#F4D5A7'
     }
-
-
 
 }

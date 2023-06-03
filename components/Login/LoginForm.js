@@ -6,7 +6,6 @@ import { DotIndicator } from "react-native-indicators";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import LoginHelper from "../../index"
 
-
 class LoginForm extends Component {
     constructor() {
         super();
@@ -38,7 +37,7 @@ class LoginForm extends Component {
 
     }
 
-    
+
 
     ShowComponent = () => this.setState({ show: false });
     HideComponent = () => this.setState({ show: true });
@@ -81,8 +80,8 @@ class LoginForm extends Component {
                 password: "",
                 loading: false
             })
-            
-           
+
+
         }
     }
 
@@ -92,8 +91,8 @@ class LoginForm extends Component {
             // if(!auth.currentUser.emailVerified)
 
             return (
-                
-                <View style={{ alignSelf: 'center', alignItems: 'center', height: '6%'}}>
+
+                <View style={{ alignSelf: 'center', alignItems: 'center', height: '6%' }}>
                     <View style={{ flexDirection: 'row', width: '75%' }}>
                         <View style={{ flex: 3 }}>
                             <TextInput
@@ -147,7 +146,6 @@ class LoginForm extends Component {
         )
     }
 
-
     renderButton() {
         if (this.state.loading) {
             return <DotIndicator color="FF8C37" />
@@ -181,11 +179,8 @@ class LoginForm extends Component {
 
     }
 
-
-
     render() {
         return (
-
 
             <View style={styles.background}>
                 <View style={styles.logoView}>
@@ -194,10 +189,6 @@ class LoginForm extends Component {
                             style={styles.logo} />
                     ) : null}
                 </View>
-
-
-
-
 
                 <View style={styles.inputView}>
                     <TextInput
@@ -228,27 +219,21 @@ class LoginForm extends Component {
                     />
                 </View>
 
-
-
-
-                <View style={{ alignSelf: 'center', height: "7%",marginTop:'5%' }}>
+                <View style={{ alignSelf: 'center', height: "7%", marginTop: '5%' }}>
                     <TouchableOpacity
-                    onPress={() => {
-                        this.setState({ resetPassword: !this.state.resetPassword })
+                        onPress={() => {
+                            this.setState({ resetPassword: !this.state.resetPassword })
 
-                    }}
-                >
-                    <Text style={{ fontSize: 16, color: "#404040"}}>שכחתם את הסיסמה? לחצו כאן..</Text>
-                </TouchableOpacity>
-                    
+                        }}
+                    >
+                        <Text style={{ fontSize: 16, color: "#404040" }}>שכחתם את הסיסמה? לחצו כאן..</Text>
+                    </TouchableOpacity>
+
                 </View>
-
-
 
                 <View>{this.renderResetEmail()}</View>
                 <View>{this.renderButton()}</View>
             </View>
-
 
         )
 
@@ -279,7 +264,7 @@ const styles = {
         borderWidth: 2,
         fontSize: 20,
         width: "92%",
-        
+
     },
     buttonStyle: {
         backgroundColor: "cyan",
@@ -291,7 +276,6 @@ const styles = {
         alignSelf: "center",
         marginTop: 20,
         overflow: 'hidden'
-
 
     },
 
@@ -312,16 +296,4 @@ const styles = {
         height: '35%',
         alignItems: 'center'
     }
-
-    /*
-    loginBackgorund: {
-        flex: 1,
-        resizeMode: "cover",
-        justifyContent: "center"
-    }
-    */
-
-
-
-
 }

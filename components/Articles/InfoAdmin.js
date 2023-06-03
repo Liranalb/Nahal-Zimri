@@ -95,7 +95,6 @@ function InfoAdminScreen({ navigation }) {
 
     const [loaded, setLoaded] = useState(false);
 
-
     // on mount
     useEffect(() => {
         keyID = newPostKey();
@@ -164,7 +163,6 @@ function InfoAdminScreen({ navigation }) {
                 alert("Upload image first");
             return -1;
         }
-
 
         if ((type != "כתבות" && type != "עדכונים" && type != "מהעיתונות")) {
             alert('אנא סמן את סוג התוכן')
@@ -299,7 +297,6 @@ function InfoAdminScreen({ navigation }) {
                         />
                     </View>
 
-
                     <View style={styles.CheckBoxStyle}>
                         <CheckBox
                             center
@@ -318,8 +315,6 @@ function InfoAdminScreen({ navigation }) {
 
                     <View style={{ width: "100%", flex: 1 }}>
 
-
-
                         <View style={{ height: "100%", flex: 1 }}>
 
                             <ScrollView
@@ -331,8 +326,6 @@ function InfoAdminScreen({ navigation }) {
                                 {infoArray.map((item) => {
 
                                     return (
-
-
 
                                         <View key={item.id} style={styles.routeStyle}>
                                             <InfoUnitAdmin imageUri={{ uri: item.imageLink }}
@@ -382,15 +375,11 @@ function InfoAdminScreen({ navigation }) {
                         </View>
                     </View>
 
-
                     <View style={{ width: "95%", alignSelf: 'center' }}>
-
 
                         <Text style={{ marginTop: "3%", fontSize: 25, fontWeight: "bold", alignSelf: "center" }} >הוספת תוכן</Text>
 
                         <View style={{ flexDirection: 'row', alignSelf: "center" }}>
-
-
 
                             <CheckBox
                                 center
@@ -427,7 +416,6 @@ function InfoAdminScreen({ navigation }) {
                             />
                         </View>
 
-
                         <View style={{ flexDirection: 'row', marginTop: '2.5%' }}>
                             <Text style={styles.textAddStyle}>תיאור:  </Text>
                             <  TextInput
@@ -448,8 +436,6 @@ function InfoAdminScreen({ navigation }) {
                                 value={detail3}
                             />
                         </View>
-
-
 
                         <View style={{ flexDirection: 'row', marginTop: '2.5%', alignSelf: 'center' }}>
                             <Text style={styles.textAddStyle}>הוספת תמונה:  </Text>
@@ -477,7 +463,6 @@ function InfoAdminScreen({ navigation }) {
                             >הוסף</Text>
                         </View>
                     </TouchableOpacity>
-
 
                 </ScrollView>
 
@@ -524,7 +509,6 @@ function InfoAdmin() {
     );
 }
 
-
 export default InfoAdmin;
 
 const styles = {
@@ -553,7 +537,6 @@ const styles = {
         borderWidth: 1,
         backgroundColor: '#F4D5A7'
     },
-
 
     CheckBoxInfo: {
         backgroundColor: '#FAE5D3',
@@ -590,7 +573,6 @@ const styles = {
         fontSize: 20,
         alignSelf: "center",
         textAlignVertical: 'center',
-
 
     }
 }

@@ -17,13 +17,9 @@ export function PathCatagoriesScreen({ navigation }) {
     return (
         <View style={{ width: "100%", height: "100%" }}>
             <ImageBackground source={require('../../assets/img/homePageAdmin_background.jpg')}
-                style={{ flex:1, resizeMode: 'cover' }}>
-
-
+                style={{ flex: 1, resizeMode: 'cover' }}>
                 <View style={styles.rowStyle1}>
-
                     <TouchableWithoutFeedback
-
                         onPress={() => {
                             typeName.type = "HikePath";
                             navigation.navigate('PathAdminScreen');
@@ -62,9 +58,6 @@ export function PathCatagoriesScreen({ navigation }) {
                 </View>
 
                 <View style={styles.rowStyle2}>
-
-
-
                     <TouchableWithoutFeedback
 
                         onPress={() => {
@@ -86,51 +79,34 @@ export function PathCatagoriesScreen({ navigation }) {
                             </View>
                         </View>
                     </TouchableWithoutFeedback>
-
-                    
-
-
                 </View>
 
                 <TouchableWithoutFeedback
                     onPress={() => {
                         navigation.goBack();
                     }}>
-                    <View style={{ flex: 1}}>
-
-
+                    <View style={{ flex: 1 }}>
                     </View>
                 </TouchableWithoutFeedback>
-
-
-
-
-
             </ImageBackground>
         </View>
     )
 }
 
-
 const PathStack = createStackNavigator();
 
 function InfoAdmin() {
-
     return (
-
         <AdminRoutes dataType={typeName.type} />
     );
 }
 
 function PathCatagoriesAdmin() {
     return (
-
         <PathStack.Navigator initialRouteName="InfoCatScreen">
             <PathStack.Screen options={{ headerShown: false }} name="InfoCatScreen" component={PathCatagoriesScreen} />
             <PathStack.Screen options={{ headerShown: false }} name="PathAdminScreen" component={InfoAdmin} />
-
         </PathStack.Navigator>
-
     );
 }
 
@@ -145,7 +121,6 @@ const styles = {
         alignSelf: "center",
         marginTop: "24%",
         backgroundColor: 'rgba(52, 52, 52, 0)'
-
     },
     rowStyle2: {
         flexDirection: 'row',
@@ -155,7 +130,6 @@ const styles = {
         alignSelf: "center",
         marginTop: 20,
         backgroundColor: 'rgba(52, 52, 52, 0)'
-
     },
     infoStyle: {
         backgroundColor: "#F0B27A",
@@ -168,8 +142,6 @@ const styles = {
         height: "100%",
         marginRight: 14,
         marginLeft: 8
-
-
     },
     infoStyle2: {
         backgroundColor: "#F0B27A",
@@ -182,8 +154,6 @@ const styles = {
         height: "100%",
         marginRight: 14,
         marginLeft: "28%"
-
-
     },
     textStyle: {
         position: 'absolute',
@@ -195,5 +165,4 @@ const styles = {
         alignItems: 'center',
         color: 'black'
     }
-
 }

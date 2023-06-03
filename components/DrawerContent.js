@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Linking, Image} from 'react-native';
+import { View, StyleSheet, Linking, Image } from 'react-native';
 import {
     Avatar,
     Title,
@@ -14,13 +14,11 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import firebase from "../config/Firebase"
 
 export function DrawerContent(props) {
-
-
     return (
         <View style={{ flex: 1 }}>
-            
+
             <DrawerContentScrollView {...props}>
-            <View style={styles.drawerContent}>
+                <View style={styles.drawerContent}>
                     <View style={styles.titleSection}>
                         <View style={{ marginRight: '25%', marginTop: '8%', marginBottom: '6%', flexDirection: 'column' }}>
                             <Avatar.Image
@@ -44,37 +42,36 @@ export function DrawerContent(props) {
                             onPress={() => { props.navigation.navigate('InfUs') }}
                         />
                         <DrawerItem style={styles.drawerItem}
-                        label="דיווח תצפית"
-                        labelStyle={styles.drawerLable}
-                        onPress={() => { props.navigation.navigate('Rep') }}
+                            label="דיווח תצפית"
+                            labelStyle={styles.drawerLable}
+                            onPress={() => { props.navigation.navigate('Rep') }}
                         />
 
                         <DrawerItem style={styles.drawerItem}
 
-                        label="אודות נחל זמרי"
-                        onPress={() => { props.navigation.navigate('Abo') }}
-                        labelStyle={styles.drawerLable}
+                            label="אודות נחל זמרי"
+                            onPress={() => { props.navigation.navigate('Abo') }}
+                            labelStyle={styles.drawerLable}
                         />
                         <DrawerItem style={styles.drawerItem}
-                        label="טבע ומורשת בפסגת זאב"
-                        onPress={() => { props.navigation.navigate('AboPZ') }}
-                        labelStyle={styles.drawerLable}
-                    />
+                            label="טבע ומורשת בפסגת זאב"
+                            onPress={() => { props.navigation.navigate('AboPZ') }}
+                            labelStyle={styles.drawerLable}
+                        />
 
                         <DrawerItem style={styles.drawerItem}
 
-                        label="פייסבוק"
-                        labelStyle={{ color: '#3b5998', fontWeight: "bold", fontSize: 18 }}
-                        onPress={() => { Linking.openURL('https://www.facebook.com/NahalZimri') }}
+                            label="פייסבוק"
+                            labelStyle={{ color: '#3b5998', fontWeight: "bold", fontSize: 18 }}
+                            onPress={() => { Linking.openURL('https://www.facebook.com/NahalZimri') }}
                         />
                         <DrawerItem style={styles.drawerItem}
 
-                        label="אינסטגרם"
-                        onPress={() => { Linking.openURL('https://www.instagram.com/nahalzimri/') }}
-                        labelStyle={{ color: '#fe4164', fontWeight: "bold", fontSize: 18 }}
+                            label="אינסטגרם"
+                            onPress={() => { Linking.openURL('https://www.instagram.com/nahalzimri/') }}
+                            labelStyle={{ color: '#fe4164', fontWeight: "bold", fontSize: 18 }}
                         />
                     </Drawer.Section>
-
                 </View>
             </DrawerContentScrollView>
             <Drawer.Section style={styles.bottomDrawerSection}>
@@ -89,9 +86,7 @@ export function DrawerContent(props) {
                     )}
                     label="התנתק"
                     onPress={() => firebase.auth().signOut()}
-
                 />
-
             </Drawer.Section>
         </View>
     );
@@ -100,8 +95,6 @@ export function DrawerContent(props) {
 const styles = StyleSheet.create({
     drawerContent: {
         flex: 1
-
-
     },
     titleSection: {
         paddingLeft: 20,
@@ -110,22 +103,18 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 25,
-        //color: '#FF8C37',
         fontWeight: 'bold',
         paddingBottom: 3
 
     },
     drawerItem: {
-        //flexDirection: 'row',
         backgroundColor: '#FAD3B2'
     },
-
 
     bottomDrawerSection: {
         marginBottom: 15,
         borderTopColor: '#f4f4f4',
-        borderTopWidth: 1,
-        
+        borderTopWidth: 1
     },
     drawerLable: {
         fontWeight: "bold",

@@ -10,8 +10,6 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { db } from '../../config/Firebase'
 
-
-
 class EditInfoBox extends Component {
     constructor(props) {
         super(props);
@@ -22,15 +20,13 @@ class EditInfoBox extends Component {
         };
     }
 
-
     render() {
         return (
 
-
             <View style={styles.containerStyle}>
-                
+
                 <View style={{ flex: 1 }}>
-                        <View style={{ width: '100%', height: '100%' }}>
+                    <View style={{ width: '100%', height: '100%' }}>
                         <Image source={this.props.imageUri}
                             style={styles.imageStyle}
 
@@ -38,7 +34,7 @@ class EditInfoBox extends Component {
                     </View>
 
                 </View>
-               
+
                 <View style={styles.textDetailStyle}>
                     <View >
                         <TextInput
@@ -59,8 +55,6 @@ class EditInfoBox extends Component {
                         />
                         {/* // this.props.onEditText */}
                     </ScrollView>
-
-
 
                     <View style={styles.buttonsContainer}>
                         <View style={styles.editButtons}>
@@ -98,9 +92,6 @@ class EditInfoBox extends Component {
                             </View>
                         </TouchableOpacity>
 
-
-
-
                     </View>
 
                 </View>
@@ -126,7 +117,6 @@ const styles = {
         flexDirection: 'row-reverse',
         backgroundColor: '#F4D5A7',
         overflow: 'hidden'
-
 
     },
     headlineStyle: {
